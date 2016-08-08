@@ -1,33 +1,43 @@
 !< FURY class definition of integer quantity with associated unit of measure.
 module fury_qinteger
-  !< FURY class definition of integer quantity with associated unit of measure.
+!-----------------------------------------------------------------------------------------------------------------------------------
+!< FURY class definition of integer quantity with associated unit of measure.
+!-----------------------------------------------------------------------------------------------------------------------------------
 
-  ! use penf
-  ! use stringifor
+!-----------------------------------------------------------------------------------------------------------------------------------
+use penf
+use stringifor
+!-----------------------------------------------------------------------------------------------------------------------------------
 
-  implicit none
+!-----------------------------------------------------------------------------------------------------------------------------------
+implicit none
+private
+public :: qinteger
+!-----------------------------------------------------------------------------------------------------------------------------------
+
+!-----------------------------------------------------------------------------------------------------------------------------------
+type :: qinteger
+  !< Integer quantity with associated unit of measure.
+  !<
+  !< @todo Add units checking.
   private
-  public :: qinteger
-
-  type :: qinteger
-    !< Integer quantity with associated unit of measure.
-    private
-    integer,      public :: magnitude !< Magnitude of quantity.
-    ! type(string), public :: unit      !< Unit of measure of quantity.
-    contains
-      ! public methods
-      generic :: assignment(=) => assign_qinteger !< Overloading `=` assignament.
-      generic :: operator(+) => add               !< Overloading `+` operator.
-      generic :: operator(/) => div               !< Overloading `/` operator.
-      generic :: operator(*) => mul               !< Overloading `*` operator.
-      generic :: operator(-) => sub               !< Overloading `-` operator.
-      ! private methods
-      procedure, pass(lhs), private :: assign_qinteger !< `qinteger = qinteger` assignament.
-      procedure, pass(lhs), private :: add             !< `qinteger + qinteger` operator.
-      procedure, pass(lhs), private :: div             !< `qinteger / qinteger` operator.
-      procedure, pass(lhs), private :: mul             !< `qinteger * qinteger` operator.
-      procedure, pass(lhs), private :: sub             !< `qinteger - qinteger` operator.
-  endtype qinteger
+  integer(I_P), public :: magnitude !< Magnitude of quantity.
+  type(string), public :: unit      !< Unit of measure of quantity.
+  contains
+    ! public methods
+    generic :: assignment(=) => assign_qinteger !< Overloading `=` assignament.
+    generic :: operator(+) => add               !< Overloading `+` operator.
+    generic :: operator(/) => div               !< Overloading `/` operator.
+    generic :: operator(*) => mul               !< Overloading `*` operator.
+    generic :: operator(-) => sub               !< Overloading `-` operator.
+    ! private methods
+    procedure, pass(lhs), private :: assign_qinteger !< `qinteger = qinteger` assignament.
+    procedure, pass(lhs), private :: add             !< `qinteger + qinteger` operator.
+    procedure, pass(lhs), private :: div             !< `qinteger / qinteger` operator.
+    procedure, pass(lhs), private :: mul             !< `qinteger * qinteger` operator.
+    procedure, pass(lhs), private :: sub             !< `qinteger - qinteger` operator.
+endtype qinteger
+!-----------------------------------------------------------------------------------------------------------------------------------
 contains
   elemental subroutine assign_qinteger(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +47,7 @@ contains
   type(qinteger),  intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
   lhs%magnitude = rhs%magnitude
-  ! lhs%unit = rhs%unit
+  lhs%unit = rhs%unit
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qinteger
 

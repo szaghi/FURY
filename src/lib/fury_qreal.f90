@@ -1,33 +1,41 @@
 !< FURY class definition of real quantity with associated unit of measure.
 module fury_qreal
-  !< FURY class definition of real quantity with associated unit of measure.
+!-----------------------------------------------------------------------------------------------------------------------------------
+!< FURY class definition of real quantity with associated unit of measure.
+!-----------------------------------------------------------------------------------------------------------------------------------
+use penf
+use stringifor
+!-----------------------------------------------------------------------------------------------------------------------------------
 
-  ! use penf
-  ! use stringifor
+!-----------------------------------------------------------------------------------------------------------------------------------
+implicit none
+private
+public :: qreal
+!-----------------------------------------------------------------------------------------------------------------------------------
 
-  implicit none
+!-----------------------------------------------------------------------------------------------------------------------------------
+type :: qreal
+  !< Real quantity with associated unit of measure.
+  !<
+  !< @todo Add units checking.
   private
-  public :: qreal
-
-  type :: qreal
-    !< Real quantity with associated unit of measure.
-    private
-    real,         public :: magnitude !< Magnitude of quantity.
-    ! type(string), public :: unit      !< Unit of measure of quantity.
-    contains
-      ! public methods
-      generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
-      generic :: operator(+) => add            !< Overloading `+` operator.
-      generic :: operator(/) => div            !< Overloading `/` operator.
-      generic :: operator(*) => mul            !< Overloading `*` operator.
-      generic :: operator(-) => sub            !< Overloading `-` operator.
-      ! private methods
-      procedure, pass(lhs), private :: assign_qreal !< `qreal = qreal` assignament.
-      procedure, pass(lhs), private :: add          !< `qreal + qreal` operator.
-      procedure, pass(lhs), private :: div          !< `qreal / qreal` operator.
-      procedure, pass(lhs), private :: mul          !< `qreal * qreal` operator.
-      procedure, pass(lhs), private :: sub          !< `qreal - qreal` operator.
-  endtype qreal
+  real(R_P),    public :: magnitude !< Magnitude of quantity.
+  type(string), public :: unit      !< Unit of measure of quantity.
+  contains
+    ! public methods
+    generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
+    generic :: operator(+) => add            !< Overloading `+` operator.
+    generic :: operator(/) => div            !< Overloading `/` operator.
+    generic :: operator(*) => mul            !< Overloading `*` operator.
+    generic :: operator(-) => sub            !< Overloading `-` operator.
+    ! private methods
+    procedure, pass(lhs), private :: assign_qreal !< `qreal = qreal` assignament.
+    procedure, pass(lhs), private :: add          !< `qreal + qreal` operator.
+    procedure, pass(lhs), private :: div          !< `qreal / qreal` operator.
+    procedure, pass(lhs), private :: mul          !< `qreal * qreal` operator.
+    procedure, pass(lhs), private :: sub          !< `qreal - qreal` operator.
+endtype qreal
+!-----------------------------------------------------------------------------------------------------------------------------------
 contains
   elemental subroutine assign_qreal(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +45,7 @@ contains
   type(qreal),  intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
   lhs%magnitude = rhs%magnitude
-  ! lhs%unit = rhs%unit
+  lhs%unit = rhs%unit
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qreal
 

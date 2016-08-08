@@ -1,728 +1,1258 @@
-
-
-
-
-<!DOCTYPE html>
-<html lang="en" class="">
-  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-    <meta charset='utf-8'>
-    
-
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-a2a1ae24a31177c689f6ec6d0f320684962f572ef60a84b385ec47dd00c06b38.css" media="all" rel="stylesheet" />
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-d8e32a012aaf426841c117ebd3b9fe63144acaf93ef32de2d120f32d61bc80f0.css" media="all" rel="stylesheet" />
-    
-    
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-c31d97cdffdd1a140b356a16a2e2b37db7c98fa23ce2127f79a61bc338af1083.css" media="all" rel="stylesheet" />
-    
-
-    <link as="script" href="https://assets-cdn.github.com/assets/frameworks-952d14ac162c6f6f327175882f6b1a4645bf7aadc9b36ccd52d50fc6f34c8568.js" rel="preload" />
-    
-    <link as="script" href="https://assets-cdn.github.com/assets/github-bf48faaabf8d67ac672500f09e75d7185fff7e7c82caa4da1306a43cfa7979ff.js" rel="preload" />
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en">
-    <meta name="viewport" content="width=device-width">
-    
-    <title>StringiFor/befor64.F90 at master · szaghi/StringiFor · GitHub</title>
-    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
-    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
-    <meta property="fb:app_id" content="1401488693436528">
-
-      <meta content="https://avatars2.githubusercontent.com/u/1661942?v=3&amp;s=400" name="twitter:image:src" /><meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="szaghi/StringiFor" name="twitter:title" /><meta content="StringiFor - Strings Fortran Manipulator with steroids" name="twitter:description" />
-      <meta content="https://avatars2.githubusercontent.com/u/1661942?v=3&amp;s=400" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="szaghi/StringiFor" property="og:title" /><meta content="https://github.com/szaghi/StringiFor" property="og:url" /><meta content="StringiFor - Strings Fortran Manipulator with steroids" property="og:description" />
-      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
-    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
-    <link rel="assets" href="https://assets-cdn.github.com/">
-    
-    <meta name="pjax-timeout" content="1000">
-    
-
-    <meta name="msapplication-TileImage" content="/windows-tile.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="selected-link" value="repo_source" data-pjax-transient>
-
-    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
-<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
-    <meta name="google-analytics" content="UA-3769691-2">
-
-<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="C1CE836E:1029:132DEB5D:57A853A3" name="octolytics-dimension-request_id" />
-<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
-
-
-
-  <meta class="js-ga-set" name="dimension1" content="Logged Out">
-
-
-
-        <meta name="hostname" content="github.com">
-    <meta name="user-login" content="">
-
-        <meta name="expected-hostname" content="github.com">
-      <meta name="js-proxy-site-detection-payload" content="YjJmY2I0MjE5ZTM0YTFjMDYzOGViMmU1NWNhMDQwODI3NGUwMjYyNjNiNmM2OGFlYWMzMGRjZDNkYzA1OTBlY3x7InJlbW90ZV9hZGRyZXNzIjoiMTkzLjIwNi4xMzEuMTEwIiwicmVxdWVzdF9pZCI6IkMxQ0U4MzZFOjEwMjk6MTMyREVCNUQ6NTdBODUzQTMiLCJ0aW1lc3RhbXAiOjE0NzA2NDkyNTF9">
-
-
-      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
-      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
-
-    <meta name="html-safe-nonce" content="6543e89196e93804720bebc0322bef80d91ab935">
-    <meta content="8c0c7310518a588317bfcf644479981df3759139" name="form-nonce" />
-
-    <meta http-equiv="x-pjax-version" content="ab6488e49f0deff9f75b76b8e9ab7b3a">
-    
-
-      
-  <meta name="description" content="StringiFor - Strings Fortran Manipulator with steroids">
-  <meta name="go-import" content="github.com/szaghi/StringiFor git https://github.com/szaghi/StringiFor.git">
-
-  <meta content="1661942" name="octolytics-dimension-user_id" /><meta content="szaghi" name="octolytics-dimension-user_login" /><meta content="58048517" name="octolytics-dimension-repository_id" /><meta content="szaghi/StringiFor" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="58048517" name="octolytics-dimension-repository_network_root_id" /><meta content="szaghi/StringiFor" name="octolytics-dimension-repository_network_root_nwo" />
-  <link href="https://github.com/szaghi/StringiFor/commits/master.atom" rel="alternate" title="Recent Commits to StringiFor:master" type="application/atom+xml">
-
-
-      <link rel="canonical" href="https://github.com/szaghi/StringiFor/blob/master/src/lib/befor64.F90" data-pjax-transient>
-  </head>
-
-
-  <body class="logged-out  env-production  vis-public page-blob">
-    <div id="js-pjax-loader-bar" class="pjax-loader-bar"></div>
-    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
-
-    
-    
-    
-
-
-
-          <header class="site-header js-details-container" role="banner">
-  <div class="container-responsive">
-    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
-      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-
-    <button class="btn-link right site-header-toggle js-details-target" type="button" aria-label="Toggle navigation">
-      <svg aria-hidden="true" class="octicon octicon-three-bars" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg>
-    </button>
-
-    <div class="site-header-menu">
-      <nav class="site-header-nav site-header-nav-main">
-        <a href="/personal" class="js-selected-navigation-item nav-item nav-item-personal" data-ga-click="Header, click, Nav menu - item:personal" data-selected-links="/personal /personal">
-          Personal
-</a>        <a href="/open-source" class="js-selected-navigation-item nav-item nav-item-opensource" data-ga-click="Header, click, Nav menu - item:opensource" data-selected-links="/open-source /open-source">
-          Open source
-</a>        <a href="/business" class="js-selected-navigation-item nav-item nav-item-business" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/features /business/customers /business">
-          Business
-</a>        <a href="/explore" class="js-selected-navigation-item nav-item nav-item-explore" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /explore">
-          Explore
-</a>      </nav>
-
-      <div class="site-header-actions">
-            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
-          <a class="btn site-header-actions-btn mr-2" href="/login?return_to=%2Fszaghi%2FStringiFor%2Fblob%2Fmaster%2Fsrc%2Flib%2Fbefor64.F90" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
-      </div>
-
-        <nav class="site-header-nav site-header-nav-secondary">
-          <a class="nav-item" href="/pricing">Pricing</a>
-          <a class="nav-item" href="/blog">Blog</a>
-          <a class="nav-item" href="https://help.github.com">Support</a>
-          <a class="nav-item header-search-link" href="https://github.com/search">Search GitHub</a>
-              <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
-  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/szaghi/StringiFor/search" class="js-site-search-form" data-scoped-search-url="/szaghi/StringiFor/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-    <label class="form-control header-search-wrapper js-chromeless-input-container">
-      <div class="header-search-scope">This repository</div>
-      <input type="text"
-        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
-        data-hotkey="s"
-        name="q"
-        placeholder="Search"
-        aria-label="Search this repository"
-        data-unscoped-placeholder="Search GitHub"
-        data-scoped-placeholder="Search"
-        autocapitalize="off">
-    </label>
-</form></div>
-
-        </nav>
-    </div>
-  </div>
-</header>
-
-
-
-    <div id="start-of-content" class="accessibility-aid"></div>
-
-      <div id="js-flash-container">
-</div>
-
-
-    <div role="main">
-        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
-    <div id="js-repo-pjax-container" data-pjax-container>
-      
-<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
-  <div class="container repohead-details-container">
-
-    
-
-<ul class="pagehead-actions">
-
-  <li>
-      <a href="/login?return_to=%2Fszaghi%2FStringiFor"
-    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-    aria-label="You must be signed in to watch a repository" rel="nofollow">
-    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
-    Watch
-  </a>
-  <a class="social-count" href="/szaghi/StringiFor/watchers">
-    4
-  </a>
-
-  </li>
-
-  <li>
-      <a href="/login?return_to=%2Fszaghi%2FStringiFor"
-    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-    aria-label="You must be signed in to star a repository" rel="nofollow">
-    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-    Star
-  </a>
-
-    <a class="social-count js-social-count" href="/szaghi/StringiFor/stargazers">
-      10
-    </a>
-
-  </li>
-
-  <li>
-      <a href="/login?return_to=%2Fszaghi%2FStringiFor"
-        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-        aria-label="You must be signed in to fork a repository" rel="nofollow">
-        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-        Fork
-      </a>
-
-    <a href="/szaghi/StringiFor/network" class="social-count">
-      2
-    </a>
-  </li>
-</ul>
-
-    <h1 class="public ">
-  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
-  <span class="author" itemprop="author"><a href="/szaghi" class="url fn" rel="author">szaghi</a></span><!--
---><span class="path-divider">/</span><!--
---><strong itemprop="name"><a href="/szaghi/StringiFor" data-pjax="#js-repo-pjax-container">StringiFor</a></strong>
-
-</h1>
-
-  </div>
-  <div class="container">
-    
-<nav class="reponav js-repo-nav js-sidenav-container-pjax"
-     itemscope
-     itemtype="http://schema.org/BreadcrumbList"
-     role="navigation"
-     data-pjax="#js-repo-pjax-container">
-
-  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
-    <a href="/szaghi/StringiFor" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /szaghi/StringiFor" itemprop="url">
-      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
-      <span itemprop="name">Code</span>
-      <meta itemprop="position" content="1">
-</a>  </span>
-
-    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
-      <a href="/szaghi/StringiFor/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /szaghi/StringiFor/issues" itemprop="url">
-        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
-        <span itemprop="name">Issues</span>
-        <span class="counter">3</span>
-        <meta itemprop="position" content="2">
-</a>    </span>
-
-  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
-    <a href="/szaghi/StringiFor/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /szaghi/StringiFor/pulls" itemprop="url">
-      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-      <span itemprop="name">Pull requests</span>
-      <span class="counter">0</span>
-      <meta itemprop="position" content="3">
-</a>  </span>
-
-    <a href="/szaghi/StringiFor/wiki" class="js-selected-navigation-item reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /szaghi/StringiFor/wiki">
-      <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path></svg>
-      Wiki
-</a>
-
-  <a href="/szaghi/StringiFor/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /szaghi/StringiFor/pulse">
-    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8z"></path></svg>
-    Pulse
-</a>
-  <a href="/szaghi/StringiFor/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /szaghi/StringiFor/graphs">
-    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"></path></svg>
-    Graphs
-</a>
-
-</nav>
-
-  </div>
-</div>
-
-<div class="container new-discussion-timeline experiment-repo-nav">
-  <div class="repository-content">
-
-    
-
-<a href="/szaghi/StringiFor/blob/fa73a1d0443fdf7d3e3c3d090f6e23b102ff0dad/src/lib/befor64.F90" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
-
-<!-- blob contrib key: blob_contributors:v21:5254ead6a75c2d66afc98537446562a9 -->
-
-<div class="file-navigation js-zeroclipboard-container">
-  
-<div class="select-menu branch-select-menu js-menu-container js-select-menu left">
-  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
-    title="master"
-    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
-    <i>Branch:</i>
-    <span class="js-select-button css-truncate-target">master</span>
-  </button>
-
-  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
-
-    <div class="select-menu-modal">
-      <div class="select-menu-header">
-        <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-        <span class="select-menu-title">Switch branches/tags</span>
-      </div>
-
-      <div class="select-menu-filters">
-        <div class="select-menu-text-filter">
-          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
-        </div>
-        <div class="select-menu-tabs">
-          <ul>
-            <li class="select-menu-tab">
-              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
-            </li>
-            <li class="select-menu-tab">
-              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
-
-        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
-
-
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/szaghi/StringiFor/blob/gh-pages/src/lib/befor64.F90"
-               data-name="gh-pages"
-               data-skip-pjax="true"
-               rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text" title="gh-pages">
-                gh-pages
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open selected"
-               href="/szaghi/StringiFor/blob/master/src/lib/befor64.F90"
-               data-name="master"
-               data-skip-pjax="true"
-               rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text" title="master">
-                master
-              </span>
-            </a>
-        </div>
-
-          <div class="select-menu-no-results">Nothing to show</div>
-      </div>
-
-      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
-        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
-
-
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.9.0/src/lib/befor64.F90"
-              data-name="v0.9.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.9.0">
-                v0.9.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.5/src/lib/befor64.F90"
-              data-name="v0.8.5"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.5">
-                v0.8.5
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.4/src/lib/befor64.F90"
-              data-name="v0.8.4"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.4">
-                v0.8.4
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.3/src/lib/befor64.F90"
-              data-name="v0.8.3"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.3">
-                v0.8.3
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.2/src/lib/befor64.F90"
-              data-name="v0.8.2"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.2">
-                v0.8.2
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.1/src/lib/befor64.F90"
-              data-name="v0.8.1"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.1">
-                v0.8.1
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.8.0/src/lib/befor64.F90"
-              data-name="v0.8.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.8.0">
-                v0.8.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.7.5/src/lib/befor64.F90"
-              data-name="v0.7.5"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.7.5">
-                v0.7.5
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.7.2/src/lib/befor64.F90"
-              data-name="v0.7.2"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.7.2">
-                v0.7.2
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.7.1/src/lib/befor64.F90"
-              data-name="v0.7.1"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.7.1">
-                v0.7.1
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.7.0/src/lib/befor64.F90"
-              data-name="v0.7.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.7.0">
-                v0.7.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.6.0/src/lib/befor64.F90"
-              data-name="v0.6.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.6.0">
-                v0.6.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.5.0/src/lib/befor64.F90"
-              data-name="v0.5.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.5.0">
-                v0.5.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.4.0/src/lib/befor64.F90"
-              data-name="v0.4.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.4.0">
-                v0.4.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.3.0/src/lib/befor64.F90"
-              data-name="v0.3.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.3.0">
-                v0.3.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.2.0/src/lib/befor64.F90"
-              data-name="v0.2.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.2.0">
-                v0.2.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.1.0/src/lib/befor64.F90"
-              data-name="v0.1.0"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.1.0">
-                v0.1.0
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.0.2/src/lib/befor64.F90"
-              data-name="v0.0.2"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.0.2">
-                v0.0.2
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/szaghi/StringiFor/tree/v0.0.1/src/lib/befor64.F90"
-              data-name="v0.0.1"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.0.1">
-                v0.0.1
-              </span>
-            </a>
-        </div>
-
-        <div class="select-menu-no-results">Nothing to show</div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-  <div class="btn-group right">
-    <a href="/szaghi/StringiFor/find/master"
-          class="js-pjax-capture-input btn btn-sm"
-          data-pjax
-          data-hotkey="t">
-      Find file
-    </a>
-    <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
-  </div>
-  <div class="breadcrumb js-zeroclipboard-target">
-    <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/szaghi/StringiFor"><span>StringiFor</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/szaghi/StringiFor/tree/master/src"><span>src</span></a></span><span class="separator">/</span><span class="js-path-segment"><a href="/szaghi/StringiFor/tree/master/src/lib"><span>lib</span></a></span><span class="separator">/</span><strong class="final-path">befor64.F90</strong>
-  </div>
-</div>
-
-
-  <div class="commit-tease">
-      <span class="right">
-        <a class="commit-tease-sha" href="/szaghi/StringiFor/commit/7290f8681d9248e965854d2e2d43f2da1f0e94bd" data-pjax>
-          7290f86
-        </a>
-        <relative-time datetime="2016-05-16T13:41:35Z">May 16, 2016</relative-time>
-      </span>
-      <div>
-        <img alt="@szaghi" class="avatar" height="20" src="https://avatars1.githubusercontent.com/u/1661942?v=3&amp;s=40" width="20" />
-        <a href="/szaghi" class="user-mention" rel="author">szaghi</a>
-          <a href="/szaghi/StringiFor/commit/7290f8681d9248e965854d2e2d43f2da1f0e94bd" class="message" data-pjax="true" title="Add BeFoR64 dep and first encode test
-
-Add BeFoR64 dep and first encode test">Add BeFoR64 dep and first encode test</a>
-      </div>
-
-    <div class="commit-tease-contributors">
-      <button type="button" class="btn-link muted-link contributors-toggle" data-facebox="#blob_contributors_box">
-        <strong>1</strong>
-         contributor
-      </button>
-      
-    </div>
-
-    <div id="blob_contributors_box" style="display:none">
-      <h2 class="facebox-header" data-facebox-id="facebox-header">Users who have contributed to this file</h2>
-      <ul class="facebox-user-list" data-facebox-id="facebox-description">
-          <li class="facebox-user-list-item">
-            <img alt="@szaghi" height="24" src="https://avatars3.githubusercontent.com/u/1661942?v=3&amp;s=48" width="24" />
-            <a href="/szaghi">szaghi</a>
-          </li>
-      </ul>
-    </div>
-  </div>
-
-<div class="file">
-  <div class="file-header">
-  <div class="file-actions">
-
-    <div class="btn-group">
-      <a href="/szaghi/StringiFor/raw/master/src/lib/befor64.F90" class="btn btn-sm " id="raw-url">Raw</a>
-        <a href="/szaghi/StringiFor/blame/master/src/lib/befor64.F90" class="btn btn-sm js-update-url-with-hash">Blame</a>
-      <a href="/szaghi/StringiFor/commits/master/src/lib/befor64.F90" class="btn btn-sm " rel="nofollow">History</a>
-    </div>
-
-
-        <button type="button" class="btn-octicon disabled tooltipped tooltipped-nw"
-          aria-label="You must be signed in to make or propose changes">
-          <svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
-        </button>
-        <button type="button" class="btn-octicon btn-octicon-danger disabled tooltipped tooltipped-nw"
-          aria-label="You must be signed in to make or propose changes">
-          <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
-        </button>
-  </div>
-
-  <div class="file-info">
-      <span class="file-mode" title="File mode">symbolic link</span>
-      <span class="file-info-divider"></span>
-      1 lines (1 sloc)
-      <span class="file-info-divider"></span>
-    42 Bytes
-  </div>
-</div>
-
-  
-
-  <div itemprop="text" class="blob-wrapper data type-fortran">
-      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
-      <tr>
-        <td id="L1" class="blob-num js-line-number" data-line-number="1"></td>
-        <td id="LC1" class="blob-code blob-code-inner js-file-line">..<span class="pl-k">/</span>third_party<span class="pl-k">/</span>BeFoR64<span class="pl-k">/</span>src<span class="pl-k">/</span>lib<span class="pl-k">/</span>befor64.F90</td>
-      </tr>
-</table>
-
-  </div>
-
-</div>
-
-<button type="button" data-facebox="#jump-to-line" data-facebox-class="linejump" data-hotkey="l" class="hidden">Jump to Line</button>
-<div id="jump-to-line" style="display:none">
-  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-    <input class="form-control linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
-    <button type="submit" class="btn">Go</button>
-</form></div>
-
-  </div>
-  <div class="modal-backdrop js-touch-events"></div>
-</div>
-
-
-    </div>
-  </div>
-
-    </div>
-
-        <div class="container site-footer-container">
-  <div class="site-footer" role="contentinfo">
-    <ul class="site-footer-links right">
-        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
-      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
-      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
-      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
-        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
-        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
-
-    </ul>
-
-    <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub">
-      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-</a>
-    <ul class="site-footer-links">
-      <li>&copy; 2016 <span title="0.07130s from github-fe121-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
-        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
-        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
-        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
-        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
-        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
-    </ul>
-  </div>
-</div>
-
-
-
-    
-
-    <div id="ajax-error-message" class="ajax-error-message flash flash-error">
-      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
-      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
-        <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-      </button>
-      You can't perform that action at this time.
-    </div>
-
-
-      <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/compat-7db58f8b7b91111107fac755dd8b178fe7db0f209ced51fc339c446ad3f8da2b.js"></script>
-      <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-952d14ac162c6f6f327175882f6b1a4645bf7aadc9b36ccd52d50fc6f34c8568.js"></script>
-      <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-bf48faaabf8d67ac672500f09e75d7185fff7e7c82caa4da1306a43cfa7979ff.js"></script>
-      
-      
-      
-      
-      
-      
-    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
-      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
-      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
-      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
-    </div>
-    <div class="facebox" id="facebox" style="display:none;">
-  <div class="facebox-popup">
-    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
-    </div>
-    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
-      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-    </button>
-  </div>
-</div>
-
-  </body>
-</html>
-
+!< BeFoR64, Base64 encoding/decoding library for FoRtran poor people.
+module befor64
+!-----------------------------------------------------------------------------------------------------------------------------------
+!< BeFoR64, Base64 encoding/decoding library for FoRtran poor people.
+!<{!README-BeFoR64.md!}
+!-----------------------------------------------------------------------------------------------------------------------------------
+use penf                ! Portability environment.
+use befor64_pack_data_m ! Library for packing heterogeneous data into single (homogeneous) packed one.
+!-----------------------------------------------------------------------------------------------------------------------------------
+
+!-----------------------------------------------------------------------------------------------------------------------------------
+implicit none
+private
+public :: is_b64_initialized, b64_init
+public :: b64_encode, b64_encode_up
+public :: b64_decode, b64_decode_up
+public :: pack_data
+public :: autotest
+!-----------------------------------------------------------------------------------------------------------------------------------
+
+!-----------------------------------------------------------------------------------------------------------------------------------
+logical       :: is_b64_initialized=.false. !< Flag for checking the initialization of the library.
+character(64) :: base64="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" !< Base64 alphabet.
+!-----------------------------------------------------------------------------------------------------------------------------------
+
+!-----------------------------------------------------------------------------------------------------------------------------------
+interface b64_encode
+  !< Encode numbers (integer and real) to base64.
+  !<
+  !< This is an interface for encoding integer and real numbers of any kinds into a base64 string. This interface can encode both
+  !< scalar and array.
+  !<
+  !< @warning The encoded string is returned as varying length character string, `character(len=:), allocatable:: string`, thus the
+  !< compiler must support such a Fortran (2003) feature.
+  !<
+  !< @note Before start to encode anything the library must be initialized. The procedure `b64_init` must be called at first. The
+  !< global variable `is_b64_initialized` can be used to check the status of the initialization.
+  !<
+  !<### Usage
+  !< For a practical example see the `autotest` procedure.
+  !<
+  !<#### Scalar encoding
+  !<```fortran
+  !<character(len=:), allocatable:: code64 ! base64 encoded string
+  !<...
+  !<call b64_encode(n=12._R8P,code=code64)
+  !<```
+  !<
+  !<#### Array encoding
+  !<```fortran
+  !<character(len=:), allocatable:: code64 ! base64 encoded string
+  !<...
+  !<call b64_encode(n=[12_I4P,1_I4P],code=code64)
+  !<```
+  !<
+  !< @note If you want to encode heterogenous data (e.g. integer and real numbers), you must use the auxiliary `pack_data`
+  !< procedure.
+  !<
+  !< @warning The encoding of array of strings is admitted only if each string of the array has the same length.
+  module procedure &
+#ifdef r16p
+                   b64_encode_R16,   b64_encode_R16_a, &
+#endif
+                   b64_encode_R8,    b64_encode_R8_a,  &
+                   b64_encode_R4,    b64_encode_R4_a,  &
+                   b64_encode_I8,    b64_encode_I8_a,  &
+                   b64_encode_I4,    b64_encode_I4_a,  &
+                   b64_encode_I2,    b64_encode_I2_a,  &
+                   b64_encode_I1,    b64_encode_I1_a,  &
+                   b64_encode_string,b64_encode_string_a
+endinterface
+interface b64_encode_up
+  !< Encode unlimited polymorphic variable to base64.
+  !<
+  !< This is an interface for encoding both scalar and array.
+  !<
+  !< @warning The encoded string is returned as varying length character string, `character(len=:), allocatable:: string`, thus the
+  !< compiler must support such a Fortran (2003) feature.
+  !<
+  !< @note Before start to encode anything the library must be initialized. The procedure `b64_init` must be called at first. The
+  !< global variable `is_b64_initialized` can be used to check the status of the initialization.
+  !<
+  !<### Usage
+  !< For a practical example see the `autotest` procedure.
+  !<
+  !<#### Scalar encoding
+  !<```fortran
+  !<character(len=:), allocatable:: code64 ! base64 encoded string
+  !<...
+  !<call b64_encode_up(up=12._R8P,code=code64)
+  !<```
+  !<
+  !<#### Array encoding
+  !<```fortran
+  !<character(len=:), allocatable:: code64 ! base64 encoded string
+  !<...
+  !<call b64_encode_up(up=[12_I4P,1_I4P],code=code64)
+  !<```
+  !<
+  !< @note If you want to encode heterogenous data (e.g. integer and real numbers), you must use the auxiliary `pack_data`
+  !< procedure.
+  !<
+  !< @warning The encoding of array of strings is admitted only if each string of the array has the same length.
+  module procedure b64_encode_up,b64_encode_up_a
+endinterface
+interface b64_decode
+  !< Decode numbers (integer and real) from base64.
+  !<
+  !< This is an interface for decoding integer and real numbers of any kinds from a base64 string. This interface can decode both
+  !< scalar and array.
+  !<
+  !< @note Before start to decode anything the library must be initialized. The procedure `b64_init` must be called at first. The
+  !< global variable `is_b64_initialized` can be used to check the status of the initialization.
+  !<
+  !<### Usage
+  !< For a practical example see the `autotest` procedure.
+  !<
+  !<#### Scalar decoding
+  !<```fortran
+  !<real(R8P):: decoded ! scalar to be decoded
+  !<...
+  !<call b64_decode(code='AAAAAAAA8D8=',n=decoded)
+  !<```
+  !<
+  !<#### Array decoding
+  !<```fortran
+  !<integer(I8P):: decoded(1:4) ! array to be decoded
+  !<...
+  !<call b64_decode(code='FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA=',n=decoded)
+  !<```
+  !<
+  !< @note If you want to decode heterogenous data (e.g. integer and real numbers), you must use the auxiliary `pack_data`
+  !< procedure.
+  !<
+  !< @warning The decoding of array of strings is admitted only if each string of the array has the same length.
+  module procedure &
+#ifdef r16p
+                   b64_decode_R16,   b64_decode_R16_a, &
+#endif
+                   b64_decode_R8,    b64_decode_R8_a,  &
+                   b64_decode_R4,    b64_decode_R4_a,  &
+                   b64_decode_I8,    b64_decode_I8_a,  &
+                   b64_decode_I4,    b64_decode_I4_a,  &
+                   b64_decode_I2,    b64_decode_I2_a,  &
+                   b64_decode_I1,    b64_decode_I1_a,  &
+                   b64_decode_string,b64_decode_string_a
+endinterface
+interface b64_decode_up
+  !< Decode unlimited polymorphic variable from base64.
+  !<
+  !< This is an interface for decoding both scalar and array.
+  !<
+  !< @note Before start to decode anything the library must be initialized. The procedure `b64_init` must be called at first. The
+  !< global variable `is_b64_initialized` can be used to check the status of the initialization.
+  !<
+  !<### Usage
+  !< For a practical example see the `autotest` procedure.
+  !<
+  !<#### Scalar decoding
+  !<```fortran
+  !<real(R8P):: decoded ! scalar to be decoded
+  !<...
+  !<call b64_decode_up(code='AAAAAAAA8D8=',up=decoded)
+  !<```
+  !<
+  !<#### Array decoding
+  !<```fortran
+  !<integer(I8P):: decoded(1:4) ! array to be decoded
+  !<...
+  !<call b64_decode_up(code='FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA=',up=decoded)
+  !<```
+  !<
+  !< @note If you want to decode heterogenous data (e.g. integer and real numbers), you must use the auxiliary `pack_data`
+  !< procedure.
+  !<
+  !< @warning The decoding of array of strings is admitted only if each string of the array has the same length.
+  module procedure b64_decode_up,b64_decode_up_a
+endinterface
+!-----------------------------------------------------------------------------------------------------------------------------------
+contains
+  subroutine b64_init()
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Initialize the BeFoR64 library.
+  !<
+  !< @note This procedure **must** be called before encoding/decoding anything!
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (.not.is_initialized) call penf_init
+  is_b64_initialized = .true.
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_init
+
+  pure subroutine encode_bits(bits, padd, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode a bits stream (must be multiple of 24 bits) into base64 charcaters code (of length multiple of 4).
+  !<
+  !< The bits stream are encoded in chunks of 24 bits as the following example (in little endian order)
+  !<```
+  !< +--first octet--+-second octet--+--third octet--+
+  !< |7 6 5 4 3 2 1 0|7 6 5 4 3 2 1 0|7 6 5 4 3 2 1 0|
+  !< +-----------+---+-------+-------+---+-----------+
+  !< |5 4 3 2 1 0|5 4 3 2 1 0|5 4 3 2 1 0|5 4 3 2 1 0|
+  !< +--1.index--+--2.index--+--3.index--+--4.index--+
+  !<```
+  !< @note The 4 indexes are stored into 4 elements 8 bits array, thus 2 bits of each array element are not used.
+  !<
+  !< @note The number of paddings must be computed outside this procedure, into the calling scope.
+  !<
+  !< @warning This procedure is the backend of encoding, thus it must be never called outside the module.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I1P), intent(in)  :: bits(1:)  !< Bits to be encoded.
+  integer(I4P), intent(in)  :: padd      !< Number of padding characters ('=').
+  character(*), intent(out) :: code      !< Characters code.
+  integer(I1P)              :: sixb(1:4) !< 6 bits slices (stored into 8 bits integer) of 24 bits input.
+  integer(I8P)              :: c         !< Counter.
+  integer(I8P)              :: e         !< Counter.
+  integer(I8P)              :: Nb        !< Length of bits array.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  Nb=size(bits,dim=1,kind=I8P)
+  c = 1_I8P
+  do e=1_I8P,Nb,3_I8P ! loop over array elements: 3 bytes (24 bits) scanning
+    sixb = 0_I1P
+    call mvbits(bits(e  ),2,6,sixb(1),0)
+    call mvbits(bits(e  ),0,2,sixb(2),4)
+    if (e+1<=Nb) then
+      call mvbits(bits(e+1),4,4,sixb(2),0)
+      call mvbits(bits(e+1),0,4,sixb(3),2)
+    endif
+    if (e+2<=Nb) then
+      call mvbits(bits(e+2),6,2,sixb(3),0)
+      call mvbits(bits(e+2),0,6,sixb(4),0)
+    endif
+    sixb = sixb + 1_I1P
+    code(c  :c  ) = base64(sixb(1):sixb(1))
+    code(c+1:c+1) = base64(sixb(2):sixb(2))
+    code(c+2:c+2) = base64(sixb(3):sixb(3))
+    code(c+3:c+3) = base64(sixb(4):sixb(4))
+    c = c + 4_I8P
+  enddo
+  if (padd>0) code(len(code)-padd+1:)=repeat('=',padd)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine encode_bits
+
+  pure subroutine decode_bits(code, bits)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 string into a sequence of bits stream.
+  !<
+  !< The base64 string must be parsed with a strike of 4 characters and converted into a 3 bytes stream. Considering the base64 code
+  !< `QUJD` the decoding process must do
+  !<```
+  !< +-b64 char--+-b64 char--+-b64 char--+-b64 char--+
+  !< |      Q    |      U    |      J    |      D    |
+  !< +-b64 index-+-b64 index-+-b64 index-+-b64 index-+
+  !< !      16   |      20   |      9    |      3    |
+  !< +-6 bits----+-6 bits----+-6 bits----+-6 bits----+
+  !< |0 1 0 0 0 0|0 1 0 1 0 0|0 0 1 0 0 1|0 0 0 0 1 1|
+  !< +-----------+---+-------+-------+---+-----------+
+  !< |0 1 0 0 0 0 0 1|0 1 0 0 0 0 1 0|0 1 0 0 0 0 1 1|
+  !< +-----8 bits----+-----8 bits----+-----8 bits----+
+  !<```
+  !< @note The bits pattern is returned as a 1-byte element array, the dimension of witch must be computed outside this procedure.
+  !<
+  !< @warning This procedure is the backend of decoding, thus it must be never called outside the module.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code      !< Characters code.
+  integer(I1P), intent(out) :: bits(1:)  !< Bits decoded.
+  integer(I1P)              :: sixb(1:4) !< 6 bits slices (stored into 8 bits integer) of 24 bits input.
+  integer(I8P)              :: c         !< Counter.
+  integer(I8P)              :: e         !< Counter.
+  integer(I8P)              :: Nb        !< Length of bits array.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  Nb=size(bits,dim=1,kind=I8P)
+  e = 1_I8P
+  do c=1_I8P,len(code),4_I8P ! loop over code characters: 3 bytes (24 bits) scanning
+    sixb = 0_I1P
+    sixb(1) = index(base64,code(c  :c  )) - 1
+    sixb(2) = index(base64,code(c+1:c+1)) - 1
+    sixb(3) = index(base64,code(c+2:c+2)) - 1
+    sixb(4) = index(base64,code(c+3:c+3)) - 1
+      call mvbits(sixb(1),0,6,bits(e  ),2) ; call mvbits(sixb(2),4,2,bits(e  ),0)
+    if (e+1<=Nb) then
+      call mvbits(sixb(2),0,4,bits(e+1),4) ; call mvbits(sixb(3),2,4,bits(e+1),0)
+    endif
+    if (e+2<=Nb) then
+      call mvbits(sixb(3),0,2,bits(e+2),6) ; call mvbits(sixb(4),0,6,bits(e+2),0)
+    endif
+    e = e + 3_I8P
+  enddo
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine decode_bits
+
+  subroutine b64_encode_up(up, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode an unlimited polymorphic scalar to base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(*),                      intent(in)  :: up   !< Unlimited polymorphic variable to be encoded.
+  character(len=:), allocatable, intent(out) :: code !< Encoded scalar.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  select type(up)
+  type is(real(R8P))
+    call b64_encode_R8(n=up,code=code)
+  type is(real(R4P))
+    call b64_encode_R4(n=up,code=code)
+  type is(integer(I8P))
+    call b64_encode_I8(n=up,code=code)
+  type is(integer(I4P))
+    call b64_encode_I4(n=up,code=code)
+  type is(integer(I2P))
+    call b64_encode_I2(n=up,code=code)
+  type is(integer(I1P))
+    call b64_encode_I1(n=up,code=code)
+  type is(character(*))
+    call b64_encode_string(s=up,code=code)
+  endselect
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_up
+
+  pure subroutine b64_encode_up_a(up, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode an unlimited polymorphic array to base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(*),                      intent(in)  :: up(1:) !< Unlimited polymorphic variable to be encoded.
+  character(len=:), allocatable, intent(out) :: code   !< Encoded array.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  select type(up)
+  type is(real(R8P))
+    call b64_encode_R8_a(n=up,code=code)
+  type is(real(R4P))
+    call b64_encode_R4_a(n=up,code=code)
+  type is(integer(I8P))
+    call b64_encode_I8_a(n=up,code=code)
+  type is(integer(I4P))
+    call b64_encode_I4_a(n=up,code=code)
+  type is(integer(I2P))
+    call b64_encode_I2_a(n=up,code=code)
+  type is(integer(I1P))
+    call b64_encode_I1_a(n=up,code=code)
+  type is(character(*))
+    call b64_encode_string_a(s=up,code=code)
+  endselect
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_up_a
+
+  subroutine b64_decode_up(code, up)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode an unlimited polymorphic scalar from base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code !< Encoded scalar.
+  class(*),     intent(out) :: up   !< Unlimited polymorphic variable to be decoded.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  select type(up)
+  type is(real(R8P))
+    call b64_decode_R8(code=code,n=up)
+  type is(real(R4P))
+    call b64_decode_R4(code=code,n=up)
+  type is(integer(I8P))
+    call b64_decode_I8(code=code,n=up)
+  type is(integer(I4P))
+    call b64_decode_I4(code=code,n=up)
+  type is(integer(I2P))
+    call b64_decode_I2(code=code,n=up)
+  type is(integer(I1P))
+    call b64_decode_I1(code=code,n=up)
+  type is(character(*))
+    call b64_decode_string(code=code,s=up)
+  endselect
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_up
+
+  subroutine b64_decode_up_a(code, up)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode an unlimited polymorphic array from base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code   !< Encoded array.
+  class(*),     intent(out) :: up(1:) !< Unlimited polymorphic variable to be decoded.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  select type(up)
+  type is(real(R8P))
+    call b64_decode_R8_a(code=code,n=up)
+  type is(real(R4P))
+    call b64_decode_R4_a(code=code,n=up)
+  type is(integer(I8P))
+    call b64_decode_I8_a(code=code,n=up)
+  type is(integer(I4P))
+    call b64_decode_I4_a(code=code,n=up)
+  type is(integer(I2P))
+    call b64_decode_I2_a(code=code,n=up)
+  type is(integer(I1P))
+    call b64_decode_I1_a(code=code,n=up)
+  type is(character(*))
+    call b64_decode_string_a(code=code,s=up)
+  endselect
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_up_a
+
+  pure subroutine b64_encode_R16(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (R16P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R16P),                    intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYR16P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYR16P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYR16P),3_I2P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R16
+
+  pure subroutine b64_encode_R8(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (R8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R8P),                     intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYR8P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYR8P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYR8P),3_I1P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R8
+
+  pure subroutine b64_encode_R4(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (R4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R4P),                     intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYR4P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYR4P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYR4P),3_I1P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R4
+
+  pure subroutine b64_encode_I8(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (I8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I8P),                  intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYI8P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYI8P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYI8P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I8
+
+  pure subroutine b64_encode_I4(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (I4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I4P),                  intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYI4P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYI4P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYI4P),3_I4P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I4
+
+  pure subroutine b64_encode_I2(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (I2P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I2P),                  intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYI2P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYI2P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYI2P),3_I2P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I2
+
+  pure subroutine b64_encode_I1(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar number to base64 (I1P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I1P),                  intent(in)  :: n       !< Number to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:((BYI1P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYI1P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((BYI1P),3_I1P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I1
+
+  pure subroutine b64_encode_string(s, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode scalar string to base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*),                  intent(in)  :: s       !< String to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I4P)                               :: BYCHS   !< Bytes of character string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  BYCHS = byte_size(s)
+  allocate(nI1P(1:((BYCHS+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYCHS+2)/3)*4)
+  nI1P = transfer(s,nI1P)
+  padd = mod((BYCHS),3_I4P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_string
+
+  pure subroutine b64_encode_R16_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (R16P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R16P),                    intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYR16P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYR16P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYR16P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R16_a
+
+  pure subroutine b64_encode_R8_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (R8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R8P),                     intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYR8P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYR8P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYR8P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R8_a
+
+  pure subroutine b64_encode_R4_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (R4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R4P),                     intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYR4P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYR4P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYR4P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_R4_a
+
+  pure subroutine b64_encode_I8_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (I8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I8P),                  intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYI8P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYI8P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYI8P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I8_a
+
+  pure subroutine b64_encode_I4_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (I4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I4P),                  intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYI4P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYI4P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYI4P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I4_a
+
+  pure subroutine b64_encode_I2_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (I2P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I2P),                  intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYI2P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYI2P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYI2P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I2_a
+
+  pure subroutine b64_encode_I1_a(n, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array numbers to base64 (I1P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I1P),                  intent(in)  :: n(1:)   !< Array of numbers to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded array.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I8P)                               :: ns      !< Size of n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  ns = size(n,dim=1)
+  allocate(nI1P(1:((ns*BYI1P+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((ns*BYI1P+2)/3)*4)
+  nI1P = transfer(n,nI1P)
+  padd = mod((ns*BYI1P),3_I8P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_I1_a
+
+  pure subroutine b64_encode_string_a(s, code)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Encode array string to base64.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*),                  intent(in)  :: s(1:)   !< String to be encoded.
+  character(len=:), allocatable, intent(out) :: code    !< Encoded scalar.
+  integer(I1P),     allocatable              :: nI1P(:) !< One byte integer array containing n.
+  integer(I4P)                               :: padd    !< Number of padding characters ('=').
+  integer(I4P)                               :: BYCHS   !< Bytes of character string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  BYCHS = byte_size(s(1))*size(s,dim=1)
+  allocate(nI1P(1:((BYCHS+2)/3)*3)) ; nI1P = 0_I1P
+  code = repeat(' ',((BYCHS+2)/3)*4)
+  nI1P = transfer(s,nI1P)
+  padd = mod((BYCHS),3_I4P) ; if (padd>0_I4P) padd = 3_I4P - padd
+  call encode_bits(bits=nI1P,padd=padd,code=code)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_encode_string_a
+
+  elemental subroutine b64_decode_R16(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (R16P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  real(R16P),   intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYR16P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R16
+
+  elemental subroutine b64_decode_R8(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (R8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  real(R8P),    intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYR8P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R8
+
+  elemental subroutine b64_decode_R4(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (R4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  real(R4P),    intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYR4P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R4
+
+  elemental subroutine b64_decode_I8(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (I8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  integer(I8P), intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYI8P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I8
+
+  elemental subroutine b64_decode_I4(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (I4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  integer(I4P), intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYI4P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I4
+
+  elemental subroutine b64_decode_I2(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (I2P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  integer(I2P), intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYI2P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I2
+
+  elemental subroutine b64_decode_I1(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar number (I1P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  integer(I1P), intent(out) :: n       !< Number to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:BYI1P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I1
+
+  elemental subroutine b64_decode_string(code, s)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into a scalar string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  character(*), intent(out) :: s       !< String to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:byte_size(s))) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  s = transfer(nI1P,s)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_string
+
+  pure subroutine b64_decode_R16_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (R16P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  real(R16P),   intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYR16P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R16_a
+
+  pure subroutine b64_decode_R8_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (R8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  real(R8P),    intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYR8P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R8_a
+
+  pure subroutine b64_decode_R4_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (R4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  real(R4P),    intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYR4P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_R4_a
+
+  pure subroutine b64_decode_I8_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (I8P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  integer(I8P), intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYI8P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I8_a
+
+  pure subroutine b64_decode_I4_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (I4P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  integer(I4P), intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYI4P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I4_a
+
+  pure subroutine b64_decode_I2_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (I2P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  integer(I2P), intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYI2P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I2_a
+
+  pure subroutine b64_decode_I1_a(code, n)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array numbers (I1P).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded array.
+  integer(I1P), intent(out) :: n(1:)   !< Array of numbers to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:size(n,dim=1)*BYI1P)) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  n = transfer(nI1P,n)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_I1_a
+
+  pure subroutine b64_decode_string_a(code, s)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Decode a base64 code into an array of strings.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in)  :: code    !< Encoded scalar.
+  character(*), intent(out) :: s(1:)   !< String to be decoded.
+  integer(I1P), allocatable :: nI1P(:) !< One byte integer array containing n.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  allocate(nI1P(1:byte_size(s(1))*size(s,dim=1))) ; nI1P = 0_I1P
+  call decode_bits(code=code,bits=nI1P)
+  s = transfer(nI1P,s)
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine b64_decode_string_a
+
+  subroutine autotest()
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Procedure for autotesting the library functionalities.
+  !<
+  !< @note Into the *src* directory there is a small python script (*validation.py*) that can be used to validate the library
+  !< correctness by a comparison with other widely used tools such as the python builtin module *struct*.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(len=:), allocatable :: code64        !< Base64 code.
+  logical                       :: ok            !< Flag for checking the result of encoding/decoding.
+#ifdef r16p
+  real(R16P)                    :: scalar_R16    !< Decoded scalar.
+#endif
+  real(R8P)                     :: scalar_R8     !< Decoded scalar.
+  real(R4P)                     :: scalar_R4     !< Decoded scalar.
+  integer(I8P)                  :: scalar_I8     !< Decoded scalar.
+  integer(I4P)                  :: scalar_I4     !< Decoded scalar.
+  integer(I2P)                  :: scalar_I2     !< Decoded scalar.
+  integer(I1P)                  :: scalar_I1     !< Decoded scalar.
+  real(R8P)                     :: array_R8(1:2) !< Decoded array.
+  real(R4P)                     :: array_R4(1:2) !< Decoded array.
+  integer(I8P)                  :: array_I8(1:4) !< Decoded array.
+  integer(I4P)                  :: array_I4(1:2) !< Decoded array.
+  integer(I2P)                  :: array_I2(1:2) !< Decoded array.
+  integer(I1P)                  :: array_I1(1:2) !< Decoded array.
+  character(5)                  :: array_s(1:2)  !< Decoded array.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  call b64_Init
+
+  print "(A)", 'Encoders'
+
+  print "(A)", 'Scalars'
+
+#ifdef r16p
+  call b64_encode(n=134.231_R16P,code=code64)
+  ok = code64=='CKwcWmTHYEA='
+  print "(A)", '+ Code of '//trim(str(n=134.231_R16P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'CKwcWmTHYEA='//'", Is it correct?',ok
+  if (.not.ok) stop
+#endif
+
+  call b64_encode(n=1._R8P,code=code64)
+  ok = code64=='AAAAAAAA8D8='
+  print "(A)", '+ Code of '//trim(str(n=1._R8P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'AAAAAAAA8D8='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=0._R4P,code=code64)
+  ok = code64=='AAAAAA=='
+  print "(A)", '+ Code of '//trim(str(n=0._R4P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'AAAAAA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=23_I8P,code=code64)
+  ok = code64=='FwAAAAAAAAA='
+  print "(A)", '+ Code of '//trim(str(n=23_I8P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'FwAAAAAAAAA='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=2023_I4P,code=code64)
+  ok = code64=='5wcAAA=='
+  print "(A)", '+ Code of '//trim(str(n=2023_I4P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'5wcAAA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=-203_I2P,code=code64)
+  ok = code64=='Nf8='
+  print "(A)", '+ Code of '//trim(str(n=-203_I2P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'Nf8='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=120_I1P,code=code64)
+  ok = code64=='eA=='
+  print "(A)", '+ Code of '//trim(str(n=120_I1P))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'eA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(s='hello',code=code64)
+  ok = code64=='aGVsbG8='
+  print "(A)", '+ Code of hello: "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'aGVsbG8='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  print "(A)", 'Arrays'
+
+#ifdef r16p
+  call b64_encode(n=[121._R16P,2.32_R16P],code=code64)
+  ok = code64=='AAAAAABAXkCPwvUoXI8CQA=='
+  print "(A)", '+ Code of '//trim(str(n=[121._R16P,2.32_R16P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'AAAAAABAXkCPwvUoXI8CQA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+#endif
+
+  call b64_encode(n=[1._R8P,2._R8P],code=code64)
+  ok = code64=='AAAAAAAA8D8AAAAAAAAAQA=='
+  print "(A)", '+ Code of '//trim(str(n=[1._R8P,2._R8P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'AAAAAAAA8D8AAAAAAAAAQA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=[0._R4P,-32.12_R4P],code=code64)
+  ok = code64=='AAAAAOF6AMI='
+  print "(A)", '+ Code of '//trim(str(n=[0._R4P,-32.12_R4P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'AAAAAOF6AMI='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=[23_I8P,324_I8P,25456656_I8P,2_I8P],code=code64)
+  ok = code64=='FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA='
+  print "(A)", '+ Code of '//trim(str(n=[23_I8P,324_I8P,25456656_I8P,2_I8P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=[2023_I4P,-24_I4P],code=code64)
+  ok = code64=='5wcAAOj///8='
+  print "(A)", '+ Code of '//trim(str(n=[2023_I4P,-24_I4P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'5wcAAOj///8='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=[-203_I2P,-10_I2P],code=code64)
+  ok = code64=='Nf/2/w=='
+  print "(A)", '+ Code of '//trim(str(n=[-203_I2P,-10_I2P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'Nf/2/w=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(n=[120_I1P,-1_I1P],code=code64)
+  ok = code64=='eP8='
+  print "(A)", '+ Code of '//trim(str(n=[120_I1P,-1_I1P], delimiters=['[',']']))//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'eP8='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_encode(s=['hello','world'],code=code64)
+  ok = code64=='aGVsbG93b3JsZA=='
+  print "(A)", '+ Code of [hello,world]: "'//code64//'"'
+  print "(A,1X,L1)", '  Expected code: "'//'aGVsbG93b3JsZA=='//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  print "(A)", 'Decoders'
+
+  print "(A)", 'Scalars'
+
+  call b64_decode(code='AAAAAAAA8D8=',n=scalar_R8)
+  ok = str(n=scalar_R8)==str(n=1._R8P)
+  print "(A)", '+ Decode of '//'AAAAAAAA8D8='//': "'//trim(str(n=scalar_R8))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=1._R8P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='AAAAAA==',n=scalar_R4)
+  ok = str(n=scalar_R4)==str(n=0._R4P)
+  print "(A)", '+ Decode of '//'AAAAAA=='//': "'//trim(str(n=scalar_R4))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=0._R4P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='FwAAAAAAAAA=',n=scalar_I8)
+  ok = str(n=scalar_I8)==str(n=23_I8P)
+  print "(A)", '+ Decode of '//'FwAAAAAAAAA='//': "'//trim(str(n=scalar_I8))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=23_I8P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='5wcAAA==',n=scalar_I4)
+  ok = str(n=scalar_I4)==str(n=2023_I4P)
+  print "(A)", '+ Decode of '//'5wcAAA=='//': "'//trim(str(n=scalar_I4))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=2023_I4P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='Nf8=',n=scalar_I2)
+  ok = str(n=scalar_I2)==str(n=-203_I2P)
+  print "(A)", '+ Decode of '//'Nf8='//': "'//trim(str(n=scalar_I2))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=-203_I2P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='eA==',n=scalar_I1)
+  ok = str(n=scalar_I1)==str(n=120_I1P)
+  print "(A)", '+ Decode of '//'eA=='//': "'//trim(str(n=scalar_I1))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=120_I1P))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  code64 = repeat(' ',5)
+  call b64_decode(code='aGVsbG8=',s=code64)
+  ok = 'hello'==code64
+  print "(A)", '+ Decode of '//'aGVsbG8='//': "'//code64//'"'
+  print "(A,1X,L1)", '  Expected value: "hello", Is it correct?',ok
+  if (.not.ok) stop
+
+  print "(A)", 'Arrays'
+
+  call b64_decode(code='AAAAAAAA8D8AAAAAAAAAQA==',n=array_R8)
+  ok = str(n=array_R8)==str(n=[1._R8P,2._R8P])
+  print "(A)", '+ Decode of '//'AAAAAAAA8D8AAAAAAAAAQA=='//': "'//trim(str(n=array_R8, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[1._R8P,2._R8P], delimiters=['[',']']))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='AAAAAOF6AMI=',n=array_R4)
+  ok = str(n=array_R4)==str(n=[0._R4P,-32.12_R4P])
+  print "(A)", '+ Decode of '//'AAAAAOF6AMI='//': "'//trim(str(n=array_R4, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[0._R4P,-32.12_R4P], delimiters=['[',']']))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  ! ok = test_decode_array(code=, input=) ; if (.not.ok) stop
+  call b64_decode(code='FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA=',n=array_I8)
+  ok = str(n=array_I8)==str(n=[23_I8P,324_I8P,25456656_I8P,2_I8P])
+  print "(A)", '+ Decode of '//'FwAAAAAAAABEAQAAAAAAABBwhAEAAAAAAgAAAAAAAAA='//': "'//&
+    trim(str(n=array_I8, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[23_I8P,324_I8P,25456656_I8P,2_I8P], delimiters=['[',']']))//&
+    '", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='5wcAAOj///8=',n=array_I4)
+  ok = str(n=array_I4)==str(n=[2023_I4P,-24_I4P])
+  print "(A)", '+ Decode of '//'5wcAAOj///8='//': "'//trim(str(n=array_I4, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[2023_I4P,-24_I4P], delimiters=['[',']']))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='Nf/2/w==',n=array_I2)
+  ok = str(n=array_I2)==str(n=[-203_I2P,-10_I2P])
+  print "(A)", '+ Decode of '//'Nf/2/w=='//': "'//trim(str(n=array_I2, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[-203_I2P,-10_I2P], delimiters=['[',']']))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='eP8=',n=array_I1)
+  ok = str(n=array_I1)==str(n=[120_I1P,-1_I1P])
+  print "(A)", '+ Decode of '//'eP8='//': "'//trim(str(n=array_I1, delimiters=['[',']']))//'"'
+  print "(A,1X,L1)", '  Expected value: "'//trim(str(n=[120_I1P,-1_I1P], delimiters=['[',']']))//'", Is it correct?',ok
+  if (.not.ok) stop
+
+  call b64_decode(code='aGVsbG93b3JsZA==',s=array_s)
+  ok = array_s(1)//array_s(2)=='helloworld'
+  print "(A)", '+ Decode of '//'aGVsbG93b3JsZA=='//': "'//array_s(1)//array_s(2)//'"'
+  print "(A,1X,L1)", '  Expected value: "helloworld", Is it correct?',ok
+  if (.not.ok) stop
+  return
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine autotest
+endmodule befor64
