@@ -20,14 +20,6 @@ A KISS pure Fortran Library for improving physical math computations by taking i
 - FURY is OOP designed;
 - FURY is a Free, Open Source Project.
 
-#### Table of Contents
-
-- [What is FURY?](#what-is-FURY)
-- [Main features](#main-features)
-- [Copyrights](#copyrights)
-- [Documentation](#documentation)
-  - [A Taste of FURY](#a-taste-of-FURY)
-
 #### Issues
 
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/FURY.svg)]()
@@ -43,6 +35,12 @@ A KISS pure Fortran Library for improving physical math computations by taking i
 [![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
+
+---
+
+[What is FURY?](#what-is-FURY) | [Main features](#main-features) | [Copyrights](#copyrights) | [Download](#download) | [Compilation](#compilation) | [Documentation](#documentation)
+
+---
 
 ## What is FURY?
 
@@ -95,6 +93,77 @@ Anyone is interest to use, to develop or to contribute to FURY is welcome, feel 
 More details can be found on [wiki](https://github.com/szaghi/FURY/wiki/Copyrights).
 
 Go to [Top](#top)
+
+## Download
+
+FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY). It uses a bunch of bash scripts to handle the third party dependencies. To download all the source files you can:
+
++ clone recursively this repository: `git clone --recursive https://github.com/szaghi/FURY`
++ download the latest master-branch archive at [https://github.com/szaghi/FURY/archive/master.zip](https://github.com/szaghi/FURY/archive/master.zip)
++ download a release archive at [https://github.com/szaghi/FURY/releases](https://github.com/szaghi/FURY/releases)
+
+Go to [Top](#top)
+
+## Compilation
+
+FURY is a modern Fortran project thus a modern Fortran compiler is need to compile the project. In the following table the support for some widely-used Fortran compilers is summarized.
+
+The library is modular, namely it exploits Fortran modules. As a consequence, there is compilation-cascade hierarchy to build the library. To correctly build the library the following approaches are supported
+
++ [Build by means of FoBiS](#build-by-means-of-fobis): full support;
++ [Build by means of GNU Make](#build-by-means-of-gnu-make): to be implemented.
++ [Build by means of CMake](#build-by-means-of-cmake): to be implemented.
+
+The FoBiS building support is the most complete, as it is the one used for the developing FURY.
+
+### Build by means of FoBiS
+
+A `fobos` file is provided to build the library by means of the Fortran Building System [FoBiS](https://github.com/szaghi/FoBiS).
+
+#### Build all tests
+
+Type
+
+```shell
+FoBiS.py build
+```
+
+After (a successful) building a directory `./exe` is created containing all the compiled tests that constitute the FURY *regression-tests-suite*, e.g.
+
+```bash
+→ FoBiS.py build
+Builder options
+Directories
+  Building directory: "exe"
+  Compiled-objects .o   directory: "exe/obj"
+  Compiled-objects .mod directory: "exe/mod"
+Compiler options
+  Vendor: "gnu"
+  Compiler command: "gfortran"
+  Module directory switch: "-J"
+  Compiling flags: "-c -frealloc-lhs -std=f2008 -fall-intrinsics -O2 -Dr16p"
+  Linking flags: "-O2"
+  Preprocessing flags: "-Dr16p"
+  Coverage: False
+  Profile: False
+PreForM.py used: False
+PreForM.py output directory: None
+PreForM.py extensions processed: []
+
+Building src/tests/basic_use.f90
+Compiling src/lib/penf.F90 serially
+Compiling src/lib/string_t.F90 serially
+Compiling src/lib/stringifor.F90 serially
+Compiling ...
+Linking exe/basic_use
+Target src/tests/basic_use.f90 has been successfully built
+...
+
+→ tree -L 1 exe/
+exe/
+├── basic_use
+...
+```
 
 ## Documentation
 
