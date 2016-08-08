@@ -2,9 +2,12 @@
 module fury_qinteger
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY class definition of integer quantity with associated unit of measure.
+!<
+!< @todo Work only on `qreal`, `qinteger` class will be updated soon or late...
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
+use fury_unit_abstract
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -21,8 +24,8 @@ type :: qinteger
   !<
   !< @todo Add units checking.
   private
-  integer(I_P), public :: magnitude !< Magnitude of quantity.
-  type(string), public :: unit      !< Unit of measure of quantity.
+  integer(I_P),                      public :: magnitude !< Magnitude of quantity.
+  class(unit_abstract), allocatable, public :: unit      !< Unit of measure of quantity.
   contains
     ! public methods
     generic :: assignment(=) => assign_qinteger !< Overloading `=` assignament.
@@ -46,8 +49,7 @@ contains
   class(qinteger), intent(inout) :: lhs !< Left hand side.
   type(qinteger),  intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
-  lhs%magnitude = rhs%magnitude
-  lhs%unit = rhs%unit
+  if (lhs%unit%is_compatible(rhs%unit)) lhs%magnitude = rhs%magnitude
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qinteger
 
@@ -59,7 +61,7 @@ contains
   type(qinteger),  intent(in) :: rhs !< Right hand side.
   type(qinteger)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
-  opr%magnitude = lhs%magnitude + rhs%magnitude
+  if (lhs%unit%is_compatible(rhs%unit)) opr%magnitude = lhs%magnitude + rhs%magnitude
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction add
 
@@ -95,7 +97,7 @@ contains
   type(qinteger),  intent(in) :: rhs !< Right hand side.
   type(qinteger)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
-  opr%magnitude = lhs%magnitude - rhs%magnitude
+  if (lhs%unit%is_compatible(rhs%unit)) opr%magnitude = lhs%magnitude - rhs%magnitude
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction sub
 endmodule fury_qinteger
