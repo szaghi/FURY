@@ -1,6 +1,6 @@
 project: FURY
-project_dir: ./src
-output_dir: ./doc/html/publish/
+src_dir: ../src
+output_dir: html/publish/
 project_github: https://github.com/szaghi/FURY
 summary: Fortran Units (environment) for Reliable phYsical math
 author: Stefano Zaghi
@@ -16,6 +16,7 @@ display: public
          private
 source: true
 warn: true
+search: false
 graph: true
 extra_mods: iso_fortran_env:https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html
 
