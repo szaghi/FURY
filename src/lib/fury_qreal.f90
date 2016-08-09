@@ -19,12 +19,18 @@ type :: qreal
   !< Real quantity with associated unit of measure.
   !<
   !< @todo Add units checking.
+  !<
+  !< @note The result of the operator `+` and `-` between two `qreal` has the unit of the left term, namely `q` has the unit
+  !< of `q1` in the sum `q=q1+q2`. Note also that the operation is done in the *norm* of scaling factor of the left term, namely
+  !< `q=q1+ scale2*q2/scale1` is the operation made if `q1` and `q2` have different scale factors, e.g. if `q1` is in metre and
+  !< `q2` is in kilometre the actual operation is `q=q1*1000*q2`: take care about this, possible losts of accuracy are likely.
   real(R_P),                         public :: magnitude=0._R_P !< Magnitude of quantity.
   class(unit_abstract), allocatable, public :: unit             !< Unit of measure of quantity.
   contains
     ! public methods
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity magnitude/unit.
+    procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
     ! public generic names
     generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
     generic :: operator(+) => add            !< Overloading `+` operator.
@@ -61,6 +67,19 @@ contains
   endfunction creator
 
   ! public methods
+  elemental function is_unit_defined(self) result(is_defined)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has been defined.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self       !< The quantity.
+  logical                  :: is_defined !< Unit definition status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_defined = allocated(self%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_unit_defined
+
   elemental subroutine set(self, magnitude, unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set quantity magnitude/unit.
@@ -79,18 +98,24 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  elemental function is_unit_defined(self) result(is_defined)
+  pure function stringify(self, format) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has been defined.
+  !< Return a string representaion of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal), intent(in) :: self       !< The quantity.
-  logical                  :: is_defined !< Unit definition status.
+  class(qreal), intent(in)           :: self   !< The quantity.
+  character(*), intent(in), optional :: format !< Format to pring magnitude.
+  character(len=:), allocatable      :: raw  !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  is_defined = allocated(self%unit)
+  if (present(format)) then
+    raw = trim(str(fm=format, n=self%magnitude))
+  else
+    raw = trim(str(n=self%magnitude))
+  endif
+  if (self%is_unit_defined()) raw = raw//self%unit%symbol
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_unit_defined
+  endfunction stringify
 
   ! public methods
   elemental subroutine assign_qreal(lhs, rhs)
@@ -102,15 +127,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%unit%is_compatible(rhs%unit)) then
-      lhs%magnitude = rhs%magnitude
-    else
-      ! raise a sort of error...
-    endif
+  if (rhs%is_unit_defined()) then
+    call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
   else
     ! dimensionless quantities assumed
     lhs%magnitude = rhs%magnitude
+    if (allocated(lhs%unit)) deallocate(lhs%unit)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qreal
@@ -127,7 +149,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%unit%is_compatible(rhs%unit)) then
-      opr%magnitude = lhs%magnitude + rhs%magnitude
+      call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
     else
       ! raise a sort of error...
     endif
@@ -178,7 +200,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%unit%is_compatible(rhs%unit)) then
-      opr%magnitude = lhs%magnitude - rhs%magnitude
+      call opr%set(magnitude=(lhs%magnitude - rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
     else
       ! raise a sort of error...
     endif
