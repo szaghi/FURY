@@ -3,6 +3,7 @@ module fury_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY class definition of real quantity with associated unit of measure.
 !-----------------------------------------------------------------------------------------------------------------------------------
+use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_unit_abstract
 use penf
 use stringifor
@@ -31,6 +32,7 @@ type :: qreal
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity magnitude/unit.
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
+    procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
     generic :: operator(+) => add            !< Overloading `+` operator.
@@ -117,6 +119,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
+  elemental subroutine unset(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Unset quantity.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(inout) :: self !< The quantity.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  self%magnitude = 0._R_P
+  if (allocated(self%unit)) deallocate(self%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine unset
+
   ! public methods
   elemental subroutine assign_qreal(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +152,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qreal
 
-  elemental function add(lhs, rhs) result(opr)
+  function add(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal + qreal` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -151,7 +166,9 @@ contains
     if (lhs%unit%is_compatible(rhs%unit)) then
       call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
     else
-      ! raise a sort of error...
+      write(stderr, '(A)')'error: left and right terms of computation "l+r" have incompatible units!'
+      write(stderr, '(A)')'result is nullified with units set equal to the one of left term!'
+      call opr%set(unit=lhs%unit)
     endif
   else
     ! dimensionless quantities assumed
@@ -188,7 +205,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
-  elemental function sub(lhs, rhs) result(opr)
+  function sub(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal - qreal` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -202,7 +219,9 @@ contains
     if (lhs%unit%is_compatible(rhs%unit)) then
       call opr%set(magnitude=(lhs%magnitude - rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
     else
-      ! raise a sort of error...
+      write(stderr, '(A)')'error: left and right terms of computation "l-r" have incompatible units!'
+      write(stderr, '(A)')'result is nullified with units set equal to the one of left term!'
+      call opr%set(unit=lhs%unit)
     endif
   else
     ! dimensionless quantities assumed

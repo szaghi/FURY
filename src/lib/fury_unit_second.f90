@@ -1,7 +1,7 @@
-!< FURY definition of metre unit.
-module fury_unit_metre
+!< FURY definition of second unit.
+module fury_unit_second
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of metre unit.
+!< FURY definition of second unit.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_unit_abstract
 use penf
@@ -10,23 +10,23 @@ use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_metre
+public :: unit_second
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-character(len=*), parameter   :: predefined_symbols = 'm,metre,metres,meter,meters' !< Pre-defined compatible symbols.
-character(len=:), allocatable :: user_symbols                                       !< User-defined compatible symbols.
+character(len=*), parameter   :: predefined_symbols = 's,second,seconds,sec,secs' !< Pre-defined compatible symbols.
+character(len=:), allocatable :: user_symbols                                     !< User-defined compatible symbols.
 
-type, extends(unit_abstract) :: unit_metre
-  !< Definition of metre unit.
+type, extends(unit_abstract) :: unit_second
+  !< Definition of second unit.
   contains
     ! public methods
     procedure, pass(self) :: is_compatible !< Check if unit is compatible with another.
     procedure, pass(self) :: set           !< set the unit.
-endtype unit_metre
+endtype unit_second
 
-interface unit_metre
-  !< Ovearloading unit_metre name with a creator function.
+interface unit_second
+  !< Ovearloading unit_second name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -36,9 +36,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  type(unit_metre)         :: unit         !< The unit.
+  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
+  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "s" for seconds.
+  type(unit_second)        :: unit         !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -51,14 +51,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is compatible with another.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre),    intent(in) :: self       !< The unit.
+  class(unit_second),   intent(in) :: self       !< The unit.
   class(unit_abstract), intent(in) :: unit       !< The other unit.
   logical                          :: compatible !< Compatibility check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   select type(unit)
-  class is(unit_metre)
+  class is(unit_second)
     ! check that both `self` and `unit` are in the same compatibility list
     compatible = (self%is_symbol_compatible(predefined_symbols=predefined_symbols, user_symbols=user_symbols) &
              .and.unit%is_symbol_compatible(predefined_symbols=predefined_symbols, user_symbols=user_symbols))
@@ -74,11 +74,11 @@ contains
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre), intent(inout)         :: self         !< The unit.
-  real(R_P),         intent(in),  optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*),      intent(in),  optional :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  integer(I_P),      intent(out), optional :: error        !< Error code, 0 => no errors happen.
-  integer(I_P)                             :: error_       !< Error code, 0 => no errors happen, local variable.
+  class(unit_second), intent(inout)         :: self         !< The unit.
+  real(R_P),          intent(in),  optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
+  character(*),       intent(in),  optional :: symbol       !< Litteral symbol of the unit, e.g. "s" for seconds.
+  integer(I_P),       intent(out), optional :: error        !< Error code, 0 => no errors happen.
+  integer(I_P)                              :: error_       !< Error code, 0 => no errors happen, local variable.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -92,4 +92,4 @@ contains
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
-endmodule fury_unit_metre
+endmodule fury_unit_second

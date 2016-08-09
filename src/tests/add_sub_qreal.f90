@@ -12,7 +12,7 @@ type(qreal)      :: q              !< A quantity.
 type(qreal)      :: q1             !< A quantity.
 type(qreal)      :: q2             !< A quantity.
 type(unit_metre) :: kilometre      !< The kilometre unit instance based on the metre unit.
-logical          :: test_passed(4) !< List of passed tests.
+logical          :: test_passed(6) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -48,8 +48,21 @@ q = q1 - q2
 test_passed(4) = q%magnitude==0.999_R_P
 print "(A,L1)", '1km - 1m = '//q%stringify(format='(F5.3)')//', is correct? ', test_passed(4)
 
+call q%unset
+call q1%unset
+call q2%unset
+q1 = qreal(magnitude=1000._R_P)
+q2 = qreal(magnitude=1._R_P)
+
+q = q1 + q2
+test_passed(5) = q%magnitude==1001._R_P
+print "(A,L1)", '1000 + 1 = '//q%stringify(format='(F6.1)')//', is correct? ', test_passed(5)
+
+q = q1 - q2
+test_passed(6) = q%magnitude==999._R_P
+print "(A,L1)", '1000 - 1 = '//q%stringify(format='(F5.1)')//', is correct? ', test_passed(6)
+
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram add_sub_qreal
-
