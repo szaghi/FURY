@@ -12,7 +12,7 @@ use stringifor
 implicit none
 private
 public :: initialize
-public :: metre
+public :: metre, unit_metre
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -26,14 +26,14 @@ contains
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  integer(I_P), intent(out), optional :: error  !< Initializing error code, 0 => no errors happen.
-  integer(I_P)                        :: error_ !< Initializing error code, 0 => no errors happen, local variable.
+  integer(I_P), intent(out), optional :: error  !< Error code, 0 => no errors happen.
+  integer(I_P)                        :: error_ !< Error code, 0 => no errors happen, local variable.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   error_ = 0
   if (.not.initialized) then
-    call metre%initialize(error=error_)
+    call metre%set(error=error_)
   endif
   initialized = .true.
   if (present(error)) error = error_

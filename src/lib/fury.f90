@@ -5,19 +5,21 @@ module fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_qinteger, only : qinteger
 use fury_qreal, only : qreal
-use fury_units_si, only : initialize_si=>initialize, metre
+use fury_units_si, only : initialize_si=>initialize, metre, unit_metre
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
+! FURY objects
 ! quantity with unit
 public :: qinteger
 public :: qreal
 ! SI units
 public :: initialize_si
-public :: metre
+public :: metre, unit_metre
+! PENF objects
 ! kinds
 public :: R8P
 public :: R4P
@@ -27,5 +29,7 @@ public :: I4P
 public :: I2P
 public :: I1P
 public :: I_P
+! number casting
+public :: str, strz
 !-----------------------------------------------------------------------------------------------------------------------------------
 endmodule fury
