@@ -165,12 +165,114 @@ exe/
 ...
 ```
 
+### Build by means of GNU Make
+
+To be implemented.
+
+### Build by means of CMake
+
+To be implemented.
+
+Go to [Top](#top)
+
 ## Documentation
 
 Besides this README file the FURY documentation is contained into its own [wiki](https://github.com/szaghi/FURY/wiki). Detailed documentation of the API is contained into the [GitHub Pages](http://szaghi.github.io/FURY/index.html) that can also be created locally by means of [ford tool](https://github.com/cmacmackin/ford).
 
-### A Taste of FURY
+### The design
 
-To be written.
+FURY is designed upon 2 fundamental blocks:
+
+1. expose two fully OOD classes, namely `qreal` and `qinteger` for real and integer physical quantities with units;
+1. a collection(s) of base units which can be attributed to `qreal` and `qinteger` variables, and that can be extended to add new (user-defined) units, e.g. the `fury_units_si` system for the SI units system.
+
+These 2 ingredients allow to perform a more reliable physical maths.
+
+#### A taste of FURY
+
+Let us assume to consider the summation of 2 length, the first expressed in meters and the second in kilometers. With FURY this can be implemented as:
+
+```fortran
+use fury
+type(qreal)      :: q         ! A physical quantity.
+type(qreal)      :: q1        ! A physical quantity.
+type(qreal)      :: q2        ! A physical quantity.
+type(unit_metre) :: kilometre ! The kilometre unit based on the metre unit.
+
+! initialize SI units
+call initialize_si
+
+! define a new unit, i.e. the kilometre, that must
+! be compatible with SI's metre
+! update also the metre symbols defining "km" a compatible unit
+kilometre = unit_metre(scale_factor=1000._R_P, symbol='km')
+
+! make a sum in meters
+q1 = qreal(magnitude=1._R_P, unit=metre)
+q2 = qreal(magnitude=1._R_P, unit=kilometre)
+q = q1 + q2
+print "(A)", '1m + 1km = '//q%stringify(format='(F6.1)')
+! output "1m + 1km = 1001.0m"
+
+! make a sum in kilometers
+q1 = qreal(magnitude=1._R_P, unit=kilometre)
+q2 = qreal(magnitude=1._R_P, unit=metre)
+q = q1 + q2
+print "(A)", '1km + 1m = '//q%stringify(format='(F5.3)')
+! output "1km + 1m = 1.001km"
+```
+
+#### The minimal tutorial
+
+To use FURY the minimal steps necessary are:
+
+##### 1. use FURY module
+
+```fortran
+use fury
+```
+
+##### 2. define FURY quantities
+
+```fortran
+type(qreal)    :: q1 ! A real physical quantity.
+type(qinteger) :: q2 ! A integer physical quantity.
+```
+
+##### 3. (optional) define new FURY units
+
+```fortran
+type(unit_centimetre) :: centimetre ! The centimetre unit based on the metre unit.
+type(unit_metre)      :: kilometre  ! The kilometre unit based on the metre unit.
+type(unit_second)     :: hour       ! The hour unit based on the second unit.
+```
+
+##### 4. initialize FURY units system(s)
+
+```fortran
+! initialize SI units
+call initialize_si
+```
+
+Note that currently on the SI system is provided.
+
+##### 5. (optional) initialize new FURY units
+
+```fortran
+centimetre = unit_metre(scale_factor=0.01._R_P, symbol='cm')
+kilometre = unit_metre(scale_factor=1000._R_P, symbol='km')
+hour = unit_second(scale_factor=3600._R_P, symbol='h')
+```
+
+##### 6. assign unit (and optionally magnitude) to FURY quantities
+
+```fortran
+q1 = qreal(magnitude=1._R_P, unit=metre)
+q2 = qinteger(magnitude=3, unit=second)
+```
+
+##### 7. do your physical maths
+
+Now you can do your physical math computations :party:
 
 Go to [Top](#top)
