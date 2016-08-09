@@ -5,9 +5,11 @@ module fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_qinteger, only : qinteger
 use fury_qreal, only : qreal
-use fury_units_si, only : initialize_si=>initialize, &
-                          metre, unit_metre,         &
-                          second, unit_second
+use fury_unit_length, only : unit_length
+use fury_unit_time, only : unit_time
+use fury_unit_metre, only : unit_metre
+use fury_unit_second, only : unit_second
+use fury_units_si, only : initialize_si=>initialize, metre, second
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,10 +20,10 @@ private
 ! quantity with unit
 public :: qinteger
 public :: qreal
+! basic units
+public :: unit_length, unit_time
 ! SI units
-public :: initialize_si
-public :: metre, unit_metre
-public :: second, unit_second
+public :: initialize_si, metre, second
 ! PENF objects
 ! kinds
 public :: R8P

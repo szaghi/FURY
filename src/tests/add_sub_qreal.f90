@@ -8,11 +8,11 @@ use fury
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
-type(qreal)      :: q              !< A quantity.
-type(qreal)      :: q1             !< A quantity.
-type(qreal)      :: q2             !< A quantity.
-type(unit_metre) :: kilometre      !< The kilometre unit instance based on the metre unit.
-logical          :: test_passed(6) !< List of passed tests.
+type(qreal)       :: q              !< A quantity.
+type(qreal)       :: q1             !< A quantity.
+type(qreal)       :: q2             !< A quantity.
+type(unit_length) :: kilometre      !< The kilometre unit instance based on the length unit.
+logical           :: test_passed(6) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ test_passed = .false.
 call initialize_si
 
 ! define a new unit, i.e. the kilometre that must be compatible with SI's metre
-kilometre = unit_metre(scale_factor=1000._R_P, symbol='km') ! update also the metre symbols defining km a compatible unit
+kilometre = unit_length(scale_factor=1000._R_P, symbol='km') ! update also the metre symbols defining km a compatible unit
 
 q1 = qreal(magnitude=1._R_P, unit=metre)
 q2 = qreal(magnitude=1._R_P, unit=kilometre)

@@ -3,7 +3,7 @@ module fury_unit_metre
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of metre unit.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_abstract
+use fury_unit_length
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -14,15 +14,11 @@ public :: unit_metre
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-character(len=*), parameter   :: predefined_symbols = 'm,metre,metres,meter,meters' !< Pre-defined compatible symbols.
-character(len=:), allocatable :: user_symbols                                       !< User-defined compatible symbols.
-
-type, extends(unit_abstract) :: unit_metre
+type, extends(unit_length) :: unit_metre
   !< Definition of metre unit.
   contains
-    ! public methods
-    procedure, pass(self) :: is_compatible !< Check if unit is compatible with another.
-    procedure, pass(self) :: set           !< set the unit.
+    ! public overrided methods
+    procedure, pass(self) :: set !< set the unit.
 endtype unit_metre
 
 interface unit_metre
@@ -46,28 +42,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
-  ! public methods
-  elemental function is_compatible(self, unit) result(compatible)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is compatible with another.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre),    intent(in) :: self       !< The unit.
-  class(unit_abstract), intent(in) :: unit       !< The other unit.
-  logical                          :: compatible !< Compatibility check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  select type(unit)
-  class is(unit_metre)
-    ! check that both `self` and `unit` are in the same compatibility list
-    compatible = (self%is_symbol_compatible(predefined_symbols=predefined_symbols, user_symbols=user_symbols) &
-             .and.unit%is_symbol_compatible(predefined_symbols=predefined_symbols, user_symbols=user_symbols))
-  class default
-    compatible = .false.
-  endselect
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_compatible
-
+  ! public overrided methods
   subroutine set(self, scale_factor, symbol, error)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
@@ -83,11 +58,8 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   error_ = 1
-  if (present(scale_factor)) self%scale_factor = scale_factor
-  if (present(symbol)) then
-    self%symbol = symbol
-    call self%update_compatible_user_symbols(predefined_symbols=predefined_symbols, user_symbols=user_symbols)
-  endif
+  self%scale_factor = 1._R_P ; if (present(scale_factor)) self%scale_factor = scale_factor
+  self%symbol = 'm' ; if (present(symbol)) self%symbol = symbol
   error_ = 0
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------

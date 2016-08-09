@@ -1,28 +1,28 @@
-!< FURY definition of second unit.
-module fury_unit_second
+!< FURY definition of unit *parent* time.
+module fury_unit_time
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of second unit.
+!< FURY definition of unit *parent* time.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_time
+use fury_unit_abstract
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_second
+public :: unit_time
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(unit_time) :: unit_second
-  !< Definition of second unit.
-  ! contains
-  !   ! public overrided methods
-  !   procedure, pass(self) :: set !< set the unit.
-endtype unit_second
+type, extends(unit_abstract) :: unit_time
+  !< Definition of time unit.
+  contains
+    ! public deferred methods
+    procedure, nopass :: is_compatible !< Check if unit is compatible with another one.
+endtype unit_time
 
-interface unit_second
-  !< Ovearloading unit_second name with a creator function.
+interface unit_time
+  !< Ovearloading unit_time name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,9 +32,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
-  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "s" for seconds.
-  type(unit_second)        :: unit         !< The unit.
+  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
+  type(unit_time)          :: unit         !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -42,26 +42,22 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
-  ! public overrided methods
-  subroutine set(self, scale_factor, symbol, error)
+  ! public methods
+  elemental function is_compatible(unit) result(compatible)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set the unit.
-  !<
-  !< @todo Load from file.
+  !< Check if unit is compatible with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_second), intent(inout)         :: self         !< The unit.
-  real(R_P),          intent(in),  optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
-  character(*),       intent(in),  optional :: symbol       !< Litteral symbol of the unit, e.g. "s" for seconds.
-  integer(I_P),       intent(out), optional :: error        !< Error code, 0 => no errors happen.
-  integer(I_P)                              :: error_       !< Error code, 0 => no errors happen, local variable.
+  class(unit_abstract), intent(in) :: unit       !< The other unit.
+  logical                          :: compatible !< Compatibility check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  error_ = 1
-  self%scale_factor = 1._R_P ;if (present(scale_factor)) self%scale_factor = scale_factor
-  self%symbol = 's' ; if (present(symbol)) self%symbol = symbol
-  error_ = 0
-  if (present(error)) error = error_
+  select type(unit)
+  class is(unit_time)
+    compatible = .true.
+  class default
+    compatible = .false.
+  endselect
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine set
-endmodule fury_unit_second
+  endfunction is_compatible
+endmodule fury_unit_time
