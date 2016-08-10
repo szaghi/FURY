@@ -1,7 +1,7 @@
-!< FURY definition of unit *parent* length.
-module fury_unit_length
+!< FURY definition of unit *reference* time.
+module fury_unit_time
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of unit *parent* length.
+!< FURY definition of unit *reference* time.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_unit_abstract
 use penf
@@ -10,39 +10,40 @@ use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_length
+public :: unit_time
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(unit_abstract) :: unit_length
-  !< Definition of length unit.
+type, extends(unit_abstract) :: unit_time
+  !< Definition of time unit.
   contains
     ! public deferred methods
     procedure, nopass :: is_compatible !< Check if unit is compatible with another one.
-endtype unit_length
+endtype unit_time
 
-interface unit_length
-  !< Ovearloading unit_length name with a creator function.
+interface unit_time
+  !< Ovearloading unit_time name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! non type bound procedures
-  function creator(scale_factor, symbol) result(unit)
+  function creator(scale_factor, symbol, dimensionality) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  type(unit_length)        :: unit         !< The unit.
+  real(R_P),    intent(in), optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*), intent(in), optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
+  character(*), intent(in), optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
+  type(unit_time)                    :: unit           !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call unit%set(scale_factor=scale_factor, symbol=symbol)
+  call unit%set(scale_factor=scale_factor, symbol=symbol, dimensionality=dimensionality)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
-  ! public deferred methods
+  ! public methods
   elemental function is_compatible(unit) result(compatible)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is compatible with another one.
@@ -53,11 +54,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   select type(unit)
-  class is(unit_length)
+  class is(unit_time)
     compatible = .true.
   class default
     compatible = .false.
   endselect
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
-endmodule fury_unit_length
+endmodule fury_unit_time
