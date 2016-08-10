@@ -1,28 +1,28 @@
-!< FURY definition of metre**2 unit.
-module fury_unit_metre_square
+!< FURY definition of mole unit.
+module fury_unit_mole
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of metre**2 unit.
+!< FURY definition of mole unit.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_length
+use fury_unit_substance
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_metre_square
+public :: unit_mole
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(unit_length) :: unit_metre_square
-  !< Definition of metre**2 unit.
+type, extends(unit_substance) :: unit_mole
+  !< Definition of mole unit.
   contains
     ! public overrided methods
     procedure, pass(self) :: set !< set the unit.
-endtype unit_metre_square
+endtype unit_mole
 
-interface unit_metre_square
-  !< Ovearloading unit_metre_square name with a creator function.
+interface unit_mole
+  !< Ovearloading unit_mole name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ contains
   real(R_P),    intent(in), optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
   character(*), intent(in), optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
   character(*), intent(in), optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
-  type(unit_metre_square)            :: unit           !< The unit.
+  type(unit_mole)                    :: unit           !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -50,21 +50,21 @@ contains
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre_square), intent(inout)         :: self           !< The unit.
-  real(R_P),                intent(in),  optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for km.
-  character(*),             intent(in),  optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
-  character(*),             intent(in),  optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
-  integer(I_P),             intent(out), optional :: error          !< Error code, 0 => no errors happen.
-  integer(I_P)                                    :: error_         !< Error code, 0 => no errors happen, local variable.
+  class(unit_mole), intent(inout)         :: self           !< The unit.
+  real(R_P),        intent(in),  optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*),     intent(in),  optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
+  character(*),     intent(in),  optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
+  integer(I_P),     intent(out), optional :: error          !< Error code, 0 => no errors happen.
+  integer(I_P)                            :: error_         !< Error code, 0 => no errors happen, local variable.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   error_ = 1
   self%scale_factor = 1._R_P ; if (present(scale_factor)) self%scale_factor = scale_factor
-  self%symbol = 'm**2' ; if (present(symbol)) self%symbol = symbol
-  self%dimensionality = '[length]*[length]' ; if (present(dimensionality)) self%dimensionality = dimensionality
+  self%symbol = 'm' ; if (present(symbol)) self%symbol = symbol
+  self%dimensionality = '[length]' ; if (present(dimensionality)) self%dimensionality = dimensionality
   error_ = 0
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
-endmodule fury_unit_metre_square
+endmodule fury_unit_mole
