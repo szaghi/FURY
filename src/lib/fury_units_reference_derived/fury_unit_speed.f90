@@ -1,7 +1,7 @@
-!< FURY definition of unit *parent* length.
-module fury_unit_length
+!< FURY definition of unit *reference* speed.
+module fury_unit_speed
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of unit *parent* length.
+!< FURY definition of unit *reference* speed.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_unit_abstract
 use penf
@@ -10,19 +10,19 @@ use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_length
+public :: unit_speed
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(unit_abstract) :: unit_length
-  !< Definition of length unit.
+type, extends(unit_abstract) :: unit_speed
+  !< Definition of speed unit.
   contains
     ! public deferred methods
     procedure, nopass :: is_compatible !< Check if unit is compatible with another one.
-endtype unit_length
+endtype unit_speed
 
-interface unit_length
-  !< Ovearloading unit_length name with a creator function.
+interface unit_speed
+  !< Ovearloading unit_speed name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
   character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  type(unit_length)        :: unit         !< The unit.
+  type(unit_speed)         :: unit         !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -53,11 +53,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   select type(unit)
-  class is(unit_length)
+  class is(unit_speed)
     compatible = .true.
   class default
     compatible = .false.
   endselect
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
-endmodule fury_unit_length
+endmodule fury_unit_speed
