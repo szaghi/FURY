@@ -32,7 +32,7 @@ abstract interface
   import unit_abstract, units_system_abstract
   class(units_system_abstract), intent(in), target   :: self           !< The units system.
   character(*),                 intent(in)           :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for m.
-  class(unit_abstract),         intent(out), pointer :: unit=>null()   !< Unit of measure of quantity.
+  class(unit_abstract),         intent(out), pointer :: unit           !< Unit of measure of quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine associate_unit_interface
 endinterface
