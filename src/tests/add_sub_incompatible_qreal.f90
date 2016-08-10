@@ -8,20 +8,20 @@ use fury
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
-type(qreal)      :: q              !< A quantity.
-type(qreal)      :: q1             !< A quantity.
-type(qreal)      :: q2             !< A quantity.
-logical          :: test_passed(4) !< List of passed tests.
+type(qreal)           :: q              !< A quantity.
+type(qreal)           :: q1             !< A quantity.
+type(qreal)           :: q2             !< A quantity.
+type(units_system_si) :: si             !< SI system.
+logical               :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-! initialize SI
-call initialize_si
+call si%initialize
 
-q1 = qreal(magnitude=1._R_P, unit=metre)
-q2 = qreal(magnitude=1._R_P, unit=second)
+q1 = qreal(magnitude=1._R_P, unit=si%metre)
+q2 = qreal(magnitude=1._R_P, unit=si%second)
 
 q = q1 + q2
 test_passed(1) = q%magnitude==0._R_P
