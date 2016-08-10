@@ -43,23 +43,25 @@ contains
   endfunction creator
 
   ! public overrided methods
-  subroutine set(self, scale_factor, symbol, error)
+  subroutine set(self, scale_factor, symbol, dimensionality, error)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre), intent(inout)         :: self         !< The unit.
-  real(R_P),         intent(in),  optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*),      intent(in),  optional :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  integer(I_P),      intent(out), optional :: error        !< Error code, 0 => no errors happen.
-  integer(I_P)                             :: error_       !< Error code, 0 => no errors happen, local variable.
+  class(unit_metre), intent(inout)         :: self           !< The unit.
+  real(R_P),         intent(in),  optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*),      intent(in),  optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
+  character(*),      intent(in),  optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
+  integer(I_P),      intent(out), optional :: error          !< Error code, 0 => no errors happen.
+  integer(I_P)                             :: error_         !< Error code, 0 => no errors happen, local variable.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   error_ = 1
   self%scale_factor = 1._R_P ; if (present(scale_factor)) self%scale_factor = scale_factor
   self%symbol = 'm' ; if (present(symbol)) self%symbol = symbol
+  self%dimensionality = '[length]' ; if (present(dimensionality)) self%dimensionality = dimensionality
   error_ = 0
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------
