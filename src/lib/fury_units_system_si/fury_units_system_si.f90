@@ -7,6 +7,7 @@ use fury_unit_abstract
 use fury_unit_metre
 use fury_unit_second
 use fury_unit_metre_per_second
+use fury_unit_metre_square
 use fury_units_system_abstract
 use penf
 ! use stringifor
@@ -23,6 +24,7 @@ type, extends(units_system_abstract) :: units_system_si
   type(unit_metre)            :: metre            !< The metre unit instance.
   type(unit_second)           :: second           !< The second unit instance.
   type(unit_metre_per_second) :: metre_per_second !< The metre/second unit instance.
+  type(unit_metre_square)     :: metre_square     !< The metre**2 unit instance.
   contains
     ! public deferred methods
     procedure, pass(self) :: associate_unit !< Associate unit by dimensionality.
@@ -40,7 +42,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  unit => null()
   select case(dimensionality)
   case('[length]')
     unit => self%metre
@@ -48,6 +49,10 @@ contains
     unit => self%second
   case('[length]/[time]')
     unit => self%metre_per_second
+  case('[length]*[length]')
+    unit => self%metre_square
+  case default
+    unit => null()
   endselect
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine associate_unit
@@ -70,6 +75,7 @@ contains
   call self%metre%set(scale_factor=1._R_P, symbol='m', dimensionality='[length]', error=error_)
   call self%second%set(scale_factor=1._R_P, symbol='s', dimensionality='[time]', error=error_)
   call self%metre_per_second%set(scale_factor=1._R_P, symbol='m/s', dimensionality='[length]/[time]', error=error_)
+  call self%metre_square%set(scale_factor=1._R_P, symbol='m**2', dimensionality='[length]*[length]', error=error_)
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize

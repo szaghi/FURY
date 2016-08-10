@@ -202,6 +202,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined().and.lhs%is_units_system_defined().and.rhs%is_units_system_defined()) then
+    ! here should come the logics for different units systems scenario
     call opr%set(magnitude=(lhs%magnitude / rhs%magnitude), units_system=lhs%units_system)
     call lhs%units_system%associate_unit(dimensionality=lhs%unit%dimensionality//'/'//rhs%unit%dimensionality, unit=opr%unit)
     if (.not.associated(opr%unit)) then
@@ -214,22 +215,38 @@ contains
     endif
   else
     ! dimensionless quantities assumed
-  opr%magnitude = lhs%magnitude / rhs%magnitude
+    opr%magnitude = lhs%magnitude / rhs%magnitude
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
-  elemental function mul(lhs, rhs) result(opr)
+  function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal * qreal` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal), intent(in) :: lhs !< Left hand side.
-  type(qreal),  intent(in) :: rhs !< Right hand side.
-  type(qreal)              :: opr !< Operator result.
+  class(qreal), intent(in) :: lhs      !< Left hand side.
+  type(qreal),  intent(in) :: rhs      !< Right hand side.
+  type(qreal)              :: opr      !< Operator result.
+  type(unit_unknown)       :: new_unit !< New type of unit not already defined into the units system used.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  opr%magnitude = lhs%magnitude * rhs%magnitude
+  if (lhs%is_unit_defined().and.rhs%is_unit_defined().and.lhs%is_units_system_defined().and.rhs%is_units_system_defined()) then
+    ! here should come the logics for different units systems scenario
+    call opr%set(magnitude=(lhs%magnitude * rhs%magnitude), units_system=lhs%units_system)
+    call lhs%units_system%associate_unit(dimensionality=lhs%unit%dimensionality//'*'//rhs%unit%dimensionality, unit=opr%unit)
+    if (.not.associated(opr%unit)) then
+      write(stderr, '(A)')'error: left and right terms of computation "l*r" produce an unknown unit!'
+      write(stderr, '(A)')'a new unknown unit is associated to the result''s unit!'
+      new_unit = unit_unknown(scale_factor=1._R_P,                          &
+                              symbol=lhs%unit%symbol//'*'//rhs%unit%symbol, &
+                              dimensionality=lhs%unit%dimensionality//'*'//rhs%unit%dimensionality)
+      allocate(opr%unit, source=new_unit)
+    endif
+  else
+    ! dimensionless quantities assumed
+    opr%magnitude = lhs%magnitude * rhs%magnitude
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
