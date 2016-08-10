@@ -4,22 +4,17 @@ module fury
 !< FURY, Fortran Units (environment) for Reliable phYsical math.
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! FURY objects
-! quantity with unit
-use fury_qinteger, only : qinteger
-use fury_qreal, only : qreal
-! reference base units
-use fury_unit_length, only : unit_length
-use fury_unit_time, only : unit_time
-use fury_unit_unknown, only : unit_unknown
-! reference derived units
-use fury_unit_area, only : unit_area
-use fury_unit_speed, only : unit_speed
-! SI units
-use fury_unit_metre, only : unit_metre
-use fury_unit_second, only : unit_second
-use fury_unit_metre_per_second, only : unit_metre_per_second
-use fury_unit_metre_square, only : unit_metre_square
-use fury_units_system_si, only : units_system_si
+! quantities
+use fury_qinteger
+use fury_qreal
+! units reference
+use fury_unit_unknown
+use fury_units_base_reference
+use fury_units_derived_reference
+! units SI
+use fury_units_base_si
+use fury_units_derived_si
+use fury_units_system_si
 
 ! PENF objects
 use penf
@@ -29,15 +24,64 @@ use penf
 implicit none
 private
 ! FURY objects
-! quantity with unit
+! quantities
 public :: qinteger
 public :: qreal
-! reference base units
-public :: unit_length, unit_time, unit_unknown
-! reference derived units
-public :: unit_area, unit_speed
-! units system SI
-public :: unit_metre, unit_second, unit_metre_per_second, unit_metre_square
+! units reference
+public :: unit_current
+public :: unit_length
+public :: unit_luminosity
+public :: unit_mass
+public :: unit_substance
+public :: unit_temperature
+public :: unit_time
+public :: unit_angle
+public :: unit_area
+public :: unit_electrical_conductance
+public :: unit_electric_capacitance
+public :: unit_electric_charge
+public :: unit_electric_resistance
+public :: unit_energy
+public :: unit_force
+public :: unit_frequency
+public :: unit_illuminance
+public :: unit_inductance
+public :: unit_luminous_flux
+public :: unit_magnetic_flux_density
+public :: unit_magnetic_flux
+public :: unit_power
+public :: unit_pressure
+public :: unit_solid_angle
+public :: unit_speed
+public :: unit_voltage
+public :: unit_unknown
+! units SI
+public :: unit_ampere
+public :: unit_candela
+public :: unit_kelvin
+public :: unit_kilogram
+public :: unit_metre
+public :: unit_mole
+public :: unit_second
+public :: unit_coulomb
+public :: unit_farad
+public :: unit_henry
+public :: unit_hertz
+public :: unit_joule
+public :: unit_lumen
+public :: unit_lux
+public :: unit_metre_per_second
+public :: unit_metre_square
+public :: unit_newton
+public :: unit_ohm
+public :: unit_pascal
+public :: unit_radian
+public :: unit_siemens
+public :: unit_steradian
+public :: unit_tesla
+public :: unit_volt
+public :: unit_watt
+public :: unit_weber
 public :: units_system_si
 
 ! PENF objects
