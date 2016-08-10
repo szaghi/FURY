@@ -3,6 +3,7 @@ module fury_units_system_abstract
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of abstract units system class.
 !-----------------------------------------------------------------------------------------------------------------------------------
+use fury_unit_abstract
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,8 +19,23 @@ type, abstract :: units_system_abstract
   character(len=:), allocatable :: acronym !< Units system acronym, e.g. "SI" for the International System.
   contains
     ! public deferred methods
-    procedure(initialize_interface), pass(self), deferred :: initialize !< Initialize the units system.
+    procedure(associate_unit_interface), pass(self), deferred :: associate_unit !< Associate unit by dimensionality.
+    procedure(initialize_interface),     pass(self), deferred :: initialize     !< Initialize the units system.
 endtype units_system_abstract
+
+abstract interface
+  !< Associate unit by dimensionality.
+  subroutine associate_unit_interface(self, dimensionality, unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Associate unit by dimensionality.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  import unit_abstract, units_system_abstract
+  class(units_system_abstract), intent(in), target   :: self           !< The units system.
+  character(*),                 intent(in)           :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for m.
+  class(unit_abstract),         intent(out), pointer :: unit=>null()   !< Unit of measure of quantity.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine associate_unit_interface
+endinterface
 
 abstract interface
   !< Check if unit is compatible with .

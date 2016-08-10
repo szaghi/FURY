@@ -3,6 +3,7 @@ module fury_units_system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of units symbols of *International System of Units*.
 !-----------------------------------------------------------------------------------------------------------------------------------
+use fury_unit_abstract
 use fury_unit_metre
 use fury_unit_second
 use fury_unit_metre_per_second
@@ -24,10 +25,33 @@ type, extends(units_system_abstract) :: units_system_si
   type(unit_metre_per_second) :: metre_per_second !< The metre/second unit instance.
   contains
     ! public deferred methods
-    procedure, pass(self) :: initialize !< Initialize the units system.
+    procedure, pass(self) :: associate_unit !< Associate unit by dimensionality.
+    procedure, pass(self) :: initialize     !< Initialize the units system.
 endtype units_system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
+  subroutine associate_unit(self, dimensionality, unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Associate unit by dimensionality.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(units_system_si), intent(in), target   :: self           !< The units system.
+  character(*),           intent(in)           :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for m.
+  class(unit_abstract),   intent(out), pointer :: unit           !< Unit of measure of quantity.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  unit => null()
+  select case(dimensionality)
+  case('[length]')
+    unit => self%metre
+  case('[time]')
+    unit => self%second
+  case('[length]/[time]')
+    unit => self%metre_per_second
+  endselect
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine associate_unit
+
   subroutine initialize(self, acronym, error)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Initialize the units system.

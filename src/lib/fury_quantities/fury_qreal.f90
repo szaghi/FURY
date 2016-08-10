@@ -5,6 +5,8 @@ module fury_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_unit_abstract
+use fury_unit_unknown
+use fury_units_system_abstract
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -25,14 +27,16 @@ type :: qreal
   !< of `q1` in the sum `q=q1+q2`. Note also that the operation is done in the *norm* of scaling factor of the left term, namely
   !< `q=q1+ scale2*q2/scale1` is the operation made if `q1` and `q2` have different scale factors, e.g. if `q1` is in metre and
   !< `q2` is in kilometre the actual operation is `q=q1*1000*q2`: take care about this, possible losts of accuracy are likely.
-  real(R_P),                         public :: magnitude=0._R_P !< Magnitude of quantity.
-  class(unit_abstract), allocatable, public :: unit             !< Unit of measure of quantity.
+  real(R_P),                             public :: magnitude=0._R_P     !< Magnitude of quantity.
+  class(unit_abstract),         pointer, public :: unit=>null()         !< Unit of measure of quantity.
+  class(units_system_abstract), pointer, public :: units_system=>null() !< Units system.
   contains
     ! public methods
-    procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
-    procedure, pass(self) :: set             !< Set quantity magnitude/unit.
-    procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
-    procedure, pass(self) :: unset           !< Unset quantity.
+    procedure, pass(self) :: is_unit_defined         !< Check if the unit has been defined.
+    procedure, pass(self) :: is_units_system_defined !< Check if the units system has been defined.
+    procedure, pass(self) :: set                     !< Set quantity magnitude/unit/units system.
+    procedure, pass(self) :: stringify               !< Return a string representaion of the quantity with unit symbol.
+    procedure, pass(self) :: unset                   !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
     generic :: operator(+) => add            !< Overloading `+` operator.
@@ -54,17 +58,18 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! non type bound procedures
-  elemental function creator(magnitude, unit) result(quantity)
+  function creator(magnitude, unit, units_system) result(quantity)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of qreal quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),            intent(in), optional :: magnitude !< Magnitude of quantity.
-  class(unit_abstract), intent(in), optional :: unit      !< Unit of measure of quantity.
-  type(qreal)                                :: quantity  !< The quantity.
+  real(R_P),                    intent(in),         optional :: magnitude    !< Magnitude of quantity.
+  class(unit_abstract),         intent(in), target, optional :: unit         !< Unit of measure of quantity.
+  class(units_system_abstract), intent(in), target, optional :: units_system !< Units system.
+  type(qreal)                                                :: quantity     !< The quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call quantity%set(magnitude=magnitude, unit=unit)
+  call quantity%set(magnitude=magnitude, unit=unit, units_system=units_system)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
@@ -78,25 +83,37 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  is_defined = allocated(self%unit)
+  is_defined = associated(self%unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_unit_defined
 
-  elemental subroutine set(self, magnitude, unit)
+  elemental function is_units_system_defined(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set quantity magnitude/unit.
+  !< Check if the units system has been defined.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal),         intent(inout)        :: self      !< The quantity.
-  real(R_P),            intent(in), optional :: magnitude !< Magnitude of quantity.
-  class(unit_abstract), intent(in), optional :: unit      !< Unit of measure of quantity.
+  class(qreal), intent(in) :: self       !< The quantity.
+  logical                  :: is_defined !< Units system definition status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_defined = associated(self%units_system)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_units_system_defined
+
+  subroutine set(self, magnitude, unit, units_system)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Set quantity magnitude/unit/units system.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal),                 intent(inout)                :: self         !< The quantity.
+  real(R_P),                    intent(in),         optional :: magnitude    !< Magnitude of quantity.
+  class(unit_abstract),         intent(in), target, optional :: unit         !< Unit of measure of quantity.
+  class(units_system_abstract), intent(in), target, optional :: units_system !< Units system.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (present(magnitude)) self%magnitude = magnitude
-  if (present(unit)) then
-    if (allocated(self%unit)) deallocate(self%unit)
-    allocate(self%unit, source=unit)
-  endif
+  if (present(unit)) self%unit => unit
+  if (present(units_system)) self%units_system => units_system
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
@@ -106,7 +123,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in)           :: self   !< The quantity.
   character(*), intent(in), optional :: format !< Format to pring magnitude.
-  character(len=:), allocatable      :: raw  !< Raw characters data.
+  character(len=:), allocatable      :: raw    !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -128,12 +145,13 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   self%magnitude = 0._R_P
-  if (allocated(self%unit)) deallocate(self%unit)
+  self%unit => null()
+  self%units_system => null()
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
   ! public methods
-  elemental subroutine assign_qreal(lhs, rhs)
+  subroutine assign_qreal(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal = qreal` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -142,13 +160,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (rhs%is_unit_defined()) then
-    call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
-  else
-    ! dimensionless quantities assumed
-    lhs%magnitude = rhs%magnitude
-    if (allocated(lhs%unit)) deallocate(lhs%unit)
-  endif
+  call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit, units_system=rhs%units_system)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qreal
 
@@ -164,11 +176,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%unit%is_compatible(rhs%unit)) then
-      call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
+      call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), &
+                   unit=lhs%unit, units_system=lhs%units_system)
     else
       write(stderr, '(A)')'error: left and right terms of computation "l+r" have incompatible units!'
       write(stderr, '(A)')'result is nullified with units set equal to the one of left term!'
-      call opr%set(unit=lhs%unit)
+      call opr%set(unit=lhs%unit, units_system=lhs%units_system)
     endif
   else
     ! dimensionless quantities assumed
@@ -177,17 +190,32 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction add
 
-  elemental function div(lhs, rhs) result(opr)
+  function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal / qreal` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal), intent(in) :: lhs !< Left hand side.
-  type(qreal),  intent(in) :: rhs !< Right hand side.
-  type(qreal)              :: opr !< Operator result.
+  class(qreal), intent(in) :: lhs      !< Left hand side.
+  type(qreal),  intent(in) :: rhs      !< Right hand side.
+  type(qreal)              :: opr      !< Operator result.
+  type(unit_unknown)       :: new_unit !< New type of unit not already defined into the units system used.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_unit_defined().and.rhs%is_unit_defined().and.lhs%is_units_system_defined().and.rhs%is_units_system_defined()) then
+    call opr%set(magnitude=(lhs%magnitude / rhs%magnitude), units_system=lhs%units_system)
+    call lhs%units_system%associate_unit(dimensionality=lhs%unit%dimensionality//'/'//rhs%unit%dimensionality, unit=opr%unit)
+    if (.not.associated(opr%unit)) then
+      write(stderr, '(A)')'error: left and right terms of computation "l/r" produce an unknown unit!'
+      write(stderr, '(A)')'a new unknown unit is associated to the result''s unit!'
+      new_unit = unit_unknown(scale_factor=1._R_P,                          &
+                              symbol=lhs%unit%symbol//'/'//rhs%unit%symbol, &
+                              dimensionality=lhs%unit%dimensionality//'/'//rhs%unit%dimensionality)
+      allocate(opr%unit, source=new_unit)
+    endif
+  else
+    ! dimensionless quantities assumed
   opr%magnitude = lhs%magnitude / rhs%magnitude
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
@@ -217,11 +245,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%unit%is_compatible(rhs%unit)) then
-      call opr%set(magnitude=(lhs%magnitude - rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), unit=lhs%unit)
+      call opr%set(magnitude=(lhs%magnitude - rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), &
+                   unit=lhs%unit, units_system=lhs%units_system)
     else
       write(stderr, '(A)')'error: left and right terms of computation "l-r" have incompatible units!'
       write(stderr, '(A)')'result is nullified with units set equal to the one of left term!'
-      call opr%set(unit=lhs%unit)
+      call opr%set(unit=lhs%unit, units_system=lhs%units_system)
     endif
   else
     ! dimensionless quantities assumed

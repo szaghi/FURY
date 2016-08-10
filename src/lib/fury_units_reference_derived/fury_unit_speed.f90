@@ -28,17 +28,18 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! non type bound procedures
-  function creator(scale_factor, symbol) result(unit)
+  function creator(scale_factor, symbol, dimensionality) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
-  type(unit_speed)         :: unit         !< The unit.
+  real(R_P),    intent(in), optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*), intent(in), optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
+  character(*), intent(in), optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
+  type(unit_speed)                   :: unit           !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call unit%set(scale_factor=scale_factor, symbol=symbol)
+  call unit%set(scale_factor=scale_factor, symbol=symbol, dimensionality=dimensionality)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 

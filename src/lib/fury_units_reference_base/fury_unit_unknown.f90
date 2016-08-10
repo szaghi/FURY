@@ -1,28 +1,31 @@
-!< FURY definition of metre/second unit.
-module fury_unit_metre_per_second
+!< FURY definition of unit *reference* for *unknown* units.
+module fury_unit_unknown
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of metre/second unit.
+!< FURY definition of unit *reference* for *unknown* units.
+!<
+!< @note *unknown* units are the untis *registered* by users or the ones *generated mixing* other units, but not already defined
+!< in the units system used.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_length
+use fury_unit_abstract
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_metre_per_second
+public :: unit_unknown
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(unit_length) :: unit_metre_per_second
-  !< Definition of metre unit.
+type, extends(unit_abstract) :: unit_unknown
+  !< Definition of unknown unit.
   contains
-    ! public overrided methods
-    procedure, pass(self) :: set !< set the unit.
-endtype unit_metre_per_second
+    ! public deferred methods
+    procedure, nopass :: is_compatible !< Check if unit is compatible with another one.
+endtype unit_unknown
 
-interface unit_metre_per_second
-  !< Ovearloading unit_metre_per_second name with a creator function.
+interface unit_unknown
+  !< Ovearloading unit_unknown name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +38,7 @@ contains
   real(R_P),    intent(in), optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
   character(*), intent(in), optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
   character(*), intent(in), optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
-  type(unit_metre_per_second)        :: unit           !< The unit.
+  type(unit_unknown)                 :: unit           !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -43,28 +46,22 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
-  ! public overrided methods
-  subroutine set(self, scale_factor, symbol, dimensionality, error)
+  ! public deferred methods
+  elemental function is_compatible(unit) result(compatible)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set the unit.
-  !<
-  !< @todo Load from file.
+  !< Check if unit is compatible with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_metre_per_second), intent(inout)         :: self           !< The unit.
-  real(R_P),                    intent(in),  optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for km.
-  character(*),                 intent(in),  optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
-  character(*),                 intent(in),  optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for m.
-  integer(I_P),                 intent(out), optional :: error          !< Error code, 0 => no errors happen.
-  integer(I_P)                                        :: error_         !< Error code, 0 => no errors happen, local variable.
+  class(unit_abstract), intent(in) :: unit       !< The other unit.
+  logical                          :: compatible !< Compatibility check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  error_ = 1
-  self%scale_factor = 1._R_P ; if (present(scale_factor)) self%scale_factor = scale_factor
-  self%symbol = 'm/s' ; if (present(symbol)) self%symbol = symbol
-  self%dimensionality = '[length]/[time]' ; if (present(dimensionality)) self%dimensionality = dimensionality
-  error_ = 0
-  if (present(error)) error = error_
+  select type(unit)
+  class is(unit_unknown)
+    compatible = .true.
+  class default
+    compatible = .false.
+  endselect
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine set
-endmodule fury_unit_metre_per_second
+  endfunction is_compatible
+endmodule fury_unit_unknown
