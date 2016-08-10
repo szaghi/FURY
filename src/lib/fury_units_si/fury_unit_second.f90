@@ -28,17 +28,18 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! non type bound procedures
-  function creator(scale_factor, symbol) result(unit)
+  function creator(scale_factor, symbol, dimensionality) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in) :: scale_factor !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
-  character(*), intent(in) :: symbol       !< Litteral symbol of the unit, e.g. "s" for seconds.
-  type(unit_second)        :: unit         !< The unit.
+  real(R_P),    intent(in) :: scale_factor   !< Scale factor for multiple of base unit, e.g. 0.001 for milliseconds.
+  character(*), intent(in) :: symbol         !< Litteral symbol of the unit, e.g. "s" for seconds.
+  character(*), intent(in) :: dimensionality !< Reference dimensionality symbol, e.g. "[time]" for seconds.
+  type(unit_second)        :: unit           !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call unit%set(scale_factor=scale_factor, symbol=symbol)
+  call unit%set(scale_factor=scale_factor, symbol=symbol, dimensionality=dimensionality)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 

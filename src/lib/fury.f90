@@ -15,7 +15,8 @@ use fury_unit_speed, only : unit_speed
 ! SI units
 use fury_unit_metre, only : unit_metre
 use fury_unit_second, only : unit_second
-use fury_units_si, only : initialize_si=>initialize, metre, second
+use fury_unit_metre_per_second, only : unit_metre_per_second
+use fury_units_si, only : initialize_si=>initialize, metre, second, metre_per_second
 
 ! PENF objects
 use penf
@@ -33,7 +34,8 @@ public :: unit_length, unit_time
 ! reference derived units
 public :: unit_speed
 ! SI units
-public :: initialize_si, metre, second, unit_metre, unit_second
+public :: initialize_si, metre, second, metre_per_second
+public :: unit_metre, unit_second, unit_metre_per_second
 
 ! PENF objects
 ! kinds
