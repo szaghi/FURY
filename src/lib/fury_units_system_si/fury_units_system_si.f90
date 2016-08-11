@@ -4,8 +4,7 @@ module fury_units_system_si
 !< FURY definition of units symbols of *International System of Units*.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use fury_unit_abstract
-use fury_units_base_si
-use fury_units_derived_si
+use fury_units_si
 use fury_units_system_abstract
 use penf
 !-----------------------------------------------------------------------------------------------------------------------------------

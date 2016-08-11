@@ -1,57 +1,55 @@
-!< FURY definition of abstract unit class.
-module fury_unit_abstract
+!< FURY definition of kilogram unit.
+module fury_unit_kilogram
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of abstract unit class.
-!<
-!< @note Units are claimed to be *compatible* (e.g. quantities with these units can be summed/subtracted) if they have the same
-!< dimension, e.g. they are all length, or mass, or time and so on. Incompatible units have different dimension,
-!< like mass and time, or time and length and so on.
+!< FURY definition of kilogram unit.
 !-----------------------------------------------------------------------------------------------------------------------------------
+use fury_unit_mass
 use penf
-! use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_abstract
+public :: unit_kilogram
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, abstract :: unit_abstract
-  !< Abstract prototype of *unit*.
-  real(R_P)                     :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(len=:), allocatable :: symbol         !< Litteral symbol(s) of the unit, e.g. "m" for metres.
-  character(len=:), allocatable :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
+type, extends(unit_mass) :: unit_kilogram
+  !< Definition of kilogram unit.
   contains
-    ! public deferred methods
-    procedure(is_compatible_interface), nopass, deferred :: is_compatible !< Check if unit is compatible with another one.
-    ! public methods
-    procedure, pass(self) :: set !< Set the unit.
-endtype unit_abstract
+    ! public overrided methods
+    procedure, pass(self) :: set !< set the unit.
+endtype unit_kilogram
 
-abstract interface
-  !< Check if unit is compatible with .
-  elemental function is_compatible_interface(unit) result(compatible)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is compatible with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  import unit_abstract
-  class(unit_abstract), intent(in) :: unit       !< The other unit.
-  logical                          :: compatible !< Compatibility check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_compatible_interface
+interface unit_kilogram
+  !< Ovearloading unit_kilogram name with a creator function.
+  module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
-  ! public methods
+  ! non type bound procedures
+  function creator(scale_factor, symbol) result(unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Create an instance of unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R_P),    intent(in), optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
+  character(*), intent(in), optional :: symbol       !< Litteral symbol of the unit, e.g. "m" for metres.
+  type(unit_kilogram)                :: unit         !< The unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  call unit%set(scale_factor=scale_factor, symbol=symbol, dimensionality=unit%dimensionality_)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction creator
+
+  ! public overrided methods
   subroutine set(self, scale_factor, symbol, dimensionality, error)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_abstract), intent(inout)         :: self           !< The unit.
+  class(unit_kilogram), intent(inout)         :: self           !< The unit.
   real(R_P),            intent(in),  optional :: scale_factor   !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
   character(*),         intent(in),  optional :: symbol         !< Litteral symbol of the unit, e.g. "m" for metres.
   character(*),         intent(in),  optional :: dimensionality !< Reference dimensionality symbol, e.g. "[length]" for metres.
@@ -61,11 +59,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   error_ = 1
-  if (present(scale_factor)) self%scale_factor = scale_factor
-  if (present(symbol)) self%symbol = symbol
-  if (present(dimensionality)) self%dimensionality = dimensionality
+  self%scale_factor = 1._R_P ; if (present(scale_factor)) self%scale_factor = scale_factor
+  self%symbol = 'm' ; if (present(symbol)) self%symbol = symbol
+  self%dimensionality = '[length]' ; if (present(dimensionality)) self%dimensionality = dimensionality
   error_ = 0
   if (present(error)) error = error_
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
-endmodule fury_unit_abstract
+endmodule fury_unit_kilogram
