@@ -1,27 +1,44 @@
-!< FURY, Fortran Units (environment) for Reliable phYsical math.
-module fury
+!< FURY exposition of units base reference.
+module fury_units_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY, Fortran Units (environment) for Reliable phYsical math.
+!< FURY exposition of units base reference.
 !-----------------------------------------------------------------------------------------------------------------------------------
-! FURY objects
-use fury_qinteger
-use fury_qreal
-use fury_units_reference
-use fury_units_si
-use fury_units_system_si
-
-! PENF objects
-use penf
+! base units
+use fury_unit_current
+use fury_unit_length
+use fury_unit_luminosity
+use fury_unit_mass
+use fury_unit_substance
+use fury_unit_temperature
+use fury_unit_time
+! derived units
+use fury_unit_angle
+use fury_unit_area
+use fury_unit_electric_capacitance
+use fury_unit_electric_charge
+use fury_unit_electric_conductance
+use fury_unit_electric_resistance
+use fury_unit_energy
+use fury_unit_force
+use fury_unit_frequency
+use fury_unit_illuminance
+use fury_unit_inductance
+use fury_unit_luminous_flux
+use fury_unit_magnetic_flux_density
+use fury_unit_magnetic_flux
+use fury_unit_power
+use fury_unit_pressure
+use fury_unit_solid_angle
+use fury_unit_speed
+use fury_unit_voltage
+! unknown unit
+use fury_unit_unknown
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-! FURY objects
-! quantities
-public :: qinteger
-public :: qreal
-! units reference
+! base units
 public :: unit_current
 public :: unit_length
 public :: unit_luminosity
@@ -29,6 +46,7 @@ public :: unit_mass
 public :: unit_substance
 public :: unit_temperature
 public :: unit_time
+! derived units
 public :: unit_angle
 public :: unit_area
 public :: unit_electric_capacitance
@@ -48,47 +66,7 @@ public :: unit_pressure
 public :: unit_solid_angle
 public :: unit_speed
 public :: unit_voltage
+! unknown unit
 public :: unit_unknown
-! units SI
-public :: unit_ampere
-public :: unit_candela
-public :: unit_kelvin
-public :: unit_kilogram
-public :: unit_metre
-public :: unit_mole
-public :: unit_second
-public :: unit_coulomb
-public :: unit_farad
-public :: unit_henry
-public :: unit_hertz
-public :: unit_joule
-public :: unit_lumen
-public :: unit_lux
-public :: unit_metre_per_second
-public :: unit_metre_square
-public :: unit_newton
-public :: unit_ohm
-public :: unit_pascal
-public :: unit_radian
-public :: unit_siemens
-public :: unit_steradian
-public :: unit_tesla
-public :: unit_volt
-public :: unit_watt
-public :: unit_weber
-public :: units_system_si
-
-! PENF objects
-! kinds
-public :: R8P
-public :: R4P
-public :: R_P
-public :: I8P
-public :: I4P
-public :: I2P
-public :: I1P
-public :: I_P
-! number casting
-public :: str, strz
 !-----------------------------------------------------------------------------------------------------------------------------------
-endmodule fury
+endmodule fury_units_reference

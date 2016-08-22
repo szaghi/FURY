@@ -32,6 +32,7 @@ type :: qreal
   class(units_system_abstract), pointer, public :: units_system=>null() !< Units system.
   contains
     ! public methods
+    procedure, pass(self) :: is_compatible           !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined         !< Check if the unit has been defined.
     procedure, pass(self) :: is_units_system_defined !< Check if the units system has been defined.
     procedure, pass(self) :: set                     !< Set quantity magnitude/unit/units system.
@@ -72,8 +73,35 @@ contains
   call quantity%set(magnitude=magnitude, unit=unit, units_system=units_system)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
+  subroutine raise_error_incompatibility(operation)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Raise the incompatibility error.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in) :: operation !< Description of the operation errored.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  write(stderr, '(A)')'  error: left and right terms of computation "'//operation//'" have incompatible units!'
+  write(stderr, '(A)')'  result is nullified!'
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine raise_error_incompatibility
 
   ! public methods
+  elemental function is_compatible(self, quantity) result(compatible)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the quantity is compatible with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self       !< The quantity.
+  type(qreal),  intent(in) :: quantity   !< The other quantity.
+  logical                  :: compatible !< Compatibility check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  compatible = .false.
+  if (self%is_unit_defined().and.quantity%is_unit_defined()) compatible = self%unit%is_compatible(quantity%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_compatible
+
   elemental function is_unit_defined(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has been defined.
@@ -117,13 +145,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  pure function stringify(self, format) result(raw)
+  pure function stringify(self, format, with_dimensionality) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representaion of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal), intent(in)           :: self   !< The quantity.
-  character(*), intent(in), optional :: format !< Format to pring magnitude.
-  character(len=:), allocatable      :: raw    !< Raw characters data.
+  class(qreal), intent(in)           :: self                !< The quantity.
+  character(*), intent(in), optional :: format              !< Format to pring magnitude.
+  logical,      intent(in), optional :: with_dimensionality !< Insert also the quantity dimensionality.
+  character(len=:), allocatable      :: raw                 !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -132,7 +161,12 @@ contains
   else
     raw = trim(str(n=self%magnitude))
   endif
-  if (self%is_unit_defined()) raw = raw//self%unit%symbol
+  if (self%is_unit_defined()) then
+    raw = raw//self%unit%symbol
+    if (present(with_dimensionality)) then
+      if (with_dimensionality) raw = raw//' '//self%unit%dimensionality
+    endif
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
@@ -175,13 +209,12 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%unit%is_compatible(rhs%unit)) then
+    if (lhs%is_compatible(quantity=rhs)) then
       call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), &
                    unit=lhs%unit, units_system=lhs%units_system)
     else
-      write(stderr, '(A)')'error: left and right terms of computation "l+r" have incompatible units!'
-      write(stderr, '(A)')'result is nullified with units set equal to the one of left term!'
-      call opr%set(unit=lhs%unit, units_system=lhs%units_system)
+      call raise_error_incompatibility(operation='L+R')
+      call opr%set(unit=null(), units_system=null())
     endif
   else
     ! dimensionless quantities assumed
