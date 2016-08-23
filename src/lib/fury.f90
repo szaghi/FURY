@@ -5,6 +5,7 @@ module fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! FURY objects
 use fury_qreal
+use fury_system_si
 use fury_unit_generic
 
 ! PENF objects
@@ -16,6 +17,7 @@ implicit none
 private
 ! FURY objects
 public :: qreal
+public :: system_si
 public :: unit_generic
 
 ! PENF objects
