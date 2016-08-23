@@ -217,8 +217,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  is_equal = self%is_compatible(other=other)
-  if (is_equal.and.self%are_symbols_defined().and.other%are_symbols_defined()) then
+  is_equal = .false.
+  if (self%are_symbols_defined().and.other%are_symbols_defined()) then
     is_equal = (size(self%symbols, dim=1)==size(other%symbols, dim=1))
     if (is_equal) then
       do s=1, size(self%symbols, dim=1)
