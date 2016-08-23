@@ -183,8 +183,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%is_compatible(other=rhs)) then
-      call opr%set(magnitude=(lhs%magnitude + rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), &
-                   unit=lhs%unit)
+      call opr%set(magnitude=(lhs%magnitude + rhs%magnitude), unit=lhs%unit)
     else
       call raise_error_incompatibility(operation='L+R')
       call opr%unset
@@ -246,8 +245,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
     if (lhs%unit%is_compatible(other=rhs%unit)) then
-      call opr%set(magnitude=(lhs%magnitude - rhs%unit%scale_factor*rhs%magnitude/lhs%unit%scale_factor), &
-                   unit=lhs%unit)
+      call opr%set(magnitude=(lhs%magnitude - rhs%magnitude), unit=lhs%unit)
     else
       call raise_error_incompatibility(operation='L-R')
       call opr%unset

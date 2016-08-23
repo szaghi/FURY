@@ -17,14 +17,14 @@ public :: unit_generic
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: unit_generic
   !< Generic prototype of *unit*.
-  real(R_P)                      :: scale_factor=1._R_P !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  type(unit_symbol), allocatable :: symbols(:)          !< Litteral symbol(s) of the unit, e.g. "m.s-1" for metres/seconds.
-  character(len=:),  allocatable :: alias               !< Alias symbol, e.g. "N" for Netown that is "kg.m.s-2".
+  type(unit_symbol), allocatable :: symbols(:) !< Symbol(s) of the unit.
+  character(len=:),  allocatable :: name       !< Unit name.
   contains
     ! public methods
     procedure, pass(self) :: add_symbol          !< Add a symbol to unit.
     procedure, pass(self) :: add_symbols         !< Add symbols to unit.
     procedure, pass(self) :: are_symbols_defined !< Check if the symbols have been defined.
+    procedure, pass(self) :: has_name            !< Check if the unit has a name.
     procedure, pass(self) :: has_symbol          !< Check if the unit has a symbol.
     procedure, pass(self) :: is_compatible       !< Check if unit is compatible with another one.
     procedure, pass(self) :: is_equal            !< Check if unit is equal with another one.
@@ -46,24 +46,23 @@ type :: unit_generic
 endtype unit_generic
 
 interface unit_generic
-  !< Ovearloading `unit_generic` name with a creator function.
+  !< Ovearloading [[unit_generic]] name with a creator function.
   module procedure creator
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! private non type bound procedures
-  function creator(scale_factor, symbols, alias) result(unit)
+  function creator(symbols, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),    intent(in), optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*), intent(in), optional :: symbols      !< Litteral symbol(s) of the unit, e.g. "m.s-1" for metres/seconds.
-  character(*), intent(in), optional :: alias        !< Alias symbol, e.g. "N" for Netown that is "kg.m.s-2".
-  type(unit_generic)                 :: unit         !< The unit.
+  character(*), intent(in), optional :: symbols !< Symbol(s) of the unit.
+  character(*), intent(in), optional :: name    !< Unit name.
+  type(unit_generic)                 :: unit    !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call unit%set(scale_factor=scale_factor, symbols=symbols, alias=alias)
+  call unit%set(symbols=symbols, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
@@ -78,8 +77,8 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   write(stderr, '(A)')'  error: left and right terms of "'//operation//'" have incompatible units!'
-  write(stderr, '(A)')'  LHS: '//lhs%stringify()
-  write(stderr, '(A)')'  RHS: '//rhs%stringify()
+  write(stderr, '(A)')'  LHS: '//lhs%stringify(with_dimensions=.true.)
+  write(stderr, '(A)')'  RHS: '//rhs%stringify(with_dimensions=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_incompatibility
 
@@ -94,8 +93,8 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   write(stderr, '(A)')'  error: left and right terms of "'//operation//'" have disequal units!'
-  write(stderr, '(A)')'  LHS: '//lhs%stringify()
-  write(stderr, '(A)')'  RHS: '//rhs%stringify()
+  write(stderr, '(A)')'  LHS: '//lhs%stringify(with_dimensions=.true.)
+  write(stderr, '(A)')'  RHS: '//rhs%stringify(with_dimensions=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_disequality
 
@@ -159,6 +158,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction are_symbols_defined
 
+  elemental function has_name(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has a name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: self     !< The unit.
+  logical                         :: has_name !< Name presence status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_name = allocated(self%name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_name
+
   elemental function has_symbol(self, symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a symbol.
@@ -218,27 +230,20 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  subroutine set(self, scale_factor, symbols, alias, error)
+  subroutine set(self, symbols, name)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout)         :: self         !< The unit.
-  real(R_P),           intent(in),  optional :: scale_factor !< Scale factor for multiple of base unit, e.g. 1000 for kilometres.
-  character(*),        intent(in),  optional :: symbols      !< Litteral symbol(s) of the unit, e.g. "m.s-1" for metres/second.
-  character(*),        intent(in),  optional :: alias        !< Alias symbol, e.g. "N" for Netown that is "kg.m.s-2".
-  integer(I_P),        intent(out), optional :: error        !< Error code, 0 => no errors happen.
-  integer(I_P)                               :: error_       !< Error code, 0 => no errors happen, local variable.
+  class(unit_generic), intent(inout)         :: self    !< The unit.
+  character(*),        intent(in),  optional :: symbols !< Symbol(s) of the unit.
+  character(*),        intent(in),  optional :: name    !< Unit name.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  error_ = 1
-  if (present(scale_factor)) self%scale_factor = scale_factor
   if (present(symbols)) call self%add_symbols(symbols=symbols)
-  if (present(alias)) self%alias = alias
-  error_ = 0
-  if (present(error)) error = error_
+  if (present(name)) self%name = name
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
@@ -281,6 +286,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (allocated(self%symbols)) deallocate(self%symbols)
+  if (allocated(self%name)) deallocate(self%name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -296,11 +302,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (rhs%are_symbols_defined())  then
     if (.not.lhs%are_symbols_defined())  then
-      lhs%scale_factor = rhs%scale_factor
       lhs%symbols = rhs%symbols
-      if (allocated(rhs%alias)) lhs%alias = rhs%alias
+      if (allocated(rhs%name)) lhs%name = rhs%name
     else
-      if (.not.lhs%is_equal(other=rhs)) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='L = R')
+      if (.not.lhs%is_equal(other=rhs)) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -319,7 +324,7 @@ contains
   if (lhs%is_equal(other=rhs)) then
     allocate(opr, source=lhs)
   else
-    call raise_error_disequality(lhs=lhs, rhs=rhs, operation='L + R')
+    call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS + RHS')
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction add
@@ -371,6 +376,9 @@ contains
         call opr%add_symbol(symbol=rhs_symbols(rs)**(-1))
       enddo
     endif
+    if (lhs%has_name().and.rhs%has_name()) then
+      opr%name = lhs%name//'/'//rhs%name
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
@@ -413,6 +421,11 @@ contains
       enddo remaining_denominator
     enddo
     opr%symbols = lhs_symbols
+    if (allocated(rhs_symbols)) then
+      do rs=1, size(rhs_symbols, dim=1)
+        call opr%add_symbol(symbol=rhs_symbols(rs))
+      enddo
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
@@ -430,7 +443,7 @@ contains
   if (lhs%is_equal(other=rhs)) then
     allocate(opr, source=lhs)
   else
-    call raise_error_disequality(lhs=lhs, rhs=rhs, operation='L - R')
+    call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS - RHS')
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction sub
