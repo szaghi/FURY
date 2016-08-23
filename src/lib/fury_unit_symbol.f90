@@ -256,6 +256,7 @@ contains
   if (dimension_exponent/=0.and.dimension_exponent/=self%symbol_exponent) then
     write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(sym_string))//'" failed! '//&
     ' the exponent of the symbol and the one of the dimension (if passed) must be the same!'
+    stop
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse

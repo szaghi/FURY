@@ -7,13 +7,13 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(unit_generic), target :: si_force       !< SI force unit.
-type(unit_generic), target :: si_length      !< SI length unit.
-type(unit_generic), target :: si_mass        !< SI mass unit.
-type(unit_generic), target :: si_speed       !< SI speed unit.
-type(unit_generic), target :: si_time        !< SI time unit.
-type(unit_generic), target :: a_unit         !< A unit.
-logical                    :: test_passed(5) !< List of passed tests.
+type(unit_generic) :: si_force       !< SI force unit.
+type(unit_generic) :: si_length      !< SI length unit.
+type(unit_generic) :: si_mass        !< SI mass unit.
+type(unit_generic) :: si_speed       !< SI speed unit.
+type(unit_generic) :: si_time        !< SI time unit.
+type(unit_generic) :: a_unit         !< A unit.
+logical            :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,12 +28,6 @@ si_speed = unit_generic(symbols='m [length].s-1 [time-1]')
 test_passed(2) = si_speed%stringify(with_dimensions=.true.)=='m.s-1 [length.time-1]'
 print "(A,L1)", 'pass explicit dim. exp.:  m [length].s-1 [time-1] => '//si_speed%stringify(with_dimensions=.true.)//&
                 ', is correct? ', test_passed(2)
-call si_speed%unset
-si_speed = unit_generic(symbols='m [length].s-1 [time2]') ! incosistent explicit dimension exponent
-print "(A)", 'An error should have been raised'
-test_passed(3) = si_speed%stringify(with_dimensions=.true.)=='m.s-1 [length.time-1]'
-print "(A,L1)", 'pass wrong explicit dim. exp.:  m [length].s-1 [time2] => '//si_speed%stringify(with_dimensions=.true.)//&
-                ', is correct? ', test_passed(3)
 
 print "(A)", ''
 print "(A)", 'Test unit/unit'
@@ -45,8 +39,8 @@ print "(A)", 'si_length = '//si_length%stringify(with_dimensions=.true.)
 print "(A)", 'si_speed  = '//si_speed%stringify(with_dimensions=.true.)
 print "(A)", 'si_time   = '//si_time%stringify(with_dimensions=.true.)
 a_unit = si_length / si_time
-test_passed(4) = a_unit%is_equal(other=si_speed)
-print "(A,L1)", 'si_length/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
+test_passed(3) = a_unit%is_equal(other=si_speed)
+print "(A,L1)", 'si_length/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(3)
 print "(A)", 'si_length/si_time name is: '//a_unit%name
 
 print "(A)", ''
@@ -57,8 +51,8 @@ print "(A)", 'si_force = '//si_force%stringify(with_dimensions=.true.)
 print "(A)", 'si_mass = '//si_mass%stringify(with_dimensions=.true.)
 call a_unit%unset
 a_unit = si_mass * si_length / si_time / si_time
-test_passed(5) = a_unit%is_equal(other=si_force)
-print "(A,L1)", 'si_mass*si_length/si_time/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(5)
+test_passed(4) = a_unit%is_equal(other=si_force)
+print "(A,L1)", 'si_mass*si_length/si_time/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
 print "(A)", 'si_mass*si_length/si_time/si_time name is: '//a_unit%name
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)

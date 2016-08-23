@@ -95,6 +95,7 @@ contains
   write(stderr, '(A)')'  error: left and right terms of "'//operation//'" have disequal units!'
   write(stderr, '(A)')'  LHS: '//lhs%stringify(with_dimensions=.true.)
   write(stderr, '(A)')'  RHS: '//rhs%stringify(with_dimensions=.true.)
+  stop
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_disequality
 
