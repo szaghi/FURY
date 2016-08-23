@@ -7,11 +7,13 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
+type(unit_generic), target :: si_force       !< SI force unit.
 type(unit_generic), target :: si_length      !< SI length unit.
+type(unit_generic), target :: si_mass        !< SI mass unit.
 type(unit_generic), target :: si_speed       !< SI speed unit.
 type(unit_generic), target :: si_time        !< SI time unit.
 type(unit_generic), target :: a_unit         !< A unit.
-logical                    :: test_passed(4) !< List of passed tests.
+logical                    :: test_passed(5) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,6 +36,7 @@ print "(A,L1)", 'pass wrong explicit dim. exp.:  m [length].s-1 [time2] => '//si
                 ', is correct? ', test_passed(3)
 
 print "(A)", ''
+print "(A)", 'Test unit/unit'
 call si_speed%unset
 si_length = unit_generic(symbols='m [length]', name='metre')
 si_time = unit_generic(symbols='s [time]', name='second')
@@ -43,8 +46,20 @@ print "(A)", 'si_speed  = '//si_speed%stringify(with_dimensions=.true.)
 print "(A)", 'si_time   = '//si_time%stringify(with_dimensions=.true.)
 a_unit = si_length / si_time
 test_passed(4) = a_unit%is_equal(other=si_speed)
-print "(A,L1)", 'si_length / si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
-print "(A)", 'si_length / si_time name is: '//a_unit%name
+print "(A,L1)", 'si_length/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
+print "(A)", 'si_length/si_time name is: '//a_unit%name
+
+print "(A)", ''
+print "(A)", 'Test unit*unit'
+si_force = unit_generic(symbols='kg [mass].m [length].s-2 [time-2]', name='newton')
+si_mass = unit_generic(symbols='kg [mass]', name='kilogram')
+print "(A)", 'si_force = '//si_force%stringify(with_dimensions=.true.)
+print "(A)", 'si_mass = '//si_mass%stringify(with_dimensions=.true.)
+call a_unit%unset
+a_unit = si_mass * si_length / si_time / si_time
+test_passed(5) = a_unit%is_equal(other=si_force)
+print "(A,L1)", 'si_mass*si_length/si_time/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(5)
+print "(A)", 'si_mass*si_length/si_time/si_time name is: '//a_unit%name
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop

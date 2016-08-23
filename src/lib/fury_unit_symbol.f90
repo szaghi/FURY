@@ -320,11 +320,9 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (rhs%has_symbol())  then
-    if (.not.lhs%has_symbol())  then
-      lhs%symbol = rhs%symbol
-      lhs%symbol_exponent = rhs%symbol_exponent
-      if (rhs%has_dimension()) lhs%dimension = rhs%dimension
-    endif
+    lhs%symbol = rhs%symbol
+    lhs%symbol_exponent = rhs%symbol_exponent
+    if (rhs%has_dimension()) lhs%dimension = rhs%dimension
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_unit_symbol

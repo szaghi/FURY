@@ -349,9 +349,10 @@ contains
     rhs_symbols = rhs%symbols
     do ls=1, size(lhs_symbols, dim=1)
       rs = 1
-      remaining_denominator: do
+      remaining_rhs_symbols: do
         if (lhs_symbols(ls)%is_compatible(other=rhs_symbols(rs))) then
           lhs_symbols(ls) = lhs_symbols(ls) / rhs_symbols(rs)
+          ! pop up current symbol from rhs symbols
           if (size(rhs_symbols, dim=1)>1) then
             if (rs==1) then
               rhs_symbols = rhs_symbols(rs+1:)
@@ -365,13 +366,15 @@ contains
             deallocate(rhs_symbols)
           endif
         else
+          ! check the next rhs symbols
           rs = rs + 1
         endif
-        if (rs>=size(rhs_symbols, dim=1).or.(.not.allocated(rhs_symbols))) exit
-      enddo remaining_denominator
+        if (rs>=size(rhs_symbols, dim=1).or.(.not.allocated(rhs_symbols))) exit remaining_rhs_symbols
+      enddo remaining_rhs_symbols
     enddo
     opr%symbols = lhs_symbols
     if (allocated(rhs_symbols)) then
+      ! there are still rhs symbols not compatible with lhs ones that must be added
       do rs=1, size(rhs_symbols, dim=1)
         call opr%add_symbol(symbol=rhs_symbols(rs)**(-1))
       enddo
@@ -403,28 +406,38 @@ contains
     rhs_symbols = rhs%symbols
     do ls=1, size(lhs_symbols, dim=1)
       rs = 1
-      remaining_denominator: do
+      remaining_rhs_symbols: do
         if (lhs_symbols(ls)%is_compatible(other=rhs_symbols(rs))) then
           lhs_symbols(ls) = lhs_symbols(ls) * rhs_symbols(rs)
-          if (rs==1) then
-            rhs_symbols = rhs_symbols(rs+1:)
-          elseif (rs==size(rhs_symbols, dim=1))  then
-            rhs_symbols = rhs_symbols(1:rs-1)
+          ! pop up current symbol from rhs symbols
+          if (size(rhs_symbols, dim=1)>1) then
+            if (rs==1) then
+              rhs_symbols = rhs_symbols(rs+1:)
+            elseif (rs==size(rhs_symbols, dim=1))  then
+              rhs_symbols = rhs_symbols(1:rs-1)
+            else
+              rhs_symbols = [rhs_symbols(1:rs-1), rhs_symbols(rs+1:)]
+            endif
+            rs = 1
           else
-            rhs_symbols = [rhs_symbols(1:rs-1), rhs_symbols(rs+1:)]
+            deallocate(rhs_symbols)
           endif
-          rs = 1
         else
+          ! check the next rhs symbols
           rs = rs + 1
         endif
-        if (rs==size(rhs_symbols, dim=1)) exit
-      enddo remaining_denominator
+        if (rs>=size(rhs_symbols, dim=1).or.(.not.allocated(rhs_symbols))) exit remaining_rhs_symbols
+      enddo remaining_rhs_symbols
     enddo
     opr%symbols = lhs_symbols
     if (allocated(rhs_symbols)) then
+      ! there are still rhs symbols not compatible with lhs ones that must be added
       do rs=1, size(rhs_symbols, dim=1)
         call opr%add_symbol(symbol=rhs_symbols(rs))
       enddo
+    endif
+    if (lhs%has_name().and.rhs%has_name()) then
+      opr%name = lhs%name//'*'//rhs%name
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
