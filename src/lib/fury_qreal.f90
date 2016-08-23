@@ -28,16 +28,43 @@ type :: qreal
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
-    generic :: assignment(=) => assign_qreal !< Overloading `=` assignament.
-    generic :: operator(+) => add            !< Overloading `+` operator.
-    generic :: operator(/) => div            !< Overloading `/` operator.
-    generic :: operator(*) => mul            !< Overloading `*` operator.
-    generic :: operator(-) => sub            !< Overloading `-` operator.
+    generic :: assignment(=) => assign_qreal     !< Overloading `=` assignament.
+    generic :: operator(+) => add                !< Overloading `+` operator.
+    generic :: operator(/) => div,             &
+                              div_R8P, div_R4P,&
+                              div_I8P, div_I4P,&
+                              div_I2P, div_I1P   !< Overloading `/` operator.
+    generic :: operator(*) => mul,             &
+                              mul_R8P, mul_R4P,&
+                              mul_I8P, mul_I4P,&
+                              mul_I2P, mul_I1P,&
+                              R8P_mul, R4P_mul,&
+                              I8P_mul, I4P_mul,&
+                              I2P_mul, I1P_mul   !< Overloading `*` operator.
+    generic :: operator(-) => sub                !< Overloading `-` operator.
     ! private methods
     procedure, pass(lhs), private :: assign_qreal !< `qreal = qreal` assignament.
     procedure, pass(lhs), private :: add          !< `qreal + qreal` operator.
     procedure, pass(lhs), private :: div          !< `qreal / qreal` operator.
+    procedure, pass(lhs), private :: div_R8P      !< `qreal / real(R8P)` operator.
+    procedure, pass(lhs), private :: div_R4P      !< `qreal / real(R4P)` operator.
+    procedure, pass(lhs), private :: div_I8P      !< `qreal / integer(I8P)` operator.
+    procedure, pass(lhs), private :: div_I4P      !< `qreal / integer(I4P)` operator.
+    procedure, pass(lhs), private :: div_I2P      !< `qreal / integer(I2P)` operator.
+    procedure, pass(lhs), private :: div_I1P      !< `qreal / integer(I1P)` operator.
     procedure, pass(lhs), private :: mul          !< `qreal * qreal` operator.
+    procedure, pass(lhs), private :: mul_R8P      !< `qreal * real(R8P)` operator.
+    procedure, pass(lhs), private :: mul_R4P      !< `qreal * real(R4P)` operator.
+    procedure, pass(lhs), private :: mul_I8P      !< `qreal * integer(I8P)` operator.
+    procedure, pass(lhs), private :: mul_I4P      !< `qreal * integer(I4P)` operator.
+    procedure, pass(lhs), private :: mul_I2P      !< `qreal * integer(I2P)` operator.
+    procedure, pass(lhs), private :: mul_I1P      !< `qreal * integer(I1P)` operator.
+    procedure, pass(rhs), private :: R8P_mul      !< `real(R8P) * qreal` operator.
+    procedure, pass(rhs), private :: R4P_mul      !< `real(R4P) * qreal` operator.
+    procedure, pass(rhs), private :: I8P_mul      !< `integer(I8P) * qreal` operator.
+    procedure, pass(rhs), private :: I4P_mul      !< `integer(I4P) * qreal` operator.
+    procedure, pass(rhs), private :: I2P_mul      !< `integer(I2P) * qreal` operator.
+    procedure, pass(rhs), private :: I1P_mul      !< `integer(I1P) * qreal` operator.
     procedure, pass(lhs), private :: sub          !< `qreal - qreal` operator.
 endtype qreal
 
@@ -74,6 +101,23 @@ contains
   write(stderr, '(A)')'result is nullified!'
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_incompatibility
+
+  subroutine raise_error_disequality(lhs, rhs, operation)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Raise the incompatibility error.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  type(qreal),  intent(in) :: lhs       !< Left hand side of the operator.
+  type(qreal),  intent(in) :: rhs       !< Rigth hand side of the operator.
+  character(*), intent(in) :: operation !< Description of the operation errored.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  write(stderr, '(A)')'  error: left and right terms of "'//operation//'" have disequal units!'
+  write(stderr, '(A)')'  LHS: '//lhs%stringify(with_dimensions=.true.)
+  write(stderr, '(A)')'  RHS: '//rhs%stringify(with_dimensions=.true.)
+  stop
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine raise_error_disequality
 
   ! public methods
   elemental function is_compatible(self, other) result(compatible)
@@ -139,7 +183,7 @@ contains
     raw = trim(str(n=self%magnitude))
   endif
   if (self%is_unit_defined()) then
-    raw = raw//self%unit%stringify(with_dimensions=with_dimensions)
+    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
@@ -167,7 +211,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
+  if (rhs%is_unit_defined()) then
+    if (.not.lhs%is_unit_defined())  then
+      call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
+    elseif (lhs%unit%is_equal(other=rhs%unit)) then
+      call lhs%set(magnitude=rhs%magnitude)
+    else
+      call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
+    endif
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_qreal
 
@@ -182,11 +234,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%is_compatible(other=rhs)) then
-      call opr%set(magnitude=(lhs%magnitude + rhs%magnitude), unit=lhs%unit)
+    if (lhs%unit%is_equal(other=rhs%unit)) then
+      opr = lhs
+      opr%magnitude = lhs%magnitude + rhs%magnitude
     else
-      call raise_error_incompatibility(operation='L+R')
-      call opr%unset
+      call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS + RHS')
     endif
   else
     ! dimensionless quantities assumed
@@ -214,6 +266,96 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
+  function div_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R8P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_R8P
+
+  function div_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R4P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_R4P
+
+  function div_I8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / integer(I8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I8P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_I8P
+
+  function div_I4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / integer(I4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I4P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_I4P
+
+  function div_I2P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / integer(I2P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I2P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_I2P
+
+  function div_I1P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal / integer(I1P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I1P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude / rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction div_I1P
+
   function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal * qreal` operator.
@@ -233,6 +375,186 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
+  function mul_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R8P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_R8P
+
+  function mul_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R4P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_R4P
+
+  function mul_I8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I8P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_I8P
+
+  function mul_I4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I4P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_I4P
+
+  function mul_I2P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I2P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I2P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_I2P
+
+  function mul_I1P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I1P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I1P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr%magnitude = lhs%magnitude * rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction mul_I1P
+
+  function R8P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R8P),    intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction R8P_mul
+
+  function R4P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R4P),    intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction R4P_mul
+
+  function I8P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I8P), intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction I8P_mul
+
+  function I4P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I4P), intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction I4P_mul
+
+  function I2P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I2P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I2P), intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction I2P_mul
+
+  function I1P_mul(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal * integer(I1P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  integer(I1P), intent(in) :: lhs !< Left hand side.
+  class(qreal), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr%magnitude = lhs * rhs%magnitude
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction I1P_mul
+
   function sub(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal - qreal` operator.
@@ -244,11 +566,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%unit%is_compatible(other=rhs%unit)) then
-      call opr%set(magnitude=(lhs%magnitude - rhs%magnitude), unit=lhs%unit)
+    if (lhs%unit%is_equal(other=rhs%unit)) then
+      opr = lhs
+      opr%magnitude = lhs%magnitude - rhs%magnitude
     else
-      call raise_error_incompatibility(operation='L-R')
-      call opr%unset
+      call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS + RHS')
     endif
   else
     ! dimensionless quantities assumed
