@@ -16,7 +16,7 @@ type(unit_generic) :: u_length        !< Length unit.
 type(unit_generic) :: u_mass          !< Mass unit.
 type(unit_generic) :: u_speed         !< Speed unit.
 type(unit_generic) :: u_time          !< Time unit.
-logical            :: test_passed(23) !< List of passed tests.
+logical            :: test_passed(27) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -128,6 +128,26 @@ print "(A,L1)", '2_I2P / 1.0 kg.m.s-2 = '//force3%stringify(format='(F3.1)')//',
 force3 = force1 / 2_I1P
 test_passed(23) = force3%stringify(format='(F3.1)')=='0.5 kg.m.s-2'
 print "(A,L1)", '2_I1P / 1.0 kg.m.s-2 = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(23)
+
+call force3%unset
+force3 = force2 ** 2_I8P
+test_passed(24) = force3%stringify(format='(F3.1)')=='4.0 kg2.m2.s-4'
+print "(A,L1)", '(2.0 kg.m.s-2) ** 2_I8P = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(24)
+
+call force3%unset
+force3 = force2 ** 2_I4P
+test_passed(25) = force3%stringify(format='(F3.1)')=='4.0 kg2.m2.s-4'
+print "(A,L1)", '(2.0 kg.m.s-2) ** 2_I4P = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(25)
+
+call force3%unset
+force3 = force2 ** 2_I2P
+test_passed(26) = force3%stringify(format='(F3.1)')=='4.0 kg2.m2.s-4'
+print "(A,L1)", '(2.0 kg.m.s-2) ** 2_I2P = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(26)
+
+call force3%unset
+force3 = force2 ** 2_I1P
+test_passed(27) = force3%stringify(format='(F3.1)')=='4.0 kg2.m2.s-4'
+print "(A,L1)", '(2.0 kg.m.s-2) ** 2_I1P = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(27)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop

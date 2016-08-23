@@ -37,12 +37,18 @@ type :: unit_generic
     generic :: operator(/) => div                   !< Overloading `/` operator.
     generic :: operator(*) => mul                   !< Overloading `*` operator.
     generic :: operator(-) => sub                   !< Overloading `-` operator.
+    generic :: operator(**) => pow_I8P, pow_I4P, &
+                               pow_I2P, pow_I1P     !< Overloading `**` operator.
     ! private methods
     procedure, pass(lhs), private :: assign_unit_generic !< `unit_generic = unit_generic` assignament.
     procedure, pass(lhs), private :: add                 !< `unit_generic + unit_generic` operator.
     procedure, pass(lhs), private :: div                 !< `unit_generic / unit_generic` operator.
     procedure, pass(lhs), private :: mul                 !< `unit_generic * unit_generic` operator.
     procedure, pass(lhs), private :: sub                 !< `unit_generic - unit_generic` operator.
+    procedure, pass(lhs), private :: pow_I8P             !< `unit_generic ** integer(I8P)` operator.
+    procedure, pass(lhs), private :: pow_I4P             !< `unit_generic ** integer(I4P)` operator.
+    procedure, pass(lhs), private :: pow_I2P             !< `unit_generic ** integer(I2P)` operator.
+    procedure, pass(lhs), private :: pow_I1P             !< `unit_generic ** integer(I1P)` operator.
 endtype unit_generic
 
 interface unit_generic
@@ -316,14 +322,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_generic + unit_generic` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in)  :: lhs !< Left hand side.
-  class(unit_generic), intent(in)  :: rhs !< Right hand side.
-  class(unit_generic), allocatable :: opr !< Operator result.
+  class(unit_generic), intent(in) :: lhs !< Left hand side.
+  class(unit_generic), intent(in) :: rhs !< Right hand side.
+  type(unit_generic)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_equal(other=rhs)) then
-    allocate(opr, source=lhs)
+    opr = lhs
   else
     call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS + RHS')
   endif
@@ -334,17 +340,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_generic / unit_generic` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in)  :: lhs            !< Left hand side.
-  class(unit_generic), intent(in)  :: rhs            !< Right hand side.
-  class(unit_generic), allocatable :: opr            !< Operator result.
-  type(unit_symbol), allocatable   :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable   :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                     :: ls             !< Counter.
-  integer(I_P)                     :: rs             !< Counter.
+  class(unit_generic), intent(in) :: lhs            !< Left hand side.
+  class(unit_generic), intent(in) :: rhs            !< Right hand side.
+  type(unit_generic)              :: opr            !< Operator result.
+  type(unit_symbol), allocatable  :: lhs_symbols(:) !< Left hand side symbols.
+  type(unit_symbol), allocatable  :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                    :: ls             !< Counter.
+  integer(I_P)                    :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  allocate(opr, source=lhs)
+  opr = lhs
   if (lhs%are_symbols_defined().and.rhs%are_symbols_defined()) then
     lhs_symbols = lhs%symbols
     rhs_symbols = rhs%symbols
@@ -391,17 +397,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_generic * unit_generic` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in)  :: lhs            !< Left hand side.
-  class(unit_generic), intent(in)  :: rhs            !< Right hand side.
-  class(unit_generic), allocatable :: opr            !< Operator result.
-  type(unit_symbol), allocatable   :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable   :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                     :: ls             !< Counter.
-  integer(I_P)                     :: rs             !< Counter.
+  class(unit_generic), intent(in) :: lhs            !< Left hand side.
+  class(unit_generic), intent(in) :: rhs            !< Right hand side.
+  type(unit_generic)              :: opr            !< Operator result.
+  type(unit_symbol), allocatable  :: lhs_symbols(:) !< Left hand side symbols.
+  type(unit_symbol), allocatable  :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                    :: ls             !< Counter.
+  integer(I_P)                    :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  allocate(opr, source=lhs)
+  opr = lhs
   if (lhs%are_symbols_defined().and.rhs%are_symbols_defined()) then
     lhs_symbols = lhs%symbols
     rhs_symbols = rhs%symbols
@@ -461,4 +467,84 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction sub
+
+  function pow_I8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_generic ** integer(I8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: lhs !< Left hand side.
+  integer(I8P),        intent(in) :: rhs !< Right hand side.
+  type(unit_generic)              :: opr !< Operator result.
+  integer(I_P)                    :: s   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  if (opr%are_symbols_defined()) then
+    do s=1, size(opr%symbols, dim=1)
+      opr%symbols(s) = opr%symbols(s) ** rhs
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I8P
+
+  function pow_I4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_generic ** integer(I4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: lhs !< Left hand side.
+  integer(I4P),        intent(in) :: rhs !< Right hand side.
+  type(unit_generic)              :: opr !< Operator result.
+  integer(I_P)                    :: s   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  if (opr%are_symbols_defined()) then
+    do s=1, size(opr%symbols, dim=1)
+      opr%symbols(s) = opr%symbols(s) ** rhs
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I4P
+
+  function pow_I2P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_generic ** integer(I2P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: lhs !< Left hand side.
+  integer(I2P),        intent(in) :: rhs !< Right hand side.
+  type(unit_generic)              :: opr !< Operator result.
+  integer(I_P)                    :: s   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  if (opr%are_symbols_defined()) then
+    do s=1, size(opr%symbols, dim=1)
+      opr%symbols(s) = opr%symbols(s) ** rhs
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I2P
+
+  function pow_I1P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_generic ** integer(I1P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: lhs !< Left hand side.
+  integer(I1P),        intent(in) :: rhs !< Right hand side.
+  type(unit_generic)              :: opr !< Operator result.
+  integer(I_P)                    :: s   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  if (opr%are_symbols_defined()) then
+    do s=1, size(opr%symbols, dim=1)
+      opr%symbols(s) = opr%symbols(s) ** rhs
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I1P
 endmodule fury_unit_generic

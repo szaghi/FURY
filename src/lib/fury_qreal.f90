@@ -28,20 +28,22 @@ type :: qreal
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
-    generic :: assignment(=) => assign_qreal     !< Overloading `=` assignament.
-    generic :: operator(+) => add                !< Overloading `+` operator.
+    generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
+    generic :: operator(+) => add                  !< Overloading `+` operator.
     generic :: operator(/) => div,             &
                               div_R8P, div_R4P,&
                               div_I8P, div_I4P,&
-                              div_I2P, div_I1P   !< Overloading `/` operator.
+                              div_I2P, div_I1P     !< Overloading `/` operator.
     generic :: operator(*) => mul,             &
                               mul_R8P, mul_R4P,&
                               mul_I8P, mul_I4P,&
                               mul_I2P, mul_I1P,&
                               R8P_mul, R4P_mul,&
                               I8P_mul, I4P_mul,&
-                              I2P_mul, I1P_mul   !< Overloading `*` operator.
-    generic :: operator(-) => sub                !< Overloading `-` operator.
+                              I2P_mul, I1P_mul     !< Overloading `*` operator.
+    generic :: operator(-) => sub                  !< Overloading `-` operator.
+    generic :: operator(**) => pow_I8P, pow_I4P, &
+                               pow_I2P, pow_I1P    !< Overloading `**` operator.
     ! private methods
     procedure, pass(lhs), private :: assign_qreal !< `qreal = qreal` assignament.
     procedure, pass(lhs), private :: add          !< `qreal + qreal` operator.
@@ -66,6 +68,10 @@ type :: qreal
     procedure, pass(rhs), private :: I2P_mul      !< `integer(I2P) * qreal` operator.
     procedure, pass(rhs), private :: I1P_mul      !< `integer(I1P) * qreal` operator.
     procedure, pass(lhs), private :: sub          !< `qreal - qreal` operator.
+    procedure, pass(lhs), private :: pow_I8P      !< `qreal ** integer(I8P)` operator.
+    procedure, pass(lhs), private :: pow_I4P      !< `qreal ** integer(I4P)` operator.
+    procedure, pass(lhs), private :: pow_I2P      !< `qreal ** integer(I2P)` operator.
+    procedure, pass(lhs), private :: pow_I1P      !< `qreal ** integer(I1P)` operator.
 endtype qreal
 
 interface qreal
@@ -578,4 +584,76 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction sub
+
+  function pow_I8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** integer(I8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I8P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I8P
+
+  function pow_I4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** integer(I4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I4P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I4P
+
+  function pow_I2P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** integer(I2P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I2P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I2P
+
+  function pow_I1P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** integer(I1P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  integer(I1P), intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_I1P
 endmodule fury_qreal

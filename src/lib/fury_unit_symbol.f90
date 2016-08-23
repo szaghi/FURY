@@ -59,10 +59,10 @@ type :: unit_symbol
     procedure, pass(lhs), private :: assign_unit_symbol !< `unit_symbol = unit_symbol` assignament.
     procedure, pass(lhs), private :: div                !< `unit_symbol / unit_symbol` operator.
     procedure, pass(lhs), private :: mul                !< `unit_symbol * unit_symbol` operator.
-    procedure, pass(lhs), private :: pow_I8P            !< `unit_symbol ** integer` operator (I8P).
-    procedure, pass(lhs), private :: pow_I4P            !< `unit_symbol ** integer` operator (I4P).
-    procedure, pass(lhs), private :: pow_I2P            !< `unit_symbol ** integer` operator (I2P).
-    procedure, pass(lhs), private :: pow_I1P            !< `unit_symbol ** integer` operator (I1P).
+    procedure, pass(lhs), private :: pow_I8P            !< `unit_symbol ** integer(I8P)` operator.
+    procedure, pass(lhs), private :: pow_I4P            !< `unit_symbol ** integer(I4P)` operator.
+    procedure, pass(lhs), private :: pow_I2P            !< `unit_symbol ** integer(I2P)` operator.
+    procedure, pass(lhs), private :: pow_I1P            !< `unit_symbol ** integer(I1P)` operator.
 endtype unit_symbol
 
 interface unit_symbol
@@ -368,7 +368,7 @@ contains
 
   pure function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_symbol ** integer` operator (I8P).
+  !< `unit_symbol ** integer(I8P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(in) :: lhs !< Left hand side.
   integer(I8P),       intent(in) :: rhs !< Right hand side.
@@ -385,7 +385,7 @@ contains
 
   pure function pow_I4P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_symbol ** integer` operator (I4P).
+  !< `unit_symbol ** integer(I4P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(in) :: lhs !< Left hand side.
   integer(I4P),       intent(in) :: rhs !< Right hand side.
@@ -402,7 +402,7 @@ contains
 
   pure function pow_I2P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_symbol ** integer` operator (I2P).
+  !< `unit_symbol ** integer(I2P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(in) :: lhs !< Left hand side.
   integer(I2P),       intent(in) :: rhs !< Right hand side.
@@ -419,7 +419,7 @@ contains
 
   pure function pow_I1P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_symbol ** integer` operator (I1P).
+  !< `unit_symbol ** integer(I1P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(in) :: lhs !< Left hand side.
   integer(I1P),       intent(in) :: rhs !< Right hand side.

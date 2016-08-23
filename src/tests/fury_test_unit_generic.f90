@@ -7,13 +7,13 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(unit_generic) :: si_force       !< SI force unit.
-type(unit_generic) :: si_length      !< SI length unit.
-type(unit_generic) :: si_mass        !< SI mass unit.
-type(unit_generic) :: si_speed       !< SI speed unit.
-type(unit_generic) :: si_time        !< SI time unit.
-type(unit_generic) :: a_unit         !< A unit.
-logical            :: test_passed(4) !< List of passed tests.
+type(unit_generic) :: si_force        !< SI force unit.
+type(unit_generic) :: si_length       !< SI length unit.
+type(unit_generic) :: si_mass         !< SI mass unit.
+type(unit_generic) :: si_speed        !< SI speed unit.
+type(unit_generic) :: si_time         !< SI time unit.
+type(unit_generic) :: a_unit          !< A unit.
+logical            :: test_passed(10) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -54,6 +54,41 @@ a_unit = si_mass * si_length / si_time / si_time
 test_passed(4) = a_unit%is_equal(other=si_force)
 print "(A,L1)", 'si_mass*si_length/si_time/si_time = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
 print "(A)", 'si_mass*si_length/si_time/si_time name is: '//a_unit%name
+
+print "(A)", ''
+print "(A)", 'Test unit+unit'
+call a_unit%unset
+a_unit = si_mass + si_mass
+test_passed(5) = a_unit%is_equal(other=si_mass)
+print "(A,L1)", 'si_mass + si_mass = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(5)
+print "(A)", 'si_mass + si_mass name is: '//a_unit%name
+
+print "(A)", ''
+print "(A)", 'Test unit-unit'
+call a_unit%unset
+a_unit = si_mass - si_mass
+test_passed(6) = a_unit%is_equal(other=si_mass)
+print "(A,L1)", 'si_mass - si_mass = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(6)
+print "(A)", 'si_mass - si_mass name is: '//a_unit%name
+
+print "(A)", ''
+print "(A)", 'Test unit**2'
+call a_unit%unset
+a_unit = si_mass ** 2_I8P
+test_passed(7) = a_unit%stringify()=='kg2'
+print "(A,L1)", 'si_mass ** 2_I8P = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(7)
+
+a_unit = si_mass ** 2_I4P
+test_passed(8) = a_unit%stringify()=='kg2'
+print "(A,L1)", 'si_mass ** 2_I4P = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(8)
+
+a_unit = si_mass ** 2_I2P
+test_passed(9) = a_unit%stringify()=='kg2'
+print "(A,L1)", 'si_mass ** 2_I2P = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(9)
+
+a_unit = si_mass ** 2_I1P
+test_passed(10) = a_unit%stringify()=='kg2'
+print "(A,L1)", 'si_mass ** 2_I1P = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(10)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
