@@ -19,12 +19,12 @@ logical            :: test_passed(10) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-si_speed = unit_generic(symbols='m [length].s-1 [time]')
+si_speed = unit_generic(source='m [length].s-1 [time]')
 test_passed(1) = si_speed%stringify(with_dimensions=.true.)=='m.s-1 [length.time-1]'
 print "(A,L1)", 'pass implicit dim. exp.:  m [length].s-1 [time] => '//si_speed%stringify(with_dimensions=.true.)//&
                 ', is correct? ', test_passed(1)
 call si_speed%unset
-si_speed = unit_generic(symbols='m [length].s-1 [time-1]')
+si_speed = unit_generic(source='m [length].s-1 [time-1]')
 test_passed(2) = si_speed%stringify(with_dimensions=.true.)=='m.s-1 [length.time-1]'
 print "(A,L1)", 'pass explicit dim. exp.:  m [length].s-1 [time-1] => '//si_speed%stringify(with_dimensions=.true.)//&
                 ', is correct? ', test_passed(2)
@@ -32,9 +32,9 @@ print "(A,L1)", 'pass explicit dim. exp.:  m [length].s-1 [time-1] => '//si_spee
 print "(A)", ''
 print "(A)", 'Test unit/unit'
 call si_speed%unset
-si_length = unit_generic(symbols='m [length]', name='metre')
-si_time = unit_generic(symbols='s [time]', name='second')
-si_speed = unit_generic(symbols='m [length].s-1 [time]', name='metre/second')
+si_length = unit_generic(source='m [length]', name='metre')
+si_time = unit_generic(source='s [time]', name='second')
+si_speed = unit_generic(source='m [length].s-1 [time]', name='metre/second')
 print "(A)", 'si_length = '//si_length%stringify(with_dimensions=.true.)
 print "(A)", 'si_speed  = '//si_speed%stringify(with_dimensions=.true.)
 print "(A)", 'si_time   = '//si_time%stringify(with_dimensions=.true.)
@@ -45,8 +45,8 @@ print "(A)", 'si_length/si_time name is: '//a_unit%name
 
 print "(A)", ''
 print "(A)", 'Test unit*unit'
-si_force = unit_generic(symbols='kg [mass].m [length].s-2 [time-2]', name='newton')
-si_mass = unit_generic(symbols='kg [mass]', name='kilogram')
+si_force = unit_generic(source='kg [mass].m [length].s-2 [time-2]', name='newton')
+si_mass = unit_generic(source='kg [mass]', name='kilogram')
 print "(A)", 'si_force = '//si_force%stringify(with_dimensions=.true.)
 print "(A)", 'si_mass = '//si_mass%stringify(with_dimensions=.true.)
 call a_unit%unset

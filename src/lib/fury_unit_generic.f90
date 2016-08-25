@@ -6,6 +6,7 @@ module fury_unit_generic
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_unit_symbol
 use penf
+use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -17,8 +18,33 @@ public :: unit_generic
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: unit_generic
   !< Generic prototype of *unit*.
-  type(unit_symbol), allocatable :: symbols(:) !< Symbol(s) of the unit.
-  character(len=:),  allocatable :: name       !< Unit name.
+  !<
+  !< The string format definition of a valid FURY unit is as following:
+  !<
+  !< `kg [mass].m-1 [length-1].s-2 [time-2](Pa[pressure]){pascal}`
+  !<
+  !< where
+  !<
+  !<+ the terms `[...]` define the *dimension* of each symbol and are optional (the white spaces are ignored); moreover ther
+  !<  exponent of dimensions can be omitted: in this case they are inferred from the symbols exponents; in the case they are
+  !<  explicitely written they must match the corresponding symbols ones or an error is raised;
+  !<+ the term `(...)` defines a symbol *alias* that is optional and must come always after symbols definition;
+  !<+ the term `{...}` defines the unit name that is optional and must be always the last term.
+  !<
+  !< Other valid string inputs of the same above *pressure* unit are:
+  !<
+  !< `kg.m-1.s-2` a unit without specified dimensions, alias and name;
+  !< `kg.m-1.s-2(Pa)` a unit without specified dimensions and name, but with an alias without alias dimension;
+  !< `kg.m-1.s-2(Pa[pressure])` a unit without specified dimensions and name, but with an alias with alias dimension;
+  !< `kg.m-1.s-2{pascal}` a unit without specified dimensions and alias, but with a name;
+  !< `kg.m-1.s-2(Pa){pascal}` a unit without specified dimensions, but with an alias without alias dimension and a name;
+  !<
+  !< @note It is better to avoid to uncomplete list of dimensions for symbols: define all dimensions for all symbols or avoid to
+  !< define dimensions at all.
+  type(unit_symbol), allocatable :: symbols(:)           !< Symbol(s) of the unit.
+  type(unit_symbol), allocatable :: alias                !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(len=:),  allocatable :: name                 !< Unit name.
+  integer(I_P), private          :: symbols_number=0_I_P !< Symbols number.
   contains
     ! public methods
     procedure, pass(self) :: add_symbol          !< Add a symbol to unit.
@@ -28,11 +54,13 @@ type :: unit_generic
     procedure, pass(self) :: has_symbol          !< Check if the unit has a symbol.
     procedure, pass(self) :: is_compatible       !< Check if unit is compatible with another one.
     procedure, pass(self) :: is_equal            !< Check if unit is equal with another one.
+    procedure, pass(self) :: parse               !< Parse unit definition from an input string.
     procedure, pass(self) :: set                 !< Set the unit.
     procedure, pass(self) :: stringify           !< Return a string representaion of the unit.
     procedure, pass(self) :: unset               !< Set the unit.
     ! public generic names
-    generic :: assignment(=) => assign_unit_generic !< Overloading `=` operator.
+    generic :: assignment(=) => assign_string, &
+                                assign_unit_generic !< Overloading `=` operator.
     generic :: operator(+) => add                   !< Overloading `+` operator.
     generic :: operator(/) => div                   !< Overloading `/` operator.
     generic :: operator(*) => mul                   !< Overloading `*` operator.
@@ -40,6 +68,12 @@ type :: unit_generic
     generic :: operator(**) => pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P     !< Overloading `**` operator.
     ! private methods
+    procedure, pass(self), private :: parse_alias           !< Parse unit alias from an input string.
+    procedure, pass(self), private :: parse_name            !< Parse unit name from an input string.
+    procedure, pass(self), private :: parse_symbols         !< Parse unit symbols from an input string.
+    procedure, pass(self), private :: update_symbols_number !< Update symbols number counter.
+    ! operators
+    procedure, pass(lhs), private :: assign_string       !< `unit_generic = string` assignament.
     procedure, pass(lhs), private :: assign_unit_generic !< `unit_generic = unit_generic` assignament.
     procedure, pass(lhs), private :: add                 !< `unit_generic + unit_generic` operator.
     procedure, pass(lhs), private :: div                 !< `unit_generic / unit_generic` operator.
@@ -52,25 +86,69 @@ type :: unit_generic
 endtype unit_generic
 
 interface unit_generic
-  !< Ovearloading [[unit_generic]] name with a creator function.
-  module procedure creator
+  !< Ovearloading [[unit_generic]] name with a set of creator functions.
+  module procedure creator_from_string, creator_from_other_unit
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! private non type bound procedures
-  function creator(symbols, name) result(unit)
+  function creator_from_string(source, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of unit.
+  !< Create an instance of unit from an input source string..
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*), intent(in), optional :: symbols !< Symbol(s) of the unit.
-  character(*), intent(in), optional :: name    !< Unit name.
-  type(unit_generic)                 :: unit    !< The unit.
+  character(*), intent(in)           :: source !< Source input string definition of the unit.
+  character(*), intent(in), optional :: name   !< Unit name.
+  type(unit_generic)                 :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call unit%set(symbols=symbols, name=name)
+  call unit%parse(source=source)
+  call unit%set(name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction creator
+  endfunction creator_from_string
+
+  function creator_from_other_unit(source, name) result(unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Create an instance of unit from another unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  type(unit_generic), intent(in)           :: source !< Source input unit.
+  character(*),       intent(in), optional :: name   !< Unit name.
+  type(unit_generic)                       :: unit   !< The unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  unit = source
+  call unit%set(name=name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction creator_from_other_unit
+
+  subroutine raise_error_bad_input_alias(source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Raise the bad input alias error.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in) :: source !< Input source containing the unit definition with bad alias specifier.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  write(stderr, '(A)')'  error: input source string "'//source//'" has bad alias specifier for the unit!'
+  write(stderr, '(A)')'  the alias must enclosed into "()" brackets and must be placed after the symbols definition'
+  stop
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine raise_error_bad_input_alias
+
+  subroutine raise_error_bad_input_name(source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Raise the bad input name error.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  character(*), intent(in) :: source !< Input source containing the unit definition with bad name specifier.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  write(stderr, '(A)')'  error: input source string "'//source//'" has bad name specifier for the unit!'
+  write(stderr, '(A)')'  the name must enclosed into "{}" brackets and must be placed as the last term of the input string'
+  stop
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine raise_error_bad_input_name
 
   subroutine raise_error_incompatibility(lhs, rhs, operation)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -110,22 +188,22 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self           !< The unit.
-  type(unit_symbol),   intent(in)    :: symbol         !< Unit symbol.
-  type(unit_symbol), allocatable     :: symbols(:)     !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
-  integer(I_P)                       :: symbols_number !< Symbols number.
+  class(unit_generic), intent(inout) :: self       !< The unit.
+  type(unit_symbol),   intent(in)    :: symbol     !< Unit symbol.
+  type(unit_symbol), allocatable     :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%are_symbols_defined()) then
-    symbols_number = size(self%symbols, dim=1)
-    allocate(symbols(symbols_number+1))
-    symbols(1:symbols_number) = self%symbols
-    symbols(symbols_number+1) = symbol
+  if (self%are_symbols_defined().and.(.not.self%has_symbol(symbol=symbol))) then
+    allocate(symbols(self%symbols_number+1))
+    symbols(1:self%symbols_number) = self%symbols
+    symbols(self%symbols_number+1) = symbol
     call move_alloc(from=symbols, to=self%symbols)
+    self%symbols_number = self%symbols_number + 1_I_P
   else
     allocate(self%symbols(1))
     self%symbols(1) = symbol
+    self%symbols_number = 1_I_P
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_symbol
@@ -134,20 +212,18 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self             !< The unit.
-  character(*),        intent(in)    :: symbols          !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
-  type(unit_symbol), allocatable     :: symbols_array(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
-  integer(I_P)                       :: s                !< Counter.
+  class(unit_generic), intent(inout) :: self        !< The unit.
+  type(unit_symbol),   intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
+  integer(I_P)                       :: s           !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (self%are_symbols_defined()) then
-    symbols_array = parse_unit_symbols(symbols=symbols)
-    do s=1, size(symbols_array, dim=1)
-      if (.not.self%has_symbol(symbol=symbols_array(s))) call self%add_symbol(symbol=symbols_array(s))
+    do s=1, size(symbols, dim=1)
+      call self%add_symbol(symbol=symbols(s))
     enddo
   else
-    self%symbols = parse_unit_symbols(symbols=symbols)
+    self%symbols = symbols
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_symbols
@@ -191,7 +267,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   has_symbol = .false.
   if (self%are_symbols_defined()) then
-    do s=1, size(self%symbols, dim=1)
+    do s=1, self%symbols_number
       has_symbol = self%symbols(s)%is_equal(other=symbol)
       if (has_symbol) exit
     enddo
@@ -226,9 +302,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   is_equal = .false.
   if (self%are_symbols_defined().and.other%are_symbols_defined()) then
-    is_equal = (size(self%symbols, dim=1)==size(other%symbols, dim=1))
+    is_equal = (self%symbols_number==other%symbols_number)
     if (is_equal) then
-      do s=1, size(self%symbols, dim=1)
+      do s=1, self%symbols_number
         is_equal = other%has_symbol(symbol=self%symbols(s))
         if (.not.is_equal) exit
       enddo
@@ -237,19 +313,40 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  subroutine set(self, symbols, name)
+  subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set the unit.
-  !<
-  !< @todo Load from file.
+  !< Parse unit definition form an input string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout)         :: self    !< The unit.
-  character(*),        intent(in),  optional :: symbols !< Symbol(s) of the unit.
-  character(*),        intent(in),  optional :: name    !< Unit name.
+  class(unit_generic), intent(inout) :: self       !< The unit.
+  character(*),        intent(in)    :: source     !< Input source string.
+  type(string)                       :: source_str !< Source input stringified.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (present(symbols)) call self%add_symbols(symbols=symbols)
+  source_str = trim(adjustl(source))
+  call self%parse_name(source=source_str)
+  call self%parse_alias(source=source_str)
+  call self%parse_symbols(source=source_str)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine parse
+
+  subroutine set(self, symbols, alias, name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Set the unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout)         :: self        !< The unit.
+  type(unit_symbol),   intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
+  type(unit_symbol),   intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),        intent(in),  optional :: name        !< Unit name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (present(symbols)) self%symbols = symbols
+  call self%update_symbols_number()
+  if (present(alias)) then
+    if (.not.allocated(self%alias)) allocate(self%alias)
+    self%alias = alias
+  endif
   if (present(name)) self%name = name
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
@@ -267,14 +364,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (self%are_symbols_defined()) then
     raw = ''
-    do s=1, size(self%symbols, dim=1)
+    do s=1, self%symbols_number
       raw = raw//'.'//self%symbols(s)%stringify()
     enddo
     raw = raw(2:)
     if (present(with_dimensions)) then
       if (with_dimensions) then
         raw = raw//' ['
-        do s=1, size(self%symbols, dim=1)
+        do s=1, self%symbols_number
           raw = raw//self%symbols(s)%dimensionality()//'.'
         enddo
         raw(len(raw):len(raw)) = ']'
@@ -293,11 +390,113 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (allocated(self%symbols)) deallocate(self%symbols)
+  if (allocated(self%alias)) deallocate(self%alias)
   if (allocated(self%name)) deallocate(self%name)
+  self%symbols_number = 0_I_P
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
   ! private methods
+  subroutine parse_alias(self, source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Parse unit alias form an input string and return also the source string without the alias data.
+  !<
+  !< @note It is assumed that the optional unit name has been already parsed and trimmed out form the input string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout) :: self      !< The unit.
+  type(string),        intent(inout) :: source    !< Input source string.
+  type(string), allocatable          :: tokens(:) !< String tokens.
+  integer(I_P)                       :: n1        !< Counter.
+  integer(I_P)                       :: n2        !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  n1 = source%count('(')
+  n2 = source%count(')')
+  if (n1==1.and.n2==1) then
+    call source%split(sep='(', tokens=tokens)
+    source = tokens(1)
+    tokens(2) = tokens(2)%replace(old=')', new='')
+    if (.not.allocated(self%alias)) allocate(self%alias)
+    call self%alias%parse(source=tokens(2)%chars())
+  elseif (n1>1.or.n2>1) then
+    call raise_error_bad_input_alias(source=source%chars())
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine parse_alias
+
+  subroutine parse_name(self, source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Parse unit name form an input string and return also the source string without the name data.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout) :: self      !< The unit.
+  type(string),        intent(inout) :: source    !< Input source string.
+  type(string), allocatable          :: tokens(:) !< String tokens.
+  integer(I_P)                       :: n1        !< Counter.
+  integer(I_P)                       :: n2        !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  n1 = source%count('{')
+  n2 = source%count('}')
+  if (n1==1.and.n2==1) then
+    call source%split(sep='{', tokens=tokens)
+    source = tokens(1)
+    tokens(2) = tokens(2)%replace(old='}', new='')
+    self%name = tokens(2)%chars()
+  elseif (n1>1.or.n2>1) then
+    call raise_error_bad_input_name(source=source%chars())
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine parse_name
+
+  subroutine parse_symbols(self, source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Parse unit symbols form an input string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout) :: self   !< The unit.
+  type(string),        intent(in)    :: source !< Input source string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  self%symbols = parse_unit_symbols(symbols=source%chars())
+  call self%update_symbols_number()
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine parse_symbols
+
+  subroutine update_symbols_number(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Update symbols number counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout) :: self !< The unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  self%symbols_number = 0_I_P
+  if (self%are_symbols_defined()) self%symbols_number = size(self%symbols, dim=1)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine update_symbols_number
+
+  ! operators
+  subroutine assign_string(lhs, rhs)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_generic = string` assignament.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(inout) :: lhs         !< Left hand side.
+  character(*),        intent(in)    :: rhs         !< Right hand side.
+  type(unit_generic)                 :: parsed_unit !< Unit arising from string input.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  call parsed_unit%parse(source=rhs)
+  if (.not.lhs%are_symbols_defined())  then
+    lhs = parsed_unit
+  else
+    if (.not.lhs%is_equal(other=parsed_unit)) call raise_error_disequality(lhs=lhs, rhs=parsed_unit, operation='LHS = RHS')
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine assign_string
+
   subroutine assign_unit_generic(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_generic = unit_generic` assignament.
@@ -310,7 +509,12 @@ contains
   if (rhs%are_symbols_defined())  then
     if (.not.lhs%are_symbols_defined())  then
       lhs%symbols = rhs%symbols
+      if (allocated(rhs%alias)) then
+        if (.not.allocated(lhs%alias)) allocate(lhs%alias)
+        lhs%alias = rhs%alias
+      endif
       if (allocated(rhs%name)) lhs%name = rhs%name
+      lhs%symbols_number = rhs%symbols_number
     else
       if (.not.lhs%is_equal(other=rhs)) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
@@ -390,6 +594,7 @@ contains
       opr%name = lhs%name//'/'//rhs%name
     endif
   endif
+  call opr%update_symbols_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
@@ -447,6 +652,7 @@ contains
       opr%name = lhs%name//'*'//rhs%name
     endif
   endif
+  call opr%update_symbols_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 

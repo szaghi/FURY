@@ -22,9 +22,9 @@ logical            :: test_passed(27) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-u_length = unit_generic(symbols='m [length]', name='metre')
-u_mass = unit_generic(symbols='kg [mass]', name='kilogram')
-u_time = unit_generic(symbols='s [time]', name='second')
+u_length = unit_generic(source='m [length]', name='metre')
+u_mass = unit_generic(source='kg [mass]', name='kilogram')
+u_time = unit_generic(source='s [time]', name='second')
 
 u_speed = u_length / u_time
 u_acceleration = u_speed / u_time

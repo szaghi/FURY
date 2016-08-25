@@ -16,7 +16,7 @@ test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
 print "(A)", 'An error will be raised (if all go rigth)'
-si_speed = unit_generic(symbols='m [length].s-1 [time2]') ! incosistent explicit dimension exponent
+si_speed = unit_generic(source='m [length].s-1 [time2]') ! incosistent explicit dimension exponent
 
 print "(A)", 'ERROR: the test should not reach this point, a previous error should have stop it before!'
 print "(A,L1)", new_line('a')//'Are all tests passed? ', .true.

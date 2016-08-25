@@ -34,6 +34,17 @@ type :: unit_symbol
   !<              same exponent value; this allows addition/subtraction operations handled by the [[unit]] class.
   !<+ *dimensionality*: 2 symbols are defined *equals in dimension* if they have dimension and also the same exponent value,
   !<                    unregarded their litteral symbols; this allows for units conversions;
+  !<
+  !< The string format definition of a valid FURY unit symbol is as following:
+  !<
+  !< `kg [mass]`
+  !<
+  !< where
+  !<
+  !<+ `kg` is the first mandatory term that defines the litteral symbol;
+  !<+ `[mass]` is the second optional term that defines the symbol dimension;
+  !<
+  !< These 2 terms can be separated by any white spaces number (even zero), but the dimension must be enclosed into `[]` brackets.
   character(len=:), allocatable :: symbol                !< Litteral symbol, e.g. "m" for metres.
   integer(I_P)                  :: symbol_exponent=1_I_P !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
   character(len=:), allocatable :: dimension             !< Dimensions of the symbol, e.g. "length" for metres.
@@ -50,12 +61,14 @@ type :: unit_symbol
     procedure, pass(self) :: stringify                !< Return a string representaion of the symbol.
     procedure, pass(self) :: unset                    !< Unset symbol.
     ! public generic names
-    generic :: assignment(=) => assign_unit_symbol !< Overloading `=` assignament.
+    generic :: assignment(=) => assign_string, &
+                                assign_unit_symbol !< Overloading `=` assignament.
     generic :: operator(/) => div                  !< Overloading `/` operator.
     generic :: operator(*) => mul                  !< Overloading `*` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P    !< Overloading `**` operator.
     ! private methods
+    procedure, pass(lhs), private :: assign_string      !< `unit_symbol = string` assignament.
     procedure, pass(lhs), private :: assign_unit_symbol !< `unit_symbol = unit_symbol` assignament.
     procedure, pass(lhs), private :: div                !< `unit_symbol / unit_symbol` operator.
     procedure, pass(lhs), private :: mul                !< `unit_symbol * unit_symbol` operator.
@@ -67,7 +80,7 @@ endtype unit_symbol
 
 interface unit_symbol
   !< Ovearloading [[unit_symbol]] name with a creator function.
-  module procedure creator
+  module procedure creator_from_string
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
@@ -90,27 +103,25 @@ contains
   symbols_number = size(sym_tokens, dim=1)
   allocate(symbols_array(1:symbols_number))
   do t=1, symbols_number
-    call symbols_array(t)%parse(sym_string=sym_tokens(t)%chars())
+    call symbols_array(t)%parse(source=sym_tokens(t)%chars())
   enddo
   ! reduce to unique symbols list
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction parse_unit_symbols
 
   ! private non type bound procedures
-  elemental function creator(symbol, symbol_exponent, dimension) result(sym)
+  function creator_from_string(source) result(symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit_symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*), intent(in)           :: symbol          !< Litteral symbol of the unit, e.g. "m" for metres.
-  integer(I_P), intent(in), optional :: symbol_exponent !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
-  character(*), intent(in), optional :: dimension       !< Dimensions of the symbol, e.g. "length" for metres.
-  type(unit_symbol)                  :: sym             !< The symbol.
+  character(*), intent(in) :: source !< Source input string definition of the symbol.
+  type(unit_symbol)        :: symbol !< The symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call sym%set(symbol=symbol, symbol_exponent=symbol_exponent, dimension=dimension)
+  call symbol%parse(source=source)
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction creator
+  endfunction creator_from_string
 
   ! public methods
   pure function dimensionality(self) result(raw)
@@ -217,12 +228,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  subroutine parse(self, sym_string)
+  subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse symbol from string.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(inout) :: self               !< The symbol.
-  character(*),       intent(in)    :: sym_string         !< Symbol as string.
+  character(*),       intent(in)    :: source             !< Source input string definition of symbol.
   character(len=:), allocatable     :: buffer             !< String buffer.
   character(len=:), allocatable     :: dimension          !< Dimension buffer.
   integer(I_P)                      :: dimension_exponent !< Dimension exponent.
@@ -232,7 +243,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   dimension_exponent = 0
-  buffer = trim(adjustl(sym_string))
+  buffer = trim(adjustl(source))
   d(1) = index(string=buffer, substring='[')
   d(2) = index(string=buffer, substring=']')
   if ((d(1)>0).and.(d(2)>0).and.(d(2)>d(1)+1)) then
@@ -254,7 +265,7 @@ contains
     self%symbol = trim(adjustl(buffer))
   endif
   if (dimension_exponent/=0.and.dimension_exponent/=self%symbol_exponent) then
-    write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(sym_string))//'" failed! '//&
+    write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
     ' the exponent of the symbol and the one of the dimension (if passed) must be the same!'
     stop
   endif
@@ -315,6 +326,21 @@ contains
   endsubroutine unset
 
   ! private methods
+  subroutine assign_string(lhs, rhs)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `unit_symbol = string` assignament.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_symbol), intent(inout) :: lhs           !< Left hand side.
+  character(*),       intent(in)    :: rhs           !< Right hand side.
+  type(unit_symbol)                 :: parsed_symbol !< Symbol arising from string input.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  call parsed_symbol%parse(source=rhs)
+  if (parsed_symbol%has_symbol()) lhs = parsed_symbol
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine assign_string
+
   pure subroutine assign_unit_symbol(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol = unit_symbol` assignament.
