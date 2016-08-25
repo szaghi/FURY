@@ -9,12 +9,13 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 type(unit_generic) :: si_force        !< SI force unit.
 type(unit_generic) :: si_length       !< SI length unit.
+type(unit_generic) :: si_frequency    !< SI frequency unit.
 type(unit_generic) :: si_mass         !< SI mass unit.
 type(unit_generic) :: si_pressure     !< SI pressure unit.
 type(unit_generic) :: si_speed        !< SI speed unit.
 type(unit_generic) :: si_time         !< SI time unit.
 type(unit_generic) :: a_unit          !< A unit.
-logical            :: test_passed(12) !< List of passed tests.
+logical            :: test_passed(13) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,6 +102,12 @@ print "(A,L1)", 'Pa = '//si_pressure%stringify()//', is correct? ', test_passed(
 
 test_passed(12) = si_pressure%has_symbol(symbol=a_unit%symbols(1))
 print "(A,L1)", si_pressure%stringify(with_alias=.true.)//' has symbol Pa, is correct? ', test_passed(12)
+
+call a_unit%unset
+si_frequency = 'Hz [frequency]'
+a_unit = unit_generic('s-1 = Hz = hertz [frequency]')/si_frequency
+test_passed(13) = a_unit%stringify()=='s0'
+print "(A,L1)", 's-1/Hz = '//a_unit%stringify()//', is correct? ', test_passed(13)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop

@@ -35,30 +35,36 @@ type :: unit_symbol
   !<+ *dimensionality*: 2 symbols are defined *equals in dimension* if they have dimension and also the same exponent value,
   !<                    unregarded their litteral symbols; this allows for units conversions;
   !<
-  !< The string format definition of a valid FURY unit symbol is as following:
+  !< The string format definition of a valid FURY unit symbol definition is as following:
   !<
-  !< `kg [mass]`
+  !< `s-1 = Hz = hertz [time-1]`
   !<
   !< where
   !<
-  !<+ `kg` is the first mandatory term that defines the litteral symbol;
-  !<+ `[mass]` is the second optional term that defines the symbol dimension;
+  !<+ `s-1` is the first mandatory term that defines the litteral symbol with its exponent (if 1 can be omitted);
+  !<+ all subsequent ` = Hz = ...` are optional aliases of the main litteral symbol;
+  !<+ `[time-1]` is the last optional term that defines the symbol dimension (if dimension exponent is passed it must be equal
+  !<  to the one of the main litteral symbol.
   !<
-  !< These 2 terms can be separated by any white spaces number (even zero), but the dimension must be enclosed into `[]` brackets.
+  !< These terms can be separated by any white spaces number (even zero), but the dimension must be enclosed into `[]` brackets
+  !< at the end of the string.
   character(len=:), allocatable :: symbol                !< Litteral symbol, e.g. "m" for metres.
   integer(I_P)                  :: symbol_exponent=1_I_P !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
   character(len=:), allocatable :: dimension             !< Dimensions of the symbol, e.g. "length" for metres.
+  type(unit_symbol), pointer    :: aliases(:)=>null()    !< Litteral symbol, e.g. "meter, meters..." for metres.
+  integer(I_P)                  :: aliases_number=0_I_P  !< Number of defined symbol aliases.
   contains
     ! public methods
-    procedure, pass(self) :: dimensionality           !< Return a string representation of the symbol dimensionality.
-    procedure, pass(self) :: has_dimension            !< Check if the symbol dimension has been defined.
-    procedure, pass(self) :: has_symbol               !< Check if the symbol has been defined.
-    procedure, pass(self) :: is_compatible            !< Check if the symbol is compatible with another one.
-    procedure, pass(self) :: is_dimension_equal       !< Check if the symbol dimension is equal with another one.
-    procedure, pass(self) :: parse                    !< Parse symbol from string.
-    procedure, pass(self) :: set                      !< Set symbol.
-    procedure, pass(self) :: stringify                !< Return a string representaion of the symbol.
-    procedure, pass(self) :: unset                    !< Unset symbol.
+    procedure, pass(self) :: dimensionality     !< Return a string representation of the symbol dimensionality.
+    procedure, pass(self) :: has_aliases        !< Check if the symbol has defined aliase.
+    procedure, pass(self) :: has_dimension      !< Check if the symbol dimension has been defined.
+    procedure, pass(self) :: has_symbol         !< Check if the symbol has been defined.
+    procedure, pass(self) :: is_compatible      !< Check if the symbol is compatible with another one.
+    procedure, pass(self) :: is_dimension_equal !< Check if the symbol dimension is equal with another one.
+    procedure, pass(self) :: parse              !< Parse symbol from string.
+    procedure, pass(self) :: set                !< Set symbol.
+    procedure, pass(self) :: stringify          !< Return a string representaion of the symbol.
+    procedure, pass(self) :: unset              !< Unset symbol.
     ! public generic names
     generic :: assignment(=) => assign_string, &
                                 assign_unit_symbol !< Overloading `=` assignament.
@@ -149,6 +155,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction dimensionality
 
+  elemental function has_aliases(self) result(is_defined)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the symbol has defined aliases.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_symbol), intent(in) :: self       !< The symbol.
+  logical                        :: is_defined !< Symbol aliases definition status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_defined = associated(self%aliases)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_aliases
+
   elemental function has_dimension(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the symbol dimension has been defined.
@@ -184,12 +203,34 @@ contains
   class(unit_symbol), intent(in) :: self       !< The symbol.
   type(unit_symbol),  intent(in) :: other      !< The other symbol.
   logical                        :: compatible !< Compatibility check result.
+  integer(I_P)                   :: o          !< Counter.
+  integer(I_P)                   :: s          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   compatible = .false.
   if (self%has_symbol().and.other%has_symbol()) then
     compatible = (self%symbol==other%symbol)
+    if (.not.compatible.and.other%has_aliases()) then
+      do o=1, other%aliases_number
+        if (other%aliases(o)%has_symbol()) compatible = (self%symbol==other%aliases(o)%symbol)
+        if (compatible) exit
+      enddo
+    endif
+    if (.not.compatible.and.self%has_aliases()) then
+      do s=1, self%aliases_number
+        if (self%aliases(s)%has_symbol()) compatible = (other%symbol==self%aliases(s)%symbol)
+        if (compatible) exit
+      enddo
+    endif
+    if (.not.compatible.and.self%has_aliases()) then
+      outer_loop: do o=1, other%aliases_number
+        do s=1, self%aliases_number
+          compatible = (self%aliases(s)%symbol==other%aliases(o)%symbol)
+          if (compatible) exit outer_loop
+        enddo
+      enddo outer_loop
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
@@ -215,47 +256,73 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse symbol from string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_symbol), intent(inout) :: self               !< The symbol.
-  character(*),       intent(in)    :: source             !< Source input string definition of symbol.
-  character(len=:), allocatable     :: buffer             !< String buffer.
-  character(len=:), allocatable     :: dimension          !< Dimension buffer.
-  integer(I_P)                      :: dimension_exponent !< Dimension exponent.
-  integer(I_P)                      :: e                  !< Counter.
-  integer(I_P)                      :: d(2)               !< Counter.
+  class(unit_symbol), intent(inout) :: self                 !< The symbol.
+  character(*),       intent(in)    :: source               !< Source input string definition of symbol.
+  type(string)                      :: buffer               !< String buffer.
+  type(string), allocatable         :: tokens(:)            !< String tokens.
+  type(unit_symbol)                 :: dimension_symbolized !< Storing dimension data as a symbol.
+  integer(I_P)                      :: a                    !< Counter.
+  integer(I_P)                      :: d(2)                 !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  dimension_exponent = 0
+  ! parse dimension (with its exponent)
   buffer = trim(adjustl(source))
-  d(1) = index(string=buffer, substring='[')
-  d(2) = index(string=buffer, substring=']')
+  d(1) = buffer%index(substring='[')
+  d(2) = buffer%index(substring=']')
   if ((d(1)>0).and.(d(2)>0).and.(d(2)>d(1)+1)) then
-    dimension = trim(adjustl(buffer(d(1)+1:d(2)-1)))
-    buffer = trim(adjustl(buffer(1:d(1)-1)))
-    e = scan(string=dimension, set='-123456789')
-    if (e>0) then
-      self%dimension = trim(adjustl(dimension(1:e-1)))
-      dimension_exponent = cton(str=dimension(e:), knd=1_I_P)
-    else
-      self%dimension = trim(adjustl(dimension))
-    endif
+    call buffer%split(sep='[', tokens=tokens)
+    dimension_symbolized%symbol_exponent = 0_I_P
+    tokens(2) = tokens(2)%slice(1, tokens(2)%index(']')-1)
+    call subparse(symbol_string=tokens(2), symbol_parsed=dimension_symbolized)
+    buffer = tokens(1)
   endif
-  e = scan(string=buffer, set='-123456789')
-  if (e>0) then
-    self%symbol = trim(adjustl(buffer(1:e-1)))
-    self%symbol_exponent = cton(str=buffer(e:), knd=1_I_P)
-  else
-    self%symbol = trim(adjustl(buffer))
-  endif
-  if (dimension_exponent/=0.and.dimension_exponent/=self%symbol_exponent) then
+  ! allocate aliases of litteral symbol
+  self%aliases_number = buffer%count('=')
+  if (associated(self%aliases)) deallocate(self%aliases)
+  allocate(self%aliases(1:self%aliases_number))
+  ! parse main symbol
+  call buffer%split(sep='=', tokens=tokens)
+  call subparse(symbol_string=tokens(1), symbol_parsed=self)
+  if (dimension_symbolized%symbol_exponent/=0.and.dimension_symbolized%symbol_exponent/=self%symbol_exponent) then
     write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
     ' the exponent of the symbol and the one of the dimension (if passed) must be the same!'
     stop
+  else
+    self%dimension = dimension_symbolized%symbol
+  endif
+  ! parse other aliases of litteral symbol if any
+  if (self%aliases_number>1) then
+    do a=2, self%aliases_number
+      call subparse(symbol_string=tokens(a), symbol_parsed=self%aliases(a))
+    enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
+  contains
+    subroutine subparse(symbol_string, symbol_parsed)
+    !-------------------------------------------------------------------------------------------------------------------------------
+    !< Parse a single symbol definition without considering aliases.
+    !<
+    !< @note This is a trick to simplify parsing: `s-1=time-1=Hz=hertz` can be parsed with the same logics
+    !-------------------------------------------------------------------------------------------------------------------------------
+    type(string),      intent(in)    :: symbol_string !< String containing symbol definition.
+    type(unit_symbol), intent(inout) :: symbol_parsed !< Symbol to be parsed.
+    integer(I_P)                     :: e             !< Counter.
+    !-------------------------------------------------------------------------------------------------------------------------------
+
+    !-------------------------------------------------------------------------------------------------------------------------------
+    e = symbol_string%scan(set='-123456789')
+    if (e>0) then
+      symbol_parsed%symbol = trim(adjustl(symbol_string%slice(1, e-1)))
+      symbol_parsed%symbol_exponent = cton(str=symbol_string%slice(e, symbol_string%len()), knd=1_I_P)
+    else
+      symbol_parsed%symbol = trim(adjustl(symbol_string%chars()))
+    endif
+    !-------------------------------------------------------------------------------------------------------------------------------
+    endsubroutine subparse
   endsubroutine parse
 
-  elemental subroutine set(self, symbol, symbol_exponent, dimension)
+  subroutine set(self, symbol, symbol_exponent, dimension, aliases)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -263,22 +330,31 @@ contains
   character(*),       intent(in), optional :: symbol          !< Litteral symbol of the unit, e.g. "m" for metres.
   integer(I_P),       intent(in), optional :: symbol_exponent !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
   character(*),       intent(in), optional :: dimension       !< Dimensions of the symbol, e.g. "length" for metres.
+  type(unit_symbol),  intent(in), optional :: aliases(1:)     !< Symbol aliases.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (present(symbol)) self%symbol = symbol
   if (present(symbol_exponent)) self%symbol_exponent = symbol_exponent
   if (present(dimension)) self%dimension = dimension
+  if (present(aliases)) then
+    if (associated(self%aliases)) deallocate(self%aliases)
+    self%aliases_number = size(aliases, dim=1)
+    allocate(self%aliases(1:self%aliases_number))
+    self%aliases = aliases
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  pure function stringify(self, with_dimension) result(raw)
+  recursive function stringify(self, with_dimension, with_aliases) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(in)           :: self           !< The symbol.
   logical,            intent(in), optional :: with_dimension !< Flag to activate dimension printing.
+  logical,            intent(in), optional :: with_aliases   !< Flag to activate aliases printing.
   character(len=:), allocatable            :: raw            !< Raw characters data.
+  integer(I_P)                             :: a              !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -292,20 +368,40 @@ contains
     if (present(with_dimension)) then
       if (with_dimension) raw = raw//' ['//self%dimensionality()//']'
     endif
+    if (present(with_aliases)) then
+      if (with_aliases.and.self%has_aliases()) then
+        do a=1, self%aliases_number
+          raw = raw//' = '//self%aliases(a)%stringify()
+        enddo
+      endif
+    endif
   else
     raw = ''
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
-  elemental subroutine unset(self)
+  recursive subroutine unset(self, only_aliases)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Unset symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_symbol), intent(inout) :: self !< The symbol.
+  class(unit_symbol), intent(inout)        :: self         !< The symbol.
+  logical,            intent(in), optional :: only_aliases !< Unset only aliases if .true..
+  integer(I_P)                             :: a            !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  if (associated(self%aliases)) then
+    do a=1, self%aliases_number
+      call self%aliases(a)%unset
+    enddo
+    deallocate(self%aliases)
+    self%aliases => null()
+    self%aliases_number = 0_I_P
+  endif
+  if (present(only_aliases)) then
+    if (only_aliases) return
+  endif
   if (allocated(self%symbol)) deallocate(self%symbol)
   self%symbol_exponent = 1_I_P
   if (allocated(self%dimension)) deallocate(self%dimension)
@@ -322,12 +418,37 @@ contains
   class(unit_symbol), intent(in) :: self  !< The symbol.
   type(unit_symbol),  intent(in) :: other !< The other symbol.
   logical                        :: equal !< Equality check result.
+  integer(I_P)                   :: o     !< Counter.
+  integer(I_P)                   :: s     !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   equal = .false.
   if (self%has_symbol().and.other%has_symbol()) then
     equal = ((self%symbol==other%symbol).and.(self%symbol_exponent==other%symbol_exponent))
+    if (.not.equal.and.other%has_aliases()) then
+      do o=1, other%aliases_number
+        if (other%aliases(o)%has_symbol()) &
+          equal = ((self%symbol==other%aliases(o)%symbol).and.(self%symbol_exponent==other%aliases(o)%symbol_exponent))
+        if (equal) exit
+      enddo
+    endif
+    if (.not.equal.and.self%has_aliases()) then
+      do s=1, self%aliases_number
+        if (self%aliases(s)%has_symbol()) &
+          equal = ((other%symbol==self%aliases(s)%symbol).and.(other%symbol_exponent==self%aliases(s)%symbol_exponent))
+        if (equal) exit
+      enddo
+    endif
+    if (.not.equal.and.self%has_aliases()) then
+      outer_loop: do o=1, other%aliases_number
+        do s=1, self%aliases_number
+          equal = ((self%aliases(s)%symbol==other%aliases(o)%symbol).and.&
+                   (self%aliases(s)%symbol_exponent==other%aliases(o)%symbol_exponent))
+          if (equal) exit outer_loop
+        enddo
+      enddo outer_loop
+    endif
     if (equal.and.self%has_dimension().and.other%has_dimension()) equal = (self%dimension==other%dimension)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -363,12 +484,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_string
 
-  pure subroutine assign_unit_symbol(lhs, rhs)
+  subroutine assign_unit_symbol(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol = unit_symbol` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_symbol), intent(inout) :: lhs !< Left hand side.
   type(unit_symbol),  intent(in)    :: rhs !< Right hand side.
+  integer(I_P)                      :: a   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -376,11 +498,22 @@ contains
     lhs%symbol = rhs%symbol
     lhs%symbol_exponent = rhs%symbol_exponent
     if (rhs%has_dimension()) lhs%dimension = rhs%dimension
+    if (rhs%has_aliases()) then
+      if (associated(lhs%aliases)) then
+        do a=1, lhs%aliases_number
+          call lhs%aliases(a)%unset
+        enddo
+        deallocate(lhs%aliases)
+      endif
+      lhs%aliases_number = size(rhs%aliases, dim=1)
+      allocate(lhs%aliases(1:lhs%aliases_number))
+      lhs%aliases = rhs%aliases
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_unit_symbol
 
-  pure function div(lhs, rhs) result(opr)
+  function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol / unit_symbol` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -390,14 +523,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs%is_compatible(other=rhs)) then
+  if (lhs==rhs) then
+    opr = lhs
+    opr%symbol_exponent = 0_I_P
+  elseif (lhs%is_compatible(other=rhs)) then
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent - rhs%symbol_exponent
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
-  pure function mul(lhs, rhs) result(opr)
+  function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol * unit_symbol` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -407,14 +545,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs%is_compatible(other=rhs)) then
+  if (lhs==rhs) then
+    opr = lhs
+    opr%symbol_exponent = opr%symbol_exponent*2_I_P
+  elseif (lhs%is_compatible(other=rhs)) then
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent + rhs%symbol_exponent
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
-  pure function pow_I8P(lhs, rhs) result(opr)
+  function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol ** integer(I8P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -428,10 +571,12 @@ contains
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent * rhs
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I8P
 
-  pure function pow_I4P(lhs, rhs) result(opr)
+  function pow_I4P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol ** integer(I4P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -445,10 +590,12 @@ contains
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent * rhs
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I4P
 
-  pure function pow_I2P(lhs, rhs) result(opr)
+  function pow_I2P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol ** integer(I2P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -462,10 +609,12 @@ contains
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent * rhs
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I2P
 
-  pure function pow_I1P(lhs, rhs) result(opr)
+  function pow_I1P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol ** integer(I1P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -479,6 +628,8 @@ contains
     opr = lhs
     opr%symbol_exponent = lhs%symbol_exponent * rhs
   endif
+  ! aliases must be eliminated
+  call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
 endmodule fury_unit_symbol
