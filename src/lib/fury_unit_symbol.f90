@@ -55,7 +55,6 @@ type :: unit_symbol
     procedure, pass(self) :: has_symbol               !< Check if the symbol has been defined.
     procedure, pass(self) :: is_compatible            !< Check if the symbol is compatible with another one.
     procedure, pass(self) :: is_dimension_equal       !< Check if the symbol dimension is equal with another one.
-    procedure, pass(self) :: is_equal                 !< Check if the symbol is equal with another one.
     procedure, pass(self) :: parse                    !< Parse symbol from string.
     procedure, pass(self) :: set                      !< Set symbol.
     procedure, pass(self) :: stringify                !< Return a string representaion of the symbol.
@@ -67,15 +66,19 @@ type :: unit_symbol
     generic :: operator(*) => mul                  !< Overloading `*` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P    !< Overloading `**` operator.
+    generic :: operator(==) => is_equal            !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
     ! private methods
-    procedure, pass(lhs), private :: assign_string      !< `unit_symbol = string` assignament.
-    procedure, pass(lhs), private :: assign_unit_symbol !< `unit_symbol = unit_symbol` assignament.
-    procedure, pass(lhs), private :: div                !< `unit_symbol / unit_symbol` operator.
-    procedure, pass(lhs), private :: mul                !< `unit_symbol * unit_symbol` operator.
-    procedure, pass(lhs), private :: pow_I8P            !< `unit_symbol ** integer(I8P)` operator.
-    procedure, pass(lhs), private :: pow_I4P            !< `unit_symbol ** integer(I4P)` operator.
-    procedure, pass(lhs), private :: pow_I2P            !< `unit_symbol ** integer(I2P)` operator.
-    procedure, pass(lhs), private :: pow_I1P            !< `unit_symbol ** integer(I1P)` operator.
+    procedure, pass(self), private :: is_equal           !< Check if the symbol is equal with another one.
+    procedure, pass(self), private :: is_not_equal       !< Check if the symbol is not equal with another one.
+    procedure, pass(lhs),  private :: assign_string      !< `unit_symbol = string` assignament.
+    procedure, pass(lhs),  private :: assign_unit_symbol !< `unit_symbol = unit_symbol` assignament.
+    procedure, pass(lhs),  private :: div                !< `unit_symbol / unit_symbol` operator.
+    procedure, pass(lhs),  private :: mul                !< `unit_symbol * unit_symbol` operator.
+    procedure, pass(lhs),  private :: pow_I8P            !< `unit_symbol ** integer(I8P)` operator.
+    procedure, pass(lhs),  private :: pow_I4P            !< `unit_symbol ** integer(I4P)` operator.
+    procedure, pass(lhs),  private :: pow_I2P            !< `unit_symbol ** integer(I2P)` operator.
+    procedure, pass(lhs),  private :: pow_I1P            !< `unit_symbol ** integer(I1P)` operator.
 endtype unit_symbol
 
 interface unit_symbol
@@ -208,26 +211,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_dimension_equal
 
-  elemental function is_equal(self, other) result(equal)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol is equal with another one.
-  !<
-  !< Two symbols are defined *equal* if they have the same litteral symbol and the same exponent value.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_symbol), intent(in) :: self  !< The symbol.
-  type(unit_symbol),  intent(in) :: other !< The other symbol.
-  logical                        :: equal !< Equality check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  equal = .false.
-  if (self%has_symbol().and.other%has_symbol()) then
-    equal = ((self%symbol==other%symbol).and.(self%symbol_exponent==other%symbol_exponent))
-    if (equal.and.self%has_dimension().and.other%has_dimension()) equal = (self%dimension==other%dimension)
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_equal
-
   subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse symbol from string.
@@ -289,12 +272,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  pure function stringify(self) result(raw)
+  pure function stringify(self, with_dimension) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_symbol), intent(in) :: self !< The symbol.
-  character(len=:), allocatable  :: raw  !< Raw characters data.
+  class(unit_symbol), intent(in)           :: self           !< The symbol.
+  logical,            intent(in), optional :: with_dimension !< Flag to activate dimension printing.
+  character(len=:), allocatable            :: raw            !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -304,6 +288,9 @@ contains
       raw = raw//trim(str(n=self%symbol_exponent))
     elseif (self%symbol_exponent/=1_I_P) then
       raw = raw//trim(str(n=self%symbol_exponent, no_sign=.true.))
+    endif
+    if (present(with_dimension)) then
+      if (with_dimension) raw = raw//' ['//self%dimensionality()//']'
     endif
   else
     raw = ''
@@ -326,6 +313,41 @@ contains
   endsubroutine unset
 
   ! private methods
+  elemental function is_equal(self, other) result(equal)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the symbol is equal with another one.
+  !<
+  !< Two symbols are defined *equal* if they have the same litteral symbol and the same exponent value.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_symbol), intent(in) :: self  !< The symbol.
+  type(unit_symbol),  intent(in) :: other !< The other symbol.
+  logical                        :: equal !< Equality check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  equal = .false.
+  if (self%has_symbol().and.other%has_symbol()) then
+    equal = ((self%symbol==other%symbol).and.(self%symbol_exponent==other%symbol_exponent))
+    if (equal.and.self%has_dimension().and.other%has_dimension()) equal = (self%dimension==other%dimension)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_equal
+
+  elemental function is_not_equal(self, other) result(not_equal)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the symbol is not equal with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_symbol), intent(in) :: self      !< The symbol.
+  type(unit_symbol),  intent(in) :: other     !< The other symbol.
+  logical                        :: not_equal !< Disequality check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  not_equal = .not.self%is_equal(other=other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_not_equal
+
+  ! operators
   subroutine assign_string(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `unit_symbol = string` assignament.

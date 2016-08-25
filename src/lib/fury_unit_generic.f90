@@ -50,10 +50,10 @@ type :: unit_generic
     procedure, pass(self) :: add_symbol          !< Add a symbol to unit.
     procedure, pass(self) :: add_symbols         !< Add symbols to unit.
     procedure, pass(self) :: are_symbols_defined !< Check if the symbols have been defined.
+    procedure, pass(self) :: has_alias           !< Check if the unit has an alias.
     procedure, pass(self) :: has_name            !< Check if the unit has a name.
     procedure, pass(self) :: has_symbol          !< Check if the unit has a symbol.
     procedure, pass(self) :: is_compatible       !< Check if unit is compatible with another one.
-    procedure, pass(self) :: is_equal            !< Check if unit is equal with another one.
     procedure, pass(self) :: parse               !< Parse unit definition from an input string.
     procedure, pass(self) :: set                 !< Set the unit.
     procedure, pass(self) :: stringify           !< Return a string representaion of the unit.
@@ -67,7 +67,11 @@ type :: unit_generic
     generic :: operator(-) => sub                   !< Overloading `-` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P     !< Overloading `**` operator.
+    generic :: operator(==) => is_equal             !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal         !< Overloading `/=` operator.
     ! private methods
+    procedure, pass(self), private :: is_equal              !< Check if unit is equal with another one.
+    procedure, pass(self), private :: is_not_equal          !< Check if unit is not equal with another one.
     procedure, pass(self), private :: parse_alias           !< Parse unit alias from an input string.
     procedure, pass(self), private :: parse_name            !< Parse unit name from an input string.
     procedure, pass(self), private :: parse_symbols         !< Parse unit symbols from an input string.
@@ -92,33 +96,35 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! private non type bound procedures
-  function creator_from_string(source, name) result(unit)
+  function creator_from_string(source, alias, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from an input source string..
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*), intent(in)           :: source !< Source input string definition of the unit.
-  character(*), intent(in), optional :: name   !< Unit name.
-  type(unit_generic)                 :: unit   !< The unit.
+  character(*),      intent(in)           :: source !< Source input string definition of the unit.
+  type(unit_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),      intent(in), optional :: name   !< Unit name.
+  type(unit_generic)                      :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   call unit%parse(source=source)
-  call unit%set(name=name)
+  call unit%set(alias=alias, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator_from_string
 
-  function creator_from_other_unit(source, name) result(unit)
+  function creator_from_other_unit(source, alias, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from another unit.
   !---------------------------------------------------------------------------------------------------------------------------------
   type(unit_generic), intent(in)           :: source !< Source input unit.
+  type(unit_symbol),  intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
   character(*),       intent(in), optional :: name   !< Unit name.
   type(unit_generic)                       :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   unit = source
-  call unit%set(name=name)
+  call unit%set(alias=alias, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator_from_other_unit
 
@@ -241,6 +247,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction are_symbols_defined
 
+  elemental function has_alias(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has an alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: self      !< The unit.
+  logical                         :: has_alias !< Alias presence status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_alias = allocated(self%alias)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_alias
+
   elemental function has_name(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a name.
@@ -268,9 +287,12 @@ contains
   has_symbol = .false.
   if (self%are_symbols_defined()) then
     do s=1, self%symbols_number
-      has_symbol = self%symbols(s)%is_equal(other=symbol)
+      has_symbol = self%symbols(s) == symbol
       if (has_symbol) exit
     enddo
+    if (.not.has_symbol) then
+      if (self%has_alias()) has_symbol = self%alias == symbol
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_symbol
@@ -288,30 +310,6 @@ contains
   is_compatible = .true.
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
-
-  elemental function is_equal(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is equal (has the same symbols) with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self     !< The unit.
-  class(unit_generic), intent(in) :: other    !< The other unit.
-  logical                         :: is_equal !< Equality check result.
-  integer(I_P)                    :: s        !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_equal = .false.
-  if (self%are_symbols_defined().and.other%are_symbols_defined()) then
-    is_equal = (self%symbols_number==other%symbols_number)
-    if (is_equal) then
-      do s=1, self%symbols_number
-        is_equal = other%has_symbol(symbol=self%symbols(s))
-        if (.not.is_equal) exit
-      enddo
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_equal
 
   subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -351,12 +349,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  pure function stringify(self, with_dimensions) result(raw)
+  pure function stringify(self, with_dimensions, with_alias) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(unit_generic), intent(in)           :: self            !< The unit.
   logical,             intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
+  logical,             intent(in), optional :: with_alias      !< Flag to activate alias printing.
   character(len=:), allocatable             :: raw             !< Raw characters data.
   integer(I_P)                              :: s               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -375,6 +374,11 @@ contains
           raw = raw//self%symbols(s)%dimensionality()//'.'
         enddo
         raw(len(raw):len(raw)) = ']'
+      endif
+    endif
+    if (present(with_alias)) then
+      if (with_alias.and.self%has_alias()) then
+        raw = raw//' ('//self%alias%stringify(with_dimension=with_dimensions)//')'
       endif
     endif
   endif
@@ -397,6 +401,52 @@ contains
   endsubroutine unset
 
   ! private methods
+  elemental function is_equal(self, other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if unit is equal (has the same symbols) with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: self     !< The unit.
+  class(unit_generic), intent(in) :: other    !< The other unit.
+  logical                         :: is_equal !< Equality check result.
+  integer(I_P)                    :: s        !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_equal = .false.
+  if (self%are_symbols_defined().and.other%are_symbols_defined()) then
+    is_equal = (self%symbols_number==other%symbols_number)
+    if (is_equal) then
+      do s=1, self%symbols_number
+        is_equal = other%has_symbol(symbol=self%symbols(s))
+        if (.not.is_equal) exit
+      enddo
+    endif
+    if (.not.is_equal) then
+      ! compare against alias
+      if (self%has_alias().and.other%symbols_number==1) then
+        is_equal = other%symbols(1) == self%alias
+      elseif (other%has_alias().and.self%symbols_number==1) then
+        is_equal = self%symbols(1) == other%alias
+      endif
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_equal
+
+  elemental function is_not_equal(self, other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if unit is not equal (has not the same symbols) with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(unit_generic), intent(in) :: self         !< The unit.
+  class(unit_generic), intent(in) :: other        !< The other unit.
+  logical                         :: is_not_equal !< Disequality check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_not_equal = .not.self%is_equal(other=other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_not_equal
+
   subroutine parse_alias(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse unit alias form an input string and return also the source string without the alias data.
@@ -492,7 +542,7 @@ contains
   if (.not.lhs%are_symbols_defined())  then
     lhs = parsed_unit
   else
-    if (.not.lhs%is_equal(other=parsed_unit)) call raise_error_disequality(lhs=lhs, rhs=parsed_unit, operation='LHS = RHS')
+    if (.not.lhs == parsed_unit) call raise_error_disequality(lhs=lhs, rhs=parsed_unit, operation='LHS = RHS')
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_string
@@ -516,7 +566,7 @@ contains
       if (allocated(rhs%name)) lhs%name = rhs%name
       lhs%symbols_number = rhs%symbols_number
     else
-      if (.not.lhs%is_equal(other=rhs)) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
+      if (.not.lhs==rhs) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -532,7 +582,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs%is_equal(other=rhs)) then
+  if (lhs == rhs) then
     opr = lhs
   else
     call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS + RHS')
@@ -666,7 +716,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs%is_equal(other=rhs)) then
+  if (lhs==rhs) then
     allocate(opr, source=lhs)
   else
     call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS - RHS')

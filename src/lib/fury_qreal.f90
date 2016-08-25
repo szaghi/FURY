@@ -220,7 +220,7 @@ contains
   if (rhs%is_unit_defined()) then
     if (.not.lhs%is_unit_defined())  then
       call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
-    elseif (lhs%unit%is_equal(other=rhs%unit)) then
+    elseif (lhs%unit == rhs%unit) then
       call lhs%set(magnitude=rhs%magnitude)
     else
       call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
@@ -240,7 +240,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%unit%is_equal(other=rhs%unit)) then
+    if (lhs%unit == rhs%unit) then
       opr = lhs
       opr%magnitude = lhs%magnitude + rhs%magnitude
     else
@@ -572,7 +572,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs%is_unit_defined().and.rhs%is_unit_defined()) then
-    if (lhs%unit%is_equal(other=rhs%unit)) then
+    if (lhs%unit == rhs%unit) then
       opr = lhs
       opr%magnitude = lhs%magnitude - rhs%magnitude
     else
