@@ -40,14 +40,12 @@ type :: uom_reference
   !< The string format definition of a valid FURY unit reference definition is as following:
   !<
   !< `s-1 = Hz = hertz [time-1]`
-  !< `kHz = kilohertz < 1000 * Hz = 1000 * s-1 > [time-1]`
+  !< `kHz = 1000* Hz = kilohertz [time-1]`
   !<
   !< where
   !<
   !<+ `s-1` is the first mandatory term that defines the litteral symbol with its exponent (if 1 can be omitted);
   !<+ all subsequent ` = Hz = ...` are optional aliases (with their own exponent) of the main litteral symbol;
-  !<+ `< 1000 * Hz ...> terms are (optional) *multiplicative-conversion* formulas to convert from on symbol to another that have the same
-  !<  dimensions; these formulas must be enclosed into `<>` pairs;
   !<+ `[time-1]` is the last optional term that defines the symbol dimensions (if dimensions exponent is passed it must be equal
   !<  to the one of the main litteral symbol.
   !<
@@ -57,7 +55,7 @@ type :: uom_reference
   integer(I_P),                  private :: symbol_exponent=1_I_P !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
   real(R_P),                     private :: symbol_scale=1._R_P   !< Symbol multiplicative scale factor (used only for converters).
   character(len=:), allocatable, private :: dimensions            !< Dimensions of the symbol, e.g. "length" for metres.
-  type(uom_reference), pointer,  private :: aliases(:)=>null()    !< Litteral symbol, e.g. "meter, meters..." for metres.
+  type(uom_reference), pointer,  private :: aliases(:)=>null()    !< Aliases, e.g. "Hz, hertz" for "s-1".
   integer(I_P),                  private :: aliases_number=0_I_P  !< Number of defined symbol aliases.
   contains
     ! public methods
@@ -223,15 +221,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  ! parse dimensions (with its exponent)
   buffer = trim(adjustl(source))
   call dimensions_symbolized%parse_symbol_dimensions(source=buffer)
-  ! allocate aliases of litteral symbol
   self%aliases_number = buffer%count('=')
+  call buffer%split(sep='=', tokens=tokens)
   if (associated(self%aliases)) deallocate(self%aliases)
   allocate(self%aliases(1:self%aliases_number))
-  ! parse main symbol
-  call buffer%split(sep='=', tokens=tokens)
+  if (self%aliases_number>0) then
+    do a=1, self%aliases_number
+      call self%aliases(a)%parse_symbol(source=tokens(a+1))
+    enddo
+  endif
   call self%parse_symbol(source=tokens(1))
   if (dimensions_symbolized%symbol_exponent/=0.and.dimensions_symbolized%symbol_exponent/=self%symbol_exponent) then
     write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
@@ -239,12 +239,6 @@ contains
     stop
   else
     self%dimensions = dimensions_symbolized%symbol
-  endif
-  ! parse other aliases of litteral symbol if any
-  if (self%aliases_number>0) then
-    do a=1, self%aliases_number
-      call self%aliases(a)%parse_symbol(source=tokens(a+1))
-    enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse

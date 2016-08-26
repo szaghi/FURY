@@ -22,6 +22,7 @@ type :: uom
   !< The string format definition of a valid FURY unit is as following:
   !<
   !< `kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2](Pa[pressure]){pascal}`
+  !< `km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}`
   !<
   !< where
   !<
