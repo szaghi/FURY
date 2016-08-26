@@ -4,7 +4,7 @@ module fury_uom
 !< FURY definition of *generic* unit class.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_symbol
+use fury_uom_reference
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -21,14 +21,14 @@ type :: uom
   !<
   !< The string format definition of a valid FURY unit is as following:
   !<
-  !< `kg [mass].m-1 [length-1].s-2 [time-2](Pa[pressure]){pascal}`
+  !< `kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2](Pa[pressure]){pascal}`
   !<
   !< where
   !<
-  !<+ the terms `[...]` define the *dimension* of each symbol and are optional (the white spaces are ignored); moreover ther
-  !<  exponent of dimensions can be omitted: in this case they are inferred from the symbols exponents; in the case they are
-  !<  explicitely written they must match the corresponding symbols ones or an error is raised;
-  !<+ the term `(...)` defines a symbol *alias* that is optional and must come always after symbols definition;
+  !<+ the terms `[...]` define the *dimension* of each reference and are optional (the white spaces are ignored); moreover the
+  !<  exponents of dimensions can be omitted: in this case they are inferred from the symbol reference exponents; in the case
+  !<  they are explicitely written they must match the corresponding symbols ones or an error is raised;
+  !<+ the term `(...)` defines a unit *alias* that is optional and must come always after unit reference definition;
   !<+ the term `{...}` defines the unit name that is optional and must be always the last term.
   !<
   !< Other valid string inputs of the same above *pressure* unit are:
@@ -39,25 +39,21 @@ type :: uom
   !< `kg.m-1.s-2{pascal}` a unit without specified dimensions and alias, but with a name;
   !< `kg.m-1.s-2(Pa){pascal}` a unit without specified dimensions, but with an alias without alias dimension and a name;
   !<
-  !< @note It is better to avoid to uncomplete list of dimensions for symbols: define all dimensions for all symbols or avoid to
-  !< define dimensions at all.
-  type(uom_symbol), allocatable          :: symbols(:)           !< Symbol(s) of the unit.
-  type(uom_symbol), allocatable, private :: alias                !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
-  integer(I_P),                  private :: symbols_number=0_I_P !< Symbols number.
-  character(len=:), allocatable          :: name                 !< Unit name.
+  !< @note It is better to avoid to uncomplete list of dimensions for references: define all dimensions for all references
+  !< or avoid to define dimensions at all.
+  type(uom_reference), allocatable          :: references(:)           !< Reference units of the unit.
+  type(uom_reference), allocatable, private :: alias                   !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
+  integer(I_P),                     private :: references_number=0_I_P !< References number.
+  character(len=:), allocatable             :: name                    !< Unit name.
   contains
     ! public methods
-    procedure, pass(self) :: add_symbol          !< Add a symbol to unit.
-    procedure, pass(self) :: add_symbols         !< Add symbols to unit.
-    procedure, pass(self) :: are_symbols_defined !< Check if the symbols have been defined.
-    procedure, pass(self) :: has_alias           !< Check if the unit has an alias.
-    procedure, pass(self) :: has_name            !< Check if the unit has a name.
-    procedure, pass(self) :: has_symbol          !< Check if the unit has a symbol.
-    procedure, pass(self) :: is_compatible       !< Check if unit is compatible with another one.
-    procedure, pass(self) :: parse               !< Parse unit definition from an input string.
-    procedure, pass(self) :: set                 !< Set the unit.
-    procedure, pass(self) :: stringify           !< Return a string representaion of the unit.
-    procedure, pass(self) :: unset               !< Set the unit.
+    procedure, pass(self) :: has_alias     !< Check if the unit has an alias.
+    procedure, pass(self) :: has_name      !< Check if the unit has a name.
+    procedure, pass(self) :: has_reference !< Check if the unit has a refence unit.
+    procedure, pass(self) :: is_compatible !< Check if unit is compatible with another one.
+    procedure, pass(self) :: is_defined    !< Check if the unit is defined.
+    procedure, pass(self) :: stringify     !< Return a string representaion of the unit.
+    procedure, pass(self) :: unset         !< Set the unit.
     ! public generic names
     generic :: assignment(=) => assign_string, &
                                 assign_uom         !< Overloading `=` operator.
@@ -70,12 +66,15 @@ type :: uom
     generic :: operator(==) => is_equal            !< Overloading `==` operator.
     generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
     ! private methods
-    procedure, pass(self), private :: is_equal              !< Check if unit is equal with another one.
-    procedure, pass(self), private :: is_not_equal          !< Check if unit is not equal with another one.
-    procedure, pass(self), private :: parse_alias           !< Parse unit alias from an input string.
-    procedure, pass(self), private :: parse_name            !< Parse unit name from an input string.
-    procedure, pass(self), private :: parse_symbols         !< Parse unit symbols from an input string.
-    procedure, pass(self), private :: update_symbols_number !< Update symbols number counter.
+    procedure, pass(self), private :: add_reference            !< Add a refence unit to unit.
+    procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
+    procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
+    procedure, pass(self), private :: parse                    !< Parse unit definition from an input string.
+    procedure, pass(self), private :: parse_alias              !< Parse unit alias from an input string.
+    procedure, pass(self), private :: parse_name               !< Parse unit name from an input string.
+    procedure, pass(self), private :: parse_references         !< Parse refence units from an input string.
+    procedure, pass(self), private :: set                      !< Set the unit.
+    procedure, pass(self), private :: update_references_number !< Update refence units number counter.
     ! operators
     procedure, pass(lhs), private :: assign_string !< `uom = string` assignament.
     procedure, pass(lhs), private :: assign_uom    !< `uom = uom` assignament.
@@ -100,10 +99,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from an input source string..
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*),     intent(in)           :: source !< Source input string definition of the unit.
-  type(uom_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),     intent(in), optional :: name   !< Unit name.
-  type(uom)                              :: unit   !< The unit.
+  character(*),        intent(in)           :: source !< Source input string definition of the unit.
+  type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),        intent(in), optional :: name   !< Unit name.
+  type(uom)                                 :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -116,10 +115,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from another unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  type(uom),        intent(in)           :: source !< Source input unit.
-  type(uom_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),     intent(in), optional :: name   !< Unit name.
-  type(uom)                              :: unit   !< The unit.
+  type(uom),           intent(in)           :: source !< Source input unit.
+  type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),        intent(in), optional :: name   !< Unit name.
+  type(uom)                                 :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +136,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   write(stderr, '(A)')'  error: input source string "'//source//'" has bad alias specifier for the unit!'
-  write(stderr, '(A)')'  the alias must enclosed into "()" brackets and must be placed after the symbols definition'
+  write(stderr, '(A)')'  the alias must enclosed into "()" brackets and must be placed after the references definition'
   stop
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_bad_input_alias
@@ -190,63 +189,6 @@ contains
   endsubroutine raise_error_disequality
 
   ! public methods
-  subroutine add_symbol(self, symbol)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Add symbols to unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(inout) :: self       !< The unit.
-  type(uom_symbol), intent(in)    :: symbol     !< Unit symbol.
-  type(uom_symbol), allocatable   :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%are_symbols_defined().and.(.not.self%has_symbol(symbol=symbol))) then
-    allocate(symbols(self%symbols_number+1))
-    symbols(1:self%symbols_number) = self%symbols
-    symbols(self%symbols_number+1) = symbol
-    call move_alloc(from=symbols, to=self%symbols)
-    self%symbols_number = self%symbols_number + 1_I_P
-  else
-    allocate(self%symbols(1))
-    self%symbols(1) = symbol
-    self%symbols_number = 1_I_P
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine add_symbol
-
-  subroutine add_symbols(self, symbols)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Add symbols to unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(inout) :: self        !< The unit.
-  type(uom_symbol), intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
-  integer(I_P)                    :: s           !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%are_symbols_defined()) then
-    do s=1, size(symbols, dim=1)
-      call self%add_symbol(symbol=symbols(s))
-    enddo
-  else
-    self%symbols = symbols
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine add_symbols
-
-  elemental function are_symbols_defined(self) result(are_defined)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbols have been defined.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self        !< The unit.
-  logical                :: are_defined !< Symbols definition status.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  are_defined = allocated(self%symbols)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction are_symbols_defined
-
   elemental function has_alias(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has an alias.
@@ -273,29 +215,29 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_name
 
-  elemental function has_symbol(self, symbol)
+  elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has a symbol.
+  !< Check if the unit has a reference unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(in) :: self       !< The unit.
-  type(uom_symbol), intent(in) :: symbol     !< Symbol to check the presence of.
-  logical                      :: has_symbol !< Symbol presence status.
-  integer(I_P)                 :: s          !< Counter.
+  class(uom),          intent(in) :: self          !< The unit.
+  type(uom_reference), intent(in) :: reference     !< Reference unit to check the presence of.
+  logical                         :: has_reference !< reference unit presence status.
+  integer(I_P)                    :: s             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  has_symbol = .false.
-  if (self%are_symbols_defined()) then
-    do s=1, self%symbols_number
-      has_symbol = self%symbols(s) == symbol
-      if (has_symbol) exit
+  has_reference = .false.
+  if (self%is_defined()) then
+    do s=1, self%references_number
+      has_reference = self%references(s) == reference
+      if (has_reference) exit
     enddo
-    if (.not.has_symbol) then
-      if (self%has_alias()) has_symbol = self%alias == symbol
+    if (.not.has_reference) then
+      if (self%has_alias()) has_reference = self%alias == reference
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_symbol
+  endfunction has_reference
 
   elemental function is_compatible(self, other)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -311,43 +253,18 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
 
-  subroutine parse(self, source)
+  elemental function is_defined(self)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Parse unit definition form an input string.
+  !< Check if the unit has been defined, namely it has defined references.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),   intent(inout) :: self       !< The unit.
-  character(*), intent(in)    :: source     !< Input source string.
-  type(string)                :: source_str !< Source input stringified.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  source_str = trim(adjustl(source))
-  call self%parse_name(source=source_str)
-  call self%parse_alias(source=source_str)
-  call self%parse_symbols(source=source_str)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine parse
-
-  subroutine set(self, symbols, alias, name)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set the unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(inout)         :: self        !< The unit.
-  type(uom_symbol), intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
-  type(uom_symbol), intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),     intent(in),  optional :: name        !< Unit name.
+  class(uom), intent(in) :: self       !< The unit.
+  logical                :: is_defined !< Definition status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (present(symbols)) self%symbols = symbols
-  call self%update_symbols_number()
-  if (present(alias)) then
-    if (.not.allocated(self%alias)) allocate(self%alias)
-    self%alias = alias
-  endif
-  if (present(name)) self%name = name
+  is_defined = allocated(self%references)
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine set
+  endfunction is_defined
 
   function stringify(self, with_dimensions, with_alias) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -361,17 +278,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%are_symbols_defined()) then
+  if (self%is_defined()) then
     raw = ''
-    do s=1, self%symbols_number
-      raw = raw//'.'//self%symbols(s)%stringify()
+    do s=1, self%references_number
+      raw = raw//'.'//self%references(s)%stringify()
     enddo
     raw = raw(2:)
     if (present(with_dimensions)) then
       if (with_dimensions) then
         raw = raw//' ['
-        do s=1, self%symbols_number
-          raw = raw//self%symbols(s)%dimensionality()//'.'
+        do s=1, self%references_number
+          raw = raw//self%references(s)%dimensionality()//'.'
         enddo
         raw(len(raw):len(raw)) = ']'
       endif
@@ -393,17 +310,41 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (allocated(self%symbols)) deallocate(self%symbols)
+  if (allocated(self%references)) deallocate(self%references)
   if (allocated(self%alias)) deallocate(self%alias)
   if (allocated(self%name)) deallocate(self%name)
-  self%symbols_number = 0_I_P
+  self%references_number = 0_I_P
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
   ! private methods
+  subroutine add_reference(self, reference)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Add reference unit to unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(inout) :: self          !< The unit.
+  type(uom_reference), intent(in)    :: reference     !< Unit reference to be added.
+  type(uom_reference), allocatable   :: references(:) !< Reference unit(s), e.g. "m.s-1" for metres/seconds.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.(.not.self%has_reference(reference=reference))) then
+    allocate(references(self%references_number+1))
+    references(1:self%references_number) = self%references
+    references(self%references_number+1) = reference
+    call move_alloc(from=references, to=self%references)
+    self%references_number = self%references_number + 1_I_P
+  else
+    allocate(self%references(1))
+    self%references(1) = reference
+    self%references_number = 1_I_P
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine add_reference
+
   elemental function is_equal(self, other)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is equal (has the same symbols) with another one.
+  !< Check if unit is equal (has the same references units) with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self     !< The unit.
   class(uom), intent(in) :: other    !< The other unit.
@@ -413,20 +354,20 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   is_equal = .false.
-  if (self%are_symbols_defined().and.other%are_symbols_defined()) then
-    is_equal = (self%symbols_number==other%symbols_number)
+  if (self%is_defined().and.other%is_defined()) then
+    is_equal = (self%references_number==other%references_number)
     if (is_equal) then
-      do s=1, self%symbols_number
-        is_equal = other%has_symbol(symbol=self%symbols(s))
+      do s=1, self%references_number
+        is_equal = other%has_reference(reference=self%references(s))
         if (.not.is_equal) exit
       enddo
     endif
     if (.not.is_equal) then
       ! compare against alias
-      if (self%has_alias().and.other%symbols_number==1) then
-        is_equal = other%symbols(1) == self%alias
-      elseif (other%has_alias().and.self%symbols_number==1) then
-        is_equal = self%symbols(1) == other%alias
+      if (self%has_alias().and.other%references_number==1) then
+        is_equal = other%references(1) == self%alias
+      elseif (other%has_alias().and.self%references_number==1) then
+        is_equal = self%references(1) == other%alias
       endif
     endif
   endif
@@ -435,7 +376,7 @@ contains
 
   elemental function is_not_equal(self, other)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is not equal (has not the same symbols) with another one.
+  !< Check if unit is not equal (has not the same references units) with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self         !< The unit.
   class(uom), intent(in) :: other        !< The other unit.
@@ -446,6 +387,23 @@ contains
   is_not_equal = .not.self%is_equal(other=other)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_not_equal
+
+  subroutine parse(self, source)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Parse unit definition form an input string.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),   intent(inout) :: self       !< The unit.
+  character(*), intent(in)    :: source     !< Input source string.
+  type(string)                :: source_str !< Source input stringified.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  source_str = trim(adjustl(source))
+  call self%parse_name(source=source_str)
+  call self%parse_alias(source=source_str)
+  call self%parse_references(source=source_str)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine parse
 
   subroutine parse_alias(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -500,32 +458,53 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse_name
 
-  subroutine parse_symbols(self, source)
+  subroutine parse_references(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Parse unit symbols form an input string.
+  !< Parse references units form an input string.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom),   intent(inout) :: self   !< The unit.
   type(string), intent(in)    :: source !< Input source string.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  self%symbols = parse_uom_symbols(symbols=source%chars())
-  call self%update_symbols_number()
+  self%references = parse_uom_references(source=source%chars())
+  call self%update_references_number()
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine parse_symbols
+  endsubroutine parse_references
 
-  subroutine update_symbols_number(self)
+  subroutine set(self, references, alias, name)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Update symbols number counter.
+  !< Set the unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(inout)         :: self           !< The unit.
+  type(uom_reference), intent(in),  optional :: references(1:) !< Unit references of the unit.
+  type(uom_reference), intent(in),  optional :: alias          !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),        intent(in),  optional :: name           !< Unit name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (present(references)) self%references = references
+  call self%update_references_number()
+  if (present(alias)) then
+    if (.not.allocated(self%alias)) allocate(self%alias)
+    self%alias = alias
+  endif
+  if (present(name)) self%name = name
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine set
+
+  subroutine update_references_number(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Update references number counter.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(inout) :: self !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  self%symbols_number = 0_I_P
-  if (self%are_symbols_defined()) self%symbols_number = size(self%symbols, dim=1)
+  self%references_number = 0_I_P
+  if (self%is_defined()) self%references_number = size(self%references, dim=1)
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine update_symbols_number
+  endsubroutine update_references_number
 
   ! operators
   subroutine assign_string(lhs, rhs)
@@ -539,7 +518,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   call parsed_unit%parse(source=rhs)
-  if (.not.lhs%are_symbols_defined())  then
+  if (.not.lhs%is_defined())  then
     lhs = parsed_unit
   else
     if (.not.lhs == parsed_unit) call raise_error_disequality(lhs=lhs, rhs=parsed_unit, operation='LHS = RHS')
@@ -556,15 +535,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (rhs%are_symbols_defined())  then
-    if (.not.lhs%are_symbols_defined())  then
-      lhs%symbols = rhs%symbols
+  if (rhs%is_defined())  then
+    if (.not.lhs%is_defined())  then
+      lhs%references = rhs%references
       if (allocated(rhs%alias)) then
         if (.not.allocated(lhs%alias)) allocate(lhs%alias)
         lhs%alias = rhs%alias
       endif
       if (allocated(rhs%name)) lhs%name = rhs%name
-      lhs%symbols_number = rhs%symbols_number
+      lhs%references_number = rhs%references_number
     else
       if (.not.lhs==rhs) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
@@ -594,57 +573,57 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom / uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)        :: lhs            !< Left hand side.
-  class(uom), intent(in)        :: rhs            !< Right hand side.
-  type(uom)                     :: opr            !< Operator result.
-  type(uom_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
-  type(uom_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                  :: ls             !< Counter.
-  integer(I_P)                  :: rs             !< Counter.
+  class(uom), intent(in)           :: lhs            !< Left hand side.
+  class(uom), intent(in)           :: rhs            !< Right hand side.
+  type(uom)                        :: opr            !< Operator result.
+  type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
+  type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
+  integer(I_P)                     :: ls             !< Counter.
+  integer(I_P)                     :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (lhs%are_symbols_defined().and.rhs%are_symbols_defined()) then
-    lhs_symbols = lhs%symbols
-    rhs_symbols = rhs%symbols
-    do ls=1, size(lhs_symbols, dim=1)
+  if (lhs%is_defined().and.rhs%is_defined()) then
+    lhs_references = lhs%references
+    rhs_references = rhs%references
+    do ls=1, size(lhs_references, dim=1)
       rs = 1
-      remaining_rhs_symbols: do
-        if (lhs_symbols(ls)%is_compatible(other=rhs_symbols(rs))) then
-          lhs_symbols(ls) = lhs_symbols(ls) / rhs_symbols(rs)
-          ! pop up current symbol from rhs symbols
-          if (size(rhs_symbols, dim=1)>1) then
+      remaining_rhs_references: do
+        if (lhs_references(ls)%is_compatible(other=rhs_references(rs))) then
+          lhs_references(ls) = lhs_references(ls) / rhs_references(rs)
+          ! pop up current reference from rhs references
+          if (size(rhs_references, dim=1)>1) then
             if (rs==1) then
-              rhs_symbols = rhs_symbols(rs+1:)
-            elseif (rs==size(rhs_symbols, dim=1))  then
-              rhs_symbols = rhs_symbols(1:rs-1)
+              rhs_references = rhs_references(rs+1:)
+            elseif (rs==size(rhs_references, dim=1))  then
+              rhs_references = rhs_references(1:rs-1)
             else
-              rhs_symbols = [rhs_symbols(1:rs-1), rhs_symbols(rs+1:)]
+              rhs_references = [rhs_references(1:rs-1), rhs_references(rs+1:)]
             endif
             rs = 1
           else
-            deallocate(rhs_symbols)
+            deallocate(rhs_references)
           endif
         else
-          ! check the next rhs symbols
+          ! check the next rhs references
           rs = rs + 1
         endif
-        if (rs>=size(rhs_symbols, dim=1).or.(.not.allocated(rhs_symbols))) exit remaining_rhs_symbols
-      enddo remaining_rhs_symbols
+        if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
+      enddo remaining_rhs_references
     enddo
-    opr%symbols = lhs_symbols
-    if (allocated(rhs_symbols)) then
-      ! there are still rhs symbols not compatible with lhs ones that must be added
-      do rs=1, size(rhs_symbols, dim=1)
-        call opr%add_symbol(symbol=rhs_symbols(rs)**(-1))
+    opr%references = lhs_references
+    if (allocated(rhs_references)) then
+      ! there are still rhs references not compatible with lhs ones that must be added
+      do rs=1, size(rhs_references, dim=1)
+        call opr%add_reference(reference=rhs_references(rs)**(-1))
       enddo
     endif
     if (lhs%has_name().and.rhs%has_name()) then
       opr%name = lhs%name//'/'//rhs%name
     endif
   endif
-  call opr%update_symbols_number()
+  call opr%update_references_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
@@ -652,57 +631,57 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom * uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)        :: lhs            !< Left hand side.
-  class(uom), intent(in)        :: rhs            !< Right hand side.
-  type(uom)                     :: opr            !< Operator result.
-  type(uom_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
-  type(uom_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                  :: ls             !< Counter.
-  integer(I_P)                  :: rs             !< Counter.
+  class(uom), intent(in)           :: lhs            !< Left hand side.
+  class(uom), intent(in)           :: rhs            !< Right hand side.
+  type(uom)                        :: opr            !< Operator result.
+  type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
+  type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
+  integer(I_P)                     :: ls             !< Counter.
+  integer(I_P)                     :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (lhs%are_symbols_defined().and.rhs%are_symbols_defined()) then
-    lhs_symbols = lhs%symbols
-    rhs_symbols = rhs%symbols
-    do ls=1, size(lhs_symbols, dim=1)
+  if (lhs%is_defined().and.rhs%is_defined()) then
+    lhs_references = lhs%references
+    rhs_references = rhs%references
+    do ls=1, size(lhs_references, dim=1)
       rs = 1
-      remaining_rhs_symbols: do
-        if (lhs_symbols(ls)%is_compatible(other=rhs_symbols(rs))) then
-          lhs_symbols(ls) = lhs_symbols(ls) * rhs_symbols(rs)
-          ! pop up current symbol from rhs symbols
-          if (size(rhs_symbols, dim=1)>1) then
+      remaining_rhs_references: do
+        if (lhs_references(ls)%is_compatible(other=rhs_references(rs))) then
+          lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
+          ! pop up current reference from rhs references
+          if (size(rhs_references, dim=1)>1) then
             if (rs==1) then
-              rhs_symbols = rhs_symbols(rs+1:)
-            elseif (rs==size(rhs_symbols, dim=1))  then
-              rhs_symbols = rhs_symbols(1:rs-1)
+              rhs_references = rhs_references(rs+1:)
+            elseif (rs==size(rhs_references, dim=1))  then
+              rhs_references = rhs_references(1:rs-1)
             else
-              rhs_symbols = [rhs_symbols(1:rs-1), rhs_symbols(rs+1:)]
+              rhs_references = [rhs_references(1:rs-1), rhs_references(rs+1:)]
             endif
             rs = 1
           else
-            deallocate(rhs_symbols)
+            deallocate(rhs_references)
           endif
         else
-          ! check the next rhs symbols
+          ! check the next rhs references
           rs = rs + 1
         endif
-        if (rs>=size(rhs_symbols, dim=1).or.(.not.allocated(rhs_symbols))) exit remaining_rhs_symbols
-      enddo remaining_rhs_symbols
+        if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
+      enddo remaining_rhs_references
     enddo
-    opr%symbols = lhs_symbols
-    if (allocated(rhs_symbols)) then
-      ! there are still rhs symbols not compatible with lhs ones that must be added
-      do rs=1, size(rhs_symbols, dim=1)
-        call opr%add_symbol(symbol=rhs_symbols(rs))
+    opr%references = lhs_references
+    if (allocated(rhs_references)) then
+      ! there are still rhs references not compatible with lhs ones that must be added
+      do rs=1, size(rhs_references, dim=1)
+        call opr%add_reference(reference=rhs_references(rs))
       enddo
     endif
     if (lhs%has_name().and.rhs%has_name()) then
       opr%name = lhs%name//'*'//rhs%name
     endif
   endif
-  call opr%update_symbols_number()
+  call opr%update_references_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
@@ -736,9 +715,9 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (opr%are_symbols_defined()) then
-    do s=1, size(opr%symbols, dim=1)
-      opr%symbols(s) = opr%symbols(s) ** rhs
+  if (opr%is_defined()) then
+    do s=1, size(opr%references, dim=1)
+      opr%references(s) = opr%references(s) ** rhs
     enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -756,9 +735,9 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (opr%are_symbols_defined()) then
-    do s=1, size(opr%symbols, dim=1)
-      opr%symbols(s) = opr%symbols(s) ** rhs
+  if (opr%is_defined()) then
+    do s=1, size(opr%references, dim=1)
+      opr%references(s) = opr%references(s) ** rhs
     enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -776,9 +755,9 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (opr%are_symbols_defined()) then
-    do s=1, size(opr%symbols, dim=1)
-      opr%symbols(s) = opr%symbols(s) ** rhs
+  if (opr%is_defined()) then
+    do s=1, size(opr%references, dim=1)
+      opr%references(s) = opr%references(s) ** rhs
     enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -796,9 +775,9 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
-  if (opr%are_symbols_defined()) then
-    do s=1, size(opr%symbols, dim=1)
-      opr%symbols(s) = opr%symbols(s) ** rhs
+  if (opr%is_defined()) then
+    do s=1, size(opr%references, dim=1)
+      opr%references(s) = opr%references(s) ** rhs
     enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------

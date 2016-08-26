@@ -1,7 +1,7 @@
-!< FURY class definition of unit's symbol.
-module fury_uom_symbol
+!< FURY class definition of unit reference (composed by only 1 symbol).
+module fury_uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY class definition of unit's symbol.
+!< FURY class definition of unit reference (composed by only 1 symbol).
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use penf
@@ -11,17 +11,19 @@ use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: parse_uom_symbols
-public :: uom_symbol
+public :: parse_uom_references
+public :: uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type :: uom_symbol
-  !< Unit's symbol class.
+type :: uom_reference
+  !< Unit reference class.
   !<
-  !< Provide math operations on symbols necessary to build complex units.
+  !< It is the *base* unit class composed by only 1 symbol.
   !<
-  !< The symbol is constituted by 2 required and 1 optional members, namely the *litteral* symbol and its exponent and the
+  !< Provide math operations on symbols necessary to build complex (derived) units.
+  !<
+  !< The calss is constituted by 2 required and 1 optional members, namely the *litteral* symbol and its exponent and the
   !< (optional) dimension tag (that obviuosly has the same exponent of the symbol). These 3 members allow the definition of
   !< 3 different kind of comparisons:
   !<
@@ -35,14 +37,14 @@ type :: uom_symbol
   !<+ *dimensionality*: 2 symbols are defined *equals in dimension* if they have dimension and also the same exponent value,
   !<                    unregarded their litteral symbols; this allows for units conversions;
   !<
-  !< The string format definition of a valid FURY unit symbol definition is as following:
+  !< The string format definition of a valid FURY unit reference definition is as following:
   !<
   !< `s-1 = Hz = hertz [time-1]`
   !<
   !< where
   !<
   !<+ `s-1` is the first mandatory term that defines the litteral symbol with its exponent (if 1 can be omitted);
-  !<+ all subsequent ` = Hz = ...` are optional aliases of the main litteral symbol;
+  !<+ all subsequent ` = Hz = ...` are optional aliases (with their own exponent) of the main litteral symbol;
   !<+ `[time-1]` is the last optional term that defines the symbol dimensions (if dimensions exponent is passed it must be equal
   !<  to the one of the main litteral symbol.
   !<
@@ -51,7 +53,7 @@ type :: uom_symbol
   character(len=:), allocatable, private :: symbol                !< Litteral symbol, e.g. "m" for metres.
   integer(I_P),                  private :: symbol_exponent=1_I_P !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
   character(len=:), allocatable, private :: dimensions            !< Dimensions of the symbol, e.g. "length" for metres.
-  type(uom_symbol), pointer,     private :: aliases(:)=>null()    !< Litteral symbol, e.g. "meter, meters..." for metres.
+  type(uom_reference), pointer,  private :: aliases(:)=>null()    !< Litteral symbol, e.g. "meter, meters..." for metres.
   integer(I_P),                  private :: aliases_number=0_I_P  !< Number of defined symbol aliases.
   contains
     ! public methods
@@ -67,64 +69,64 @@ type :: uom_symbol
     procedure, pass(self) :: unset              !< Unset symbol.
     ! public generic names
     generic :: assignment(=) => assign_string, &
-                                assign_uom_symbol  !< Overloading `=` assignament.
-    generic :: operator(/) => div                  !< Overloading `/` operator.
-    generic :: operator(*) => mul                  !< Overloading `*` operator.
+                                assign_uom_reference !< Overloading `=` assignament.
+    generic :: operator(/) => div                    !< Overloading `/` operator.
+    generic :: operator(*) => mul                    !< Overloading `*` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
-                               pow_I2P, pow_I1P    !< Overloading `**` operator.
-    generic :: operator(==) => is_equal            !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
+                               pow_I2P, pow_I1P      !< Overloading `**` operator.
+    generic :: operator(==) => is_equal              !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal          !< Overloading `/=` operator.
     ! private methods
-    procedure, pass(self), private :: is_equal          !< Check if the symbol is equal with another one.
-    procedure, pass(self), private :: is_not_equal      !< Check if the symbol is not equal with another one.
-    procedure, pass(lhs),  private :: assign_string     !< `uom_symbol = string` assignament.
-    procedure, pass(lhs),  private :: assign_uom_symbol !< `uom_symbol = uom_symbol` assignament.
-    procedure, pass(lhs),  private :: div               !< `uom_symbol / uom_symbol` operator.
-    procedure, pass(lhs),  private :: mul               !< `uom_symbol * uom_symbol` operator.
-    procedure, pass(lhs),  private :: pow_I8P           !< `uom_symbol ** integer(I8P)` operator.
-    procedure, pass(lhs),  private :: pow_I4P           !< `uom_symbol ** integer(I4P)` operator.
-    procedure, pass(lhs),  private :: pow_I2P           !< `uom_symbol ** integer(I2P)` operator.
-    procedure, pass(lhs),  private :: pow_I1P           !< `uom_symbol ** integer(I1P)` operator.
-endtype uom_symbol
+    procedure, pass(self), private :: is_equal             !< Check if the symbol is equal with another one.
+    procedure, pass(self), private :: is_not_equal         !< Check if the symbol is not equal with another one.
+    procedure, pass(lhs),  private :: assign_string        !< `uom_reference = string` assignament.
+    procedure, pass(lhs),  private :: assign_uom_reference !< `uom_reference = uom_reference` assignament.
+    procedure, pass(lhs),  private :: div                  !< `uom_reference / uom_reference` operator.
+    procedure, pass(lhs),  private :: mul                  !< `uom_reference * uom_reference` operator.
+    procedure, pass(lhs),  private :: pow_I8P              !< `uom_reference ** integer(I8P)` operator.
+    procedure, pass(lhs),  private :: pow_I4P              !< `uom_reference ** integer(I4P)` operator.
+    procedure, pass(lhs),  private :: pow_I2P              !< `uom_reference ** integer(I2P)` operator.
+    procedure, pass(lhs),  private :: pow_I1P              !< `uom_reference ** integer(I1P)` operator.
+endtype uom_reference
 
-interface uom_symbol
-  !< Ovearloading [[uom_symbol]] name with a creator function.
+interface uom_reference
+  !< Ovearloading [[uom_reference]] name with a creator function.
   module procedure creator_from_string
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! public non type bound procedures
-  function parse_uom_symbols(symbols) result(symbols_array)
+  function parse_uom_references(source) result(references)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Parse symbols string returning an array of (base) unit symbols.
+  !< Parse string returning an array of [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*), intent(in)      :: symbols          !< Litteral symbol(s) of the unit, e.g. "m.s-1" for metres/second.
-  type(uom_symbol), allocatable :: symbols_array(:) !< Litteral symbol(s) of the unit, e.g. "m.s-1" for metres/seconds, array var.
-  type(string)                  :: buffer           !< String buffer.
-  type(string), allocatable     :: sym_tokens(:)    !< Symbols string tokens.
-  integer(I_P)                  :: symbols_number   !< Symbols number.
-  integer(I_P)                  :: t                !< Counter.
+  character(*), intent(in)         :: source        !< Reference litteral symbol(s) of the unit, e.g. "m.s-1" for metres/second.
+  type(uom_reference), allocatable :: references(:) !< Reference litteral symbol(s), array var.
+  type(string)                     :: buffer        !< String buffer.
+  type(string), allocatable        :: tokens(:)     !< String tokens.
+  integer(I_P)                     :: tokens_number !< Tokens number.
+  integer(I_P)                     :: t             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  buffer = trim(adjustl(symbols))
-  call buffer%split(tokens=sym_tokens, sep='.')
-  symbols_number = size(sym_tokens, dim=1)
-  allocate(symbols_array(1:symbols_number))
-  do t=1, symbols_number
-    call symbols_array(t)%parse(source=sym_tokens(t)%chars())
+  buffer = trim(adjustl(source))
+  call buffer%split(tokens=tokens, sep='.')
+  tokens_number = size(tokens, dim=1)
+  allocate(references(1:tokens_number))
+  do t=1, tokens_number
+    call references(t)%parse(source=tokens(t)%chars())
   enddo
   ! reduce to unique symbols list
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction parse_uom_symbols
+  endfunction parse_uom_references
 
   ! private non type bound procedures
   function creator_from_string(source) result(symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of uom_symbol.
+  !< Create an instance of [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
   character(*), intent(in) :: source !< Source input string definition of the symbol.
-  type(uom_symbol)         :: symbol !< The symbol.
+  type(uom_reference)      :: symbol !< The uom reference.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -135,10 +137,10 @@ contains
   ! public methods
   pure function dimensionality(self) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return a string representation of the symbol dimensionality.
+  !< Return a string representation of [[uom_reference]] dimensionality.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self !< The symbol.
-  character(len=:), allocatable :: raw  !< Raw characters data.
+  class(uom_reference), intent(in) :: self !< The uom reference.
+  character(len=:), allocatable    :: raw  !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -157,10 +159,10 @@ contains
 
   elemental function has_aliases(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol has defined aliases.
+  !< Check if [[uom_reference]] has defined aliases.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self       !< The symbol.
-  logical                       :: is_defined !< Symbol aliases definition status.
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  logical                          :: is_defined !< Symbol aliases definition status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -170,10 +172,10 @@ contains
 
   elemental function has_dimension(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol dimension has been defined.
+  !< Check if [[uom_reference]] dimension has been defined.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self       !< The symbol.
-  logical                       :: is_defined !< Symbol dimension definition status.
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  logical                          :: is_defined !< Symbol dimension definition status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -183,10 +185,10 @@ contains
 
   elemental function has_symbol(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol has been defined.
+  !< Check if [[uom_reference]] has been defined.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self       !< The symbol.
-  logical                       :: is_defined !< Symbol definition status.
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  logical                          :: is_defined !< Symbol definition status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -196,15 +198,15 @@ contains
 
   elemental function is_compatible(self, other) result(compatible)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol is compatible with another one.
+  !< Check if [[uom_reference]] is compatible with another one.
   !<
   !< Two symbols are defined *compatible* if they have the same litteral symbol, unregarded their exponent values.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self       !< The symbol.
-  type(uom_symbol),  intent(in) :: other      !< The other symbol.
-  logical                       :: compatible !< Compatibility check result.
-  integer(I_P)                  :: o          !< Counter.
-  integer(I_P)                  :: s          !< Counter.
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  type(uom_reference),  intent(in) :: other      !< The other symbol.
+  logical                          :: compatible !< Compatibility check result.
+  integer(I_P)                     :: o          !< Counter.
+  integer(I_P)                     :: s          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -237,11 +239,11 @@ contains
 
   elemental function is_dimension_equal(self, other) result(equal)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol dimension is equal with another one.
+  !< Check if [[uom_reference]] dimension is equal with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self  !< The symbol.
-  type(uom_symbol),  intent(in) :: other !< The other symbol.
-  logical                       :: equal !< Equality check result.
+  class(uom_reference), intent(in) :: self  !< The uom reference.
+  type(uom_reference),  intent(in) :: other !< The other symbol.
+  logical                          :: equal !< Equality check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -256,13 +258,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse symbol from string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout) :: self                 !< The symbol.
-  character(*),      intent(in)    :: source               !< Source input string definition of symbol.
-  type(string)                     :: buffer               !< String buffer.
-  type(string), allocatable        :: tokens(:)            !< String tokens.
-  type(uom_symbol)                 :: dimension_symbolized !< Storing dimension data as a symbol.
-  integer(I_P)                     :: a                    !< Counter.
-  integer(I_P)                     :: d(2)                 !< Counter.
+  class(uom_reference), intent(inout) :: self                 !< The uom reference.
+  character(*),      intent(in)       :: source               !< Source input string definition of symbol.
+  type(string)                        :: buffer               !< String buffer.
+  type(string), allocatable           :: tokens(:)            !< String tokens.
+  type(uom_reference)                 :: dimension_symbolized !< Storing dimension data as a symbol.
+  integer(I_P)                        :: a                    !< Counter.
+  integer(I_P)                        :: d(2)                 !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -305,9 +307,9 @@ contains
     !<
     !< @note This is a trick to simplify parsing: `s-1=time-1=Hz=hertz` can be parsed with the same logics
     !-------------------------------------------------------------------------------------------------------------------------------
-    type(string),     intent(in)    :: symbol_string !< String containing symbol definition.
-    type(uom_symbol), intent(inout) :: symbol_parsed !< Symbol to be parsed.
-    integer(I_P)                    :: e             !< Counter.
+    type(string),     intent(in)       :: symbol_string !< String containing symbol definition.
+    type(uom_reference), intent(inout) :: symbol_parsed !< Symbol to be parsed.
+    integer(I_P)                       :: e             !< Counter.
     !-------------------------------------------------------------------------------------------------------------------------------
 
     !-------------------------------------------------------------------------------------------------------------------------------
@@ -326,11 +328,11 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout)        :: self            !< The symbol.
-  character(*),      intent(in), optional :: symbol          !< Litteral symbol of the unit, e.g. "m" for metres.
-  integer(I_P),      intent(in), optional :: symbol_exponent !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
-  character(*),      intent(in), optional :: dimension       !< Dimensions of the symbol, e.g. "length" for metres.
-  type(uom_symbol),  intent(in), optional :: aliases(1:)     !< Symbol aliases.
+  class(uom_reference), intent(inout)        :: self            !< The uom reference.
+  character(*),         intent(in), optional :: symbol          !< Litteral symbol of the unit, e.g. "m" for metres.
+  integer(I_P),         intent(in), optional :: symbol_exponent !< Exponent of the symbol, e.g. "1" for metres, namely "m1".
+  character(*),         intent(in), optional :: dimension       !< Dimensions of the symbol, e.g. "length" for metres.
+  type(uom_reference),  intent(in), optional :: aliases(1:)     !< Symbol aliases.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -348,13 +350,13 @@ contains
 
   recursive function stringify(self, with_dimension, with_aliases) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return a string representation of the symbol.
+  !< Return a string representation of [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in)           :: self           !< The symbol.
-  logical,           intent(in), optional :: with_dimension !< Flag to activate dimension printing.
-  logical,           intent(in), optional :: with_aliases   !< Flag to activate aliases printing.
-  character(len=:), allocatable           :: raw            !< Raw characters data.
-  integer(I_P)                            :: a              !< Counter.
+  class(uom_reference), intent(in)           :: self           !< The uom reference.
+  logical,              intent(in), optional :: with_dimension !< Flag to activate dimension printing.
+  logical,              intent(in), optional :: with_aliases   !< Flag to activate aliases printing.
+  character(len=:), allocatable              :: raw            !< Raw characters data.
+  integer(I_P)                               :: a              !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -385,9 +387,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Unset symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout)        :: self         !< The symbol.
-  logical,           intent(in), optional :: only_aliases !< Unset only aliases if .true..
-  integer(I_P)                            :: a            !< Counter.
+  class(uom_reference), intent(inout)        :: self         !< The uom reference.
+  logical,              intent(in), optional :: only_aliases !< Unset only aliases if .true..
+  integer(I_P)                               :: a            !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -411,15 +413,15 @@ contains
   ! private methods
   elemental function is_equal(self, other) result(equal)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol is equal with another one.
+  !< Check if [[uom_reference]] is equal with another one.
   !<
   !< Two symbols are defined *equal* if they have the same litteral symbol and the same exponent value.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self  !< The symbol.
-  type(uom_symbol),  intent(in) :: other !< The other symbol.
-  logical                       :: equal !< Equality check result.
-  integer(I_P)                  :: o     !< Counter.
-  integer(I_P)                  :: s     !< Counter.
+  class(uom_reference), intent(in) :: self  !< The uom reference.
+  type(uom_reference),  intent(in) :: other !< The other symbol.
+  logical                          :: equal !< Equality check result.
+  integer(I_P)                     :: o     !< Counter.
+  integer(I_P)                     :: s     !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -456,11 +458,11 @@ contains
 
   elemental function is_not_equal(self, other) result(not_equal)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the symbol is not equal with another one.
+  !< Check if [[uom_reference]] is not equal with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self      !< The symbol.
-  type(uom_symbol),  intent(in) :: other     !< The other symbol.
-  logical                       :: not_equal !< Disequality check result.
+  class(uom_reference), intent(in) :: self      !< The uom reference.
+  type(uom_reference),  intent(in) :: other     !< The other symbol.
+  logical                          :: not_equal !< Disequality check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -471,11 +473,11 @@ contains
   ! operators
   subroutine assign_string(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol = string` assignament.
+  !< `uom_reference = string` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout) :: lhs           !< Left hand side.
-  character(*),      intent(in)    :: rhs           !< Right hand side.
-  type(uom_symbol)                 :: parsed_symbol !< Symbol arising from string input.
+  class(uom_reference), intent(inout) :: lhs           !< Left hand side.
+  character(*),         intent(in)    :: rhs           !< Right hand side.
+  type(uom_reference)                 :: parsed_symbol !< Symbol arising from string input.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -484,13 +486,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_string
 
-  subroutine assign_uom_symbol(lhs, rhs)
+  subroutine assign_uom_reference(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol = uom_symbol` assignament.
+  !< `uom_reference = uom_reference` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout) :: lhs !< Left hand side.
-  type(uom_symbol),  intent(in)    :: rhs !< Right hand side.
-  integer(I_P)                     :: a   !< Counter.
+  class(uom_reference), intent(inout) :: lhs !< Left hand side.
+  type(uom_reference),  intent(in)    :: rhs !< Right hand side.
+  integer(I_P)                        :: a   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -511,15 +513,15 @@ contains
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine assign_uom_symbol
+  endsubroutine assign_uom_reference
 
   function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol / uom_symbol` operator.
+  !< `uom_reference / uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  type(uom_symbol),  intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  type(uom_reference),  intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -537,11 +539,11 @@ contains
 
   function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol * uom_symbol` operator.
+  !< `uom_reference * uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  type(uom_symbol),  intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  type(uom_reference),  intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -559,11 +561,11 @@ contains
 
   function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol ** integer(I8P)` operator.
+  !< `uom_reference ** integer(I8P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  integer(I8P),      intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  integer(I8P),         intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -578,11 +580,11 @@ contains
 
   function pow_I4P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol ** integer(I4P)` operator.
+  !< `uom_reference ** integer(I4P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  integer(I4P),      intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  integer(I4P),         intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -597,11 +599,11 @@ contains
 
   function pow_I2P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol ** integer(I2P)` operator.
+  !< `uom_reference ** integer(I2P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  integer(I2P),      intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  integer(I2P),         intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -616,11 +618,11 @@ contains
 
   function pow_I1P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_symbol ** integer(I1P)` operator.
+  !< `uom_reference ** integer(I1P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: lhs !< Left hand side.
-  integer(I1P),      intent(in) :: rhs !< Right hand side.
-  type(uom_symbol)              :: opr !< Operator result.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  integer(I1P),         intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -632,4 +634,4 @@ contains
   call opr%unset(only_aliases=.true.)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
-endmodule fury_uom_symbol
+endmodule fury_uom_reference

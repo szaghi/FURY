@@ -21,7 +21,7 @@ si_pressure = 'kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}'
 test_passed(1) = a_unit == si_pressure
 print "(A,L1)", 'Pa = '//si_pressure%stringify()//', is correct? ', test_passed(1)
 
-test_passed(2) = si_pressure%has_symbol(symbol=a_unit%symbols(1))
+test_passed(2) = si_pressure%has_reference(reference=a_unit%references(1))
 print "(A,L1)", si_pressure%stringify(with_alias=.true.)//' has symbol Pa, is correct? ', test_passed(2)
 
 si_frequency = 'Hz [frequency]'
