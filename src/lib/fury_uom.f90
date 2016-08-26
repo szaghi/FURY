@@ -1,5 +1,5 @@
 !< FURY definition of *generic* unit class.
-module fury_unit_generic
+module fury_uom
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of *generic* unit class.
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -12,11 +12,11 @@ use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: unit_generic
+public :: uom
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type :: unit_generic
+type :: uom
   !< Generic prototype of *unit*.
   !<
   !< The string format definition of a valid FURY unit is as following:
@@ -60,15 +60,15 @@ type :: unit_generic
     procedure, pass(self) :: unset               !< Set the unit.
     ! public generic names
     generic :: assignment(=) => assign_string, &
-                                assign_unit_generic !< Overloading `=` operator.
-    generic :: operator(+) => add                   !< Overloading `+` operator.
-    generic :: operator(/) => div                   !< Overloading `/` operator.
-    generic :: operator(*) => mul                   !< Overloading `*` operator.
-    generic :: operator(-) => sub                   !< Overloading `-` operator.
+                                assign_uom         !< Overloading `=` operator.
+    generic :: operator(+) => add                  !< Overloading `+` operator.
+    generic :: operator(/) => div                  !< Overloading `/` operator.
+    generic :: operator(*) => mul                  !< Overloading `*` operator.
+    generic :: operator(-) => sub                  !< Overloading `-` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
-                               pow_I2P, pow_I1P     !< Overloading `**` operator.
-    generic :: operator(==) => is_equal             !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal         !< Overloading `/=` operator.
+                               pow_I2P, pow_I1P    !< Overloading `**` operator.
+    generic :: operator(==) => is_equal            !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
     ! private methods
     procedure, pass(self), private :: is_equal              !< Check if unit is equal with another one.
     procedure, pass(self), private :: is_not_equal          !< Check if unit is not equal with another one.
@@ -77,20 +77,20 @@ type :: unit_generic
     procedure, pass(self), private :: parse_symbols         !< Parse unit symbols from an input string.
     procedure, pass(self), private :: update_symbols_number !< Update symbols number counter.
     ! operators
-    procedure, pass(lhs), private :: assign_string       !< `unit_generic = string` assignament.
-    procedure, pass(lhs), private :: assign_unit_generic !< `unit_generic = unit_generic` assignament.
-    procedure, pass(lhs), private :: add                 !< `unit_generic + unit_generic` operator.
-    procedure, pass(lhs), private :: div                 !< `unit_generic / unit_generic` operator.
-    procedure, pass(lhs), private :: mul                 !< `unit_generic * unit_generic` operator.
-    procedure, pass(lhs), private :: sub                 !< `unit_generic - unit_generic` operator.
-    procedure, pass(lhs), private :: pow_I8P             !< `unit_generic ** integer(I8P)` operator.
-    procedure, pass(lhs), private :: pow_I4P             !< `unit_generic ** integer(I4P)` operator.
-    procedure, pass(lhs), private :: pow_I2P             !< `unit_generic ** integer(I2P)` operator.
-    procedure, pass(lhs), private :: pow_I1P             !< `unit_generic ** integer(I1P)` operator.
-endtype unit_generic
+    procedure, pass(lhs), private :: assign_string !< `uom = string` assignament.
+    procedure, pass(lhs), private :: assign_uom    !< `uom = uom` assignament.
+    procedure, pass(lhs), private :: add           !< `uom + uom` operator.
+    procedure, pass(lhs), private :: div           !< `uom / uom` operator.
+    procedure, pass(lhs), private :: mul           !< `uom * uom` operator.
+    procedure, pass(lhs), private :: sub           !< `uom - uom` operator.
+    procedure, pass(lhs), private :: pow_I8P       !< `uom ** integer(I8P)` operator.
+    procedure, pass(lhs), private :: pow_I4P       !< `uom ** integer(I4P)` operator.
+    procedure, pass(lhs), private :: pow_I2P       !< `uom ** integer(I2P)` operator.
+    procedure, pass(lhs), private :: pow_I1P       !< `uom ** integer(I1P)` operator.
+endtype uom
 
-interface unit_generic
-  !< Ovearloading [[unit_generic]] name with a set of creator functions.
+interface uom
+  !< Ovearloading [[uom]] name with a set of creator functions.
   module procedure creator_from_string, creator_from_other_unit
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ contains
   character(*),      intent(in)           :: source !< Source input string definition of the unit.
   type(unit_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
   character(*),      intent(in), optional :: name   !< Unit name.
-  type(unit_generic)                      :: unit   !< The unit.
+  type(uom)                               :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -116,10 +116,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from another unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  type(unit_generic), intent(in)           :: source !< Source input unit.
-  type(unit_symbol),  intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),       intent(in), optional :: name   !< Unit name.
-  type(unit_generic)                       :: unit   !< The unit.
+  type(uom),         intent(in)           :: source !< Source input unit.
+  type(unit_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),      intent(in), optional :: name   !< Unit name.
+  type(uom)                               :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -160,9 +160,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Raise the incompatibility error.
   !---------------------------------------------------------------------------------------------------------------------------------
-  type(unit_generic), intent(in) :: lhs       !< Left hand side of the operator.
-  type(unit_generic), intent(in) :: rhs       !< Rigth hand side of the operator.
-  character(*),       intent(in) :: operation !< Description of the operation errored.
+  type(uom),    intent(in) :: lhs       !< Left hand side of the operator.
+  type(uom),    intent(in) :: rhs       !< Rigth hand side of the operator.
+  character(*), intent(in) :: operation !< Description of the operation errored.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -176,9 +176,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Raise the disequality error.
   !---------------------------------------------------------------------------------------------------------------------------------
-  type(unit_generic), intent(in) :: lhs       !< Left hand side of the operator.
-  type(unit_generic), intent(in) :: rhs       !< Rigth hand side of the operator.
-  character(*),       intent(in) :: operation !< Description of the operation errored.
+  type(uom),    intent(in) :: lhs       !< Left hand side of the operator.
+  type(uom),    intent(in) :: rhs       !< Rigth hand side of the operator.
+  character(*), intent(in) :: operation !< Description of the operation errored.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -194,9 +194,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self       !< The unit.
-  type(unit_symbol),   intent(in)    :: symbol     !< Unit symbol.
-  type(unit_symbol), allocatable     :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
+  class(uom),        intent(inout) :: self       !< The unit.
+  type(unit_symbol), intent(in)    :: symbol     !< Unit symbol.
+  type(unit_symbol), allocatable   :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -218,9 +218,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self        !< The unit.
-  type(unit_symbol),   intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
-  integer(I_P)                       :: s           !< Counter.
+  class(uom),        intent(inout) :: self        !< The unit.
+  type(unit_symbol), intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
+  integer(I_P)                     :: s           !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -238,8 +238,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the symbols have been defined.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self        !< The unit.
-  logical                         :: are_defined !< Symbols definition status.
+  class(uom), intent(in) :: self        !< The unit.
+  logical                :: are_defined !< Symbols definition status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -251,8 +251,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has an alias.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self      !< The unit.
-  logical                         :: has_alias !< Alias presence status.
+  class(uom), intent(in) :: self      !< The unit.
+  logical                :: has_alias !< Alias presence status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -264,8 +264,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a name.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self     !< The unit.
-  logical                         :: has_name !< Name presence status.
+  class(uom), intent(in) :: self     !< The unit.
+  logical                :: has_name !< Name presence status.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -277,10 +277,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self       !< The unit.
-  type(unit_symbol),   intent(in) :: symbol     !< Symbol to check the presence of.
-  logical                         :: has_symbol !< Symbol presence status.
-  integer(I_P)                    :: s          !< Counter.
+  class(uom),        intent(in) :: self       !< The unit.
+  type(unit_symbol), intent(in) :: symbol     !< Symbol to check the presence of.
+  logical                       :: has_symbol !< Symbol presence status.
+  integer(I_P)                  :: s          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -301,9 +301,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is compatible with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self          !< The unit.
-  class(unit_generic), intent(in) :: other         !< The other unit.
-  logical                         :: is_compatible !< Compatibility check result.
+  class(uom), intent(in) :: self          !< The unit.
+  class(uom), intent(in) :: other         !< The other unit.
+  logical                :: is_compatible !< Compatibility check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -315,9 +315,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse unit definition form an input string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self       !< The unit.
-  character(*),        intent(in)    :: source     !< Input source string.
-  type(string)                       :: source_str !< Source input stringified.
+  class(uom),   intent(inout) :: self       !< The unit.
+  character(*), intent(in)    :: source     !< Input source string.
+  type(string)                :: source_str !< Source input stringified.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -332,10 +332,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout)         :: self        !< The unit.
-  type(unit_symbol),   intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
-  type(unit_symbol),   intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),        intent(in),  optional :: name        !< Unit name.
+  class(uom),        intent(inout)         :: self        !< The unit.
+  type(unit_symbol), intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
+  type(unit_symbol), intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),      intent(in),  optional :: name        !< Unit name.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -353,11 +353,11 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in)           :: self            !< The unit.
-  logical,             intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
-  logical,             intent(in), optional :: with_alias      !< Flag to activate alias printing.
-  character(len=:), allocatable             :: raw             !< Raw characters data.
-  integer(I_P)                              :: s               !< Counter.
+  class(uom), intent(in)           :: self            !< The unit.
+  logical,    intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
+  logical,    intent(in), optional :: with_alias      !< Flag to activate alias printing.
+  character(len=:), allocatable    :: raw             !< Raw characters data.
+  integer(I_P)                     :: s               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -389,7 +389,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Unset the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self !< The unit.
+  class(uom), intent(inout) :: self !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -405,10 +405,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is equal (has the same symbols) with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self     !< The unit.
-  class(unit_generic), intent(in) :: other    !< The other unit.
-  logical                         :: is_equal !< Equality check result.
-  integer(I_P)                    :: s        !< Counter.
+  class(uom), intent(in) :: self     !< The unit.
+  class(uom), intent(in) :: other    !< The other unit.
+  logical                :: is_equal !< Equality check result.
+  integer(I_P)           :: s        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -437,9 +437,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is not equal (has not the same symbols) with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: self         !< The unit.
-  class(unit_generic), intent(in) :: other        !< The other unit.
-  logical                         :: is_not_equal !< Disequality check result.
+  class(uom), intent(in) :: self         !< The unit.
+  class(uom), intent(in) :: other        !< The other unit.
+  logical                :: is_not_equal !< Disequality check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -453,11 +453,11 @@ contains
   !<
   !< @note It is assumed that the optional unit name has been already parsed and trimmed out form the input string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self      !< The unit.
-  type(string),        intent(inout) :: source    !< Input source string.
-  type(string), allocatable          :: tokens(:) !< String tokens.
-  integer(I_P)                       :: n1        !< Counter.
-  integer(I_P)                       :: n2        !< Counter.
+  class(uom),   intent(inout) :: self      !< The unit.
+  type(string), intent(inout) :: source    !< Input source string.
+  type(string), allocatable   :: tokens(:) !< String tokens.
+  integer(I_P)                :: n1        !< Counter.
+  integer(I_P)                :: n2        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -479,11 +479,11 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse unit name form an input string and return also the source string without the name data.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self      !< The unit.
-  type(string),        intent(inout) :: source    !< Input source string.
-  type(string), allocatable          :: tokens(:) !< String tokens.
-  integer(I_P)                       :: n1        !< Counter.
-  integer(I_P)                       :: n2        !< Counter.
+  class(uom),   intent(inout) :: self      !< The unit.
+  type(string), intent(inout) :: source    !< Input source string.
+  type(string), allocatable   :: tokens(:) !< String tokens.
+  integer(I_P)                :: n1        !< Counter.
+  integer(I_P)                :: n2        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -504,8 +504,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse unit symbols form an input string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self   !< The unit.
-  type(string),        intent(in)    :: source !< Input source string.
+  class(uom),   intent(inout) :: self   !< The unit.
+  type(string), intent(in)    :: source !< Input source string.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -518,7 +518,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Update symbols number counter.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: self !< The unit.
+  class(uom), intent(inout) :: self !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -530,11 +530,11 @@ contains
   ! operators
   subroutine assign_string(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic = string` assignament.
+  !< `uom = string` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: lhs         !< Left hand side.
-  character(*),        intent(in)    :: rhs         !< Right hand side.
-  type(unit_generic)                 :: parsed_unit !< Unit arising from string input.
+  class(uom),   intent(inout) :: lhs         !< Left hand side.
+  character(*), intent(in)    :: rhs         !< Right hand side.
+  type(uom)                   :: parsed_unit !< Unit arising from string input.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -547,12 +547,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_string
 
-  subroutine assign_unit_generic(lhs, rhs)
+  subroutine assign_uom(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic = unit_generic` assignament.
+  !< `uom = uom` assignament.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(inout) :: lhs !< Left hand side.
-  class(unit_generic), intent(in)    :: rhs !< Right hand side.
+  class(uom), intent(inout) :: lhs !< Left hand side.
+  class(uom), intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -570,15 +570,15 @@ contains
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine assign_unit_generic
+  endsubroutine assign_uom
 
   function add(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic + unit_generic` operator.
+  !< `uom + uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs !< Left hand side.
-  class(unit_generic), intent(in) :: rhs !< Right hand side.
-  type(unit_generic)              :: opr !< Operator result.
+  class(uom), intent(in) :: lhs !< Left hand side.
+  class(uom), intent(in) :: rhs !< Right hand side.
+  type(uom)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -592,15 +592,15 @@ contains
 
   function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic / unit_generic` operator.
+  !< `uom / uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs            !< Left hand side.
-  class(unit_generic), intent(in) :: rhs            !< Right hand side.
-  type(unit_generic)              :: opr            !< Operator result.
-  type(unit_symbol), allocatable  :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable  :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                    :: ls             !< Counter.
-  integer(I_P)                    :: rs             !< Counter.
+  class(uom), intent(in)         :: lhs            !< Left hand side.
+  class(uom), intent(in)         :: rhs            !< Right hand side.
+  type(uom)                      :: opr            !< Operator result.
+  type(unit_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
+  type(unit_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                   :: ls             !< Counter.
+  integer(I_P)                   :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -650,15 +650,15 @@ contains
 
   function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic * unit_generic` operator.
+  !< `uom * uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs            !< Left hand side.
-  class(unit_generic), intent(in) :: rhs            !< Right hand side.
-  type(unit_generic)              :: opr            !< Operator result.
-  type(unit_symbol), allocatable  :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable  :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                    :: ls             !< Counter.
-  integer(I_P)                    :: rs             !< Counter.
+  class(uom), intent(in)         :: lhs            !< Left hand side.
+  class(uom), intent(in)         :: rhs            !< Right hand side.
+  type(uom)                      :: opr            !< Operator result.
+  type(unit_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
+  type(unit_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                   :: ls             !< Counter.
+  integer(I_P)                   :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -708,11 +708,11 @@ contains
 
   function sub(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic - unit_generic` operator.
+  !< `uom - uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in)  :: lhs !< Left hand side.
-  class(unit_generic), intent(in)  :: rhs !< Right hand side.
-  class(unit_generic), allocatable :: opr !< Operator result.
+  class(uom), intent(in)  :: lhs !< Left hand side.
+  class(uom), intent(in)  :: rhs !< Right hand side.
+  class(uom), allocatable :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -726,12 +726,12 @@ contains
 
   function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic ** integer(I8P)` operator.
+  !< `uom ** integer(I8P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs !< Left hand side.
-  integer(I8P),        intent(in) :: rhs !< Right hand side.
-  type(unit_generic)              :: opr !< Operator result.
-  integer(I_P)                    :: s   !< Counter.
+  class(uom),   intent(in) :: lhs !< Left hand side.
+  integer(I8P), intent(in) :: rhs !< Right hand side.
+  type(uom)                :: opr !< Operator result.
+  integer(I_P)             :: s   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -746,12 +746,12 @@ contains
 
   function pow_I4P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic ** integer(I4P)` operator.
+  !< `uom ** integer(I4P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs !< Left hand side.
-  integer(I4P),        intent(in) :: rhs !< Right hand side.
-  type(unit_generic)              :: opr !< Operator result.
-  integer(I_P)                    :: s   !< Counter.
+  class(uom),   intent(in) :: lhs !< Left hand side.
+  integer(I4P), intent(in) :: rhs !< Right hand side.
+  type(uom)                :: opr !< Operator result.
+  integer(I_P)             :: s   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -766,12 +766,12 @@ contains
 
   function pow_I2P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic ** integer(I2P)` operator.
+  !< `uom ** integer(I2P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs !< Left hand side.
-  integer(I2P),        intent(in) :: rhs !< Right hand side.
-  type(unit_generic)              :: opr !< Operator result.
-  integer(I_P)                    :: s   !< Counter.
+  class(uom),   intent(in) :: lhs !< Left hand side.
+  integer(I2P), intent(in) :: rhs !< Right hand side.
+  type(uom)                :: opr !< Operator result.
+  integer(I_P)             :: s   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -786,12 +786,12 @@ contains
 
   function pow_I1P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `unit_generic ** integer(I1P)` operator.
+  !< `uom ** integer(I1P)` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(unit_generic), intent(in) :: lhs !< Left hand side.
-  integer(I1P),        intent(in) :: rhs !< Right hand side.
-  type(unit_generic)              :: opr !< Operator result.
-  integer(I_P)                    :: s   !< Counter.
+  class(uom),   intent(in) :: lhs !< Left hand side.
+  integer(I1P), intent(in) :: rhs !< Right hand side.
+  type(uom)                :: opr !< Operator result.
+  integer(I_P)             :: s   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -803,4 +803,4 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
-endmodule fury_unit_generic
+endmodule fury_uom

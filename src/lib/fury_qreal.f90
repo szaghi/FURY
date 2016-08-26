@@ -4,7 +4,7 @@ module fury_qreal
 !< FURY class definition of real quantity with associated unit of measure.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_unit_generic
+use fury_uom
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -18,8 +18,8 @@ public :: qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: qreal
   !< Real quantity with associated unit of measure.
-  real(R_P),                        public :: magnitude=0._R_P !< Magnitude of the quantity.
-  class(unit_generic), allocatable, public :: unit             !< Unit of measure of the quantity.
+  real(R_P),               public :: magnitude=0._R_P !< Magnitude of the quantity.
+  class(uom), allocatable, public :: unit             !< Unit of measure of the quantity.
   contains
     ! public methods
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
@@ -85,9 +85,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of qreal quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),           intent(in), optional :: magnitude !< Magnitude of the quantity.
-  class(unit_generic), intent(in), optional :: unit      !< Unit of measure of the quantity.
-  type(qreal)                               :: quantity  !< The quantity.
+  real(R_P),  intent(in), optional :: magnitude !< Magnitude of the quantity.
+  class(uom), intent(in), optional :: unit      !< Unit of measure of the quantity.
+  type(qreal)                      :: quantity  !< The quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -158,9 +158,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal),        intent(inout)        :: self      !< The quantity.
-  real(R_P),           intent(in), optional :: magnitude !< Magnitude of the quantity.
-  class(unit_generic), intent(in), optional :: unit      !< Unit of measure of the quantity.
+  class(qreal), intent(inout)        :: self      !< The quantity.
+  real(R_P),    intent(in), optional :: magnitude !< Magnitude of the quantity.
+  class(uom),   intent(in), optional :: unit      !< Unit of measure of the quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

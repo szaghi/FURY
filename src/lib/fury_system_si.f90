@@ -3,7 +3,7 @@ module fury_system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of *International System of Units*.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_generic
+use fury_uom
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -17,9 +17,9 @@ public :: system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: system_si
   !< International System of Units.
-  character(len=:),   allocatable :: acronym            !< Units system acronym, e.g. "SI" for the International System.
-  type(unit_generic), allocatable :: units(:)           !< Defined units.
-  integer(I_P)                    :: units_number=0_I_P !< Number of units.
+  character(len=:), allocatable :: acronym            !< Units system acronym, e.g. "SI" for the International System.
+  type(uom),        allocatable :: units(:)           !< Defined units.
+  integer(I_P)                  :: units_number=0_I_P !< Number of units.
   contains
     ! public deferred methods
     ! procedure, pass(self) :: add_unit   !< Add a new unit.

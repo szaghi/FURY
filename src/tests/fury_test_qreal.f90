@@ -1,4 +1,4 @@
-!< FURY test of [[unit generic]].
+!< FURY test of [[qreal]].
 program fury_test_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY test of [[qreal]].
@@ -7,24 +7,24 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal)        :: force1          !< A force.
-type(qreal)        :: force2          !< A force.
-type(qreal)        :: force3          !< A force.
-type(unit_generic) :: u_acceleration  !< Acceleration unit.
-type(unit_generic) :: u_force         !< Force unit.
-type(unit_generic) :: u_length        !< Length unit.
-type(unit_generic) :: u_mass          !< Mass unit.
-type(unit_generic) :: u_speed         !< Speed unit.
-type(unit_generic) :: u_time          !< Time unit.
-logical            :: test_passed(27) !< List of passed tests.
+type(qreal) :: force1          !< A force.
+type(qreal) :: force2          !< A force.
+type(qreal) :: force3          !< A force.
+type(uom)   :: u_acceleration  !< Acceleration unit.
+type(uom)   :: u_force         !< Force unit.
+type(uom)   :: u_length        !< Length unit.
+type(uom)   :: u_mass          !< Mass unit.
+type(uom)   :: u_speed         !< Speed unit.
+type(uom)   :: u_time          !< Time unit.
+logical     :: test_passed(27) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-u_length = unit_generic(source='m [length]', name='metre')
-u_mass = unit_generic(source='kg [mass]', name='kilogram')
-u_time = unit_generic(source='s [time]', name='second')
+u_length = uom(source='m [length]', name='metre')
+u_mass = uom(source='kg [mass]', name='kilogram')
+u_time = uom(source='s [time]', name='second')
 
 u_speed = u_length / u_time
 u_acceleration = u_speed / u_time
