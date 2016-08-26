@@ -14,9 +14,6 @@ all_passed () {
 
 declare -a tests_executed
 
-echo "Run all tests"
-# non intentionally failing tests
-echo
 echo "Run non intentionally failing tests"
 for e in $( find ./exe/ -type f -executable -print | grep -v failure); do
   is_passed=`$e | grep -i "Are all tests passed? " | awk '{print $5}'`
@@ -29,14 +26,12 @@ for e in $( find ./exe/ -type f -executable -print | grep -v failure); do
   fi
 done
 passed=$(all_passed tests_executed)
-echo "Number of tests executed ${#tests_executed[@]}"
 if [ $passed -eq 1 ]; then
-  echo "All non intentionally failing tests passed"
+  echo "All tests passed"
 else
-  echo "Some non intentionally failing tests failed"
+  echo "Some tests failed"
   exit 1
 fi
-# intentionally failing tests
 echo
 echo "Run intentionally failing tests"
 for e in $( find ./exe/ -type f -executable -print | grep failure); do
@@ -55,11 +50,12 @@ for e in $( find ./exe/ -type f -executable -print | grep failure); do
   fi
 done
 passed=$(all_passed tests_executed)
-echo "Number of tests executed ${#tests_executed[@]}"
 if [ $passed -eq 1 ]; then
-  echo "All intentionally failing tests passed"
+  echo "All tests passed"
 else
-  echo "Some intentionally failing tests failed"
+  echo "Some tests failed"
   exit 1
 fi
+echo
+echo "Number of tests executed ${#tests_executed[@]}"
 exit 0

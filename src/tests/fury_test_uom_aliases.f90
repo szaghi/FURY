@@ -10,7 +10,7 @@ use fury
 type(uom) :: si_frequency   !< SI frequency unit.
 type(uom) :: si_pressure    !< SI pressure unit.
 type(uom) :: a_unit         !< A unit.
-logical   :: test_passed(4) !< List of passed tests.
+logical   :: test_passed(9) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,6 +34,33 @@ call a_unit%unset
 a_unit = si_frequency / uom('s-1 = Hz = hertz [frequency]')
 test_passed(4) = a_unit%stringify()=='Hz0'
 print "(A,L1)", 'Hz/s-1 = '//a_unit%stringify()//', is correct? ', test_passed(4)
+
+call a_unit%unset
+a_unit = uom('kHz = 1000 * hertz = 1000 * s-1 [frequency]')
+test_passed(5) = a_unit%stringify(with_alias=.true.)==&
+                 'kHz = +0.100000000000000E+004 * hertz = +0.100000000000000E+004 * s-1'
+print "(A,L1)", 'kHz = 1000 * hertz = 1000 * s-1 [frequency] == '//a_unit%stringify(with_alias=.true., compact_reals=.true.)//&
+  ', is correct? ', test_passed(5)
+
+call a_unit%unset
+a_unit = si_frequency / uom('kHz = 1000 * Hz [frequency]')
+test_passed(6) = a_unit%stringify()=='+0.100000000000000E-002 * Hz0'
+print "(A,L1)", 'Hz/kHz == '//a_unit%stringify(compact_reals=.true.)//', is correct? ', test_passed(6)
+
+call a_unit%unset
+a_unit = uom('kHz = 1000 * Hz [frequency]') / si_frequency
+test_passed(7) = a_unit%stringify()=='kHz0'
+print "(A,L1)", 'kHz/Hz == '//a_unit%stringify()//', is correct? ', test_passed(7)
+
+call a_unit%unset
+a_unit = si_frequency * uom('kHz = 1000 * Hz [frequency]')
+test_passed(8) = a_unit%stringify()=='+0.100000000000000E+004 * Hz2'
+print "(A,L1)", 'Hz*kHz == '//a_unit%stringify(compact_reals=.true.)//', is correct? ', test_passed(8)
+
+call a_unit%unset
+a_unit = uom('kHz = 1000 * Hz [frequency]') * si_frequency
+test_passed(9) = a_unit%stringify()=='kHz2'
+print "(A,L1)", 'kHz*Hz == '//a_unit%stringify()//', is correct? ', test_passed(9)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
