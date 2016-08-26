@@ -4,7 +4,7 @@ module fury_uom
 !< FURY definition of *generic* unit class.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_unit_symbol
+use fury_uom_symbol
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -41,10 +41,10 @@ type :: uom
   !<
   !< @note It is better to avoid to uncomplete list of dimensions for symbols: define all dimensions for all symbols or avoid to
   !< define dimensions at all.
-  type(unit_symbol), allocatable :: symbols(:)           !< Symbol(s) of the unit.
-  type(unit_symbol), allocatable :: alias                !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(len=:),  allocatable :: name                 !< Unit name.
-  integer(I_P), private          :: symbols_number=0_I_P !< Symbols number.
+  type(uom_symbol), allocatable          :: symbols(:)           !< Symbol(s) of the unit.
+  type(uom_symbol), allocatable, private :: alias                !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
+  integer(I_P),                  private :: symbols_number=0_I_P !< Symbols number.
+  character(len=:), allocatable          :: name                 !< Unit name.
   contains
     ! public methods
     procedure, pass(self) :: add_symbol          !< Add a symbol to unit.
@@ -100,10 +100,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from an input source string..
   !---------------------------------------------------------------------------------------------------------------------------------
-  character(*),      intent(in)           :: source !< Source input string definition of the unit.
-  type(unit_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),      intent(in), optional :: name   !< Unit name.
-  type(uom)                               :: unit   !< The unit.
+  character(*),     intent(in)           :: source !< Source input string definition of the unit.
+  type(uom_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),     intent(in), optional :: name   !< Unit name.
+  type(uom)                              :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -116,10 +116,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from another unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  type(uom),         intent(in)           :: source !< Source input unit.
-  type(unit_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),      intent(in), optional :: name   !< Unit name.
-  type(uom)                               :: unit   !< The unit.
+  type(uom),        intent(in)           :: source !< Source input unit.
+  type(uom_symbol), intent(in), optional :: alias  !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),     intent(in), optional :: name   !< Unit name.
+  type(uom)                              :: unit   !< The unit.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -194,9 +194,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),        intent(inout) :: self       !< The unit.
-  type(unit_symbol), intent(in)    :: symbol     !< Unit symbol.
-  type(unit_symbol), allocatable   :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
+  class(uom),       intent(inout) :: self       !< The unit.
+  type(uom_symbol), intent(in)    :: symbol     !< Unit symbol.
+  type(uom_symbol), allocatable   :: symbols(:) !< Litteral symbol(s), e.g. "m.s-1" for metres/seconds, array var.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -218,9 +218,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add symbols to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),        intent(inout) :: self        !< The unit.
-  type(unit_symbol), intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
-  integer(I_P)                     :: s           !< Counter.
+  class(uom),       intent(inout) :: self        !< The unit.
+  type(uom_symbol), intent(in)    :: symbols(1:) !< Litteral symbol(s), e.g. "m.s-1" for metres/second.
+  integer(I_P)                    :: s           !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -277,10 +277,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),        intent(in) :: self       !< The unit.
-  type(unit_symbol), intent(in) :: symbol     !< Symbol to check the presence of.
-  logical                       :: has_symbol !< Symbol presence status.
-  integer(I_P)                  :: s          !< Counter.
+  class(uom),       intent(in) :: self       !< The unit.
+  type(uom_symbol), intent(in) :: symbol     !< Symbol to check the presence of.
+  logical                      :: has_symbol !< Symbol presence status.
+  integer(I_P)                 :: s          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -332,10 +332,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),        intent(inout)         :: self        !< The unit.
-  type(unit_symbol), intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
-  type(unit_symbol), intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),      intent(in),  optional :: name        !< Unit name.
+  class(uom),       intent(inout)         :: self        !< The unit.
+  type(uom_symbol), intent(in),  optional :: symbols(1:) !< Symbol(s) of the unit.
+  type(uom_symbol), intent(in),  optional :: alias       !< Alias symbol of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),     intent(in),  optional :: name        !< Unit name.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -509,7 +509,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  self%symbols = parse_unit_symbols(symbols=source%chars())
+  self%symbols = parse_uom_symbols(symbols=source%chars())
   call self%update_symbols_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse_symbols
@@ -594,13 +594,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom / uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)         :: lhs            !< Left hand side.
-  class(uom), intent(in)         :: rhs            !< Right hand side.
-  type(uom)                      :: opr            !< Operator result.
-  type(unit_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                   :: ls             !< Counter.
-  integer(I_P)                   :: rs             !< Counter.
+  class(uom), intent(in)        :: lhs            !< Left hand side.
+  class(uom), intent(in)        :: rhs            !< Right hand side.
+  type(uom)                     :: opr            !< Operator result.
+  type(uom_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
+  type(uom_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                  :: ls             !< Counter.
+  integer(I_P)                  :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -652,13 +652,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom * uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)         :: lhs            !< Left hand side.
-  class(uom), intent(in)         :: rhs            !< Right hand side.
-  type(uom)                      :: opr            !< Operator result.
-  type(unit_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
-  type(unit_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
-  integer(I_P)                   :: ls             !< Counter.
-  integer(I_P)                   :: rs             !< Counter.
+  class(uom), intent(in)        :: lhs            !< Left hand side.
+  class(uom), intent(in)        :: rhs            !< Right hand side.
+  type(uom)                     :: opr            !< Operator result.
+  type(uom_symbol), allocatable :: lhs_symbols(:) !< Left hand side symbols.
+  type(uom_symbol), allocatable :: rhs_symbols(:) !< Right hand side symbols.
+  integer(I_P)                  :: ls             !< Counter.
+  integer(I_P)                  :: rs             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

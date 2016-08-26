@@ -7,7 +7,6 @@ module fury
 use fury_qreal
 use fury_system_si
 use fury_uom
-use fury_unit_symbol
 
 ! PENF objects
 use penf
@@ -20,7 +19,6 @@ private
 public :: qreal
 public :: system_si
 public :: uom
-public :: unit_symbol
 
 ! PENF objects
 ! kinds
