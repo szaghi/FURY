@@ -22,7 +22,7 @@ test_passed(1) = a_unit == si_pressure
 print "(A,L1)", 'Pa = '//si_pressure%stringify()//', is correct? ', test_passed(1)
 
 test_passed(2) = si_pressure%has_reference(reference=a_unit%references(1))
-print "(A,L1)", si_pressure%stringify(with_alias=.true.)//' has symbol Pa, is correct? ', test_passed(2)
+print "(A,L1)", si_pressure%stringify(with_aliases=.true.)//' has symbol Pa, is correct? ', test_passed(2)
 
 si_frequency = 'Hz [frequency]'
 call a_unit%unset
@@ -37,9 +37,9 @@ print "(A,L1)", 'Hz/s-1 = '//a_unit%stringify()//', is correct? ', test_passed(4
 
 call a_unit%unset
 a_unit = uom('kHz = 1000 * hertz = 1000 * s-1 [frequency]')
-test_passed(5) = a_unit%stringify(with_alias=.true.)==&
+test_passed(5) = a_unit%stringify(with_aliases=.true.)==&
                  'kHz = +0.100000000000000E+004 * hertz = +0.100000000000000E+004 * s-1'
-print "(A,L1)", 'kHz = 1000 * hertz = 1000 * s-1 [frequency] == '//a_unit%stringify(with_alias=.true., compact_reals=.true.)//&
+print "(A,L1)", 'kHz = 1000 * hertz = 1000 * s-1 [frequency] == '//a_unit%stringify(with_aliases=.true., compact_reals=.true.)//&
   ', is correct? ', test_passed(5)
 
 call a_unit%unset

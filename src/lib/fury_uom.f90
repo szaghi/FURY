@@ -267,13 +267,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_defined
 
-  function stringify(self, with_dimensions, with_alias, compact_reals) result(raw)
+  function stringify(self, with_dimensions, with_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in)           :: self            !< The unit.
   logical,    intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
-  logical,    intent(in), optional :: with_alias      !< Flag to activate alias printing.
+  logical,    intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
   logical,    intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable    :: raw             !< Raw characters data.
   integer(I_P)                     :: s               !< Counter.
@@ -283,7 +283,7 @@ contains
   if (self%is_defined()) then
     raw = ''
     do s=1, self%references_number
-      raw = raw//'.'//self%references(s)%stringify(with_aliases=with_alias, compact_reals=compact_reals)
+      raw = raw//'.'//self%references(s)%stringify(with_aliases=with_aliases, compact_reals=compact_reals)
     enddo
     raw = raw(2:)
     if (present(with_dimensions)) then
@@ -295,8 +295,8 @@ contains
         raw(len(raw):len(raw)) = ']'
       endif
     endif
-    if (present(with_alias)) then
-      if (with_alias.and.self%has_alias()) then
+    if (present(with_aliases)) then
+      if (with_aliases.and.self%has_alias()) then
         raw = raw//' ('//self%alias%stringify(with_dimensions=with_dimensions, compact_reals=compact_reals)//')'
       endif
     endif

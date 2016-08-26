@@ -26,6 +26,7 @@ type :: qreal
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
+    procedure, pass(self) :: to              !< Convert quantity with respect one of its defined unit aliases.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
@@ -172,13 +173,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  function stringify(self, format, with_dimensions) result(raw)
+  function stringify(self, format, with_dimensions, with_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representaion of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in)           :: self            !< The quantity.
   character(*), intent(in), optional :: format          !< Format to pring magnitude.
   logical,      intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
+  logical,      intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
+  logical,      intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable      :: raw             !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,13 +189,31 @@ contains
   if (present(format)) then
     raw = trim(str(fm=format, n=self%magnitude))
   else
-    raw = trim(str(n=self%magnitude))
+    raw = trim(str(n=self%magnitude, compact=compact_reals))
   endif
   if (self%is_unit_defined()) then
-    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions)
+    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions, with_aliases=with_aliases, compact_reals=compact_reals)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
+
+  function to(self, alias) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Convert quantity with respect one of its defined unit aliases.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self      !< The quantity.
+  character(*), intent(in) :: alias     !< Unit alias.
+  type(qreal)              :: converted !< Quantity converted.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  converted = self
+  if (self%is_unit_defined()) then
+    if (self%unit%has_alias()) then
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction to
 
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +224,10 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   self%magnitude = 0._R_P
-  if (allocated(self%unit)) deallocate(self%unit)
+  if (allocated(self%unit)) then
+    call self%unit%unset
+    deallocate(self%unit)
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
