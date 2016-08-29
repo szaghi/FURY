@@ -1,10 +1,11 @@
-!< FURY definition of *generic* unit class.
+!< FURY definition of unit of measure class.
 module fury_uom
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of *generic* unit class.
+!< FURY definition of unit of measure class.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom_reference
+use fury_uom_symbol
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -17,7 +18,7 @@ public :: uom
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: uom
-  !< Generic prototype of *unit*.
+  !< Unit of measure (UOM) class.
   !<
   !< The string format definition of a valid FURY unit is as following:
   !<
@@ -42,39 +43,42 @@ type :: uom
   !<
   !< @note It is better to avoid to uncomplete list of dimensions for references: define all dimensions for all references
   !< or avoid to define dimensions at all.
-  type(uom_reference), allocatable          :: references(:)           !< Reference units of the unit.
+  type(uom_reference), allocatable, private :: references(:)           !< Reference units of the unit.
   type(uom_reference), allocatable, private :: alias                   !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
   integer(I_P),                     private :: references_number=0_I_P !< References number.
   character(len=:), allocatable             :: name                    !< Unit name.
   contains
     ! public methods
-    procedure, pass(self) :: has_alias     !< Check if the unit has an alias.
-    procedure, pass(self) :: has_name      !< Check if the unit has a name.
     procedure, pass(self) :: has_reference !< Check if the unit has a refence unit.
-    procedure, pass(self) :: is_compatible !< Check if unit is compatible with another one.
     procedure, pass(self) :: is_defined    !< Check if the unit is defined.
+    procedure, pass(self) :: set           !< Set the unit.
     procedure, pass(self) :: stringify     !< Return a string representaion of the unit.
-    procedure, pass(self) :: unset         !< Set the unit.
+    procedure, pass(self) :: unset         !< unset the unit.
     ! public generic names
     generic :: assignment(=) => assign_string, &
-                                assign_uom         !< Overloading `=` operator.
-    generic :: operator(+) => add                  !< Overloading `+` operator.
-    generic :: operator(/) => div                  !< Overloading `/` operator.
-    generic :: operator(*) => mul                  !< Overloading `*` operator.
-    generic :: operator(-) => sub                  !< Overloading `-` operator.
+                                assign_uom             !< Overloading `=` operator.
+    generic :: operator(+) => add                      !< Overloading `+` operator.
+    generic :: operator(/) => div                      !< Overloading `/` operator.
+    generic :: operator(*) => mul                      !< Overloading `*` operator.
+    generic :: operator(-) => sub                      !< Overloading `-` operator.
     generic :: operator(**) => pow_I8P, pow_I4P, &
-                               pow_I2P, pow_I1P    !< Overloading `**` operator.
-    generic :: operator(==) => is_equal            !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
+                               pow_I2P, pow_I1P        !< Overloading `**` operator.
+    generic :: operator(==) => is_equal                !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
+    generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
     procedure, pass(self), private :: add_reference            !< Add a refence unit to unit.
+    ! procedure, pass(self) :: get_alias_scale          !< Get the scale factor from an alias.
+    procedure, pass(self), private :: has_alias                !< Check if the unit has an alias.
+    procedure, pass(self), private :: has_name                 !< Check if the unit has a name.
+    procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible refence unit.
+    procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
     procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
     procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
     procedure, pass(self), private :: parse                    !< Parse unit definition from an input string.
     procedure, pass(self), private :: parse_alias              !< Parse unit alias from an input string.
     procedure, pass(self), private :: parse_name               !< Parse unit name from an input string.
     procedure, pass(self), private :: parse_references         !< Parse refence units from an input string.
-    procedure, pass(self), private :: set                      !< Set the unit.
     procedure, pass(self), private :: update_references_number !< Update refence units number counter.
     ! operators
     procedure, pass(lhs), private :: assign_string !< `uom = string` assignament.
@@ -111,7 +115,7 @@ contains
   call unit%set(alias=alias, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator_from_string
-
+!
   function creator_from_other_unit(source, alias, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of unit from another unit.
@@ -169,6 +173,7 @@ contains
   write(stderr, '(A)')'  error: left and right terms of "'//operation//'" have incompatible units!'
   write(stderr, '(A)')'  LHS: '//lhs%stringify(with_dimensions=.true.)
   write(stderr, '(A)')'  RHS: '//rhs%stringify(with_dimensions=.true.)
+  stop
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_incompatibility
 
@@ -189,32 +194,65 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine raise_error_disequality
 
+  subroutine remove_reference(references, id)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Remove a reference from a list of rerefences.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  type(uom_reference), intent(inout), allocatable :: references(:)     !< References list.
+  integer(I_P),        intent(in)                 :: id                !< Index of reference to remove.
+  type(uom_reference), allocatable                :: references_tmp(:) !< References list temporary copy.
+  integer(I_P)                                    :: references_number !< References number.
+  integer(I_P)                                    :: i                 !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  references_number = size(references, dim=1)
+  allocate(references_tmp(1:references_number-1))
+  if (id==1) then
+    do i=2, references_number
+      references_tmp(i-1) = references(i)
+    enddo
+  elseif (id==references_number )  then
+    do i=1, references_number-1
+      references_tmp(i) = references(i)
+    enddo
+  else
+    do i=1, id-1
+      references_tmp(i) = references(i)
+    enddo
+    do i=id, references_number-1
+      references_tmp(i) = references(i+1)
+    enddo
+  endif
+  call move_alloc(from=references_tmp, to=references)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine remove_reference
+
   ! public methods
-  elemental function has_alias(self)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has an alias.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self      !< The unit.
-  logical                :: has_alias !< Alias presence status.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_alias = allocated(self%alias)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_alias
-
-  elemental function has_name(self)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has a name.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self     !< The unit.
-  logical                :: has_name !< Name presence status.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_name = allocated(self%name)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_name
+! function get_alias_scale(self, alias_unit) result(scale_factor)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Get the scale factor from an alias.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom), intent(in) :: self         !< The uom.
+! type(uom),  intent(in) :: alias_unit   !< Alias symbol queried.
+! real(R_P)              :: scale_factor !< Symbol scale factor.
+! integer(I_P)           :: r            !< Counter.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+!     print*, 'cazzo ', self%stringify(), alias_unit%stringify(), self%references_number
+! scale_factor = 1._R_P
+! if (self%is_defined().and.alias_unit%is_defined().and.self%references_number==alias_unit%references_number) then
+!   do r=1, self%references_number
+!     if (alias_unit%references(r)%is_compatible(self%references(r))) then
+!       scale_factor = scale_factor * alias_unit%references(r)%get_alias_scale(self%references(r)%symbol)
+!     print*, 'cazzo ', scale_factor
+!     else
+!     endif
+!   enddo
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction get_alias_scale
 
   elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -223,14 +261,14 @@ contains
   class(uom),          intent(in) :: self          !< The unit.
   type(uom_reference), intent(in) :: reference     !< Reference unit to check the presence of.
   logical                         :: has_reference !< reference unit presence status.
-  integer(I_P)                    :: s             !< Counter.
+  integer(I_P)                    :: r             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   has_reference = .false.
   if (self%is_defined()) then
-    do s=1, self%references_number
-      has_reference = self%references(s) == reference
+    do r=1, self%references_number
+      has_reference = self%references(r) == reference
       if (has_reference) exit
     enddo
     if (.not.has_reference) then
@@ -240,32 +278,49 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_reference
 
-  elemental function is_compatible(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is compatible with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self          !< The unit.
-  class(uom), intent(in) :: other         !< The other unit.
-  logical                :: is_compatible !< Compatibility check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_compatible = .true.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_compatible
-
   elemental function is_defined(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has been defined, namely it has defined references.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self       !< The unit.
   logical                :: is_defined !< Definition status.
+  integer                :: r          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   is_defined = allocated(self%references)
+  if (is_defined) then
+    do r=1, self%references_number
+      is_defined = self%references(r)%is_defined()
+      if (.not.is_defined) exit
+    enddo
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_defined
+
+  subroutine set(self, references, alias, name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Set the unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(inout)         :: self           !< The unit.
+  type(uom_reference), intent(in),  optional :: references(1:) !< Unit references of the unit.
+  type(uom_reference), intent(in),  optional :: alias          !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+  character(*),        intent(in),  optional :: name           !< Unit name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (present(references)) then
+    if (allocated(self%references)) deallocate(self%references)
+    self%references = references
+  endif
+  call self%update_references_number()
+  if (present(alias)) then
+    if (.not.allocated(self%alias)) allocate(self%alias)
+    self%alias = alias
+  endif
+  if (present(name)) self%name = name
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine set
 
   function stringify(self, with_dimensions, with_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -314,8 +369,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (allocated(self%references)) deallocate(self%references)
   if (allocated(self%alias)) deallocate(self%alias)
-  if (allocated(self%name)) deallocate(self%name)
   self%references_number = 0_I_P
+  if (allocated(self%name)) deallocate(self%name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -326,13 +381,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom),          intent(inout) :: self          !< The unit.
   type(uom_reference), intent(in)    :: reference     !< Unit reference to be added.
-  type(uom_reference), allocatable   :: references(:) !< Reference unit(s), e.g. "m.s-1" for metres/seconds.
+  type(uom_reference), allocatable   :: references(:) !< Reference unit(s) temporary array.
+  integer(I_P)                       :: r             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (self%is_defined().and.(.not.self%has_reference(reference=reference))) then
     allocate(references(self%references_number+1))
-    references(1:self%references_number) = self%references
+    ! references(1:self%references_number) = self%references
+    do r=1, self%references_number
+      references(r) = self%references(r)
+    enddo
     references(self%references_number+1) = reference
     call move_alloc(from=references, to=self%references)
     self%references_number = self%references_number + 1_I_P
@@ -344,6 +403,89 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_reference
 
+  elemental function has_alias(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has an alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self      !< The unit.
+  logical                :: has_alias !< Alias presence status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_alias = allocated(self%alias)
+  if (has_alias) has_alias = self%alias%is_defined()
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_alias
+
+  elemental function has_name(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has a name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self     !< The unit.
+  logical                :: has_name !< Name presence status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_name = allocated(self%name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_name
+
+  elemental function has_reference_compatible(self, reference)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has a compatible reference unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(in) :: self                     !< The unit.
+  type(uom_reference), intent(in) :: reference                !< Reference unit to check the presence of.
+  logical                         :: has_reference_compatible !< reference unit presence status.
+  integer(I_P)                    :: r                        !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_reference_compatible = .false.
+  if (self%is_defined()) then
+    do r=1, self%references_number
+      has_reference_compatible = self%references(r).compatible.reference
+      if (has_reference_compatible) exit
+    enddo
+    if (.not.has_reference_compatible) then
+      if (self%has_alias()) has_reference_compatible = self%alias.compatible.reference
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_reference_compatible
+
+  elemental function is_compatible(self, other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if unit is compatible with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self          !< The unit.
+  class(uom), intent(in) :: other         !< The other unit.
+  logical                :: is_compatible !< Compatibility check result.
+  integer(I_P)           :: r             !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_compatible = .false.
+  if (self%is_defined().and.other%is_defined()) then
+    is_compatible = (self%references_number==other%references_number)
+    if (is_compatible) then
+      do r=1, self%references_number
+        is_compatible = other%has_reference_compatible(reference=self%references(r))
+        if (.not.is_compatible) exit
+      enddo
+    endif
+    if (.not.is_compatible) then
+      ! compare against alias
+      if (self%has_alias().and.other%references_number==1) then
+        is_compatible = other%references(1).compatible.self%alias
+      elseif (other%has_alias().and.self%references_number==1) then
+        is_compatible = self%references(1).compatible.other%alias
+      endif
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_compatible
+
   elemental function is_equal(self, other)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if unit is equal (has the same references units) with another one.
@@ -351,7 +493,7 @@ contains
   class(uom), intent(in) :: self     !< The unit.
   class(uom), intent(in) :: other    !< The other unit.
   logical                :: is_equal !< Equality check result.
-  integer(I_P)           :: s        !< Counter.
+  integer(I_P)           :: r        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -359,8 +501,8 @@ contains
   if (self%is_defined().and.other%is_defined()) then
     is_equal = (self%references_number==other%references_number)
     if (is_equal) then
-      do s=1, self%references_number
-        is_equal = other%has_reference(reference=self%references(s))
+      do r=1, self%references_number
+        is_equal = other%has_reference(reference=self%references(r))
         if (.not.is_equal) exit
       enddo
     endif
@@ -400,6 +542,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  call self%unset
   source_str = trim(adjustl(source))
   call self%parse_name(source=source_str)
   call self%parse_alias(source=source_str)
@@ -464,36 +607,26 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse references units form an input string.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),   intent(inout) :: self   !< The unit.
-  type(string), intent(in)    :: source !< Input source string.
+  class(uom),   intent(inout) :: self          !< The unit.
+  type(string), intent(in)    :: source        !< Input source string.
+  type(string)                :: buffer        !< String buffer.
+  type(string), allocatable   :: tokens(:)     !< String tokens.
+  integer(I_P)                :: tokens_number !< Tokens number.
+  integer(I_P)                :: t             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  self%references = parse_uom_references(source=source%chars())
+  buffer = source
+  call buffer%split(tokens=tokens, sep='.')
+  tokens_number = size(tokens, dim=1)
+  if (allocated(self%references)) deallocate(self%references)
+  allocate(self%references(1:tokens_number))
+  do t=1, tokens_number
+    call self%references(t)%parse(source=tokens(t)%chars())
+  enddo
   call self%update_references_number()
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse_references
-
-  subroutine set(self, references, alias, name)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set the unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),          intent(inout)         :: self           !< The unit.
-  type(uom_reference), intent(in),  optional :: references(1:) !< Unit references of the unit.
-  type(uom_reference), intent(in),  optional :: alias          !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),        intent(in),  optional :: name           !< Unit name.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (present(references)) self%references = references
-  call self%update_references_number()
-  if (present(alias)) then
-    if (.not.allocated(self%alias)) allocate(self%alias)
-    self%alias = alias
-  endif
-  if (present(name)) self%name = name
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine set
 
   subroutine update_references_number(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -539,13 +672,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (rhs%is_defined())  then
     if (.not.lhs%is_defined())  then
-      lhs%references = rhs%references
+      if (allocated(lhs%references)) deallocate(lhs%references)
+      ! lhs%references = rhs%references ! possible GNU bug
+      allocate(lhs%references, source=rhs%references)
+      lhs%references_number = rhs%references_number
       if (allocated(rhs%alias)) then
         if (.not.allocated(lhs%alias)) allocate(lhs%alias)
         lhs%alias = rhs%alias
       endif
       if (allocated(rhs%name)) lhs%name = rhs%name
-      lhs%references_number = rhs%references_number
     else
       if (.not.lhs==rhs) call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
@@ -575,34 +710,30 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom / uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)           :: lhs            !< Left hand side.
-  class(uom), intent(in)           :: rhs            !< Right hand side.
-  type(uom)                        :: opr            !< Operator result.
+  class(uom), intent(in)           :: lhs               !< Left hand side.
+  class(uom), intent(in)           :: rhs               !< Right hand side.
+  type(uom)                        :: opr               !< Operator result.
   type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
   type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
-  integer(I_P)                     :: ls             !< Counter.
-  integer(I_P)                     :: rs             !< Counter.
+  integer(I_P)                     :: ls                !< Counter.
+  integer(I_P)                     :: rs                !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    lhs_references = lhs%references
-    rhs_references = rhs%references
+    ! lhs_references = lhs%references ! possible GNU bug
+    ! rhs_references = rhs%references ! possible GNU bug
+    allocate(lhs_references, source=lhs%references)
+    allocate(rhs_references, source=rhs%references)
     do ls=1, size(lhs_references, dim=1)
       rs = 1
       remaining_rhs_references: do
-        if (lhs_references(ls)%is_compatible(other=rhs_references(rs))) then
+        if (lhs_references(ls).compatible.rhs_references(rs)) then
           lhs_references(ls) = lhs_references(ls) / rhs_references(rs)
           ! pop up current reference from rhs references
           if (size(rhs_references, dim=1)>1) then
-            if (rs==1) then
-              rhs_references = rhs_references(rs+1:)
-            elseif (rs==size(rhs_references, dim=1))  then
-              rhs_references = rhs_references(1:rs-1)
-            else
-              rhs_references = [rhs_references(1:rs-1), rhs_references(rs+1:)]
-            endif
+            call remove_reference(references=rhs_references, id=rs)
             rs = 1
           else
             deallocate(rhs_references)
@@ -633,34 +764,30 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom * uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)           :: lhs            !< Left hand side.
-  class(uom), intent(in)           :: rhs            !< Right hand side.
-  type(uom)                        :: opr            !< Operator result.
+  class(uom), intent(in)           :: lhs               !< Left hand side.
+  class(uom), intent(in)           :: rhs               !< Right hand side.
+  type(uom)                        :: opr               !< Operator result.
   type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
   type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
-  integer(I_P)                     :: ls             !< Counter.
-  integer(I_P)                     :: rs             !< Counter.
+  integer(I_P)                     :: ls                !< Counter.
+  integer(I_P)                     :: rs                !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    lhs_references = lhs%references
-    rhs_references = rhs%references
+    ! lhs_references = lhs%references ! possible GNU bug
+    ! rhs_references = rhs%references ! possible GNU bug
+    allocate(lhs_references, source=lhs%references)
+    allocate(rhs_references, source=rhs%references)
     do ls=1, size(lhs_references, dim=1)
       rs = 1
       remaining_rhs_references: do
-        if (lhs_references(ls)%is_compatible(other=rhs_references(rs))) then
+        if (lhs_references(ls).compatible.rhs_references(rs)) then
           lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
           ! pop up current reference from rhs references
           if (size(rhs_references, dim=1)>1) then
-            if (rs==1) then
-              rhs_references = rhs_references(rs+1:)
-            elseif (rs==size(rhs_references, dim=1))  then
-              rhs_references = rhs_references(1:rs-1)
-            else
-              rhs_references = [rhs_references(1:rs-1), rhs_references(rs+1:)]
-            endif
+            call remove_reference(references=rhs_references, id=rs)
             rs = 1
           else
             deallocate(rhs_references)
@@ -691,14 +818,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom - uom` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)  :: lhs !< Left hand side.
-  class(uom), intent(in)  :: rhs !< Right hand side.
-  class(uom), allocatable :: opr !< Operator result.
+  class(uom), intent(in) :: lhs !< Left hand side.
+  class(uom), intent(in) :: rhs !< Right hand side.
+  type(uom)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (lhs==rhs) then
-    allocate(opr, source=lhs)
+    opr = lhs
   else
     call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS - RHS')
   endif
@@ -712,15 +839,18 @@ contains
   class(uom),   intent(in) :: lhs !< Left hand side.
   integer(I8P), intent(in) :: rhs !< Right hand side.
   type(uom)                :: opr !< Operator result.
-  integer(I_P)             :: s   !< Counter.
+  integer(I_P)             :: r   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (opr%is_defined()) then
-    do s=1, size(opr%references, dim=1)
-      opr%references(s) = opr%references(s) ** rhs
+    do r=1, size(opr%references, dim=1)
+      opr%references(r) = opr%references(r) ** rhs
     enddo
+    if (opr%has_alias()) then
+      if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I8P
@@ -732,15 +862,18 @@ contains
   class(uom),   intent(in) :: lhs !< Left hand side.
   integer(I4P), intent(in) :: rhs !< Right hand side.
   type(uom)                :: opr !< Operator result.
-  integer(I_P)             :: s   !< Counter.
+  integer(I_P)             :: r   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (opr%is_defined()) then
-    do s=1, size(opr%references, dim=1)
-      opr%references(s) = opr%references(s) ** rhs
+    do r=1, size(opr%references, dim=1)
+      opr%references(r) = opr%references(r) ** rhs
     enddo
+    if (opr%has_alias()) then
+      if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I4P
@@ -752,15 +885,18 @@ contains
   class(uom),   intent(in) :: lhs !< Left hand side.
   integer(I2P), intent(in) :: rhs !< Right hand side.
   type(uom)                :: opr !< Operator result.
-  integer(I_P)             :: s   !< Counter.
+  integer(I_P)             :: r   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (opr%is_defined()) then
-    do s=1, size(opr%references, dim=1)
-      opr%references(s) = opr%references(s) ** rhs
+    do r=1, size(opr%references, dim=1)
+      opr%references(r) = opr%references(r) ** rhs
     enddo
+    if (opr%has_alias()) then
+      if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I2P
@@ -772,15 +908,18 @@ contains
   class(uom),   intent(in) :: lhs !< Left hand side.
   integer(I1P), intent(in) :: rhs !< Right hand side.
   type(uom)                :: opr !< Operator result.
-  integer(I_P)             :: s   !< Counter.
+  integer(I_P)             :: r   !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (opr%is_defined()) then
-    do s=1, size(opr%references, dim=1)
-      opr%references(s) = opr%references(s) ** rhs
+    do r=1, size(opr%references, dim=1)
+      opr%references(r) = opr%references(r) ** rhs
     enddo
+    if (opr%has_alias()) then
+      if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P

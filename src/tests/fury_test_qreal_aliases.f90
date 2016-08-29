@@ -26,7 +26,7 @@ speed1 = qreal(magnitude=1._R_P, unit=u_speed_km_h)
 speed2 = qreal(magnitude=2._R_P, unit=u_speed_m_s)
 
 print "(A)", 'An error will be raised (if all go rigth)'
-speed3 = speed1%to('m.s-1') + speed2
+! speed3 = speed1%to('m.s-1') + speed2
 test_passed(1) = speed3%stringify(format='(F3.1)')=='3.0 km.h-1'
 print "(A,L1)", '1.0 km.h-1 + 2.0 m.s = '//speed3%stringify(format='(F3.1)')//', is correct? ', test_passed(1)
 

@@ -7,10 +7,11 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom) :: si_frequency   !< SI frequency unit.
-type(uom) :: si_pressure    !< SI pressure unit.
-type(uom) :: a_unit         !< A unit.
-logical   :: test_passed(9) !< List of passed tests.
+type(uom)           :: si_frequency     !< SI frequency unit.
+type(uom)           :: si_pressure      !< SI pressure unit.
+type(uom)           :: a_unit           !< A unit.
+type(uom_reference) :: a_unit_reference !< A unit reference.
+logical             :: test_passed(9)   !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -21,8 +22,9 @@ si_pressure = 'kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}'
 test_passed(1) = a_unit == si_pressure
 print "(A,L1)", 'Pa = '//si_pressure%stringify()//', is correct? ', test_passed(1)
 
-test_passed(2) = si_pressure%has_reference(reference=a_unit%references(1))
-print "(A,L1)", si_pressure%stringify(with_aliases=.true.)//' has symbol Pa, is correct? ', test_passed(2)
+a_unit_reference = uom_reference('kg')
+test_passed(2) = si_pressure%has_reference(reference=a_unit_reference)
+print "(A,L1)", si_pressure%stringify(with_aliases=.true.)//' has symbol kg, is correct? ', test_passed(2)
 
 si_frequency = 'Hz [frequency]'
 call a_unit%unset
