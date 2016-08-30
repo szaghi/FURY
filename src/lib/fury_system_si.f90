@@ -87,12 +87,12 @@ contains
   self%units(25) = 'kg [mass].m2 [length2].s-3 [time-3] (W[power]) {watt}'
   self%units(26) = 'kg [mass].m2 [length2].s-2 [time-2].A-1 [current-1] (Wb[magnetic_flux]) {weber}'
   ! USCS units for conversions
-  self%units(27) = 'in = 0.0254 * m = inch [length] {internaltion_inch}'
-  self%units(28) = 'yd = 0.9144 * m = yard [length] {internaltion_yard}'
-  self%units(29) = 'ft = 0.3048 * m = foot [length] {internaltion_foot}'
-  self%units(30) = 'mi = 1609.34 * m = mile [length] {internaltion_mile}'
-  self%units(31) = 'pound = 0.453592 * kg [mass] {internaltion_pound}'
-  self%units(32) = 'oz = 0.0283495 * kg = ounce [mass] {internaltion_ounce}'
+  self%units(27) = 'in< = 0.0254 * m = inch> [length] {internaltion_inch}'
+  self%units(28) = 'yd< = 0.9144 * m = yard> [length] {internaltion_yard}'
+  self%units(29) = 'ft< = 0.3048 * m = foot> [length] {internaltion_foot}'
+  self%units(30) = 'mi< = 1609.34 * m = mile> [length] {internaltion_mile}'
+  self%units(31) = 'lb< = 0.453592 * kg = pound> [mass] {internaltion_pound}'
+  self%units(32) = 'oz< = 0.0283495 * kg = ounce> [mass] {internaltion_ounce}'
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize
 

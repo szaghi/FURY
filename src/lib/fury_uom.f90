@@ -617,14 +617,51 @@ contains
   class(uom),   intent(inout) :: self          !< The unit.
   type(string), intent(in)    :: source        !< Input source string.
   type(string)                :: buffer        !< String buffer.
+  type(string)                :: alias         !< String buffer.
+  type(string)                :: aliases       !< String buffer.
+  integer(I_P)                :: istart        !< Starting index of alias tag inside the string.
+  integer(I_P)                :: iend          !< Ending index of alias tag inside the string.
   type(string), allocatable   :: tokens(:)     !< String tokens.
   integer(I_P)                :: tokens_number !< Tokens number.
   integer(I_P)                :: t             !< Counter.
+  integer(I_P)                :: offset        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   buffer = source
-  call buffer%split(tokens=tokens, sep='.')
+  if (buffer%count('<')>0) then
+    ! aliases are protected because there are alias formulas with "." conflicting with "." symbols separators
+    aliases = repeat(' ', buffer%len())
+    do while(buffer%count('<')>0)
+      alias = buffer%search(tag_start='<', tag_end='>', istart=istart, iend=iend)
+      buffer = buffer%replace(old=alias%chars(), new=repeat(' ', alias%len()))
+      aliases = aliases%slice(1, istart-1)//alias//aliases%slice(iend+1, aliases%len())
+    enddo
+    if (aliases/='') then
+      call buffer%split(tokens=tokens, sep='.')
+      tokens_number = size(tokens, dim=1)
+      offset = 0
+      do t=1, tokens_number
+        if (t>1) offset = offset + tokens(t-1)%len() + 1
+        do while(aliases%count('<')>0)
+          alias = aliases%search(tag_start='<', tag_end='>', istart=istart, iend=iend)
+          if (iend<=tokens(t)%len()+offset) then
+            tokens(t) = tokens(t)%slice(1, istart-offset-1)//alias//tokens(t)%slice(iend-offset+1, tokens(t)%len())
+            aliases = aliases%replace(old=alias%chars(), new=repeat(' ', alias%len()))
+          else
+            exit
+          endif
+        enddo
+      enddo
+      do t=1, tokens_number
+        tokens(t) = tokens(t)%replace(old='<', new='')
+        tokens(t) = tokens(t)%replace(old='>', new='')
+      enddo
+    endif
+  else
+    ! aliases are not protected, symbols can be safely tokenized by "."
+    call buffer%split(tokens=tokens, sep='.')
+  endif
   tokens_number = size(tokens, dim=1)
   if (allocated(self%references)) deallocate(self%references)
   allocate(self%references(1:tokens_number))
