@@ -3,7 +3,7 @@ module fury_system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY definition of *International System of Units*.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use fury_unit_generic
+use fury_uom
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -17,9 +17,9 @@ public :: system_si
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: system_si
   !< International System of Units.
-  character(len=:),   allocatable :: acronym            !< Units system acronym, e.g. "SI" for the International System.
-  type(unit_generic), allocatable :: units(:)           !< Defined units.
-  integer(I_P)                    :: units_number=0_I_P !< Number of units.
+  character(len=:), allocatable :: acronym            !< Units system acronym, e.g. "SI" for the International System.
+  type(uom),        allocatable :: units(:)           !< Defined units.
+  integer(I_P)                  :: units_number=0_I_P !< Number of units.
   contains
     ! public deferred methods
     ! procedure, pass(self) :: add_unit   !< Add a new unit.
@@ -89,13 +89,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize
 
-  function list_units(self, with_dimensions, with_alias) result(raw)
+  function list_units(self, with_dimensions, with_aliases) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the list defined units.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(system_si), intent(in)           :: self            !< The unit.
   logical,          intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
-  logical,          intent(in), optional :: with_alias      !< Flag to activate alias printing.
+  logical,          intent(in), optional :: with_aliases    !< Flag to activate alias printing.
   character(len=:), allocatable          :: raw             !< Raw characters data.
   integer(I_P)                           :: u               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ contains
   if (self%units_number>0) then
     do u=1, self%units_number
       raw = raw//new_line('a')//' '//trim(strz(n=u, nz_pad=3))//'. '//self%units(u)%name//': '//&
-        self%units(u)%stringify(with_dimensions=with_dimensions, with_alias=with_alias)
+        self%units(u)%stringify(with_dimensions=with_dimensions, with_aliases=with_aliases)
     enddo
     raw = raw(2:)
   endif

@@ -4,7 +4,7 @@ module fury_qreal
 !< FURY class definition of real quantity with associated unit of measure.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_unit_generic
+use fury_uom
 use penf
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -18,14 +18,15 @@ public :: qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: qreal
   !< Real quantity with associated unit of measure.
-  real(R_P),                        public :: magnitude=0._R_P !< Magnitude of the quantity.
-  class(unit_generic), allocatable, public :: unit             !< Unit of measure of the quantity.
+  real(R_P),               public :: magnitude=0._R_P !< Magnitude of the quantity.
+  class(uom), allocatable, public :: unit             !< Unit of measure of the quantity.
   contains
     ! public methods
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
+    procedure, pass(self) :: to              !< Convert quantity with respect one of its defined unit aliases.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
@@ -85,9 +86,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of qreal quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),           intent(in), optional :: magnitude !< Magnitude of the quantity.
-  class(unit_generic), intent(in), optional :: unit      !< Unit of measure of the quantity.
-  type(qreal)                               :: quantity  !< The quantity.
+  real(R_P),  intent(in), optional :: magnitude !< Magnitude of the quantity.
+  class(uom), intent(in), optional :: unit      !< Unit of measure of the quantity.
+  type(qreal)                      :: quantity  !< The quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +138,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   compatible = .false.
-  if (self%is_unit_defined().and.other%is_unit_defined()) compatible = self%unit%is_compatible(other%unit)
+  if (self%is_unit_defined().and.other%is_unit_defined()) compatible = self%unit.compatible.other%unit
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
 
@@ -158,9 +159,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal),        intent(inout)        :: self      !< The quantity.
-  real(R_P),           intent(in), optional :: magnitude !< Magnitude of the quantity.
-  class(unit_generic), intent(in), optional :: unit      !< Unit of measure of the quantity.
+  class(qreal), intent(inout)        :: self      !< The quantity.
+  real(R_P),    intent(in), optional :: magnitude !< Magnitude of the quantity.
+  class(uom),   intent(in), optional :: unit      !< Unit of measure of the quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -172,13 +173,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  function stringify(self, format, with_dimensions) result(raw)
+  function stringify(self, format, with_dimensions, with_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representaion of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in)           :: self            !< The quantity.
   character(*), intent(in), optional :: format          !< Format to pring magnitude.
   logical,      intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
+  logical,      intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
+  logical,      intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable      :: raw             !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,13 +189,35 @@ contains
   if (present(format)) then
     raw = trim(str(fm=format, n=self%magnitude))
   else
-    raw = trim(str(n=self%magnitude))
+    raw = trim(str(n=self%magnitude, compact=compact_reals))
   endif
   if (self%is_unit_defined()) then
-    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions)
+    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions, with_aliases=with_aliases, compact_reals=compact_reals)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
+
+  function to(self, alias) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Convert quantity with respect one of its defined unit aliases.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self      !< The quantity.
+  type(uom),    intent(in) :: alias     !< Unit alias.
+  type(qreal)              :: converted !< Quantity converted.
+  real(R_P)                :: factor    !< Whole scale factor.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_unit_defined().and.alias%is_defined()) then
+    factor = self%unit%get_conversion_factor(alias)
+    converted%magnitude = factor * self%magnitude
+    allocate(converted%unit)
+    converted%unit = alias
+  else
+    converted = self
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction to
 
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +228,10 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   self%magnitude = 0._R_P
-  if (allocated(self%unit)) deallocate(self%unit)
+  if (allocated(self%unit)) then
+    call self%unit%unset
+    deallocate(self%unit)
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
