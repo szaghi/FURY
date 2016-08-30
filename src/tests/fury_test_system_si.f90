@@ -22,6 +22,7 @@ test_passed = .true.
 
 call system%initialize
 print "(A)", 'List of defined units in "'//system%acronym//'" system:'
+! print "(A)", system%list_units(with_dimensions=.true., with_aliases=.true., compact_reals=.true.)
 print "(A)", system%list_units(with_dimensions=.true., with_aliases=.true.)
 
 ! si_speed = uom(symbols='m [length].s-1 [time]')

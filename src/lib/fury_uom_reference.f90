@@ -247,7 +247,7 @@ contains
     stop
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
-    call self%dimensions%set(factor_ = self%aliases(1)%get_factor())
+    call self%dimensions%set(factor_ = 1._R_P)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
@@ -298,7 +298,6 @@ contains
     if (present(with_dimensions)) then
       if (with_dimensions) raw = raw//' ['//self%dimensionality()//']'
     endif
-
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify

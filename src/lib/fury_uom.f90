@@ -335,6 +335,7 @@ contains
   logical,    intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
   logical,    intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable    :: raw             !< Raw characters data.
+  character(len=:), allocatable    :: dimensions      !< Dimensions in raw characters data.
   integer(I_P)                     :: s               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -347,11 +348,13 @@ contains
     raw = raw(2:)
     if (present(with_dimensions)) then
       if (with_dimensions) then
-        raw = raw//' ['
+        dimensions = ''
         do s=1, self%references_number
-          raw = raw//self%references(s)%dimensionality()//'.'
+          dimensions = dimensions//self%references(s)%dimensionality()//'.'
         enddo
-        raw(len(raw):len(raw)) = ']'
+        if (dimensions(1:1)=='.') dimensions = dimensions(2:)
+        if (dimensions(len(dimensions):len(dimensions))=='.') dimensions = dimensions(:len(dimensions)-1)
+        raw = raw//' ['//dimensions//']'
       endif
     endif
     if (present(with_aliases)) then
