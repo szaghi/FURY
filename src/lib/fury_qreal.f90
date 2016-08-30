@@ -26,7 +26,7 @@ type :: qreal
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
     procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
-    ! procedure, pass(self) :: to              !< Convert quantity with respect one of its defined unit aliases.
+    procedure, pass(self) :: to              !< Convert quantity with respect one of its defined unit aliases.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
@@ -197,30 +197,27 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
-! function to(self, alias) result(converted)
-! !---------------------------------------------------------------------------------------------------------------------------------
-! !< Convert quantity with respect one of its defined unit aliases.
-! !---------------------------------------------------------------------------------------------------------------------------------
-! class(qreal), intent(in) :: self           !< The quantity.
-! character(*), intent(in) :: alias          !< Unit alias.
-! type(qreal)              :: converted      !< Quantity converted.
-! type(uom)                :: alias_unit     !< Unit alias typed.
-! type(uom)                :: alias_unit_all !< Unit alias typed preserving all data (dimensions, aliases...).
-! real(R_P)                :: scale_factor   !< Whole scale factor.
-! !---------------------------------------------------------------------------------------------------------------------------------
-!
-! !alias m.s-1
-! !self km.h-1
-! !---------------------------------------------------------------------------------------------------------------------------------
-! converted = self
-! scale_factor = 1._R_P
-! if (self%is_unit_defined()) then
-!   alias_unit = uom(alias)
-!   ! scale_factor = self%unit%get_alias_scale(alias_unit=alias_unit)
-!   print*, 'cazzo ', scale_factor
-! endif
-! !---------------------------------------------------------------------------------------------------------------------------------
-! endfunction to
+  function to(self, alias) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Convert quantity with respect one of its defined unit aliases.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self      !< The quantity.
+  type(uom),    intent(in) :: alias     !< Unit alias.
+  type(qreal)              :: converted !< Quantity converted.
+  real(R_P)                :: factor    !< Whole scale factor.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_unit_defined().and.alias%is_defined()) then
+    factor = self%unit%get_conversion_factor(alias)
+    converted%magnitude = factor * self%magnitude
+    allocate(converted%unit)
+    converted%unit = alias
+  else
+    converted = self
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction to
 
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------

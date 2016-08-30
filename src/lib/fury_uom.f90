@@ -49,11 +49,12 @@ type :: uom
   character(len=:), allocatable             :: name                    !< Unit name.
   contains
     ! public methods
-    procedure, pass(self) :: has_reference !< Check if the unit has a refence unit.
-    procedure, pass(self) :: is_defined    !< Check if the unit is defined.
-    procedure, pass(self) :: set           !< Set the unit.
-    procedure, pass(self) :: stringify     !< Return a string representaion of the unit.
-    procedure, pass(self) :: unset         !< unset the unit.
+    procedure, pass(self) :: get_conversion_factor !< Get the scale factor from an alias.
+    procedure, pass(self) :: has_reference         !< Check if the unit has a refence unit.
+    procedure, pass(self) :: is_defined            !< Check if the unit is defined.
+    procedure, pass(self) :: set                   !< Set the unit.
+    procedure, pass(self) :: stringify             !< Return a string representaion of the unit.
+    procedure, pass(self) :: unset                 !< unset the unit.
     ! public generic names
     generic :: assignment(=) => assign_string, &
                                 assign_uom             !< Overloading `=` operator.
@@ -68,7 +69,6 @@ type :: uom
     generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
     procedure, pass(self), private :: add_reference            !< Add a refence unit to unit.
-    ! procedure, pass(self) :: get_alias_scale          !< Get the scale factor from an alias.
     procedure, pass(self), private :: has_alias                !< Check if the unit has an alias.
     procedure, pass(self), private :: has_name                 !< Check if the unit has a name.
     procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible refence unit.
@@ -229,30 +229,33 @@ contains
   endsubroutine remove_reference
 
   ! public methods
-! function get_alias_scale(self, alias_unit) result(scale_factor)
-! !---------------------------------------------------------------------------------------------------------------------------------
-! !< Get the scale factor from an alias.
-! !---------------------------------------------------------------------------------------------------------------------------------
-! class(uom), intent(in) :: self         !< The uom.
-! type(uom),  intent(in) :: alias_unit   !< Alias symbol queried.
-! real(R_P)              :: scale_factor !< Symbol scale factor.
-! integer(I_P)           :: r            !< Counter.
-! !---------------------------------------------------------------------------------------------------------------------------------
-!
-! !---------------------------------------------------------------------------------------------------------------------------------
-!     print*, 'cazzo ', self%stringify(), alias_unit%stringify(), self%references_number
-! scale_factor = 1._R_P
-! if (self%is_defined().and.alias_unit%is_defined().and.self%references_number==alias_unit%references_number) then
-!   do r=1, self%references_number
-!     if (alias_unit%references(r)%is_compatible(self%references(r))) then
-!       scale_factor = scale_factor * alias_unit%references(r)%get_alias_scale(self%references(r)%symbol)
-!     print*, 'cazzo ', scale_factor
-!     else
-!     endif
-!   enddo
-! endif
-! !---------------------------------------------------------------------------------------------------------------------------------
-! endfunction get_alias_scale
+  function get_conversion_factor(self, alias) result(factor)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Get the scale factor from an alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self       !< The uom.
+  type(uom),  intent(in) :: alias      !< Alias uom queried.
+  real(R_P)              :: factor     !< Symbol scale factor.
+  type(uom_symbol)       :: s_main     !< Main self reference symbol.
+  type(uom_symbol)       :: a_main     !< Main alias reference symbol.
+  type(uom_symbol)       :: conversion !< Conversion uom symbol.
+  integer(I_P)           :: r          !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  factor = 1._R_P
+  if (self%is_defined().and.alias%is_defined().and.self%references_number==alias%references_number) then
+    do r=1, self%references_number
+      if (alias%references(r).compatible.self%references(r)) then
+        s_main = self%references(r)%get_main_symbol()
+        a_main = alias%references(r)%get_first_compatible_alias(self%references(r))
+        conversion = s_main%to(a_main)
+        factor = factor * conversion%get_factor()
+      endif
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_conversion_factor
 
   elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -288,7 +291,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  is_defined = allocated(self%references)
+  is_defined = allocated(self%references) ! possible GNU bug
+  ! is_defined = (self%references_number>0)
   if (is_defined) then
     do r=1, self%references_number
       is_defined = self%references(r)%is_defined()

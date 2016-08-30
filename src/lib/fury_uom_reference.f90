@@ -45,6 +45,7 @@ type :: uom_reference
     ! public methods
     procedure, pass(self) :: dimensionality             !< Return a string representaion of the symbol dimensions.
     procedure, pass(self) :: get_first_compatible_alias !< Get first alias compatible with symbol queried.
+    procedure, pass(self) :: get_main_symbol            !< Return the main symbol, i.e. aliases(1).
     procedure, pass(self) :: has_alias                  !< Check if the symbol has the queried alias.
     procedure, pass(self) :: has_dimensions             !< Check if the symbol dimensions has been defined.
     procedure, pass(self) :: is_defined                 !< Check if the symbol is defined.
@@ -135,6 +136,19 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_first_compatible_alias
+
+  function get_main_symbol(self) result(alias)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the main symbol, i.e. aliases(1).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in)  :: self  !< The uom reference.
+  type(uom_symbol)                  :: alias !< First compatible alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) alias = self%aliases(1)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_main_symbol
 
   elemental function has_alias(self, alias)
   !---------------------------------------------------------------------------------------------------------------------------------
