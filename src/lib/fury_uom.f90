@@ -4,6 +4,7 @@ module fury_uom
 !< FURY definition of unit of measure class.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
+use fury_prefixes
 use fury_uom_reference
 use fury_uom_symbol
 use penf
@@ -50,8 +51,13 @@ type :: uom
   contains
     ! public methods
     procedure, pass(self) :: get_conversion_factor !< Get the scale factor from an alias.
+    procedure, pass(self) :: get_main_aliases      !< Return the main aliases.
+    procedure, pass(self) :: get_main_dimensions   !< Return the main dimensions.
+    procedure, pass(self) :: get_main_reference    !< Return the main reference.
+    procedure, pass(self) :: get_main_symbol       !< Return the main symbol.
     procedure, pass(self) :: has_reference         !< Check if the unit has a refence unit.
     procedure, pass(self) :: is_defined            !< Check if the unit is defined.
+    procedure, pass(self) :: prefixed_unit         !< Return prefixed unit.
     procedure, pass(self) :: set                   !< Set the unit.
     procedure, pass(self) :: stringify             !< Return a string representaion of the unit.
     procedure, pass(self) :: unset                 !< unset the unit.
@@ -257,6 +263,119 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_conversion_factor
 
+  function get_main_symbol(self) result(symbol)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the main symbol, i.e. `self%alias%aliases(1)%symbol_` if `self%alias` is defined or
+  !< `self%references(1)%aliases(1)%symbol_` if `self` has only 1 [[uom_reference]].
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in)  :: self              !< The uom.
+  type(string)            :: symbol            !< Main alias symbol.
+  type(uom_reference)     :: main_reference    !< Main uom reference.
+  type(uom_symbol)        :: main_alias_symbol !< Main alias symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  main_reference = self%get_main_reference()
+  if (main_reference%is_defined()) then
+    main_alias_symbol = main_reference%get_main_symbol()
+    if (main_alias_symbol%is_defined()) symbol = main_alias_symbol%get_symbol()
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_main_symbol
+
+  function get_main_aliases(self) result(aliases)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the main aliases, i.e. `self%alias%aliases(1)%aliases(:)%symbol_` if `self%alias` is defined or
+  !< `self%references(1)%aliases(1)%aliases(:)%symbol_` is `self` has only 1 [[uom_reference]].
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in)    :: self       !< The uom reference.
+  type(string), allocatable :: aliases(:) !< Main alias aliases.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    if (self%has_alias()) then
+      aliases = self%alias%get_aliases()
+    elseif (self%references_number==1) then
+      aliases = self%references(1)%get_aliases()
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_main_aliases
+
+  function get_main_dimensions(self) result(dimensions)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the main dimensions, i.e. `self%alias%dimensions%symbol_` if `self%alias` is defined or
+  !< `self%references(1)%dimensions%symbol_` if `self` has only 1 [[uom_reference]].
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in)  :: self       !< The uom reference.
+  type(string)            :: dimensions !< Main alias dimensions.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    if (self%has_alias()) then
+      dimensions = self%alias%dimensionality()
+    elseif (self%references_number==1) then
+      dimensions = self%references(1)%dimensionality()
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_main_dimensions
+
+  function get_main_reference(self) result(reference)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the main symbol, i.e. `self%alias` if `self%alias` is defined or `self%references(1)` if `self` has only 1
+  !< [[uom_reference]].
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self      !< The uom.
+  type(uom_reference)    :: reference !< Main uom reference.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    if (self%has_alias()) then
+      reference = self%alias
+    elseif (self%references_number==1) then
+      reference = self%references(1)
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_main_reference
+
+  function prefixed_unit(self, prefix)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return prefixed unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),     intent(in)    :: self                !< The unit.
+  type(prefixes), intent(in)    :: prefix              !< Prefixes data.
+  type(uom)                     :: prefixed_unit       !< Prefixed unit.
+  type(uom_reference)           :: prefixed_reference  !< Prefixed unit reference.
+  type(uom_symbol), allocatable :: prefixed_aliases(:) !< Prefixed unit symbol aliases.
+  type(uom_symbol)              :: prefixed_dimensions !< Prefixed unit symbol dimensions.
+  type(string)                  :: symbol              !< Base symbol to be prefixed.
+  integer(I_P)                  :: aliases_number      !< Counter.
+  integer(I_P)                  :: a                   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.prefix%is_defined()) then
+    prefixed_unit = self
+    symbol = prefixed_unit%get_main_symbol()
+    call prefixed_dimensions%set(symbol_=prefixed_unit%get_main_dimensions()//'')
+    aliases_number = size(prefix%aliases, dim=1)
+    allocate(prefixed_aliases(1:aliases_number+1))
+    do a=1, aliases_number
+      call prefixed_aliases(a)%set(symbol_=prefix%aliases(a)//symbol)
+    enddo
+    call prefixed_aliases(aliases_number+1)%set(symbol_=symbol%chars(), factor_=prefix%factor)
+    call prefixed_reference%set(aliases=prefixed_aliases, dimensions=prefixed_dimensions)
+    call prefixed_unit%set(references=[prefixed_reference])
+    if (prefixed_unit%has_name()) call prefixed_unit%set(name=prefix%aliases(1)//prefixed_unit%name)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed_unit
+
   elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the unit has a reference unit.
@@ -315,6 +434,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (present(references)) then
     if (allocated(self%references)) deallocate(self%references)
+    allocate(self%references(1:size(references, dim=1)))
     self%references = references
   endif
   call self%update_references_number()
@@ -326,13 +446,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  function stringify(self, with_dimensions, with_aliases, compact_reals) result(raw)
+  function stringify(self, with_dimensions, with_aliases, protect_aliases, with_name, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of the unit.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in)           :: self            !< The unit.
   logical,    intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
   logical,    intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
+  logical,    intent(in), optional :: protect_aliases !< Flag to activate aliases printing in protected mode.
+  logical,    intent(in), optional :: with_name       !< Flag to activate name printing.
   logical,    intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable    :: raw             !< Raw characters data.
   character(len=:), allocatable    :: dimensions      !< Dimensions in raw characters data.
@@ -343,7 +465,9 @@ contains
   if (self%is_defined()) then
     raw = ''
     do s=1, self%references_number
-      raw = raw//'.'//self%references(s)%stringify(with_aliases=with_aliases, compact_reals=compact_reals)
+      raw = raw//'.'//self%references(s)%stringify(with_aliases=with_aliases,       &
+                                                   protect_aliases=protect_aliases, &
+                                                   compact_reals=compact_reals)
     enddo
     raw = raw(2:)
     if (present(with_dimensions)) then
@@ -352,7 +476,7 @@ contains
         do s=1, self%references_number
           dimensions = dimensions//self%references(s)%dimensionality()//'.'
         enddo
-        if (dimensions(1:1)=='.') dimensions = dimensions(2:)
+        if (dimensions(1:1)=='.'.and.len(dimensions)>1) dimensions = dimensions(2:)
         if (dimensions(len(dimensions):len(dimensions))=='.') dimensions = dimensions(:len(dimensions)-1)
         raw = raw//' ['//dimensions//']'
       endif
@@ -360,6 +484,11 @@ contains
     if (present(with_aliases)) then
       if (with_aliases.and.self%has_alias()) then
         raw = raw//' ('//self%alias%stringify(with_dimensions=with_dimensions, compact_reals=compact_reals)//')'
+      endif
+    endif
+    if (present(with_name)) then
+      if (with_name.and.self%has_name()) then
+        raw = raw//' {'//self%name//'}'
       endif
     endif
   endif

@@ -44,6 +44,7 @@ type :: uom_reference
   contains
     ! public methods
     procedure, pass(self) :: dimensionality             !< Return a string representaion of the symbol dimensions.
+    procedure, pass(self) :: get_aliases                !< Return the aliases list.
     procedure, pass(self) :: get_first_compatible_alias !< Get first alias compatible with symbol queried.
     procedure, pass(self) :: get_main_symbol            !< Return the main symbol, i.e. aliases(1).
     procedure, pass(self) :: has_alias                  !< Check if the symbol has the queried alias.
@@ -109,6 +110,25 @@ contains
   if (self%is_defined().and.self%dimensions%is_defined()) raw = raw//self%dimensions%stringify()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction dimensionality
+
+  function get_aliases(self) result(aliases)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the aliases list.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  type(string), allocatable        :: aliases(:) !< Aliases.
+  integer(I_P)                     :: a          !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+      allocate(aliases(1:self%aliases_number))
+      do a=1, self%aliases_number
+        aliases(a) = self%aliases(a)%get_symbol()
+      enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_aliases
 
   function get_first_compatible_alias(self, other) result(alias)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -272,16 +292,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  pure function stringify(self, with_dimensions, with_aliases, compact_reals) result(raw)
+  pure function stringify(self, with_dimensions, with_aliases, protect_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in)           :: self             !< The uom reference.
-  logical,              intent(in), optional :: with_dimensions  !< Flag to activate dimensions printing.
-  logical,              intent(in), optional :: with_aliases     !< Flag to activate aliases printing.
-  logical,              intent(in), optional :: compact_reals    !< Flag to activate real numbers compacting.
-  character(len=:), allocatable              :: raw              !< Raw characters data.
-  integer(I_P)                               :: a                !< Counter.
+  class(uom_reference), intent(in)           :: self            !< The uom reference.
+  logical,              intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
+  logical,              intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
+  logical,              intent(in), optional :: protect_aliases !< Flag to activate aliases printing in protected mode.
+  logical,              intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
+  character(len=:), allocatable              :: raw             !< Raw characters data.
+  integer(I_P)                               :: a               !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -290,9 +311,15 @@ contains
     raw = raw//self%aliases(1)%stringify(compact_reals=compact_reals)
     if (present(with_aliases)) then
       if (with_aliases.and.self%aliases_number>1) then
+        if (present(protect_aliases)) then
+          if (protect_aliases) raw = raw//' <'
+        endif
         do a=2, self%aliases_number
           raw = raw//' = '//self%aliases(a)%stringify(compact_reals=compact_reals)
         enddo
+        if (present(protect_aliases)) then
+          if (protect_aliases) raw = raw//' >'
+        endif
       endif
     endif
     if (present(with_dimensions)) then
