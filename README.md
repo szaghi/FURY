@@ -23,6 +23,30 @@ A KISS pure Fortran Library for improving reliability of physical math computati
 - FURY is OOP designed;
 - FURY is a Free, Open Source Project.
 
+#### A taste of FURY
+
+```fortran
+use, intrinsic :: iso_fortran_env, only : real64
+use fury
+type(uom)   :: meter
+type(uom)   :: second
+type(qreal) :: distance_to_arrival
+type(qreal) :: time_to_arrival
+type(qreal) :: mean_velocity
+
+meter = uom('m = meter = metre [length] {meter}')
+second = uom('s = sec = second [time] {second}')
+
+distance_to_arrival = qreal(100._real64, meter)
+time_to_arrival = qreal(9.58_real64, second)
+
+mean_velocity = distance_to_arrival / time_to_arrival
+
+print "(A)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimensions=.true.)
+! print
+! Bolt's record speed: +0.104384133611691E+002 m.s-1 [length.time-1]
+```
+
 #### Issues
 
 [![GitHub issues](https://img.shields.io/github/issues/szaghi/FURY.svg)]()
