@@ -50,7 +50,12 @@ type :: uom_symbol
     generic :: assignment(=) => assign_uom_symbol      !< Overloading `=` assignament.
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
-    generic :: operator(**) => pow_I8P, pow_I4P, &
+    generic :: operator(**) =>                   &
+#ifdef r16p
+                               pow_R16P,         &
+#endif
+                               pow_R8P, pow_R4P, &
+                               pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
     generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
@@ -62,6 +67,9 @@ type :: uom_symbol
     procedure, pass(lhs),  private :: assign_uom_symbol !< `uom_symbol = uom_symbol` assignament.
     procedure, pass(lhs),  private :: div               !< `uom_symbol / uom_symbol` operator.
     procedure, pass(lhs),  private :: mul               !< `uom_symbol * uom_symbol` operator.
+    procedure, pass(lhs),  private :: pow_R16P          !< `uom_symbol ** real(R16P)` operator.
+    procedure, pass(lhs),  private :: pow_R8P           !< `uom_symbol ** real(R8P)` operator.
+    procedure, pass(lhs),  private :: pow_R4P           !< `uom_symbol ** real(R4P)` operator.
     procedure, pass(lhs),  private :: pow_I8P           !< `uom_symbol ** integer(I8P)` operator.
     procedure, pass(lhs),  private :: pow_I4P           !< `uom_symbol ** integer(I4P)` operator.
     procedure, pass(lhs),  private :: pow_I2P           !< `uom_symbol ** integer(I2P)` operator.
@@ -317,7 +325,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_uom_symbol
 
-  function div(lhs, rhs) result(opr)
+  pure function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_symbol / uom_symbol` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -352,6 +360,60 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
+
+  pure function pow_R16P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R16P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R16P),        intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R16P
+
+  pure function pow_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R8P),         intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R8P
+
+  pure function pow_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R4P),         intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R4P
 
   pure function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------

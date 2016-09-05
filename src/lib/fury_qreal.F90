@@ -30,49 +30,59 @@ type :: qreal
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
     generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
-    generic :: operator(+) => add                  !< Overloading `+` operator.
-    generic :: operator(/) => div,             &
-                              div_R8P, div_R4P,&
-                              div_I8P, div_I4P,&
+    generic :: operator(+) => add, positive        !< Overloading `+` operator.
+    generic :: operator(/) => div,              &
+                              div_R8P, div_R4P, &
+                              div_I8P, div_I4P, &
                               div_I2P, div_I1P     !< Overloading `/` operator.
-    generic :: operator(*) => mul,             &
-                              mul_R8P, mul_R4P,&
-                              mul_I8P, mul_I4P,&
-                              mul_I2P, mul_I1P,&
-                              R8P_mul, R4P_mul,&
-                              I8P_mul, I4P_mul,&
+    generic :: operator(*) => mul,              &
+                              mul_R8P, mul_R4P, &
+                              mul_I8P, mul_I4P, &
+                              mul_I2P, mul_I1P, &
+                              R8P_mul, R4P_mul, &
+                              I8P_mul, I4P_mul, &
                               I2P_mul, I1P_mul     !< Overloading `*` operator.
-    generic :: operator(-) => sub                  !< Overloading `-` operator.
-    generic :: operator(**) => pow_I8P, pow_I4P, &
+    generic :: operator(-) => sub, negative        !< Overloading `-` operator.
+    generic :: operator(**) =>                   &
+#ifdef r16p
+                               pow_R16P,         &
+#endif
+                               pow_R8P, pow_R4P, &
+                               pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P    !< Overloading `**` operator.
     ! private methods
-    procedure, pass(lhs), private :: assign_qreal !< `qreal = qreal` assignament.
-    procedure, pass(lhs), private :: add          !< `qreal + qreal` operator.
-    procedure, pass(lhs), private :: div          !< `qreal / qreal` operator.
-    procedure, pass(lhs), private :: div_R8P      !< `qreal / real(R8P)` operator.
-    procedure, pass(lhs), private :: div_R4P      !< `qreal / real(R4P)` operator.
-    procedure, pass(lhs), private :: div_I8P      !< `qreal / integer(I8P)` operator.
-    procedure, pass(lhs), private :: div_I4P      !< `qreal / integer(I4P)` operator.
-    procedure, pass(lhs), private :: div_I2P      !< `qreal / integer(I2P)` operator.
-    procedure, pass(lhs), private :: div_I1P      !< `qreal / integer(I1P)` operator.
-    procedure, pass(lhs), private :: mul          !< `qreal * qreal` operator.
-    procedure, pass(lhs), private :: mul_R8P      !< `qreal * real(R8P)` operator.
-    procedure, pass(lhs), private :: mul_R4P      !< `qreal * real(R4P)` operator.
-    procedure, pass(lhs), private :: mul_I8P      !< `qreal * integer(I8P)` operator.
-    procedure, pass(lhs), private :: mul_I4P      !< `qreal * integer(I4P)` operator.
-    procedure, pass(lhs), private :: mul_I2P      !< `qreal * integer(I2P)` operator.
-    procedure, pass(lhs), private :: mul_I1P      !< `qreal * integer(I1P)` operator.
-    procedure, pass(rhs), private :: R8P_mul      !< `real(R8P) * qreal` operator.
-    procedure, pass(rhs), private :: R4P_mul      !< `real(R4P) * qreal` operator.
-    procedure, pass(rhs), private :: I8P_mul      !< `integer(I8P) * qreal` operator.
-    procedure, pass(rhs), private :: I4P_mul      !< `integer(I4P) * qreal` operator.
-    procedure, pass(rhs), private :: I2P_mul      !< `integer(I2P) * qreal` operator.
-    procedure, pass(rhs), private :: I1P_mul      !< `integer(I1P) * qreal` operator.
-    procedure, pass(lhs), private :: sub          !< `qreal - qreal` operator.
-    procedure, pass(lhs), private :: pow_I8P      !< `qreal ** integer(I8P)` operator.
-    procedure, pass(lhs), private :: pow_I4P      !< `qreal ** integer(I4P)` operator.
-    procedure, pass(lhs), private :: pow_I2P      !< `qreal ** integer(I2P)` operator.
-    procedure, pass(lhs), private :: pow_I1P      !< `qreal ** integer(I1P)` operator.
+    procedure, pass(lhs),  private :: assign_qreal !< `qreal = qreal` assignament.
+    procedure, pass(lhs),  private :: add          !< `qreal + qreal` operator.
+    procedure, pass(self), private :: positive     !< ` + qreal` unary operator.
+    procedure, pass(lhs),  private :: div          !< `qreal / qreal` operator.
+    procedure, pass(lhs),  private :: div_R8P      !< `qreal / real(R8P)` operator.
+    procedure, pass(lhs),  private :: div_R4P      !< `qreal / real(R4P)` operator.
+    procedure, pass(lhs),  private :: div_I8P      !< `qreal / integer(I8P)` operator.
+    procedure, pass(lhs),  private :: div_I4P      !< `qreal / integer(I4P)` operator.
+    procedure, pass(lhs),  private :: div_I2P      !< `qreal / integer(I2P)` operator.
+    procedure, pass(lhs),  private :: div_I1P      !< `qreal / integer(I1P)` operator.
+    procedure, pass(lhs),  private :: mul          !< `qreal * qreal` operator.
+    procedure, pass(lhs),  private :: mul_R8P      !< `qreal * real(R8P)` operator.
+    procedure, pass(lhs),  private :: mul_R4P      !< `qreal * real(R4P)` operator.
+    procedure, pass(lhs),  private :: mul_I8P      !< `qreal * integer(I8P)` operator.
+    procedure, pass(lhs),  private :: mul_I4P      !< `qreal * integer(I4P)` operator.
+    procedure, pass(lhs),  private :: mul_I2P      !< `qreal * integer(I2P)` operator.
+    procedure, pass(lhs),  private :: mul_I1P      !< `qreal * integer(I1P)` operator.
+    procedure, pass(rhs),  private :: R8P_mul      !< `real(R8P) * qreal` operator.
+    procedure, pass(rhs),  private :: R4P_mul      !< `real(R4P) * qreal` operator.
+    procedure, pass(rhs),  private :: I8P_mul      !< `integer(I8P) * qreal` operator.
+    procedure, pass(rhs),  private :: I4P_mul      !< `integer(I4P) * qreal` operator.
+    procedure, pass(rhs),  private :: I2P_mul      !< `integer(I2P) * qreal` operator.
+    procedure, pass(rhs),  private :: I1P_mul      !< `integer(I1P) * qreal` operator.
+    procedure, pass(lhs),  private :: sub          !< `qreal - qreal` operator.
+    procedure, pass(self), private :: negative     !< ` - qreal` unary operator.
+    procedure, pass(lhs),  private :: pow_R16P     !< `qreal ** real(R16P)` operator.
+    procedure, pass(lhs),  private :: pow_R8P      !< `qreal ** real(R8P)` operator.
+    procedure, pass(lhs),  private :: pow_R4P      !< `qreal ** real(R4P)` operator.
+    procedure, pass(lhs),  private :: pow_I8P      !< `qreal ** integer(I8P)` operator.
+    procedure, pass(lhs),  private :: pow_I4P      !< `qreal ** integer(I4P)` operator.
+    procedure, pass(lhs),  private :: pow_I2P      !< `qreal ** integer(I2P)` operator.
+    procedure, pass(lhs),  private :: pow_I1P      !< `qreal ** integer(I1P)` operator.
 endtype qreal
 
 interface qreal
@@ -280,6 +290,20 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction add
+
+  function positive(self) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< ` + qreal` unary operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self !< The quantity.
+  type(qreal)              :: opr  !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = + self%magnitude
+  if (self%is_unit_defined()) allocate(opr%unit, source=self%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction positive
 
   function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -612,6 +636,74 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction sub
+
+  function negative(self) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< ` - qreal` unary operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self !< The quantity.
+  type(qreal)              :: opr  !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = - self%magnitude
+  if (self%is_unit_defined()) allocate(opr%unit, source=self%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction negative
+
+  function pow_R16P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** real(R16P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R16P),   intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R16P
+
+  function pow_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R8P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R8P
+
+  function pow_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal ** real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: lhs !< Left hand side.
+  real(R4P),    intent(in) :: rhs !< Right hand side.
+  type(qreal)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr%magnitude = lhs%magnitude ** rhs
+  if (lhs%is_unit_defined()) then
+    allocate(opr%unit)
+    opr%unit = lhs%unit ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R4P
 
   function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
