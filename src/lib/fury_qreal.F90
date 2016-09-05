@@ -5,7 +5,7 @@ module fury_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ public :: qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: qreal
   !< Real quantity with associated unit of measure.
-  real(R_P),               public :: magnitude=0._R_P !< Magnitude of the quantity.
+  real(RKP),               public :: magnitude=0._RKP !< Magnitude of the quantity.
   class(uom), allocatable, public :: unit             !< Unit of measure of the quantity.
   contains
     ! public methods
@@ -96,7 +96,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of qreal quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P),  intent(in), optional :: magnitude !< Magnitude of the quantity.
+  real(RKP),  intent(in), optional :: magnitude !< Magnitude of the quantity.
   class(uom), intent(in), optional :: unit      !< Unit of measure of the quantity.
   type(qreal)                      :: quantity  !< The quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ contains
   !< Set quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(inout)        :: self      !< The quantity.
-  real(R_P),    intent(in), optional :: magnitude !< Magnitude of the quantity.
+  real(RKP),    intent(in), optional :: magnitude !< Magnitude of the quantity.
   class(uom),   intent(in), optional :: unit      !< Unit of measure of the quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -214,7 +214,7 @@ contains
   class(qreal), intent(in) :: self      !< The quantity.
   type(uom),    intent(in) :: alias     !< Unit alias.
   type(qreal)              :: converted !< Quantity converted.
-  real(R_P)                :: factor    !< Whole scale factor.
+  real(RKP)                :: factor    !< Whole scale factor.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  self%magnitude = 0._R_P
+  self%magnitude = 0._RKP
   if (allocated(self%unit)) then
     call self%unit%unset
     deallocate(self%unit)

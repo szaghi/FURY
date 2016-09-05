@@ -3,7 +3,7 @@ module fury_uom_symbol
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY class definition of unit symbol.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ type :: uom_symbol
   !<
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   integer(I_P), private :: exponent_=1_I_P !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R_P),    private :: factor_=1._R_P  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),    private :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
   type(string), private :: symbol_         !< Litteral symbol, e.g. "m" for metres.
   contains
     ! public methods
@@ -128,7 +128,7 @@ contains
   !< Return the symbol factor.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_symbol), intent(in) :: self    !< The uom symbol.
-  real(R_P)                     :: factor_ !< The symbol factor.
+  real(RKP)                     :: factor_ !< The symbol factor.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ contains
   buffer = trim(adjustl(source))
   if (buffer%count('*') > 0) then
     call buffer%split(sep='*', tokens=tokens)
-    self%factor_ = cton(str=tokens(1)%chars(), knd=1._R_P)
+    self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
     buffer = tokens(2)
   endif
   e = buffer%scan(set='-0123456789')
@@ -183,7 +183,7 @@ contains
   class(uom_symbol), intent(inout)        :: self       !< The uom symbol.
   character(*),      intent(in), optional :: symbol_    !< Litteral symbol of the unit, e.g. "m" for metres.
   integer(I_P),      intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R_P),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%is_defined()) then
-    if (self%factor_/=1._R_P) then
+    if (self%factor_/=1._RKP) then
       raw = raw//trim(str(n=self%factor_, compact=compact_reals))//' * '
     endif
     raw = raw//self%symbol_
@@ -251,7 +251,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   call self%symbol_%free
   self%exponent_ = 1_I_P
-  self%factor_ = 1._R_P
+  self%factor_ = 1._RKP
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
