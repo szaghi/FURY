@@ -18,8 +18,9 @@ public :: qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 type :: qreal
   !< Real quantity with associated unit of measure.
-  real(RKP),               public :: magnitude=0._RKP !< Magnitude of the quantity.
-  class(uom), allocatable, public :: unit             !< Unit of measure of the quantity.
+  real(RKP),                     public :: magnitude=0._RKP !< Magnitude of the quantity.
+  class(uom),       allocatable, public :: unit             !< Unit of measure of the quantity.
+  character(len=:), allocatable, public :: name             !< Quantity name.
   contains
     ! public methods
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
@@ -50,7 +51,11 @@ type :: qreal
                                pow_R8P, pow_R4P, &
                                pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P    !< Overloading `**` operator.
+    generic :: operator(==) => is_equal            !< Overloading `==` operator.
+    generic :: operator(/=) => is_not_equal        !< Overloading `/=` operator.
     ! private methods
+    procedure, pass(self), private :: is_equal     !< Check if qreal is equal with another one.
+    procedure, pass(self), private :: is_not_equal !< Check if qreal is not equal with another one.
     procedure, pass(lhs),  private :: assign_qreal !< `qreal = qreal` assignament.
     procedure, pass(lhs),  private :: add          !< `qreal + qreal` operator.
     procedure, pass(self), private :: positive     !< ` + qreal` unary operator.
@@ -92,17 +97,18 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! non type bound procedures
-  function creator(magnitude, unit) result(quantity)
+  function creator(magnitude, unit, name) result(quantity)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Create an instance of qreal quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(RKP),  intent(in), optional :: magnitude !< Magnitude of the quantity.
-  class(uom), intent(in), optional :: unit      !< Unit of measure of the quantity.
-  type(qreal)                      :: quantity  !< The quantity.
+  real(RKP),    intent(in), optional :: magnitude !< Magnitude of the quantity.
+  class(uom),   intent(in), optional :: unit      !< Unit of measure of the quantity.
+  character(*), intent(in), optional :: name      !< Quantity name.
+  type(qreal)                        :: quantity  !< The quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  call quantity%set(magnitude=magnitude, unit=unit)
+  call quantity%set(magnitude=magnitude, unit=unit, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator
 
@@ -165,13 +171,14 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_unit_defined
 
-  subroutine set(self, magnitude, unit)
+  subroutine set(self, magnitude, unit, name)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set quantity.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(inout)        :: self      !< The quantity.
   real(RKP),    intent(in), optional :: magnitude !< Magnitude of the quantity.
   class(uom),   intent(in), optional :: unit      !< Unit of measure of the quantity.
+  character(*), intent(in), optional :: name      !< Quantity name.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -180,10 +187,11 @@ contains
     if (allocated(self%unit)) deallocate(self%unit)
     allocate(self%unit, source=unit)
   endif
+  if (present(name)) self%name = name
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
-  function stringify(self, format, with_dimensions, with_aliases, compact_reals) result(raw)
+  function stringify(self, format, with_dimensions, with_aliases, with_name, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representaion of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -191,15 +199,22 @@ contains
   character(*), intent(in), optional :: format          !< Format to pring magnitude.
   logical,      intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
   logical,      intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
+  logical,      intent(in), optional :: with_name       !< Flag to activate name printing.
   logical,      intent(in), optional :: compact_reals   !< Flag to activate real numbers compacting.
   character(len=:), allocatable      :: raw             !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
+  raw = ''
+  if (present(with_name)) then
+    if (with_name) then
+      if (allocated(self%name)) raw = raw//self%name//': '
+    endif
+  endif
   if (present(format)) then
-    raw = trim(str(fm=format, n=self%magnitude))
+    raw = raw//trim(str(fm=format, n=self%magnitude))
   else
-    raw = trim(str(n=self%magnitude, compact=compact_reals))
+    raw = raw//trim(str(n=self%magnitude, compact=compact_reals))
   endif
   if (self%is_unit_defined()) then
     raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions, with_aliases=with_aliases, compact_reals=compact_reals)
@@ -242,10 +257,47 @@ contains
     call self%unit%unset
     deallocate(self%unit)
   endif
+  if (allocated(self%name)) deallocate(self%name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
   ! private methods
+  elemental function is_equal(self, other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if qreal is equal with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self     !< The unit.
+  type(qreal),  intent(in) :: other    !< The other unit.
+  logical                  :: is_equal !< Equality check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_equal = (self%magnitude==other%magnitude)
+  if (is_equal) then
+    if (self%is_unit_defined().and.other%is_unit_defined()) then
+      is_equal = (self%unit==other%unit)
+    elseif ((self%is_unit_defined().and.(.not.other%is_unit_defined())).or.&
+            (.not.self%is_unit_defined().and.(other%is_unit_defined()))) then
+      is_equal = .false.
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_equal
+
+  elemental function is_not_equal(self, other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if qreal is not equal with another one.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self         !< The unit.
+  type(qreal),  intent(in) :: other        !< The other unit.
+  logical                  :: is_not_equal !< Disequality check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_not_equal = .not.self%is_equal(other=other)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction is_not_equal
+
   subroutine assign_qreal(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal = qreal` assignament.
@@ -257,9 +309,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (rhs%is_unit_defined()) then
     if (.not.lhs%is_unit_defined())  then
-      call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
+      call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit, name=rhs%name)
     elseif (lhs%unit == rhs%unit) then
-      call lhs%set(magnitude=rhs%magnitude)
+      call lhs%set(magnitude=rhs%magnitude, name=rhs%name)
     else
       call raise_error_disequality(lhs=lhs, rhs=rhs, operation='LHS = RHS')
     endif
