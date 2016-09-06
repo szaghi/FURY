@@ -6,7 +6,7 @@ module fury_uom
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom_reference
 use fury_uom_symbol
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,7 +186,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self       !< The uom.
   type(uom),  intent(in) :: alias      !< Alias uom queried.
-  real(R_P)              :: factor     !< Symbol scale factor.
+  real(RKP)              :: factor     !< Symbol scale factor.
   type(uom_symbol)       :: s_main     !< Main self reference symbol.
   type(uom_symbol)       :: a_main     !< Main alias reference symbol.
   type(uom_symbol)       :: conversion !< Conversion uom symbol.
@@ -194,7 +194,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  factor = 1._R_P
+  factor = 1._RKP
   if (self%is_defined().and.alias%is_defined().and.self%references_number==alias%references_number) then
     do r=1, self%references_number
       if (alias%references(r).compatible.self%references(r)) then
@@ -907,20 +907,29 @@ contains
     do ls=1, size(lhs_references, dim=1)
       rs = 1
       remaining_rhs_references: do
-        if (lhs_references(ls).compatible.rhs_references(rs)) then
-          lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
-          ! pop up current reference from rhs references
-          if (size(rhs_references, dim=1)>1) then
-            call remove_reference(references=rhs_references, id=rs)
-            rs = 1
+        if (allocated(rhs_references)) then
+          if (lhs_references(ls).compatible.rhs_references(rs)) then
+            lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
+            ! pop up current reference from rhs references
+            if (size(rhs_references, dim=1)>1) then
+              call remove_reference(references=rhs_references, id=rs)
+              rs = 1
+            else
+              deallocate(rhs_references)
+            endif
           else
-            deallocate(rhs_references)
+            ! check the next rhs references
+            rs = rs + 1
+          endif
+          ! if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
+          if (allocated(rhs_references)) then
+            if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
+          else
+            exit remaining_rhs_references
           endif
         else
-          ! check the next rhs references
-          rs = rs + 1
+          exit remaining_rhs_references
         endif
-        if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
       enddo remaining_rhs_references
     enddo
     opr%references = lhs_references

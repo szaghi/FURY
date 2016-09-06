@@ -22,7 +22,7 @@ print "(A)", SI%list_units(with_dimensions=.true., with_aliases=.true., with_nam
 print "(A)", 'List of defined prefixes in "'//SI%acronym//'" system:'
 print "(A)", SI%list_prefixes(with_aliases=.true., compact_reals=.true., prefix_string='  ')
 print "(A)", 'List of defined constants in "'//SI%acronym//'" system:'
-print "(A)", SI%list_constants(with_dimensions=.true., with_name=.true., compact_reals=.true., prefix_string='  ')
+print "(A)", SI%list_constants(with_name=.true., compact_reals=.true., prefix_string='  ')
 
 print "(A)", ''
 

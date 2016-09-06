@@ -6,7 +6,7 @@ module fury_system_abstract
 use fury_qreal
 use fury_uom
 use fury_uom_reference
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ type, abstract :: system_abstract
                                            add_prefix_uom_reference !< Add a new prefix.
     generic               :: add_unit => add_unit_string, &
                                          add_unit_uom               !< Add a new unit.
+    procedure, pass(self) :: const                                  !< Return an instance of the queried constant (if defined).
     procedure, pass(self) :: free                                   !< Free the units system.
     procedure, pass(self) :: list_constants                         !< Return the list of defined constants.
     procedure, pass(self) :: list_prefixes                          !< Return the list of defined prefixes.
@@ -68,6 +69,36 @@ endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! public methods
+  function const(self, c) result(const_)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return an instance of the queried constant (if defined).
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(system_abstract), intent(in) :: self       !< The system.
+  character(*),           intent(in) :: c          !< Constant name.
+  type(qreal)                        :: const_     !< The queried constant.
+  logical                            :: is_found   !< Flag to check if queried constant has been found.
+  integer(I_P)                       :: co         !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  is_found = .false.
+  if (self%constants_number>0) then
+    do co=1, self%constants_number
+      if (self%constants(co)%has_name()) then
+        if (trim(adjustl(c))==self%constants(co)%name) then
+          const_ = self%constants(co)
+          is_found = .true.
+          exit
+        endif
+      endif
+    enddo
+  endif
+  if (.not.is_found) then
+    ! raise an error
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction const
+
   elemental subroutine free(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Free the units system.
@@ -425,7 +456,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   unit = self%unit(u)
   if (unit%is_defined()) then
-    qunit_ = qreal(magnitude=1._R_P, unit=unit)
+    qunit_ = qreal(magnitude=1._RKP, unit=unit)
   else
     ! raise an error
   endif

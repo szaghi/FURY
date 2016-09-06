@@ -5,7 +5,7 @@ module fury_uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom_symbol
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -276,7 +276,7 @@ contains
     stop
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
-    call self%dimensions%set(factor_ = 1._R_P)
+    call self%dimensions%set(factor_ = 1._RKP)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
@@ -303,7 +303,7 @@ contains
       do s=1, self%aliases_number
         a = a + 1
         aliases(a) = self%aliases(s)%prefixed(prefix=prefixes%aliases(p))
-        call aliases(a)%set(factor_=1._R_P)
+        call aliases(a)%set(factor_=1._RKP)
       enddo
     enddo
     do s=1, self%aliases_number

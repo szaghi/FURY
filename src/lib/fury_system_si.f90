@@ -6,7 +6,7 @@ module fury_system_si
 use fury_qreal
 use fury_system_abstract
 use fury_uom
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -31,8 +31,13 @@ contains
   !<
   !< @todo Load from file.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(system_si), intent(inout)         :: self    !< The units system.
-  character(*),     intent(in),  optional :: acronym !< Units system acronym, e.g. "SI" for the International System.
+  class(system_si), intent(inout)         :: self      !< The units system.
+  character(*),     intent(in),  optional :: acronym   !< Units system acronym, e.g. "SI" for the International System.
+  type(qreal)                             :: c         !< Speed of light.
+  type(qreal)                             :: epsilon_0 !< Vacuum permittivity.
+  type(qreal)                             :: mu_0      !< Vacuum permeability.
+  type(qreal)                             :: pi        !< Pi greek.
+  type(qreal)                             :: Z_0       !< Vacuum impedance.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -115,8 +120,41 @@ contains
   call self%add_prefix('2.e70 * zebi = 2.e70 * Zi')
   call self%add_prefix('2.e80 * yobi = 2.e80 * Yi')
   ! common constants
-  call self%add_constant(qreal(magnitude=299792458_R_P, unit=self%unit('metre.second-1'), name='speed_of_light'))
-  call self%add_constant(qreal(magnitude=9.806650_R_P, unit=self%unit('metre.second-2'), name='gravity'))
+  call self%add_constant(qreal(magnitude=4._RKP * atan(1._RKP), name='pi'))
+  call self%add_constant(qreal(magnitude=299792458_RKP, unit=self%unit('metre.second-1'), name='speed_of_light'))
+  call self%add_constant(qreal(magnitude=9.806650_RKP, unit=self%unit('metre.second-2'), name='gravity'))
+  call self%add_constant(qreal(magnitude=1.602176565e-19_RKP, unit=self%unit('coulomb'), name='elementary_charge'))
+  call self%add_constant(qreal(magnitude=9.10938291e-31_RKP, unit=self%unit('kilogram'), name='electron_mass'))
+  call self%add_constant(qreal(magnitude=1.674927351e-27_RKP, unit=self%unit('kilogram'), name='neutron_mass'))
+  call self%add_constant(qreal(magnitude=1.672621777e-27_RKP, unit=self%unit('kilogram'), name='proton_mass'))
+  call self%add_constant(qreal(magnitude=6.62606957e-34_RKP,                    &
+                               unit=uom('kg [mass].m2 [length2].s-1 [time-1]'), &
+                               name='planck_constant'))
+  call self%add_constant(qreal(magnitude=6.67384e-11_RKP,                           &
+                               unit=uom('m3 [length3].kg-1 [mass-1].s-2 [time-2]'), &
+                               name='newton_gravitation_constant'))
+  call self%add_constant(qreal(magnitude=8.3144621_RKP,                                                                 &
+                               unit=uom('kg [mass].m2 [length2].s-2 [time-2].mol-1 [substance-1].K-1 [temperature-1]'), &
+                               name='molar_gas_constant'))
+  call self%add_constant(qreal(magnitude=6.02214129e23_RKP, unit=uom('mol-1 [substance-1]'), name='avogadro_number'))
+  call self%add_constant(qreal(magnitude=1.3806488e-23_RKP,                                         &
+                               unit=uom('kg [mass].m2 [length2].s-2 [time-2].K-1 [temperature-1]'), &
+                               name='boltzmann_constant'))
+  ! derived constants
+  pi = self%const('pi')
+  c = self%const('speed_of_light')
+
+  mu_0 = 4_RKP * pi%magnitude * 1e-7_RKP * uom('kg [mass].m [length].s-2 [time-2].A-2 [current-2]')
+  call mu_0%set(name='vacuum_permeability')
+  call self%add_constant(mu_0)
+
+  epsilon_0 = (mu_0 * c**2)**(-1)
+  call epsilon_0%set(name='vacuum_permittivity')
+  call self%add_constant(epsilon_0)
+
+  Z_0 = mu_0 * c
+  call Z_0%set(name='vacuum_impedance')
+  call self%add_constant(Z_0)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize
 endmodule fury_system_si

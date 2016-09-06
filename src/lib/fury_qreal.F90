@@ -24,6 +24,7 @@ type :: qreal
   character(len=:), allocatable, public :: name             !< Quantity name.
   contains
     ! public methods
+    procedure, pass(self) :: has_name        !< Check if the quantity has defined name.
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
@@ -234,6 +235,19 @@ contains
   endfunction I1P_mul_uom
 
   ! public methods
+  elemental function has_name(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the quantity has defined name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(in) :: self     !< The quantity.
+  logical                  :: has_name !< Check result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_name = allocated(self%name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_name
+
   elemental function is_compatible(self, other) result(compatible)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the quantity is compatible with another one.
@@ -299,7 +313,7 @@ contains
   raw = ''
   if (present(with_name)) then
     if (with_name) then
-      if (allocated(self%name)) raw = raw//self%name//': '
+      if (self%has_name()) raw = raw//self%name//': '
     endif
   endif
   if (present(format)) then
@@ -348,7 +362,7 @@ contains
     call self%unit%unset
     deallocate(self%unit)
   endif
-  if (allocated(self%name)) deallocate(self%name)
+  if (self%has_name()) deallocate(self%name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -400,9 +414,29 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (rhs%is_unit_defined()) then
     if (.not.lhs%is_unit_defined())  then
-      call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit, name=rhs%name)
+      if (rhs%has_name()) then
+        call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit, name=rhs%name)
+      else
+        call lhs%set(magnitude=rhs%magnitude, unit=rhs%unit)
+      endif
     elseif (lhs%unit == rhs%unit) then
-      call lhs%set(magnitude=rhs%magnitude, name=rhs%name)
+      if (rhs%has_name()) then
+        call lhs%set(magnitude=rhs%magnitude, name=rhs%name)
+      else
+        call lhs%set(magnitude=rhs%magnitude)
+      endif
+    else
+      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
+                           rhs%stringify(with_dimensions=.true.)//'"'
+      stop
+    endif
+  else
+    if (.not.lhs%is_unit_defined())  then
+      if (rhs%has_name()) then
+        call lhs%set(magnitude=rhs%magnitude, name=rhs%name)
+      else
+        call lhs%set(magnitude=rhs%magnitude)
+      endif
     else
       write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
                            rhs%stringify(with_dimensions=.true.)//'"'
