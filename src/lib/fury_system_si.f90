@@ -52,6 +52,7 @@ contains
   call self%add_unit('mol = mole [substance] {mole}')
   call self%add_unit('s = sec = second [time] {second}')
   ! units derived
+  call self%add_unit('celsius< = 273.15 + K> [temperature] (celsius[temperature]) {celsius}')
   call self%add_unit('s [time].A [current] (C[electric_charge]) {coulomb}')
   call self%add_unit('kg-1 [mass-1].m-2 [length-2].s4 [time4].A2 [current2] (F[electric_capacitance]) {farad}')
   call self%add_unit('kg [mass].m2 [length2].s-2 [time-2].A-2 [current-2] (H[inductance]) {henry}')
@@ -100,7 +101,7 @@ contains
   call self%add_prefix('1.e-3  * milli  = 1.e-3  * m')
   call self%add_prefix('1.e-2  * centi  = 1.e-2  * c')
   call self%add_prefix('1.e-1  * deci   = 1.e-1  * d')
-  call self%add_prefix('1.e+1  * deca   = 1.e+1  * d = 1.e+1 * deka')
+  call self%add_prefix('1.e1   * deca   = 1.e1   * d = 1.e1 * deka')
   call self%add_prefix('1.e2   * hecto  = 1.e2   * h')
   call self%add_prefix('1.e3   * kilo   = 1.e3   * k')
   call self%add_prefix('1.e6   * mega   = 1.e6   * M')

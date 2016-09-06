@@ -23,23 +23,26 @@ type :: uom_symbol
   !<
   !< The string format definition of a valid FURY unit symbol definition is as following:
   !<
-  !< ` real_factor * litteral_symbol integer_exponent`
+  !< `real_offset + real_factor * litteral_symbol integer_exponent`
   !<
   !< For example, valid definition are:
   !<
-  !<+ `s` : a *second* definition; `real_factor` and `integere_exponent` are omitted because equal to 1;
+  !<+ `s` : a *second* definition; `real_offset` is omitted because equal to 0 and `real_factor` and `integere_exponent` are
+  !<  omitted because equal to 1;
   !<+ `1.E6 * m2` : a *square kilometer* definition;
   !<+ `1000 * s-1` : a *kiloherhz* definition.
+  !<+ `273.15 + K` : a *Celsius degree* definition.
   !<
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   integer(I_P), private :: exponent_=1_I_P !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
   real(RKP),    private :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),    private :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
   type(string), private :: symbol_         !< Litteral symbol, e.g. "m" for metres.
   contains
     ! public methods
-    procedure, pass(self) :: get_symbol   !< Return the litteral symbol.
     procedure, pass(self) :: get_exponent !< Return the symbol exponent.
     procedure, pass(self) :: get_factor   !< Return the symbol multiplicative factor.
+    procedure, pass(self) :: get_symbol   !< Return the litteral symbol.
     procedure, pass(self) :: is_defined   !< Check if the symbol is defined.
     procedure, pass(self) :: parse        !< Parse symbol from string.
     procedure, pass(self) :: prefixed     !< Return a prefixed symbol.
@@ -98,19 +101,6 @@ contains
   endfunction creator_from_string
 
   ! public methods
-  elemental function get_symbol(self) result(symbol_)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return the litteral symbol.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self !< The uom symbol.
-  type(string)                  :: symbol_ !< The litteral symbol.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined()) symbol_ = self%symbol_
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_symbol
-
   elemental function get_exponent(self) result(exponent_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the symbol exponent.
@@ -136,6 +126,32 @@ contains
   if (self%is_defined()) factor_ = self%factor_
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_factor
+
+  elemental function get_offset(self) result(offset_)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the symbol offset.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: self    !< The uom symbol.
+  real(RKP)                     :: offset_ !< The symbol offset.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) offset_ = self%offset_
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_offset
+
+  elemental function get_symbol(self) result(symbol_)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the litteral symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: self !< The uom symbol.
+  type(string)                  :: symbol_ !< The litteral symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) symbol_ = self%symbol_
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_symbol
 
   elemental function is_defined(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -163,6 +179,11 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   buffer = trim(adjustl(source))
+  if (buffer%count('+') > 0) then
+    call buffer%split(sep='+', tokens=tokens)
+    self%offset_ = cton(str=tokens(1)%chars(), knd=1._RKP)
+    buffer = tokens(2)
+  endif
   if (buffer%count('*') > 0) then
     call buffer%split(sep='*', tokens=tokens)
     self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
@@ -191,11 +212,12 @@ contains
     prefixed%symbol_ = prefix%symbol_//self%symbol_
     prefixed%exponent_ = self%exponent_
     prefixed%factor_ = self%factor_ * prefix%factor_
+    prefixed%offset_ = self%offset_
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction prefixed
 
-  pure subroutine set(self, symbol_, exponent_, factor_)
+  pure subroutine set(self, symbol_, exponent_, factor_, offset_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -203,12 +225,14 @@ contains
   character(*),      intent(in), optional :: symbol_    !< Litteral symbol of the unit, e.g. "m" for metres.
   integer(I_P),      intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
   real(RKP),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),         intent(in), optional :: offset_    !< Symbol additive offset (used only for converters).
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (present(symbol_)) self%symbol_ = symbol_
   if (present(exponent_)) self%exponent_ = exponent_
   if (present(factor_)) self%factor_ = factor_
+  if (present(offset_)) self%offset_ = offset_
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
@@ -224,6 +248,9 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%is_defined()) then
+    if (self%offset_/=0._RKP) then
+      raw = raw//trim(str(n=self%offset_, compact=compact_reals))//' + '
+    endif
     if (self%factor_/=1._RKP) then
       raw = raw//trim(str(n=self%factor_, compact=compact_reals))//' * '
     endif
@@ -241,12 +268,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Convert symbol to another.
   !<
-  !< It is assumed a multiplicative conversion from the equivalence:
+  !< It is assumed a multiplicative-like conversion from the equivalence:
   !<
-  !< `self%factor_ * self%symbol_ ** self%exponent_ = other%factor_ * other%symbol_ ** other%exponent_ =>`
+  !< `self%offset_ + self%factor_ * self%symbol_**self%exponent_ = other%offset_ + other%factor_ * other%symbol_**other%exponent_=>`
   !< `=> to%symbol_ = other%symbol_`
   !< `=> to%exponent_ = other%exponent_`
   !< `=> to%factor_ = self%factor_ / other%factor_`
+  !< `=> to%offset_ = (self%factor_ - other%offset_) / other%factor_`
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_symbol), intent(in) :: self  !< The uom symbol.
   type(uom_symbol),  intent(in) :: other !< Other symbol used for conversion.
@@ -257,6 +285,7 @@ contains
   to%symbol_ = other%symbol_
   to%exponent_ = other%exponent_
   to%factor_ = self%factor_ / other%factor_
+  to%offset_ = (self%factor_ - other%offset_) / other%factor_
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction to
 
@@ -271,6 +300,7 @@ contains
   call self%symbol_%free
   self%exponent_ = 1_I_P
   self%factor_ = 1._RKP
+  self%offset_ = 0._RKP
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -305,9 +335,10 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   equal = .false.
-  if (self%is_defined().and.other%is_defined()) equal = (self%symbol_==other%symbol_.and.&
-                                                         self%exponent_==other%exponent_.and.&
-                                                         self%factor_==other%factor_)
+  if (self%is_defined().and.other%is_defined()) equal = (self%symbol_==other%symbol_.and.     &
+                                                         self%exponent_==other%exponent_.and. &
+                                                         self%factor_==other%factor_.and.     &
+                                                         self%offset_==other%offset_)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
@@ -340,6 +371,7 @@ contains
     lhs%symbol_ = rhs%symbol_
     lhs%exponent_ = rhs%exponent_
     lhs%factor_ = rhs%factor_
+    lhs%offset_ = rhs%offset_
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_uom_symbol
@@ -358,6 +390,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ - rhs%exponent_
     opr%factor_ = lhs%factor_ / rhs%factor_
+    opr%offset_ = lhs%offset_
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
@@ -376,6 +409,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ + rhs%exponent_
     opr%factor_ = lhs%factor_ * rhs%factor_
+    opr%offset_ = lhs%offset_
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
@@ -394,6 +428,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R16P
@@ -412,6 +447,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R8P
@@ -430,6 +466,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R4P
@@ -448,6 +485,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I8P
@@ -466,6 +504,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I4P
@@ -484,6 +523,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I2P
@@ -502,6 +542,7 @@ contains
     opr%symbol_ = lhs%symbol_
     opr%exponent_ = lhs%exponent_ * rhs
     opr%factor_ = lhs%factor_ ** rhs
+    if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
