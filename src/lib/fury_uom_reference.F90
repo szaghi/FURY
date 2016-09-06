@@ -5,7 +5,7 @@ module fury_uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom_symbol
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,6 +51,7 @@ type :: uom_reference
     procedure, pass(self) :: has_dimensions             !< Check if the symbol dimensions has been defined.
     procedure, pass(self) :: is_defined                 !< Check if the symbol is defined.
     procedure, pass(self) :: parse                      !< Parse symbol from string.
+    procedure, pass(self) :: prefixed                   !< Return a prefixed symbol.
     procedure, pass(self) :: set                        !< Set symbol.
     procedure, pass(self) :: stringify                  !< Return a string representaion of the symbol.
     procedure, pass(self) :: unset                      !< Unset symbol.
@@ -58,7 +59,12 @@ type :: uom_reference
     generic :: assignment(=) => assign_uom_reference   !< Overloading `=` assignament.
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
-    generic :: operator(**) => pow_I8P, pow_I4P, &
+    generic :: operator(**) =>                   &
+#ifdef r16p
+                               pow_R16P,         &
+#endif
+                               pow_R8P, pow_R4P, &
+                               pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
     generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
@@ -70,6 +76,9 @@ type :: uom_reference
     procedure, pass(lhs),  private :: assign_uom_reference !< `uom_reference = uom_reference` assignament.
     procedure, pass(lhs),  private :: div                  !< `uom_reference / uom_reference` operator.
     procedure, pass(lhs),  private :: mul                  !< `uom_reference * uom_reference` operator.
+    procedure, pass(lhs),  private :: pow_R16P             !< `uom_reference ** real(R16P)` operator.
+    procedure, pass(lhs),  private :: pow_R8P              !< `uom_reference ** real(R8P)` operator.
+    procedure, pass(lhs),  private :: pow_R4P              !< `uom_reference ** real(R4P)` operator.
     procedure, pass(lhs),  private :: pow_I8P              !< `uom_reference ** integer(I8P)` operator.
     procedure, pass(lhs),  private :: pow_I4P              !< `uom_reference ** integer(I4P)` operator.
     procedure, pass(lhs),  private :: pow_I2P              !< `uom_reference ** integer(I2P)` operator.
@@ -111,7 +120,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction dimensionality
 
-  function get_aliases(self) result(aliases)
+  pure function get_aliases(self) result(aliases)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the aliases list.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -130,7 +139,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_aliases
 
-  function get_first_compatible_alias(self, other) result(alias)
+  pure function get_first_compatible_alias(self, other) result(alias)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Get first alias-pairs compatible.
   !<
@@ -157,7 +166,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_first_compatible_alias
 
-  function get_main_symbol(self) result(alias)
+  pure function get_main_symbol(self) result(alias)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the main symbol, i.e. aliases(1).
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -267,12 +276,47 @@ contains
     stop
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
-    call self%dimensions%set(factor_ = 1._R_P)
+    call self%dimensions%set(factor_ = 1._RKP)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
 
-  subroutine set(self, aliases, dimensions)
+  pure function prefixed(self, prefixes)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return a prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  type(uom_reference),  intent(in) :: prefixes   !< Other symbol used for prefixing.
+  type(uom_reference)              :: prefixed   !< The prefixed symbol.
+  type(uom_symbol), allocatable    :: aliases(:) !< Uom symbol aliases, e.g. "m = meter = metre" for metres.
+  integer(I_P)                     :: a          !< Counter.
+  integer(I_P)                     :: p          !< Counter.
+  integer(I_P)                     :: s          !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.(prefixes%is_defined())) then
+    prefixed = self
+    allocate(aliases(1:self%aliases_number*prefixes%aliases_number + self%aliases_number))
+    a = 0
+    do p=1, prefixes%aliases_number
+      do s=1, self%aliases_number
+        a = a + 1
+        aliases(a) = self%aliases(s)%prefixed(prefix=prefixes%aliases(p))
+        call aliases(a)%set(factor_=1._RKP)
+      enddo
+    enddo
+    do s=1, self%aliases_number
+      a = s + self%aliases_number*prefixes%aliases_number
+      aliases(a) = self%aliases(s)
+      call aliases(a)%set(factor_=prefixes%aliases(1)%get_factor())
+    enddo
+    call prefixed%set(aliases=aliases)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed
+
+  pure subroutine set(self, aliases, dimensions)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -426,7 +470,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_uom_reference
 
-  function div(lhs, rhs) result(opr)
+  pure function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference / uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -454,7 +498,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction div
 
-  function mul(lhs, rhs) result(opr)
+  pure function mul(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference * uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -482,6 +526,69 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
 
+  pure function pow_R16P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_reference ** real(R16P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  real(R16P),           intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
+  integer(I_P)                     :: a   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr = lhs
+    do a=1, opr%aliases_number
+      opr%aliases(a) = opr%aliases(a) ** rhs
+    enddo
+    opr%dimensions = opr%dimensions ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R16P
+
+  pure function pow_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_reference ** real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  real(R8P),            intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
+  integer(I_P)                     :: a   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr = lhs
+    do a=1, opr%aliases_number
+      opr%aliases(a) = opr%aliases(a) ** rhs
+    enddo
+    opr%dimensions = opr%dimensions ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R8P
+
+  pure function pow_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_reference ** real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  real(R4P),            intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
+  integer(I_P)                     :: a   !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr = lhs
+    do a=1, opr%aliases_number
+      opr%aliases(a) = opr%aliases(a) ** rhs
+    enddo
+    opr%dimensions = opr%dimensions ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R4P
+
   pure function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference ** integer(I8P)` operator.
@@ -496,9 +603,9 @@ contains
   if (lhs%is_defined()) then
     opr = lhs
     do a=1, opr%aliases_number
-      opr%aliases(a) =  opr%aliases(a) ** rhs
+      opr%aliases(a) = opr%aliases(a) ** rhs
     enddo
-    opr%dimensions =  opr%dimensions ** rhs
+    opr%dimensions = opr%dimensions ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I8P
@@ -517,9 +624,9 @@ contains
   if (lhs%is_defined()) then
     opr = lhs
     do a=1, opr%aliases_number
-      opr%aliases(a) =  opr%aliases(a) ** rhs
+      opr%aliases(a) = opr%aliases(a) ** rhs
     enddo
-    opr%dimensions =  opr%dimensions ** rhs
+    opr%dimensions = opr%dimensions ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I4P
@@ -538,9 +645,9 @@ contains
   if (lhs%is_defined()) then
     opr = lhs
     do a=1, opr%aliases_number
-      opr%aliases(a) =  opr%aliases(a) ** rhs
+      opr%aliases(a) = opr%aliases(a) ** rhs
     enddo
-    opr%dimensions =  opr%dimensions ** rhs
+    opr%dimensions = opr%dimensions ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I2P
@@ -559,9 +666,9 @@ contains
   if (lhs%is_defined()) then
     opr = lhs
     do a=1, opr%aliases_number
-      opr%aliases(a) =  opr%aliases(a) ** rhs
+      opr%aliases(a) = opr%aliases(a) ** rhs
     enddo
-    opr%dimensions =  opr%dimensions ** rhs
+    opr%dimensions = opr%dimensions ** rhs
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P

@@ -3,7 +3,7 @@ module fury_uom_symbol
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY class definition of unit symbol.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ type :: uom_symbol
   !<
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   integer(I_P), private :: exponent_=1_I_P !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R_P),    private :: factor_=1._R_P  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),    private :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
   type(string), private :: symbol_         !< Litteral symbol, e.g. "m" for metres.
   contains
     ! public methods
@@ -42,6 +42,7 @@ type :: uom_symbol
     procedure, pass(self) :: get_factor   !< Return the symbol multiplicative factor.
     procedure, pass(self) :: is_defined   !< Check if the symbol is defined.
     procedure, pass(self) :: parse        !< Parse symbol from string.
+    procedure, pass(self) :: prefixed     !< Return a prefixed symbol.
     procedure, pass(self) :: set          !< Set symbol.
     procedure, pass(self) :: stringify    !< Return a string representaion of the symbol.
     procedure, pass(self) :: to           !< Convert symbol to another.
@@ -50,7 +51,12 @@ type :: uom_symbol
     generic :: assignment(=) => assign_uom_symbol      !< Overloading `=` assignament.
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
-    generic :: operator(**) => pow_I8P, pow_I4P, &
+    generic :: operator(**) =>                   &
+#ifdef r16p
+                               pow_R16P,         &
+#endif
+                               pow_R8P, pow_R4P, &
+                               pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
     generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
@@ -62,6 +68,9 @@ type :: uom_symbol
     procedure, pass(lhs),  private :: assign_uom_symbol !< `uom_symbol = uom_symbol` assignament.
     procedure, pass(lhs),  private :: div               !< `uom_symbol / uom_symbol` operator.
     procedure, pass(lhs),  private :: mul               !< `uom_symbol * uom_symbol` operator.
+    procedure, pass(lhs),  private :: pow_R16P          !< `uom_symbol ** real(R16P)` operator.
+    procedure, pass(lhs),  private :: pow_R8P           !< `uom_symbol ** real(R8P)` operator.
+    procedure, pass(lhs),  private :: pow_R4P           !< `uom_symbol ** real(R4P)` operator.
     procedure, pass(lhs),  private :: pow_I8P           !< `uom_symbol ** integer(I8P)` operator.
     procedure, pass(lhs),  private :: pow_I4P           !< `uom_symbol ** integer(I4P)` operator.
     procedure, pass(lhs),  private :: pow_I2P           !< `uom_symbol ** integer(I2P)` operator.
@@ -120,7 +129,7 @@ contains
   !< Return the symbol factor.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_symbol), intent(in) :: self    !< The uom symbol.
-  real(R_P)                     :: factor_ !< The symbol factor.
+  real(RKP)                     :: factor_ !< The symbol factor.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -156,7 +165,7 @@ contains
   buffer = trim(adjustl(source))
   if (buffer%count('*') > 0) then
     call buffer%split(sep='*', tokens=tokens)
-    self%factor_ = cton(str=tokens(1)%chars(), knd=1._R_P)
+    self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
     buffer = tokens(2)
   endif
   e = buffer%scan(set='-0123456789')
@@ -168,14 +177,32 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
 
-  subroutine set(self, symbol_, exponent_, factor_)
+  pure function prefixed(self, prefix)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return a prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: self     !< The uom symbol.
+  type(uom_symbol),  intent(in) :: prefix   !< Other symbol used for prefixing.
+  type(uom_symbol)              :: prefixed !< The prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.(prefix%is_defined())) then
+    prefixed%symbol_ = prefix%symbol_//self%symbol_
+    prefixed%exponent_ = self%exponent_
+    prefixed%factor_ = self%factor_ * prefix%factor_
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed
+
+  pure subroutine set(self, symbol_, exponent_, factor_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_symbol), intent(inout)        :: self       !< The uom symbol.
   character(*),      intent(in), optional :: symbol_    !< Litteral symbol of the unit, e.g. "m" for metres.
   integer(I_P),      intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R_P),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -197,7 +224,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%is_defined()) then
-    if (self%factor_/=1._R_P) then
+    if (self%factor_/=1._RKP) then
       raw = raw//trim(str(n=self%factor_, compact=compact_reals))//' * '
     endif
     raw = raw//self%symbol_
@@ -221,7 +248,7 @@ contains
   !< `=> to%exponent_ = other%exponent_`
   !< `=> to%factor_ = self%factor_ / other%factor_`
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self  !< The uom reference.
+  class(uom_symbol), intent(in) :: self  !< The uom symbol.
   type(uom_symbol),  intent(in) :: other !< Other symbol used for conversion.
   type(uom_symbol)              :: to    !< The converted symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -243,7 +270,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   call self%symbol_%free
   self%exponent_ = 1_I_P
-  self%factor_ = 1._R_P
+  self%factor_ = 1._RKP
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -317,7 +344,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_uom_symbol
 
-  function div(lhs, rhs) result(opr)
+  pure function div(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_symbol / uom_symbol` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -352,6 +379,60 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction mul
+
+  pure function pow_R16P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R16P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R16P),        intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R16P
+
+  pure function pow_R8P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R8P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R8P),         intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R8P
+
+  pure function pow_R4P(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `uom_symbol ** real(R4P)` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: lhs !< Left hand side.
+  real(R4P),         intent(in) :: rhs !< Right hand side.
+  type(uom_symbol)              :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (lhs%is_defined()) then
+    opr%symbol_ = lhs%symbol_
+    opr%exponent_ = lhs%exponent_ * rhs
+    opr%factor_ = lhs%factor_ ** rhs
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction pow_R4P
 
   pure function pow_I8P(lhs, rhs) result(opr)
   !---------------------------------------------------------------------------------------------------------------------------------
