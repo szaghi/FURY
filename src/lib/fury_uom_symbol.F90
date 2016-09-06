@@ -42,6 +42,7 @@ type :: uom_symbol
     procedure, pass(self) :: get_factor   !< Return the symbol multiplicative factor.
     procedure, pass(self) :: is_defined   !< Check if the symbol is defined.
     procedure, pass(self) :: parse        !< Parse symbol from string.
+    procedure, pass(self) :: prefixed     !< Return a prefixed symbol.
     procedure, pass(self) :: set          !< Set symbol.
     procedure, pass(self) :: stringify    !< Return a string representaion of the symbol.
     procedure, pass(self) :: to           !< Convert symbol to another.
@@ -176,7 +177,25 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
 
-  subroutine set(self, symbol_, exponent_, factor_)
+  pure function prefixed(self, prefix)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return a prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: self     !< The uom symbol.
+  type(uom_symbol),  intent(in) :: prefix   !< Other symbol used for prefixing.
+  type(uom_symbol)              :: prefixed !< The prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.(prefix%is_defined())) then
+    prefixed%symbol_ = prefix%symbol_//self%symbol_
+    prefixed%exponent_ = self%exponent_
+    prefixed%factor_ = self%factor_ * prefix%factor_
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed
+
+  pure subroutine set(self, symbol_, exponent_, factor_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -229,7 +248,7 @@ contains
   !< `=> to%exponent_ = other%exponent_`
   !< `=> to%factor_ = self%factor_ / other%factor_`
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self  !< The uom reference.
+  class(uom_symbol), intent(in) :: self  !< The uom symbol.
   type(uom_symbol),  intent(in) :: other !< Other symbol used for conversion.
   type(uom_symbol)              :: to    !< The converted symbol.
   !---------------------------------------------------------------------------------------------------------------------------------

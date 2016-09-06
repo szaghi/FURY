@@ -5,7 +5,7 @@ module fury_uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom_symbol
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,6 +51,7 @@ type :: uom_reference
     procedure, pass(self) :: has_dimensions             !< Check if the symbol dimensions has been defined.
     procedure, pass(self) :: is_defined                 !< Check if the symbol is defined.
     procedure, pass(self) :: parse                      !< Parse symbol from string.
+    procedure, pass(self) :: prefixed                   !< Return a prefixed symbol.
     procedure, pass(self) :: set                        !< Set symbol.
     procedure, pass(self) :: stringify                  !< Return a string representaion of the symbol.
     procedure, pass(self) :: unset                      !< Unset symbol.
@@ -275,10 +276,45 @@ contains
     stop
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
-    call self%dimensions%set(factor_ = 1._R_P)
+    call self%dimensions%set(factor_ = 1._RKP)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
+
+  pure function prefixed(self, prefixes)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return a prefixed symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in) :: self       !< The uom reference.
+  type(uom_reference),  intent(in) :: prefixes   !< Other symbol used for prefixing.
+  type(uom_reference)              :: prefixed   !< The prefixed symbol.
+  type(uom_symbol), allocatable    :: aliases(:) !< Uom symbol aliases, e.g. "m = meter = metre" for metres.
+  integer(I_P)                     :: a          !< Counter.
+  integer(I_P)                     :: p          !< Counter.
+  integer(I_P)                     :: s          !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.(prefixes%is_defined())) then
+    prefixed = self
+    allocate(aliases(1:self%aliases_number*prefixes%aliases_number + self%aliases_number))
+    a = 0
+    do p=1, prefixes%aliases_number
+      do s=1, self%aliases_number
+        a = a + 1
+        aliases(a) = self%aliases(s)%prefixed(prefix=prefixes%aliases(p))
+        call aliases(a)%set(factor_=1._RKP)
+      enddo
+    enddo
+    do s=1, self%aliases_number
+      a = s + self%aliases_number*prefixes%aliases_number
+      aliases(a) = self%aliases(s)
+      call aliases(a)%set(factor_=prefixes%aliases(1)%get_factor())
+    enddo
+    call prefixed%set(aliases=aliases)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed
 
   pure subroutine set(self, aliases, dimensions)
   !---------------------------------------------------------------------------------------------------------------------------------

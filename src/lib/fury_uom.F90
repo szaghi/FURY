@@ -4,10 +4,9 @@ module fury_uom
 !< FURY definition of unit of measure class.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_prefixes
 use fury_uom_reference
 use fury_uom_symbol
-use penf
+use penf, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -55,9 +54,10 @@ type :: uom
     procedure, pass(self) :: get_main_dimensions   !< Return the main dimensions.
     procedure, pass(self) :: get_main_reference    !< Return the main reference.
     procedure, pass(self) :: get_main_symbol       !< Return the main symbol.
+    procedure, pass(self) :: has_name              !< Check if the unit has a name.
     procedure, pass(self) :: has_reference         !< Check if the unit has a refence unit.
     procedure, pass(self) :: is_defined            !< Check if the unit is defined.
-    procedure, pass(self) :: prefixed_unit         !< Return prefixed unit.
+    procedure, pass(self) :: prefixed              !< Return prefixed unit.
     procedure, pass(self) :: set                   !< Set the unit.
     procedure, pass(self) :: stringify             !< Return a string representaion of the unit.
     procedure, pass(self) :: unset                 !< unset the unit.
@@ -81,7 +81,6 @@ type :: uom
     ! private methods
     procedure, pass(self), private :: add_reference            !< Add a refence unit to unit.
     procedure, pass(self), private :: has_alias                !< Check if the unit has an alias.
-    procedure, pass(self), private :: has_name                 !< Check if the unit has a name.
     procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible refence unit.
     procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
     procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
@@ -187,7 +186,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self       !< The uom.
   type(uom),  intent(in) :: alias      !< Alias uom queried.
-  real(R_P)              :: factor     !< Symbol scale factor.
+  real(RKP)              :: factor     !< Symbol scale factor.
   type(uom_symbol)       :: s_main     !< Main self reference symbol.
   type(uom_symbol)       :: a_main     !< Main alias reference symbol.
   type(uom_symbol)       :: conversion !< Conversion uom symbol.
@@ -195,7 +194,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  factor = 1._R_P
+  factor = 1._RKP
   if (self%is_defined().and.alias%is_defined().and.self%references_number==alias%references_number) then
     do r=1, self%references_number
       if (alias%references(r).compatible.self%references(r)) then
@@ -289,38 +288,45 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_reference
 
-  function prefixed_unit(self, prefix)
+  function prefixed(self, prefixes)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return prefixed unit.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),     intent(in)    :: self                !< The unit.
-  type(prefixes), intent(in)    :: prefix              !< Prefixes data.
-  type(uom)                     :: prefixed_unit       !< Prefixed unit.
-  type(uom_reference)           :: prefixed_reference  !< Prefixed unit reference.
-  type(uom_symbol), allocatable :: prefixed_aliases(:) !< Prefixed unit symbol aliases.
-  type(uom_symbol)              :: prefixed_dimensions !< Prefixed unit symbol dimensions.
-  type(string)                  :: symbol              !< Base symbol to be prefixed.
-  integer(I_P)                  :: aliases_number      !< Counter.
-  integer(I_P)                  :: a                   !< Counter.
+  class(uom),          intent(in) :: self               !< The unit.
+  type(uom_reference), intent(in) :: prefixes           !< Prefixes data.
+  type(uom)                       :: prefixed           !< Prefixed unit.
+  type(uom_reference)             :: prefixed_reference !< Prefixed unit reference.
+  type(string)                    :: symbol             !< Main prefixes symbol.
+  type(uom_symbol)                :: prefixes_symbol    !< Main prefixes uom symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined().and.prefix%is_defined()) then
-    prefixed_unit = self
-    symbol = prefixed_unit%get_main_symbol()
-    call prefixed_dimensions%set(symbol_=prefixed_unit%get_main_dimensions()//'')
-    aliases_number = size(prefix%aliases, dim=1)
-    allocate(prefixed_aliases(1:aliases_number+1))
-    do a=1, aliases_number
-      call prefixed_aliases(a)%set(symbol_=prefix%aliases(a)//symbol)
-    enddo
-    call prefixed_aliases(aliases_number+1)%set(symbol_=symbol%chars(), factor_=prefix%factor)
-    call prefixed_reference%set(aliases=prefixed_aliases, dimensions=prefixed_dimensions)
-    call prefixed_unit%set(references=[prefixed_reference])
-    if (prefixed_unit%has_name()) call prefixed_unit%set(name=prefix%aliases(1)//prefixed_unit%name)
+  if (self%is_defined().and.prefixes%is_defined()) then
+    prefixed = self
+    prefixed_reference = prefixed%get_main_reference()
+    prefixed_reference = prefixed_reference%prefixed(prefixes=prefixes)
+    call prefixed%set(references=[prefixed_reference])
+    if (prefixed%has_name()) then
+      prefixes_symbol = prefixes%get_main_symbol()
+      symbol = prefixes_symbol%get_symbol()
+      call prefixed%set(name=symbol//prefixed%name)
+    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction prefixed_unit
+  endfunction prefixed
+
+  elemental function has_name(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Check if the unit has a name.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self     !< The unit.
+  logical                :: has_name !< Name presence status.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  has_name = allocated(self%name)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction has_name
 
   elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -498,19 +504,6 @@ contains
   if (has_alias) has_alias = self%alias%is_defined()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_alias
-
-  elemental function has_name(self)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has a name.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self     !< The unit.
-  logical                :: has_name !< Name presence status.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_name = allocated(self%name)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_name
 
   elemental function has_reference_compatible(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -914,20 +907,29 @@ contains
     do ls=1, size(lhs_references, dim=1)
       rs = 1
       remaining_rhs_references: do
-        if (lhs_references(ls).compatible.rhs_references(rs)) then
-          lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
-          ! pop up current reference from rhs references
-          if (size(rhs_references, dim=1)>1) then
-            call remove_reference(references=rhs_references, id=rs)
-            rs = 1
+        if (allocated(rhs_references)) then
+          if (lhs_references(ls).compatible.rhs_references(rs)) then
+            lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
+            ! pop up current reference from rhs references
+            if (size(rhs_references, dim=1)>1) then
+              call remove_reference(references=rhs_references, id=rs)
+              rs = 1
+            else
+              deallocate(rhs_references)
+            endif
           else
-            deallocate(rhs_references)
+            ! check the next rhs references
+            rs = rs + 1
+          endif
+          ! if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
+          if (allocated(rhs_references)) then
+            if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
+          else
+            exit remaining_rhs_references
           endif
         else
-          ! check the next rhs references
-          rs = rs + 1
+          exit remaining_rhs_references
         endif
-        if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
       enddo remaining_rhs_references
     enddo
     opr%references = lhs_references
