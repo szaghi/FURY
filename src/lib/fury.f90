@@ -17,6 +17,7 @@ use penf
 implicit none
 private
 ! FURY objects
+public :: operator(*)
 public :: qreal
 public :: system_si
 public :: uom
@@ -24,6 +25,7 @@ public :: uom_reference
 
 ! PENF objects
 ! kinds
+public :: R16P
 public :: R8P
 public :: R4P
 public :: R_P
