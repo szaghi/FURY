@@ -37,6 +37,7 @@
 *.dat
 
 # special directories and files
+.github-todos
 doc/html/
 exe/
 wiki/
