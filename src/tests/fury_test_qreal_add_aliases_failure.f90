@@ -19,8 +19,8 @@ logical     :: test_passed(1) !< List of passed tests.
 test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
-u_speed_km_h = 'km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}'
-u_speed_m_s = 'm [length].s-1 [time-1](m/s[speed]){m/s}'
+u_speed_km_h = uom('km = 1000 * m [length].h-1 = 3600 * s-1 [time-1](km/h[speed]){km/h}')
+u_speed_m_s = uom('m [length].s-1 [time-1](m/s[speed]){m/s}')
 
 speed1 = qreal(magnitude=1._R_P, unit=u_speed_km_h)
 speed2 = qreal(magnitude=2._R_P, unit=u_speed_m_s)

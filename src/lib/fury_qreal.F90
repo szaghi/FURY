@@ -28,11 +28,11 @@ type :: qreal
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
-    procedure, pass(self) :: stringify       !< Return a string representaion of the quantity with unit symbol.
-    procedure, pass(self) :: to              !< Convert quantity with respect one of its defined unit aliases.
+    procedure, pass(self) :: stringify       !< Return a string representation of the quantity with unit symbol.
+    procedure, pass(self) :: to              !< Convert quantity with respect another unit if its unit has a conversion alias.
     procedure, pass(self) :: unset           !< Unset quantity.
     ! public generic names
-    generic :: assignment(=) => assign_qreal       !< Overloading `=` assignament.
+    generic :: assignment(=) => assign_qreal       !< Overloading `=` assignment.
     generic :: operator(+) => add, positive        !< Overloading `+` operator.
     generic :: operator(/) => div,              &
 #ifdef r16p
@@ -67,7 +67,7 @@ type :: qreal
     ! private methods
     procedure, pass(self), private :: is_equal     !< Check if qreal is equal with another one.
     procedure, pass(self), private :: is_not_equal !< Check if qreal is not equal with another one.
-    procedure, pass(lhs),  private :: assign_qreal !< `qreal = qreal` assignament.
+    procedure, pass(lhs),  private :: assign_qreal !< `qreal = qreal` assignment.
     procedure, pass(lhs),  private :: add          !< `qreal + qreal` operator.
     procedure, pass(self), private :: positive     !< ` + qreal` unary operator.
     procedure, pass(lhs),  private :: div          !< `qreal / qreal` operator.
@@ -273,6 +273,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   is_defined = allocated(self%unit)
+  if (is_defined) is_defined = self%unit%is_defined()
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_unit_defined
 
@@ -298,10 +299,10 @@ contains
 
   function stringify(self, format, with_dimensions, with_aliases, with_name, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return a string representaion of the quantity with unit symbol.
+  !< Return a string representation of the quantity with unit symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in)           :: self            !< The quantity.
-  character(*), intent(in), optional :: format          !< Format to pring magnitude.
+  character(*), intent(in), optional :: format          !< Format to string magnitude.
   logical,      intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
   logical,      intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
   logical,      intent(in), optional :: with_name       !< Flag to activate name printing.
@@ -322,27 +323,27 @@ contains
     raw = raw//trim(str(n=self%magnitude, compact=compact_reals))
   endif
   if (self%is_unit_defined()) then
-    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions, with_aliases=with_aliases, compact_reals=compact_reals)
+    raw = raw//' '//self%unit%stringify(with_dimensions=with_dimensions, &
+                                        with_aliases=with_aliases,       &
+                                        with_name=with_name,             &
+                                        compact_reals=compact_reals)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
-  function to(self, alias) result(converted)
+  function to(self, unit) result(converted)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Convert quantity with respect one of its defined unit aliases.
+  !< Convert quantity with respect another unit if its unit has a conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in) :: self      !< The quantity.
-  type(uom),    intent(in) :: alias     !< Unit alias.
+  type(uom),    intent(in) :: unit      !< Unit of conversion.
   type(qreal)              :: converted !< Quantity converted.
-  real(RKP)                :: factor    !< Whole scale factor.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_unit_defined().and.alias%is_defined()) then
-    factor = self%unit%get_conversion_factor(alias)
-    converted%magnitude = factor * self%magnitude
-    allocate(converted%unit)
-    converted%unit = alias
+  if (self%is_unit_defined().and.unit%is_defined()) then
+    converted%magnitude = self%unit%to(other=unit, magnitude=self%magnitude)
+    allocate(converted%unit, source=unit)
   else
     converted = self
   endif
@@ -358,10 +359,7 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   self%magnitude = 0._RKP
-  if (allocated(self%unit)) then
-    call self%unit%unset
-    deallocate(self%unit)
-  endif
+  if (self%is_unit_defined()) deallocate(self%unit)
   if (self%has_name()) deallocate(self%name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
@@ -373,7 +371,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in) :: self     !< The unit.
   type(qreal),  intent(in) :: other    !< The other unit.
-  logical                  :: is_equal !< Equality check result.
+  logical                  :: is_equal !< Check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -395,7 +393,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(in) :: self         !< The unit.
   type(qreal),  intent(in) :: other        !< The other unit.
-  logical                  :: is_not_equal !< Disequality check result.
+  logical                  :: is_not_equal !< Check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -405,7 +403,7 @@ contains
 
   subroutine assign_qreal(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `qreal = qreal` assignament.
+  !< `qreal = qreal` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(qreal), intent(inout) :: lhs !< Left hand side.
   type(qreal),  intent(in)    :: rhs !< Right hand side.
@@ -426,8 +424,9 @@ contains
         call lhs%set(magnitude=rhs%magnitude)
       endif
     else
-      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                           rhs%stringify(with_dimensions=.true.)//'"'
+      write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
+        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
+        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
       stop
     endif
   else
@@ -438,8 +437,9 @@ contains
         call lhs%set(magnitude=rhs%magnitude)
       endif
     else
-      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                           rhs%stringify(with_dimensions=.true.)//'"'
+      write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
+        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
+        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
       stop
     endif
   endif
@@ -461,8 +461,9 @@ contains
       opr = lhs
       opr%magnitude = lhs%magnitude + rhs%magnitude
     else
-      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                           rhs%stringify(with_dimensions=.true.)//'"'
+      write(stderr, "(A)") 'error: cannot add'//new_line('a')//&
+        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
+        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
       stop
     endif
   else
@@ -854,8 +855,9 @@ contains
       opr = lhs
       opr%magnitude = lhs%magnitude - rhs%magnitude
     else
-      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                           rhs%stringify(with_dimensions=.true.)//'"'
+      write(stderr, "(A)") 'error: cannot subtract'//new_line('a')//&
+        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
+        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
       stop
     endif
   else

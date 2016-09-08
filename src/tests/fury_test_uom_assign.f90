@@ -27,7 +27,7 @@ print "(A,L1)", 'pass explicit dim. exp.:  m [length].s-1 [time-1] => '//si_spee
                 ', is correct? ', test_passed(2)
 
 call si_speed%unset
-si_speed = 'm [length].s-1 [time-1]{si_speed}'
+si_speed = uom('m [length].s-1 [time-1]{si_speed}')
 test_passed(3) = si_speed%stringify(with_dimensions=.true.)=='m.s-1 [length.time-1]'
 print "(A,L1)", 'pass as string:  m [length].s-1 [time-1]{si_speed} => '//si_speed%stringify(with_dimensions=.true.)//&
                 ', is correct? ', test_passed(3)

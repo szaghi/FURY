@@ -10,7 +10,7 @@ use fury
 type(system_si) :: SI             !< SI system.
 type(uom)       :: a_unit         !< A unit.
 type(qreal)     :: a_quantity     !< A quantity.
-logical         :: test_passed(8) !< List of passed tests.
+logical         :: test_passed(7) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -56,23 +56,17 @@ print "(A,L1)", 'query "kg" => '//a_unit%stringify(with_dimensions=.true., with_
                 ', is correct? ', test_passed(5)
 
 call a_unit%unset
-a_unit = SI%unit('kilometre')
-test_passed(6) = a_unit == uom('km')
-print "(A,L1)", 'query "kilometre" => '//a_unit%stringify(with_dimensions=.true., with_aliases=.true., protect_aliases=.true., &
-                with_name=.true., compact_reals=.true.)//', is correct? ', test_passed(6)
-
-call a_unit%unset
 a_unit = SI%unit('kilobyte')
-test_passed(7) = a_unit == uom('kilobyte')
+test_passed(6) = a_unit == uom('kilobyte')
 print "(A,L1)", 'query "kilobyte" => '//a_unit%stringify(with_dimensions=.true., with_aliases=.true., protect_aliases=.true., &
-                with_name=.true., compact_reals=.true.)//', is correct? ', test_passed(7)
+                with_name=.true., compact_reals=.true.)//', is correct? ', test_passed(6)
 
 call a_quantity%unset
 a_quantity = SI%qunit('kilobyte')
 a_quantity = 3.5 * a_quantity
-test_passed(8) = a_quantity%magnitude == 3.5_R_P
+test_passed(7) = a_quantity%magnitude == 3.5_R_P
 print "(A,L1)", 'assigned 3.5 "kilobyte" => '//a_quantity%stringify(with_dimensions=.true., &
-                compact_reals=.true.)//', is correct? ', test_passed(8)
+                compact_reals=.true.)//', is correct? ', test_passed(7)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
