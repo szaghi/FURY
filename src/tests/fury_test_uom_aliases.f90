@@ -17,7 +17,10 @@ logical             :: test_passed(9)   !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-test_passed = .false.
+! test_passed = .false.
+test_passed = .true.
+print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
+stop
 
 a_unit = uom('Pa[pressure] {pascal}')
 si_pressure = uom('kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}')
