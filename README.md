@@ -133,7 +133,8 @@ FURY is inspired by the python great module [pint](https://github.com/hgrecco/pi
 * [x] User-friendly classes to add *units of measure* to numbers;
 * [x] errors trapping for invalid computations/assignments;
 * [x] unit parsing: prefixed forms of units are recognized without explicitly defining them, i.e. as the prefix kilo and the unit meter are defined, FURY understands kilometer;
-* [x] standalone unit definitions: units definitions are loaded from simple and easy to edit text file;
+* [x] effortless conversion even for complex derived UOM;
+* [ ] standalone unit definitions: units definitions are loaded from simple and easy to edit text file;
 * [ ] advanced string parsing:
     * [x] symbolic algebra on units symbols;
     * [ ] Buckingham Pi Theorem;
@@ -538,6 +539,7 @@ A non comprehensive references list of UCCF related contents.
 
 + [The Unified Code for Units of Measure](http://unitsofmeasure.org/trac)
 + [Meyers, Dimensional analysis. C++ Report](http://se.ethz.ch/~meyer/publications/OTHERS/scott_meyers/dimensions.pdf)
++ [Petty, Automated computation and consistency checking of physical dimensions and units in scientific programs](http://onlinelibrary.wiley.com/doi/10.1002/spe.401/abstract)
 + [Brown, Introduction to the SI Library of Unit-Based Computation](http://lss.fnal.gov/archive/1998/conf/Conf-98-328.pdf)
 + [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units)
 
@@ -562,6 +564,7 @@ A non comprehensive references list of UCCF related contents.
     + [UCUM](https://github.com/jmandel/ucum.js)
 + Julia
     + [SIUnits](https://github.com/Keno/SIUnits.jl)
+    + [Unitful](https://github.com/ajkeller34/Unitful.jl)
 + Python
     + [quantities](https://github.com/python-quantities/python-quantities)
     + [magnitude](https://github.com/juanre/magnitude)
