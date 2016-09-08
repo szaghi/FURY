@@ -19,8 +19,8 @@ logical     :: test_passed(1) !< List of passed tests.
 test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
-u_speed = 'km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}'
-u_time = 's = second [time]'
+u_speed = uom('km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}')
+u_time = uom('s = second [time]')
 
 speed = 2 * u_speed
 time = 2 * u_time

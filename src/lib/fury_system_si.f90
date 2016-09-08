@@ -56,7 +56,7 @@ contains
   call self%add_unit('s [time].A [current] (C[electric_charge]) {coulomb}')
   call self%add_unit('kg-1 [mass-1].m-2 [length-2].s4 [time4].A2 [current2] (F[electric_capacitance]) {farad}')
   call self%add_unit('kg [mass].m2 [length2].s-2 [time-2].A-2 [current-2] (H[inductance]) {henry}')
-  call self%add_unit('s-1 [time-1] (Hz[frequency]) {hertz}')
+  call self%add_unit('Hz< = s-1 > [frequency] {hertz}')
   call self%add_unit('kg [mass].m2 [length2].s-2 [time-2] (J[energy]) {joule}')
   call self%add_unit('cd [luminous_flux] (lm [luminous_flux]) {lumen}')
   call self%add_unit('m-2 [length-2].cd [luminosity] (lx[illuminance]) {lux}')

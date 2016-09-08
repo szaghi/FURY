@@ -22,48 +22,57 @@ type :: uom
   !<
   !< The string format definition of a valid FURY unit is as following:
   !<
-  !< `kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2](Pa[pressure]){pascal}`
-  !< `km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}`
+  !< `uom_referenceA.uom_referenceB.... (uom_referenceALIAS[dimensions_alias]) {name}`
   !<
   !< where
   !<
-  !<+ the terms `[...]` define the *dimension* of each reference and are optional (the white spaces are ignored); moreover the
-  !<  exponents of dimensions can be omitted: in this case they are inferred from the symbol reference exponents; in the case
-  !<  they are explicitely written they must match the corresponding symbols ones or an error is raised;
-  !<+ the term `(...)` defines a unit *alias* that is optional and must come always after unit reference definition;
-  !<+ the term `{...}` defines the unit name that is optional and must be always the last term.
+  !<+ `uom_referenceA, uom_referenceB, ...` are the defined uom references that must follow [[uom_reference]] syntax.
+  !<+ the term `(uom_referenceALIAS[dimensions_alias])` defines a unit *alias* that is optional and must come always
+  !<  after unit reference definition;
+  !<+ the term `{name}` defines the unit name that is optional and must be always the last term.
   !<
-  !< Other valid string inputs of the same above *pressure* unit are:
+  !< For example, valid definition are:
   !<
-  !< `kg.m-1.s-2` a unit without specified dimensions, alias and name;
-  !< `kg.m-1.s-2(Pa)` a unit without specified dimensions and name, but with an alias without alias dimension;
-  !< `kg.m-1.s-2(Pa[pressure])` a unit without specified dimensions and name, but with an alias with alias dimension;
-  !< `kg.m-1.s-2{pascal}` a unit without specified dimensions and alias, but with a name;
-  !< `kg.m-1.s-2(Pa){pascal}` a unit without specified dimensions, but with an alias without alias dimension and a name;
+  !<+ `kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2] (Pa[pressure]) {pascal}`
+  !<+ `km = 1000 * m [length].h-1 = 3600 s-1 [time-1] (km_h[speed]) {km/h}`
   !<
-  !< @note It is better to avoid to uncomplete list of dimensions for references: define all dimensions for all references
+  !< The aliases definition for [[uom_reference]] term can be protected by means of `<` and `>` that are optional, but highly
+  !< recommended, e.g.:
+
+  !<+ `km< = 1000.0 * m> [length].h-1< = 3600.0 s-1> [time-1] (km_h[speed]) {km/h}`
+  !<
+  !< This protection allows disambiguation of `.` symbols that are used for [[uom_reference]] separation and for real
+  !< offset/factor of aliases definition. Other valid definitions are:
+  !<
+  !<+ `kg.m-1.s-2` a unit without specified dimensions, alias and name;
+  !<+ `kg.m-1.s-2(Pa)` a unit without specified dimensions and name, but with an alias without alias dimension;
+  !<+ `kg.m-1.s-2(Pa[pressure])` a unit without specified dimensions and name, but with an alias with alias dimension;
+  !<+ `kg.m-1.s-2{pascal}` a unit without specified dimensions and alias, but with a name;
+  !<è `kg.m-1.s-2(Pa){pascal}` a unit without specified dimensions, but with an alias without alias dimension and a name;
+  !<
+  !< @note It is better to avoid to incomplete list of dimensions for references: define all dimensions for all references
   !< or avoid to define dimensions at all.
-  type(uom_reference), allocatable, private :: references(:)           !< Reference units of the unit.
-  type(uom_reference), allocatable, private :: alias                   !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
-  integer(I_P),                     private :: references_number=0_I_P !< References number.
   character(len=:), allocatable             :: name                    !< Unit name.
+  type(uom_reference), allocatable, private :: alias                   !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal.
+  type(uom_reference), allocatable, private :: references(:)           !< Reference units of the unit.
+  integer(I_P),                     private :: references_number=0_I_P !< References number.
   contains
     ! public methods
-    procedure, pass(self) :: get_conversion_factor !< Get the scale factor from an alias.
-    procedure, pass(self) :: get_main_aliases      !< Return the main aliases.
-    procedure, pass(self) :: get_main_dimensions   !< Return the main dimensions.
+    ! procedure, pass(self) :: get_main_aliases      !< Return the main aliases.
+    ! procedure, pass(self) :: get_main_dimensions   !< Return the main dimensions.
     procedure, pass(self) :: get_main_reference    !< Return the main reference.
     procedure, pass(self) :: get_main_symbol       !< Return the main symbol.
+    procedure, pass(self) :: has_alias             !< Check if the unit has an alias.
     procedure, pass(self) :: has_name              !< Check if the unit has a name.
-    procedure, pass(self) :: has_reference         !< Check if the unit has a refence unit.
+    procedure, pass(self) :: has_reference         !< Check if the unit has a queried reference unit.
     procedure, pass(self) :: is_defined            !< Check if the unit is defined.
     procedure, pass(self) :: prefixed              !< Return prefixed unit.
     procedure, pass(self) :: set                   !< Set the unit.
-    procedure, pass(self) :: stringify             !< Return a string representaion of the unit.
+    procedure, pass(self) :: stringify             !< Return a string representation of the unit.
+    procedure, pass(self) :: to                    !< Convert magnitude with respect another unit.
     procedure, pass(self) :: unset                 !< unset the unit.
     ! public generic names
-    generic :: assignment(=) => assign_string, &
-                                assign_uom             !< Overloading `=` operator.
+    generic :: assignment(=) => assign_uom             !< Overloading `=` operator.
     generic :: operator(+) => add                      !< Overloading `+` operator.
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
@@ -79,31 +88,29 @@ type :: uom
     generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
     generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
-    procedure, pass(self), private :: add_reference            !< Add a refence unit to unit.
-    procedure, pass(self), private :: has_alias                !< Check if the unit has an alias.
-    procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible refence unit.
+    procedure, pass(self), private :: add_reference            !< Add a reference unit to unit.
+    procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible reference unit.
     procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
     procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
     procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
     procedure, pass(self), private :: parse                    !< Parse unit definition from an input string.
     procedure, pass(self), private :: parse_alias              !< Parse unit alias from an input string.
     procedure, pass(self), private :: parse_name               !< Parse unit name from an input string.
-    procedure, pass(self), private :: parse_references         !< Parse refence units from an input string.
-    procedure, pass(self), private :: update_references_number !< Update refence units number counter.
+    procedure, pass(self), private :: parse_references         !< Parse reference units from an input string.
+    procedure, pass(self), private :: update_references_number !< Update reference units number counter.
     ! operators
-    procedure, pass(lhs), private :: assign_string !< `uom = string` assignament.
-    procedure, pass(lhs), private :: assign_uom    !< `uom = uom` assignament.
-    procedure, pass(lhs), private :: add           !< `uom + uom` operator.
-    procedure, pass(lhs), private :: div           !< `uom / uom` operator.
-    procedure, pass(lhs), private :: mul           !< `uom * uom` operator.
-    procedure, pass(lhs), private :: sub           !< `uom - uom` operator.
-    procedure, pass(lhs), private :: pow_R16P      !< `uom ** real(R16P)` operator.
-    procedure, pass(lhs), private :: pow_R8P       !< `uom ** real(R8P)` operator.
-    procedure, pass(lhs), private :: pow_R4P       !< `uom ** real(R4P)` operator.
-    procedure, pass(lhs), private :: pow_I8P       !< `uom ** integer(I8P)` operator.
-    procedure, pass(lhs), private :: pow_I4P       !< `uom ** integer(I4P)` operator.
-    procedure, pass(lhs), private :: pow_I2P       !< `uom ** integer(I2P)` operator.
-    procedure, pass(lhs), private :: pow_I1P       !< `uom ** integer(I1P)` operator.
+    procedure, pass(lhs), private :: assign_uom !< `uom = uom` assignment.
+    procedure, pass(lhs), private :: add        !< `uom + uom` operator.
+    procedure, pass(lhs), private :: div        !< `uom / uom` operator.
+    procedure, pass(lhs), private :: mul        !< `uom * uom` operator.
+    procedure, pass(lhs), private :: sub        !< `uom - uom` operator.
+    procedure, pass(lhs), private :: pow_R16P   !< `uom ** real(R16P)` operator.
+    procedure, pass(lhs), private :: pow_R8P    !< `uom ** real(R8P)` operator.
+    procedure, pass(lhs), private :: pow_R4P    !< `uom ** real(R4P)` operator.
+    procedure, pass(lhs), private :: pow_I8P    !< `uom ** integer(I8P)` operator.
+    procedure, pass(lhs), private :: pow_I4P    !< `uom ** integer(I4P)` operator.
+    procedure, pass(lhs), private :: pow_I2P    !< `uom ** integer(I2P)` operator.
+    procedure, pass(lhs), private :: pow_I1P    !< `uom ** integer(I1P)` operator.
 endtype uom
 
 interface uom
@@ -115,7 +122,7 @@ contains
   ! private non type bound procedures
   function creator_from_string(source, alias, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of unit from an input source string..
+  !< Create an instance of [[uom]] from an input source string.
   !---------------------------------------------------------------------------------------------------------------------------------
   character(*),        intent(in)           :: source !< Source input string definition of the unit.
   type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
@@ -131,7 +138,7 @@ contains
 !
   function creator_from_other_unit(source, alias, name) result(unit)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of unit from another unit.
+  !< Create an instance of [[uom]] from another [[uom]].
   !---------------------------------------------------------------------------------------------------------------------------------
   type(uom),           intent(in)           :: source !< Source input unit.
   type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
@@ -147,7 +154,7 @@ contains
 
   subroutine remove_reference(references, id)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Remove a reference from a list of rerefences.
+  !< Remove a reference from the list of references.
   !---------------------------------------------------------------------------------------------------------------------------------
   type(uom_reference), intent(inout), allocatable :: references(:)     !< References list.
   integer(I_P),        intent(in)                 :: id                !< Index of reference to remove.
@@ -180,34 +187,6 @@ contains
   endsubroutine remove_reference
 
   ! public methods
-  pure function get_conversion_factor(self, alias) result(factor)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Get the scale factor from an alias.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self       !< The uom.
-  type(uom),  intent(in) :: alias      !< Alias uom queried.
-  real(RKP)              :: factor     !< Symbol scale factor.
-  type(uom_symbol)       :: s_main     !< Main self reference symbol.
-  type(uom_symbol)       :: a_main     !< Main alias reference symbol.
-  type(uom_symbol)       :: conversion !< Conversion uom symbol.
-  integer(I_P)           :: r          !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  factor = 1._RKP
-  if (self%is_defined().and.alias%is_defined().and.self%references_number==alias%references_number) then
-    do r=1, self%references_number
-      if (alias%references(r).compatible.self%references(r)) then
-        s_main = self%references(r)%get_main_symbol()
-        a_main = alias%references(r)%get_first_compatible_alias(self%references(r))
-        conversion = s_main%to(a_main)
-        factor = factor * conversion%get_factor()
-      endif
-    enddo
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_conversion_factor
-
   function get_main_symbol(self) result(symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the main symbol, i.e. `self%alias%aliases(1)%symbol_` if `self%alias` is defined or
@@ -228,45 +207,45 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_symbol
 
-  pure function get_main_aliases(self) result(aliases)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return the main aliases, i.e. `self%alias%aliases(1)%aliases(:)%symbol_` if `self%alias` is defined or
-  !< `self%references(1)%aliases(1)%aliases(:)%symbol_` is `self` has only 1 [[uom_reference]].
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)    :: self       !< The uom reference.
-  type(string), allocatable :: aliases(:) !< Main alias aliases.
-  !---------------------------------------------------------------------------------------------------------------------------------
+! pure function get_main_aliases(self) result(aliases)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Return the main aliases, i.e. `self%alias%aliases(1)%aliases(:)%symbol_` if `self%alias` is defined or
+! !< `self%references(1)%aliases(1)%aliases(:)%symbol_` is `self` has only 1 [[uom_reference]].
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom), intent(in)    :: self       !< The uom reference.
+! type(string), allocatable :: aliases(:) !< Main alias aliases.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! if (self%is_defined()) then
+!   if (self%has_alias()) then
+!     aliases = self%alias%get_aliases()
+!   elseif (self%references_number==1) then
+!     aliases = self%references(1)%get_aliases()
+!   endif
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction get_main_aliases
 
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined()) then
-    if (self%has_alias()) then
-      aliases = self%alias%get_aliases()
-    elseif (self%references_number==1) then
-      aliases = self%references(1)%get_aliases()
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_main_aliases
-
-  pure function get_main_dimensions(self) result(dimensions)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return the main dimensions, i.e. `self%alias%dimensions%symbol_` if `self%alias` is defined or
-  !< `self%references(1)%dimensions%symbol_` if `self` has only 1 [[uom_reference]].
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in)  :: self       !< The uom reference.
-  type(string)            :: dimensions !< Main alias dimensions.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined()) then
-    if (self%has_alias()) then
-      dimensions = self%alias%dimensionality()
-    elseif (self%references_number==1) then
-      dimensions = self%references(1)%dimensionality()
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_main_dimensions
+! pure function get_main_dimensions(self) result(dimensions)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Return the main dimensions, i.e. `self%alias%dimensions%symbol_` if `self%alias` is defined or
+! !< `self%references(1)%dimensions%symbol_` if `self` has only 1 [[uom_reference]].
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom), intent(in)  :: self       !< The uom reference.
+! type(string)            :: dimensions !< Main alias dimensions.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! if (self%is_defined()) then
+!   if (self%has_alias()) then
+!     dimensions = self%alias%dimensionality()
+!   elseif (self%references_number==1) then
+!     dimensions = self%references(1)%dimensionality()
+!   endif
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction get_main_dimensions
 
   pure function get_main_reference(self) result(reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -283,37 +262,14 @@ contains
       reference = self%alias
     elseif (self%references_number==1) then
       reference = self%references(1)
+    else
+      ! raise error
     endif
+  else
+    ! raise error
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_reference
-
-  function prefixed(self, prefixes)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return prefixed unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),          intent(in) :: self               !< The unit.
-  type(uom_reference), intent(in) :: prefixes           !< Prefixes data.
-  type(uom)                       :: prefixed           !< Prefixed unit.
-  type(uom_reference)             :: prefixed_reference !< Prefixed unit reference.
-  type(string)                    :: symbol             !< Main prefixes symbol.
-  type(uom_symbol)                :: prefixes_symbol    !< Main prefixes uom symbol.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined().and.prefixes%is_defined()) then
-    prefixed = self
-    prefixed_reference = prefixed%get_main_reference()
-    prefixed_reference = prefixed_reference%prefixed(prefixes=prefixes)
-    call prefixed%set(references=[prefixed_reference])
-    if (prefixed%has_name()) then
-      prefixes_symbol = prefixes%get_main_symbol()
-      symbol = prefixes_symbol%get_symbol()
-      call prefixed%set(name=symbol//prefixed%name)
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction prefixed
 
   elemental function has_name(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -330,7 +286,7 @@ contains
 
   elemental function has_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has a reference unit.
+  !< Check if the unit has a queried reference unit.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom),          intent(in) :: self          !< The unit.
   type(uom_reference), intent(in) :: reference     !< Reference unit to check the presence of.
@@ -362,8 +318,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  is_defined = allocated(self%references) ! possible GNU bug
-  ! is_defined = (self%references_number>0)
+  is_defined = allocated(self%references)
   if (is_defined) then
     do r=1, self%references_number
       is_defined = self%references(r)%is_defined()
@@ -372,6 +327,36 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_defined
+
+  function prefixed(self, prefixes)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return prefixed unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(in) :: self            !< The unit.
+  type(uom_reference), intent(in) :: prefixes        !< Prefixes data.
+  type(uom)                       :: prefixed        !< Prefixed unit.
+  type(uom_reference)             :: main_reference  !< Prefixed unit reference.
+  type(string)                    :: symbol          !< Main prefixes symbol.
+  type(uom_symbol)                :: prefixes_symbol !< Main prefixes uom symbol.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.prefixes%is_defined()) then
+    prefixed = self
+    main_reference = prefixed%get_main_reference()
+    main_reference = main_reference%prefixed(prefixes=prefixes)
+    call prefixed%set(references=[main_reference])
+    if (prefixed%has_alias()) then
+      prefixed%alias = prefixed%alias%prefixed(prefixes=prefixes)
+    endif
+    if (prefixed%has_name()) then
+      prefixes_symbol = prefixes%get_main_symbol()
+      symbol = prefixes_symbol%get_symbol()
+      call prefixed%set(name=symbol//prefixed%name)
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction prefixed
 
   pure subroutine set(self, references, alias, name)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -447,6 +432,37 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
+  elemental function to(self, other, magnitude) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Convert magnitude with respect another unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom), intent(in) :: self              !< The uom.
+  type(uom),  intent(in) :: other             !< Other unit used for conversion.
+  real(RKP),  intent(in) :: magnitude         !< Magnitude to be converted.
+  real(RKP)              :: converted         !< Converted magnitude.
+  real(RKP)              :: converted_partial !< Partial conversion storage.
+  logical                :: is_found          !< Flag to check if a conversion has been found.
+  integer(I_P)           :: ro                !< Counter.
+  integer(I_P)           :: rs                !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  converted = magnitude
+  converted_partial = converted
+  if (self%is_defined().and.other%is_defined().and.self%references_number==other%references_number) then
+    do rs=1, self%references_number
+      search_other: do ro=1, other%references_number
+        call self%references(rs)%to(other=other%references(ro), magnitude=converted, converted=converted_partial, is_found=is_found)
+        if (is_found) then
+          converted = converted_partial
+          exit search_other
+        endif
+      enddo search_other
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction to
+
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Unset the unit.
@@ -455,15 +471,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (allocated(self%references)) deallocate(self%references)
-  if (allocated(self%alias)) deallocate(self%alias)
-  self%references_number = 0_I_P
   if (allocated(self%name)) deallocate(self%name)
+  if (allocated(self%alias)) deallocate(self%alias)
+  if (allocated(self%references)) deallocate(self%references)
+  self%references_number = 0_I_P
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
   ! private methods
-  pure subroutine add_reference(self, reference)
+  elemental subroutine add_reference(self, reference)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Add reference unit to unit.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -476,7 +492,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   if (self%is_defined().and.(.not.self%has_reference(reference=reference))) then
     allocate(references(self%references_number+1))
-    ! references(1:self%references_number) = self%references
     do r=1, self%references_number
       references(r) = self%references(r)
     enddo
@@ -496,7 +511,7 @@ contains
   !< Check if the unit has an alias.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self      !< The unit.
-  logical                :: has_alias !< Alias presence status.
+  logical                :: has_alias !< Check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -511,20 +526,17 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom),          intent(in) :: self                     !< The unit.
   type(uom_reference), intent(in) :: reference                !< Reference unit to check the presence of.
-  logical                         :: has_reference_compatible !< reference unit presence status.
+  logical                         :: has_reference_compatible !< Check result.
   integer(I_P)                    :: r                        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   has_reference_compatible = .false.
-  if (self%is_defined()) then
+  if (self%is_defined().and.reference%is_defined()) then
     do r=1, self%references_number
       has_reference_compatible = self%references(r).compatible.reference
       if (has_reference_compatible) exit
     enddo
-    if (.not.has_reference_compatible) then
-      if (self%has_alias()) has_reference_compatible = self%alias.compatible.reference
-    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_reference_compatible
@@ -549,14 +561,6 @@ contains
         if (.not.is_compatible) exit
       enddo
     endif
-    if (.not.is_compatible) then
-      ! compare against alias
-      if (self%has_alias().and.other%references_number==1) then
-        is_compatible = other%references(1).compatible.self%alias
-      elseif (other%has_alias().and.self%references_number==1) then
-        is_compatible = self%references(1).compatible.other%alias
-      endif
-    endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
@@ -567,7 +571,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self     !< The unit.
   class(uom), intent(in) :: other    !< The other unit.
-  logical                :: is_equal !< Equality check result.
+  logical                :: is_equal !< Check result.
   integer(I_P)           :: r        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -599,7 +603,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self         !< The unit.
   class(uom), intent(in) :: other        !< The other unit.
-  logical                :: is_not_equal !< Disequality check result.
+  logical                :: is_not_equal !< Check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -742,7 +746,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse_references
 
-  pure subroutine update_references_number(self)
+  elemental subroutine update_references_number(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Update references number counter.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -756,32 +760,9 @@ contains
   endsubroutine update_references_number
 
   ! operators
-  subroutine assign_string(lhs, rhs)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom = string` assignament.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),   intent(inout) :: lhs         !< Left hand side.
-  character(*), intent(in)    :: rhs         !< Right hand side.
-  type(uom)                   :: parsed_unit !< Unit arising from string input.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  call parsed_unit%parse(source=rhs)
-  if (.not.lhs%is_defined())  then
-    lhs = parsed_unit
-  else
-    if (.not.lhs == parsed_unit) then
-      write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                           parsed_unit%stringify(with_dimensions=.true.)//'"'
-      stop
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endsubroutine assign_string
-
   subroutine assign_uom(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom = uom` assignament.
+  !< `uom = uom` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(inout) :: lhs !< Left hand side.
   class(uom), intent(in)    :: rhs !< Right hand side.
@@ -791,7 +772,6 @@ contains
   if (rhs%is_defined())  then
     if (.not.lhs%is_defined())  then
       if (allocated(lhs%references)) deallocate(lhs%references)
-      ! lhs%references = rhs%references ! possible GNU bug
       allocate(lhs%references, source=rhs%references)
       lhs%references_number = rhs%references_number
       if (allocated(rhs%alias)) then
@@ -801,7 +781,7 @@ contains
       if (allocated(rhs%name)) lhs%name = rhs%name
     else
       if (.not.lhs==rhs) then
-        write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
+        write(stderr, "(A)") 'error: cannot assign between "'//lhs%stringify(with_dimensions=.true.)//'" and "'//&
                              rhs%stringify(with_dimensions=.true.)//'"'
         stop
       endif
@@ -823,8 +803,8 @@ contains
   if (lhs == rhs) then
     opr = lhs
   else
-    write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                         rhs%stringify(with_dimensions=.true.)//'"'
+    write(stderr, "(A)") &
+      'error: cannot add "'//lhs%stringify(with_dimensions=.true.)//'" to "'//rhs%stringify(with_dimensions=.true.)//'"'
     stop
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -846,27 +826,34 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    ! lhs_references = lhs%references ! possible GNU bug
-    ! rhs_references = rhs%references ! possible GNU bug
     allocate(lhs_references, source=lhs%references)
     allocate(rhs_references, source=rhs%references)
     do ls=1, size(lhs_references, dim=1)
       rs = 1
       remaining_rhs_references: do
-        if (lhs_references(ls).compatible.rhs_references(rs)) then
-          lhs_references(ls) = lhs_references(ls) / rhs_references(rs)
-          ! pop up current reference from rhs references
-          if (size(rhs_references, dim=1)>1) then
-            call remove_reference(references=rhs_references, id=rs)
-            rs = 1
+        if (allocated(rhs_references)) then
+          if (lhs_references(ls).compatible.rhs_references(rs)) then
+            lhs_references(ls) = lhs_references(ls) / rhs_references(rs)
+            ! pop up current reference from rhs references
+            if (size(rhs_references, dim=1)>1) then
+              call remove_reference(references=rhs_references, id=rs)
+              rs = 1
+            else
+              deallocate(rhs_references)
+            endif
           else
-            deallocate(rhs_references)
+            ! check the next rhs references
+            rs = rs + 1
+          endif
+          ! exit strategy
+          if (allocated(rhs_references)) then
+            if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
+          else
+            exit remaining_rhs_references
           endif
         else
-          ! check the next rhs references
-          rs = rs + 1
+          exit remaining_rhs_references
         endif
-        if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
       enddo remaining_rhs_references
     enddo
     opr%references = lhs_references
@@ -900,8 +887,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    ! lhs_references = lhs%references ! possible GNU bug
-    ! rhs_references = rhs%references ! possible GNU bug
     allocate(lhs_references, source=lhs%references)
     allocate(rhs_references, source=rhs%references)
     do ls=1, size(lhs_references, dim=1)
@@ -921,7 +906,7 @@ contains
             ! check the next rhs references
             rs = rs + 1
           endif
-          ! if (rs>=size(rhs_references, dim=1).or.(.not.allocated(rhs_references))) exit remaining_rhs_references
+          ! exit strategy
           if (allocated(rhs_references)) then
             if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
           else
@@ -960,8 +945,8 @@ contains
   if (lhs==rhs) then
     opr = lhs
   else
-    write(stderr, "(A)") 'error: cannot convert from "'//lhs%stringify(with_dimensions=.true.)//'" to "'//&
-                         rhs%stringify(with_dimensions=.true.)//'"'
+    write(stderr, "(A)") &
+      'error: cannot subtract "'//lhs%stringify(with_dimensions=.true.)//'" by "'//rhs%stringify(with_dimensions=.true.)//'"'
     stop
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -986,6 +971,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(n=rhs, compact=.true.))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R16P
@@ -1009,6 +995,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(n=rhs, compact=.true.))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R8P
@@ -1032,6 +1019,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(n=rhs, compact=.true.))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_R4P
@@ -1055,6 +1043,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(rhs))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I8P
@@ -1078,6 +1067,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(rhs))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I4P
@@ -1101,6 +1091,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(rhs))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I2P
@@ -1124,6 +1115,7 @@ contains
     if (opr%has_alias()) then
       if (opr%alias%is_defined()) opr%alias = opr%alias ** rhs
     endif
+    if (opr%has_name()) opr%name = opr%name//'**'//trim(str(rhs))
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P

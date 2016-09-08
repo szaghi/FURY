@@ -12,7 +12,6 @@ use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-! public :: parse_uom_references
 public :: uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -20,43 +19,52 @@ public :: uom_reference
 type :: uom_reference
   !< Unit of measure reference class.
   !<
-  !< It is the *base* unit class composed by only 1 symbol, but with many possible aliases.
+  !< It is the *reference* unit class composed by only 1 symbol, but with many possible aliases that can be used for conversions.
   !<
   !< Provide math operations on symbols necessary to build complex (derived) units.
   !<
   !< The string format definition of a valid FURY unit reference definition is as following:
   !<
-  !< `s-1 = Hz = hertz [time-1]`
-  !< `kHz = 1000 * Hz = kilohertz [time-1]`
+  !< `uom_symbolA = uom_symbolB = uom_symbolC = ... [dimensionsA]`
   !<
   !< where
   !<
-  !<+ `s-1` is the first mandatory term that defines the litteral symbol with its exponent (if 1 can be omitted);
-  !<+ all subsequent ` = Hz = ...` are optional aliases (with their own exponent) of the main litteral symbol;
-  !<+ `[time-1]` is the last optional term that defines the symbol dimensions (if dimensions exponent is passed it must be equal
-  !<  to the one of the main litteral symbol.
+  !<+ `uom_symbolA` is the main symbol of the unit reference; it is stored as the first reference alias and must respect:
+  !<   + `uom_symbolA%offset_ = 0`
+  !<   + `uom_symbolA%factor_ = 1`
+  !<+ `uom_symbolB, uom_symbolC, ...` are the defined aliases and they are optional; they could be totally general with offset
+  !<  and factor used for conversion formulas, until they respect the [[uom_symbol]] syntax;
+  !<+ `[dimensions]` is the last optional term that defines the symbol dimensions (if dimensions exponent is passed it must be
+  !<  equal to the one of the main symbol.
+  !<
+  !< For example, valid definition are:
+  !<
+  !<+ `s-1 = Hz = hertz [time-1]`
+  !<+ `kHz< = 1000.0 * Hz = kilohertz> [frequency]`
+  !<+ `degC< = celsius = 273.15 + K> [temperature]`
   !<
   !< These terms can be separated by any white spaces number (even zero), but the dimensions must be enclosed into `[]` brackets
   !< at the end of the string.
-  type(uom_symbol), allocatable, private :: aliases(:)            !< Uom symbol aliases, e.g. "m = meter = metre" for metres.
-  integer(I_P),                  private :: aliases_number=0_I_P  !< Number of defined symbol aliases.
-  type(uom_symbol),              private :: dimensions            !< Dimensions of the symbol, e.g. "time-1" for Hz.
+  type(uom_symbol), allocatable, private :: aliases(:)           !< Uom symbol aliases, e.g. "m = meter = metre" for metres.
+  integer(I_P),                  private :: aliases_number=0_I_P !< Number of defined symbol aliases.
+  type(uom_symbol),              private :: dimensions           !< Dimensions of the symbol, e.g. "length" for meter.
   contains
     ! public methods
-    procedure, pass(self) :: dimensionality             !< Return a string representaion of the symbol dimensions.
-    procedure, pass(self) :: get_aliases                !< Return the aliases list.
-    procedure, pass(self) :: get_first_compatible_alias !< Get first alias compatible with symbol queried.
+    procedure, pass(self) :: dimensionality             !< Return a string representation of the symbol dimensions.
+    ! procedure, pass(self) :: get_aliases                !< Return the aliases list.
+    ! procedure, pass(self) :: get_first_compatible_alias !< Get first alias compatible with symbol queried.
     procedure, pass(self) :: get_main_symbol            !< Return the main symbol, i.e. aliases(1).
-    procedure, pass(self) :: has_alias                  !< Check if the symbol has the queried alias.
-    procedure, pass(self) :: has_dimensions             !< Check if the symbol dimensions has been defined.
-    procedure, pass(self) :: is_defined                 !< Check if the symbol is defined.
-    procedure, pass(self) :: parse                      !< Parse symbol from string.
-    procedure, pass(self) :: prefixed                   !< Return a prefixed symbol.
-    procedure, pass(self) :: set                        !< Set symbol.
-    procedure, pass(self) :: stringify                  !< Return a string representaion of the symbol.
-    procedure, pass(self) :: unset                      !< Unset symbol.
+    procedure, pass(self) :: has_alias                  !< Check if the reference has the queried alias.
+    procedure, pass(self) :: has_dimensions             !< Check if the reference dimensions has been defined.
+    procedure, pass(self) :: is_defined                 !< Check if the reference is defined.
+    procedure, pass(self) :: parse                      !< Parse reference from string.
+    procedure, pass(self) :: prefixed                   !< Return a prefixed reference.
+    procedure, pass(self) :: set                        !< Set reference.
+    procedure, pass(self) :: stringify                  !< Return a string representation of the reference.
+    procedure, pass(self) :: to                         !< Convert magnitude with respect another alias.
+    procedure, pass(self) :: unset                      !< Unset reference.
     ! public generic names
-    generic :: assignment(=) => assign_uom_reference   !< Overloading `=` assignament.
+    generic :: assignment(=) => assign_uom_reference   !< Overloading `=` assignment.
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
     generic :: operator(**) =>                   &
@@ -70,10 +78,10 @@ type :: uom_reference
     generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
     generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
-    procedure, pass(self), private :: is_compatible        !< Check if the symbol is compatible with another one.
-    procedure, pass(self), private :: is_equal             !< Check if the symbol is equal with another one.
-    procedure, pass(self), private :: is_not_equal         !< Check if the symbol is not equal with another one.
-    procedure, pass(lhs),  private :: assign_uom_reference !< `uom_reference = uom_reference` assignament.
+    procedure, pass(self), private :: is_compatible        !< Check if the reference is compatible with another one.
+    procedure, pass(self), private :: is_equal             !< Check if the reference is equal with another one.
+    procedure, pass(self), private :: is_not_equal         !< Check if the reference is not equal with another one.
+    procedure, pass(lhs),  private :: assign_uom_reference !< `uom_reference = uom_reference` assignment.
     procedure, pass(lhs),  private :: div                  !< `uom_reference / uom_reference` operator.
     procedure, pass(lhs),  private :: mul                  !< `uom_reference * uom_reference` operator.
     procedure, pass(lhs),  private :: pow_R16P             !< `uom_reference ** real(R16P)` operator.
@@ -86,7 +94,7 @@ type :: uom_reference
 endtype uom_reference
 
 interface uom_reference
-  !< Ovearloading [[uom_reference]] name with a creator function.
+  !< Overloading [[uom_reference]] name with a creator function.
   module procedure creator_from_string
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +118,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return a string representation of [[uom_reference]] dimensions.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: self !< The uom rerefence.
+  class(uom_reference), intent(in) :: self !< The uom reference.
   character(len=:), allocatable    :: raw  !< Raw characters data.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -184,8 +192,8 @@ contains
   !< Check if [[uom_reference]] has the queried alias.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(in) :: self      !< The uom reference.
-  type(uom_symbol),     intent(in) :: alias     !< Alias symbol queried.
-  logical                          :: has_alias !< Symbol aliases definition status.
+  type(uom_symbol),     intent(in) :: alias     !< Alias queried.
+  logical                          :: has_alias !< Check result.
   integer(I_P)                     :: a         !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -231,26 +239,18 @@ contains
   subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Parse [[uom_reference]] definition from string.
-  !<
-  !< The string format definition of a valid FURY unit reference definition is as following:
-  !<
-  !< `s-1 = Hz = hertz [time-1]`
-  !< `kHz = kilohertz = 1000 * Hz = 1000 * s-1 [time-1]`
-  !<
-  !< The first symbol is the *main* one and it is stored into the first element of the `aliases` array.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(inout) :: self       !< The uom reference.
-  character(*),         intent(in)    :: source     !< Source input string definition of symbol.
-  type(string)                        :: buffer     !< String buffer.
-  type(string), allocatable           :: tokens(:)  !< String tokens.
-  integer(I_P)                        :: a          !< Counter.
-  integer(I_P)                        :: d(2)       !< Counter.
+  class(uom_reference), intent(inout) :: self      !< The uom reference.
+  character(*),         intent(in)    :: source    !< Source input string definition of symbol.
+  type(string)                        :: buffer    !< String buffer.
+  type(string), allocatable           :: tokens(:) !< String tokens.
+  integer(I_P)                        :: a         !< Counter.
+  integer(I_P)                        :: d(2)      !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   call self%unset
   buffer = trim(adjustl(source))
-
   d(1) = buffer%index(substring='[')
   d(2) = buffer%index(substring=']')
   if ((d(1)>0).and.(d(2)>0).and.(d(2)>d(1)+1)) then
@@ -260,16 +260,14 @@ contains
     call self%dimensions%parse(source=tokens(2)%chars())
     buffer = tokens(1)
   endif
-
   self%aliases_number = buffer%count('=') + 1
   call buffer%split(sep='=', tokens=tokens)
   allocate(self%aliases(1:self%aliases_number))
   do a=1, self%aliases_number
     call self%aliases(a)%parse(source=tokens(a)%chars())
   enddo
-
   if (self%dimensions%get_exponent()/=0.and.self%dimensions%get_exponent()/=self%aliases(1)%get_exponent()) then
-    write(stderr, '(A)')'  error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
+    write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
     ' the exponent of the uom and the one of the dimensions (if passed) must be the same!'
     write(stderr, '(A)')'  dimensions: '//self%dimensions%stringify()
     write(stderr, '(A)')'  uom symbol: '//self%aliases(1)%stringify()
@@ -281,13 +279,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine parse
 
-  pure function prefixed(self, prefixes)
+  elemental function prefixed(self, prefixes)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return a prefixed symbol.
+  !< Return a prefixed reference.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(in) :: self       !< The uom reference.
-  type(uom_reference),  intent(in) :: prefixes   !< Other symbol used for prefixing.
-  type(uom_reference)              :: prefixed   !< The prefixed symbol.
+  type(uom_reference),  intent(in) :: prefixes   !< Other reference used for prefixing.
+  type(uom_reference)              :: prefixed   !< The prefixed reference.
   type(uom_symbol), allocatable    :: aliases(:) !< Uom symbol aliases, e.g. "m = meter = metre" for metres.
   integer(I_P)                     :: a          !< Counter.
   integer(I_P)                     :: p          !< Counter.
@@ -318,11 +316,11 @@ contains
 
   pure subroutine set(self, aliases, dimensions)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Set symbol.
+  !< Set reference.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(inout)        :: self        !< The uom reference.
-  type(uom_symbol),     intent(in), optional :: aliases(1:) !< Symbol aliases.
-  type(uom_symbol),     intent(in), optional :: dimensions  !< Dimensions of the symbol, e.g. "time-1" for Hz.
+  type(uom_symbol),     intent(in), optional :: aliases(1:) !< Reference aliases.
+  type(uom_symbol),     intent(in), optional :: dimensions  !< Dimensions of the reference, e.g. "frequency" for Hz.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -373,9 +371,45 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
+  elemental subroutine to(self, other, magnitude, converted, is_found)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Convert magnitude with respect another alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in)  :: self      !< The uom reference.
+  type(uom_reference),  intent(in)  :: other     !< Other unit reference used for conversion.
+  real(RKP),            intent(in)  :: magnitude !< Magnitude to be converted.
+  real(RKP),            intent(out) :: converted !< Converted magnitude.
+  logical,              intent(out) :: is_found  !< Flag to check if a conversion alias has been found.
+  integer(I_P)                      :: a         !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  converted = magnitude
+  is_found = .false.
+  if (self%is_defined().and.other%is_defined()) then
+    direct_conversion: do a=1, self%aliases_number
+      if (other%aliases(1).convertible.self%aliases(a)) then
+        converted = self%aliases(a)%convert(magnitude=magnitude)
+        is_found = .true.
+        exit direct_conversion
+      endif
+    enddo direct_conversion
+    if (.not.is_found) then
+      inverse_conversion: do a=1, other%aliases_number
+        if (other%aliases(a).convertible.self%aliases(1)) then
+          converted = other%aliases(a)%convert(magnitude=magnitude, inverse=.true.)
+          is_found = .true.
+          exit inverse_conversion
+        endif
+      enddo inverse_conversion
+    endif
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine to
+
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Unset symbol.
+  !< Unset reference.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(inout) :: self !< The uom reference.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -395,20 +429,11 @@ contains
   class(uom_reference), intent(in) :: self          !< The uom reference.
   type(uom_reference),  intent(in) :: other         !< The other reference.
   logical                          :: is_compatible !< Check result.
-  integer(I_P)                     :: o             !< Counter.
-  integer(I_P)                     :: s             !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   is_compatible = .false.
-  if (self%is_defined().and.other%is_defined()) then
-    outer_loop: do o=1, other%aliases_number
-      do s=1, self%aliases_number
-        is_compatible = (self%aliases(s).compatible.other%aliases(o))
-        if (is_compatible) exit outer_loop
-      enddo
-    enddo outer_loop
-  endif
+  if (self%is_defined().and.other%is_defined()) is_compatible = (self%aliases(1).compatible.other%aliases(1))
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_compatible
 
@@ -417,22 +442,13 @@ contains
   !< Check if [[uom_reference]] is equal with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(in) :: self     !< The uom reference.
-  type(uom_reference),  intent(in) :: other    !< The other symbol.
+  type(uom_reference),  intent(in) :: other    !< The other reference.
   logical                          :: is_equal !< Check result.
-  integer(I_P)                     :: o        !< Counter.
-  integer(I_P)                     :: s        !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   is_equal = .false.
-  if (self%is_defined().and.other%is_defined()) then
-    outer_loop: do o=1, other%aliases_number
-      do s=1, self%aliases_number
-        is_equal = (self%aliases(s) == other%aliases(o))
-        if (is_equal) exit outer_loop
-      enddo
-    enddo outer_loop
-  endif
+  if (self%is_defined().and.other%is_defined()) is_equal = (self%aliases(1)==other%aliases(1))
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
@@ -441,7 +457,7 @@ contains
   !< Check if [[uom_reference]] is not equal with another one.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(in) :: self         !< The uom reference.
-  type(uom_reference),  intent(in) :: other        !< The other symbol.
+  type(uom_reference),  intent(in) :: other        !< The other reference.
   logical                          :: is_not_equal !< Check result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -453,7 +469,7 @@ contains
   ! operators
   pure subroutine assign_uom_reference(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< `uom_reference = uom_reference` assignament.
+  !< `uom_reference = uom_reference` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom_reference), intent(inout) :: lhs !< Left hand side.
   type(uom_reference),  intent(in)    :: rhs !< Right hand side.
@@ -474,25 +490,16 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference / uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: lhs              !< Left hand side.
-  type(uom_reference),  intent(in) :: rhs              !< Right hand side.
-  type(uom_reference)              :: opr              !< Operator result.
-  type(uom_symbol)                 :: first_compatible !< First rhs compatible alias.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  type(uom_reference),  intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs==rhs) then
+  if (lhs.compatible.rhs) then
     opr%aliases_number = 1
     allocate(opr%aliases(1))
-    opr%aliases(1) = lhs%aliases(1) / lhs%aliases(1)
-    opr%dimensions = lhs%dimensions / lhs%dimensions
-  elseif (lhs.compatible.rhs) then
-    first_compatible = lhs%get_first_compatible_alias(other=rhs)
-    ! lhs and rhs have a conversion formula if first_compatible of rhs is not compatible with main symbol of lhs...
-    if (.not.(first_compatible.compatible.lhs%aliases(1))) first_compatible = first_compatible%to(lhs%aliases(1))
-    opr%aliases_number = 1
-    allocate(opr%aliases(1))
-    opr%aliases(1) = lhs%aliases(1) / first_compatible
+    opr%aliases(1) = lhs%aliases(1) / rhs%aliases(1)
     opr%dimensions = lhs%dimensions / rhs%dimensions
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -502,25 +509,16 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference * uom_reference` operator.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: lhs              !< Left hand side.
-  type(uom_reference),  intent(in) :: rhs              !< Right hand side.
-  type(uom_reference)              :: opr              !< Operator result.
-  type(uom_symbol)                 :: first_compatible !< First rhs compatible alias.
+  class(uom_reference), intent(in) :: lhs !< Left hand side.
+  type(uom_reference),  intent(in) :: rhs !< Right hand side.
+  type(uom_reference)              :: opr !< Operator result.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
-  if (lhs==rhs) then
+  if (lhs.compatible.rhs) then
     opr%aliases_number = 1
     allocate(opr%aliases(1))
-    opr%aliases(1) = lhs%aliases(1) * lhs%aliases(1)
-    opr%dimensions = lhs%dimensions * lhs%dimensions
-  elseif (lhs.compatible.rhs) then
-    first_compatible = lhs%get_first_compatible_alias(other=rhs)
-    ! lhs and rhs have a conversion formula if first_compatible of rhs is not compatible with main symbol of lhs...
-    if (.not.(first_compatible.compatible.lhs%aliases(1))) first_compatible = first_compatible%to(lhs%aliases(1))
-    opr%aliases_number = 1
-    allocate(opr%aliases(1))
-    opr%aliases(1) = lhs%aliases(1) * first_compatible
+    opr%aliases(1) = lhs%aliases(1) * rhs%aliases(1)
     opr%dimensions = lhs%dimensions * rhs%dimensions
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
