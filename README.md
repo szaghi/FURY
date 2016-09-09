@@ -56,8 +56,8 @@ print "(A)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimensions=.
 
 #### Compiler Support
 
-[![Compiler](https://img.shields.io/badge/GNU-v5.3.x+-brightgreen.svg)]()
-[![Compiler](https://img.shields.io/badge/Intel-v16.x+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/GNU-v6.1.1+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/Intel-v16.1+-brightgreen.svg)]()
 [![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
