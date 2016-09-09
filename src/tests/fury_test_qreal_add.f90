@@ -7,26 +7,26 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal) :: force1         !< A force.
-type(qreal) :: force2         !< A force.
-type(qreal) :: force3         !< A force.
-type(uom)   :: u_acceleration !< Acceleration unit.
-type(uom)   :: u_force        !< Force unit.
-type(uom)   :: u_length       !< Length unit.
-type(uom)   :: u_mass         !< Mass unit.
-type(uom)   :: u_speed        !< Speed unit.
-type(uom)   :: u_time         !< Time unit.
-logical     :: test_passed(1) !< List of passed tests.
+type(qreal64) :: force1         !< A force.
+type(qreal64) :: force2         !< A force.
+type(qreal64) :: force3         !< A force.
+type(uom64)   :: u_acceleration !< Acceleration unit.
+type(uom64)   :: u_force        !< Force unit.
+type(uom64)   :: u_length       !< Length unit.
+type(uom64)   :: u_mass         !< Mass unit.
+type(uom64)   :: u_speed        !< Speed unit.
+type(uom64)   :: u_time         !< Time unit.
+logical       :: test_passed(1) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-u_length = uom(source='m [length]', name='metre')
+u_length = uom64(source='m [length]', name='metre')
 print "(A)", 'u_length = '//u_length%stringify(with_dimensions=.true., with_name=.true.)
-u_mass = uom(source='kg [mass]', name='kilogram')
+u_mass = uom64(source='kg [mass]', name='kilogram')
 print "(A)", 'u_mass = '//u_mass%stringify(with_dimensions=.true., with_name=.true.)
-u_time = uom(source='s [time]', name='second')
+u_time = uom64(source='s [time]', name='second')
 print "(A)", 'u_time = '//u_time%stringify(with_dimensions=.true., with_name=.true.)
 
 u_speed = u_length / u_time
@@ -36,8 +36,8 @@ print "(A)", 'u_acceleration = '//u_acceleration%stringify(with_dimensions=.true
 u_force = u_mass * u_acceleration
 print "(A)", 'u_force = '//u_force%stringify(with_dimensions=.true., with_name=.true.)
 
-force1 = qreal(magnitude=1._R_P, unit=u_force)
-force2 = qreal(magnitude=2._R_P, unit=u_force)
+force1 = qreal64(magnitude=1._R_P, unit=u_force)
+force2 = qreal64(magnitude=2._R_P, unit=u_force)
 print "(A)", 'force 1 = '//force1%stringify(format='(F3.1)', with_dimensions=.true., with_name=.true.)
 print "(A)", 'force 2 = '//force1%stringify(format='(F3.1)', with_dimensions=.true., with_name=.true.)
 

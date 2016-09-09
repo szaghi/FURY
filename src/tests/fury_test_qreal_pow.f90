@@ -7,29 +7,29 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal) :: force1         !< A force.
-type(qreal) :: force2         !< A force.
-type(uom)   :: u_acceleration !< Acceleration unit.
-type(uom)   :: u_force        !< Force unit.
-type(uom)   :: u_length       !< Length unit.
-type(uom)   :: u_mass         !< Mass unit.
-type(uom)   :: u_speed        !< Speed unit.
-type(uom)   :: u_time         !< Time unit.
-logical     :: test_passed(7) !< List of passed tests.
+type(qreal64) :: force1         !< A force.
+type(qreal64) :: force2         !< A force.
+type(uom64)   :: u_acceleration !< Acceleration unit.
+type(uom64)   :: u_force        !< Force unit.
+type(uom64)   :: u_length       !< Length unit.
+type(uom64)   :: u_mass         !< Mass unit.
+type(uom64)   :: u_speed        !< Speed unit.
+type(uom64)   :: u_time         !< Time unit.
+logical       :: test_passed(7) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-u_length = uom(source='m [length]', name='metre')
-u_mass = uom(source='kg [mass]', name='kilogram')
-u_time = uom(source='s [time]', name='second')
+u_length = uom64(source='m [length]', name='metre')
+u_mass = uom64(source='kg [mass]', name='kilogram')
+u_time = uom64(source='s [time]', name='second')
 
 u_speed = u_length / u_time
 u_acceleration = u_speed / u_time
 u_force = u_mass * u_acceleration
 
-force1 = qreal(magnitude=2._R_P, unit=u_force)
+force1 = qreal64(magnitude=2._R_P, unit=u_force)
 
 force2 = force1 ** 2._R16P ; test_passed(1) = force2%stringify(format='(F3.1)')=='4.0 kg2.m2.s-4'
 print "(A,L1)", '(2.0 kg.m.s-2) ** 2._R16P = '//force2%stringify(format='(F3.1)')//', is correct? ', test_passed(1)

@@ -13,7 +13,7 @@ public :: dBm_to_mW
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(converter) :: dBm_to_mW
+type, extends(converter64) :: dBm_to_mW
   !< Converter (user-supplied) from dBm to mW.
   contains
     procedure, nopass :: convert
@@ -24,18 +24,18 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< User-supplied conversion from dBm to mW.
   !---------------------------------------------------------------------------------------------------------------------------------
-  real(R_P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
+  real(R8P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
   logical,   intent(in), optional :: inverse   !< Activate inverse conversion.
-  real(R_P)                       :: converted !< Converted magnitude.
-  logical                         :: inverse_   !< Activate inverse conversion, local variable.
+  real(R8P)                       :: converted !< Converted magnitude.
+  logical                         :: inverse_  !< Activate inverse conversion, local variable.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
   if (inverse_) then
-    converted = 10._R_P * log10(magnitude)
+    converted = 10._R8P * log10(magnitude)
   else
-    converted = 10._R_P**(magnitude / 10._R_P)
+    converted = 10._R8P**(magnitude / 10._R8P)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
@@ -50,13 +50,13 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom)       :: dBm            !< dBm unit.
-type(uom)       :: mW             !< mW unit.
-type(uom)       :: kelvin         !< Kelvin unit.
-type(uom)       :: celsius        !< Celsius unit.
-type(qreal)     :: q1             !< A quantity.
-type(qreal)     :: q2             !< A quantity.
-type(qreal)     :: q3             !< A quantity.
+type(uom64)     :: dBm            !< dBm unit.
+type(uom64)     :: mW             !< mW unit.
+type(uom64)     :: kelvin         !< Kelvin unit.
+type(uom64)     :: celsius        !< Celsius unit.
+type(qreal64)   :: q1             !< A quantity.
+type(qreal64)   :: q2             !< A quantity.
+type(qreal64)   :: q3             !< A quantity.
 type(dBm_to_mW) :: dBm2mW         !< Converter from dBm to mW.
 logical         :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -64,8 +64,8 @@ logical         :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-dBm = uom('dBm = @user mW')
-mW = uom('mW')
+dBm = uom64('dBm = @user mW')
+mW = uom64('mW')
 
 call dBm%set_alias_conversion(reference_index=1, alias_index=2, convert=dBm2mW)
 
@@ -81,8 +81,8 @@ q2 = q1%to(unit=dBm)
 test_passed(2) = q2%stringify(format='(F4.1)')=='10.0 dBm'
 print "(A,L1)", '10.0 mW = '//q2%stringify(format='(F4.1)')//', is correct? ', test_passed(2)
 
-kelvin = uom('K')
-celsius = uom('degC<=273.15 + K=celsius>')
+kelvin = uom64('K')
+celsius = uom64('degC<=273.15 + K=celsius>')
 
 call q1%unset
 call q2%unset

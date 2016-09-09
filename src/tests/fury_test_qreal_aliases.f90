@@ -7,25 +7,25 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal) :: speed1         !< A speed.
-type(qreal) :: speed2         !< A speed.
-type(qreal) :: speed3         !< A speed.
-type(uom)   :: m              !< Meter unit.
-type(uom)   :: s              !< Second unit.
-type(uom)   :: km             !< Kilometer unit.
-type(uom)   :: h              !< Hour unit.
-type(uom)   :: km_h           !< Km/h unit.
-type(uom)   :: m_s            !< m/s unit.
-logical     :: test_passed(2) !< List of passed tests.
+type(qreal64) :: speed1         !< A speed.
+type(qreal64) :: speed2         !< A speed.
+type(qreal64) :: speed3         !< A speed.
+type(uom64)   :: m              !< Meter unit.
+type(uom64)   :: s              !< Second unit.
+type(uom64)   :: km             !< Kilometer unit.
+type(uom64)   :: h              !< Hour unit.
+type(uom64)   :: km_h           !< Km/h unit.
+type(uom64)   :: m_s            !< m/s unit.
+logical       :: test_passed(2) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-m = uom('m')
-s = uom('s')
-h = uom('h = 3600 * s')
-km = uom('km = 1000 * m')
+m = uom64('m')
+s = uom64('s')
+h = uom64('h = 3600 * s')
+km = uom64('km = 1000 * m')
 km_h = km/h
 m_s =  m/s
 

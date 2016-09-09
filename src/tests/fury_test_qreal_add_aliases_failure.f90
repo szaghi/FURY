@@ -7,23 +7,23 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal) :: speed1         !< A speed.
-type(qreal) :: speed2         !< A speed.
-type(qreal) :: speed3         !< A speed.
-type(uom)   :: u_speed_km_h   !< Speed unit.
-type(uom)   :: u_speed_m_s    !< Speed unit.
-logical     :: test_passed(1) !< List of passed tests.
+type(qreal64) :: speed1         !< A speed.
+type(qreal64) :: speed2         !< A speed.
+type(qreal64) :: speed3         !< A speed.
+type(uom64)   :: u_speed_km_h   !< Speed unit.
+type(uom64)   :: u_speed_m_s    !< Speed unit.
+logical       :: test_passed(1) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
-u_speed_km_h = uom('km = 1000 * m [length].h-1 = 3600 * s-1 [time-1](km/h[speed]){km/h}')
-u_speed_m_s = uom('m [length].s-1 [time-1](m/s[speed]){m/s}')
+u_speed_km_h = uom64('km = 1000 * m [length].h-1 = 3600 * s-1 [time-1](km/h[speed]){km/h}')
+u_speed_m_s = uom64('m [length].s-1 [time-1](m/s[speed]){m/s}')
 
-speed1 = qreal(magnitude=1._R_P, unit=u_speed_km_h)
-speed2 = qreal(magnitude=2._R_P, unit=u_speed_m_s)
+speed1 = qreal64(magnitude=1._R_P, unit=u_speed_km_h)
+speed2 = qreal64(magnitude=2._R_P, unit=u_speed_m_s)
 
 print "(A)", 'An error will be raised (if all go rigth)'
 speed3 = speed1 + speed2

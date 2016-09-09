@@ -1,14 +1,5 @@
-!< FURY class definition of real quantity with associated unit of measure.
-module fury_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY class definition of real quantity with associated unit of measure.
-!<
-!< @TODO TODO: try to implement the "include" trick to generate PDT-like quantities
-!-----------------------------------------------------------------------------------------------------------------------------------
-use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom
-use penf, RKP => R_P
-use stringifor
+!< FURY class implementation of real quantity of generic kind with associated unit of measure.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -1008,4 +999,3 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
-endmodule fury_qreal

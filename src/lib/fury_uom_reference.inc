@@ -1,13 +1,5 @@
-!< FURY class definition of unit reference.
-module fury_uom_reference
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY class definition of unit reference.
-!-----------------------------------------------------------------------------------------------------------------------------------
-use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_converter
-use fury_uom_symbol
-use penf, RKP => R_P
-use stringifor
+!< FURY class implementation of unit reference with generic kind.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -51,20 +43,18 @@ type :: uom_reference
   type(uom_symbol),              private :: dimensions           !< Dimensions of the symbol, e.g. "length" for meter.
   contains
     ! public methods
-    procedure, pass(self) :: dimensionality             !< Return a string representation of the symbol dimensions.
-    ! procedure, pass(self) :: get_aliases                !< Return the aliases list.
-    ! procedure, pass(self) :: get_first_compatible_alias !< Get first alias compatible with symbol queried.
-    procedure, pass(self) :: get_main_symbol            !< Return the main symbol, i.e. aliases(1).
-    procedure, pass(self) :: has_alias                  !< Check if the reference has the queried alias.
-    procedure, pass(self) :: has_dimensions             !< Check if the reference dimensions has been defined.
-    procedure, pass(self) :: is_defined                 !< Check if the reference is defined.
-    procedure, pass(self) :: parse                      !< Parse reference from string.
-    procedure, pass(self) :: prefixed                   !< Return a prefixed reference.
-    procedure, pass(self) :: set                        !< Set reference.
-    procedure, pass(self) :: set_alias_conversion       !< Set alias conversion formula.
-    procedure, pass(self) :: stringify                  !< Return a string representation of the reference.
-    procedure, pass(self) :: to                         !< Convert magnitude with respect another alias.
-    procedure, pass(self) :: unset                      !< Unset reference.
+    procedure, pass(self) :: dimensionality       !< Return a string representation of the symbol dimensions.
+    procedure, pass(self) :: get_main_symbol      !< Return the main symbol, i.e. aliases(1).
+    procedure, pass(self) :: has_alias            !< Check if the reference has the queried alias.
+    procedure, pass(self) :: has_dimensions       !< Check if the reference dimensions has been defined.
+    procedure, pass(self) :: is_defined           !< Check if the reference is defined.
+    procedure, pass(self) :: parse                !< Parse reference from string.
+    procedure, pass(self) :: prefixed             !< Return a prefixed reference.
+    procedure, pass(self) :: set                  !< Set reference.
+    procedure, pass(self) :: set_alias_conversion !< Set alias conversion formula.
+    procedure, pass(self) :: stringify            !< Return a string representation of the reference.
+    procedure, pass(self) :: to                   !< Convert magnitude with respect another alias.
+    procedure, pass(self) :: unset                !< Unset reference.
     ! public generic names
     generic :: assignment(=) => assign_uom_reference   !< Overloading `=` assignment.
     generic :: operator(/) => div                      !< Overloading `/` operator.
@@ -691,4 +681,3 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
-endmodule fury_uom_reference

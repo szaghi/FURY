@@ -8,22 +8,22 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom)   :: meter               !< Meter unit.
-type(uom)   :: second              !< Second unit.
-type(qreal) :: distance_to_arrival !< Distance.
-type(qreal) :: time_to_arrival     !< Time.
-type(qreal) :: mean_velocity       !< Bolt's speed.
-logical     :: test_passed(1)      !< List of passed tests.
+type(uom64)   :: meter               !< Meter unit.
+type(uom64)   :: second              !< Second unit.
+type(qreal64) :: distance_to_arrival !< Distance.
+type(qreal64) :: time_to_arrival     !< Time.
+type(qreal64) :: mean_velocity       !< Bolt's speed.
+logical       :: test_passed(1)      !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-meter = uom('m = meter = metre [length] {meter}')
-second = uom('s = sec = second [time] {second}')
+meter = uom64('m = meter = metre [length] {meter}')
+second = uom64('s = sec = second [time] {second}')
 
-distance_to_arrival = qreal(100._real64, meter)
-time_to_arrival = qreal(9.58_real64, second)
+distance_to_arrival = qreal64(100._real64, meter)
+time_to_arrival = qreal64(9.58_real64, second)
 
 mean_velocity = distance_to_arrival / time_to_arrival
 test_passed(1) = mean_velocity%stringify()=='+0.104384133611691E+002 m.s-1'

@@ -7,20 +7,20 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal) :: speed          !< A speed.
-type(qreal) :: time           !< A time.
-type(qreal) :: to_fail        !< Quantity faliling.
-type(uom)   :: u_speed        !< Speed unit.
-type(uom)   :: u_time         !< Time unit.
-logical     :: test_passed(1) !< List of passed tests.
+type(qreal64) :: speed          !< A speed.
+type(qreal64) :: time           !< A time.
+type(qreal64) :: to_fail        !< Quantity faliling.
+type(uom64)   :: u_speed        !< Speed unit.
+type(uom64)   :: u_time         !< Time unit.
+logical       :: test_passed(1) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
-u_speed = uom('km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}')
-u_time = uom('s = second [time]')
+u_speed = uom64('km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}')
+u_time = uom64('s = second [time]')
 
 speed = 2 * u_speed
 time = 2 * u_time

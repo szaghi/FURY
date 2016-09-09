@@ -4,11 +4,12 @@ module fury
 !< FURY, Fortran Units (environment) for Reliable phYsical math.
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! FURY objects
-use fury_qreal
-use fury_system_si
-use fury_uom
-use fury_uom_converter
-use fury_uom_reference
+use fury_qreal64, qreal64 => qreal
+use fury_system_abstract64, system_abstract64 => system_abstract
+use fury_system_si64, system_si64 => system_si
+use fury_uom64, uom64 => uom
+use fury_uom_converter64, converter64 => converter
+use fury_uom_reference64, uom_reference64 => uom_reference
 
 ! PENF objects
 use penf
@@ -19,11 +20,11 @@ implicit none
 private
 ! FURY objects
 public :: operator(*)
-public :: qreal
-public :: system_si
-public :: converter
-public :: uom
-public :: uom_reference
+public :: qreal64
+public :: system_si64
+public :: converter64
+public :: uom64
+public :: uom_reference64
 
 ! PENF objects
 ! kinds

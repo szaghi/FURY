@@ -1,14 +1,5 @@
-!< FURY definition of unit of measure class.
-module fury_uom
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY definition of unit of measure class.
-!-----------------------------------------------------------------------------------------------------------------------------------
-use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_converter
-use fury_uom_reference
-use fury_uom_symbol
-use penf, RKP => R_P
-use stringifor
+!< FURY implementation of unit of measure class of generic kind.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -59,20 +50,18 @@ type :: uom
   integer(I_P),                     private :: references_number=0_I_P !< References number.
   contains
     ! public methods
-    ! procedure, pass(self) :: get_main_aliases      !< Return the main aliases.
-    ! procedure, pass(self) :: get_main_dimensions   !< Return the main dimensions.
-    procedure, pass(self) :: get_main_reference    !< Return the main reference.
-    procedure, pass(self) :: get_main_symbol       !< Return the main symbol.
-    procedure, pass(self) :: has_alias             !< Check if the unit has an alias.
-    procedure, pass(self) :: has_name              !< Check if the unit has a name.
-    procedure, pass(self) :: has_reference         !< Check if the unit has a queried reference unit.
-    procedure, pass(self) :: is_defined            !< Check if the unit is defined.
-    procedure, pass(self) :: prefixed              !< Return prefixed unit.
-    procedure, pass(self) :: set                   !< Set the unit.
-    procedure, pass(self) :: set_alias_conversion  !< Set alias conversion formula.
-    procedure, pass(self) :: stringify             !< Return a string representation of the unit.
-    procedure, pass(self) :: to                    !< Convert magnitude with respect another unit.
-    procedure, pass(self) :: unset                 !< unset the unit.
+    procedure, pass(self) :: get_main_reference   !< Return the main reference.
+    procedure, pass(self) :: get_main_symbol      !< Return the main symbol.
+    procedure, pass(self) :: has_alias            !< Check if the unit has an alias.
+    procedure, pass(self) :: has_name             !< Check if the unit has a name.
+    procedure, pass(self) :: has_reference        !< Check if the unit has a queried reference unit.
+    procedure, pass(self) :: is_defined           !< Check if the unit is defined.
+    procedure, pass(self) :: prefixed             !< Return prefixed unit.
+    procedure, pass(self) :: set                  !< Set the unit.
+    procedure, pass(self) :: set_alias_conversion !< Set alias conversion formula.
+    procedure, pass(self) :: stringify            !< Return a string representation of the unit.
+    procedure, pass(self) :: to                   !< Convert magnitude with respect another unit.
+    procedure, pass(self) :: unset                !< unset the unit.
     ! public generic names
     generic :: assignment(=) => assign_uom             !< Overloading `=` operator.
     generic :: operator(+) => add                      !< Overloading `+` operator.
@@ -208,46 +197,6 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_symbol
-
-! pure function get_main_aliases(self) result(aliases)
-! !---------------------------------------------------------------------------------------------------------------------------------
-! !< Return the main aliases, i.e. `self%alias%aliases(1)%aliases(:)%symbol_` if `self%alias` is defined or
-! !< `self%references(1)%aliases(1)%aliases(:)%symbol_` is `self` has only 1 [[uom_reference]].
-! !---------------------------------------------------------------------------------------------------------------------------------
-! class(uom), intent(in)    :: self       !< The uom reference.
-! type(string), allocatable :: aliases(:) !< Main alias aliases.
-! !---------------------------------------------------------------------------------------------------------------------------------
-!
-! !---------------------------------------------------------------------------------------------------------------------------------
-! if (self%is_defined()) then
-!   if (self%has_alias()) then
-!     aliases = self%alias%get_aliases()
-!   elseif (self%references_number==1) then
-!     aliases = self%references(1)%get_aliases()
-!   endif
-! endif
-! !---------------------------------------------------------------------------------------------------------------------------------
-! endfunction get_main_aliases
-
-! pure function get_main_dimensions(self) result(dimensions)
-! !---------------------------------------------------------------------------------------------------------------------------------
-! !< Return the main dimensions, i.e. `self%alias%dimensions%symbol_` if `self%alias` is defined or
-! !< `self%references(1)%dimensions%symbol_` if `self` has only 1 [[uom_reference]].
-! !---------------------------------------------------------------------------------------------------------------------------------
-! class(uom), intent(in)  :: self       !< The uom reference.
-! type(string)            :: dimensions !< Main alias dimensions.
-! !---------------------------------------------------------------------------------------------------------------------------------
-!
-! !---------------------------------------------------------------------------------------------------------------------------------
-! if (self%is_defined()) then
-!   if (self%has_alias()) then
-!     dimensions = self%alias%dimensionality()
-!   elseif (self%references_number==1) then
-!     dimensions = self%references(1)%dimensionality()
-!   endif
-! endif
-! !---------------------------------------------------------------------------------------------------------------------------------
-! endfunction get_main_dimensions
 
   pure function get_main_reference(self) result(reference)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -1136,4 +1085,3 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction pow_I1P
-endmodule fury_uom

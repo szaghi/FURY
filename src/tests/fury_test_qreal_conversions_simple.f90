@@ -7,21 +7,21 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom)   :: kilometer      !< Kilometer unit.
-type(uom)   :: meter          !< Meter unit.
-type(uom)   :: kelvin         !< Kelvin unit.
-type(uom)   :: celsius        !< Celsius unit.
-type(qreal) :: q1             !< A quantity.
-type(qreal) :: q2             !< A quantity.
-type(qreal) :: q3             !< A quantity.
-logical     :: test_passed(4) !< List of passed tests.
+type(uom64)   :: kilometer      !< Kilometer unit.
+type(uom64)   :: meter          !< Meter unit.
+type(uom64)   :: kelvin         !< Kelvin unit.
+type(uom64)   :: celsius        !< Celsius unit.
+type(qreal64) :: q1             !< A quantity.
+type(qreal64) :: q2             !< A quantity.
+type(qreal64) :: q3             !< A quantity.
+logical       :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-kilometer = uom('km<=1000.0 * m>')
-meter = uom('m')
+kilometer = uom64('km<=1000.0 * m>')
+meter = uom64('m')
 
 q1 = 3.1 * kilometer
 q2 = q1%to(unit=meter)
@@ -36,8 +36,8 @@ call q1%unset
 call q2%unset
 call q3%unset
 
-kelvin = uom('K')
-celsius = uom('degC<=273.15 + K=celsius>')
+kelvin = uom64('K')
+celsius = uom64('degC<=273.15 + K=celsius>')
 
 q1 = 2 * kelvin
 q2 = 1 * celsius

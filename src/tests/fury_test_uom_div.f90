@@ -7,19 +7,19 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom) :: si_length      !< SI length unit.
-type(uom) :: si_speed       !< SI speed unit.
-type(uom) :: si_time        !< SI time unit.
-type(uom) :: a_unit         !< A unit.
-logical   :: test_passed(1) !< List of passed tests.
+type(uom64) :: si_length      !< SI length unit.
+type(uom64) :: si_speed       !< SI speed unit.
+type(uom64) :: si_time        !< SI time unit.
+type(uom64) :: a_unit         !< A unit.
+logical     :: test_passed(1) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 test_passed = .false.
 
-si_length = uom(source='m [length]', name='metre')
-si_time = uom(source='s [time]', name='second')
-si_speed = uom(source='m [length].s-1 [time]', name='metre/second')
+si_length = uom64(source='m [length]', name='metre')
+si_time = uom64(source='s [time]', name='second')
+si_speed = uom64(source='m [length].s-1 [time]', name='metre/second')
 print "(A)", 'si_length = '//si_length%stringify(with_dimensions=.true.)
 print "(A)", 'si_speed  = '//si_speed%stringify(with_dimensions=.true.)
 print "(A)", 'si_time   = '//si_time%stringify(with_dimensions=.true.)

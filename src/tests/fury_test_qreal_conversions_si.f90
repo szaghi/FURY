@@ -7,18 +7,18 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom)       :: kilometer      !< Kilometer unit.
-type(uom)       :: meter          !< Meter unit.
-type(uom)       :: kHz            !< Kilohertz unit.
-type(uom)       :: Hz             !< Hertz unit.
-type(uom)       :: kelvin         !< Kelvin unit.
-type(uom)       :: celsius        !< Celsius unit.
-type(uom)       :: second         !< Second unit.
-type(qreal)     :: q1             !< A quantity.
-type(qreal)     :: q2             !< A quantity.
-type(qreal)     :: q3             !< A quantity.
-type(system_si) :: SI             !< SI system.
-logical         :: test_passed(4) !< List of passed tests.
+type(uom64)       :: kilometer      !< Kilometer unit.
+type(uom64)       :: meter          !< Meter unit.
+type(uom64)       :: kHz            !< Kilohertz unit.
+type(uom64)       :: Hz             !< Hertz unit.
+type(uom64)       :: kelvin         !< Kelvin unit.
+type(uom64)       :: celsius        !< Celsius unit.
+type(uom64)       :: second         !< Second unit.
+type(qreal64)     :: q1             !< A quantity.
+type(qreal64)     :: q2             !< A quantity.
+type(qreal64)     :: q3             !< A quantity.
+type(system_si64) :: SI             !< SI system.
+logical           :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
