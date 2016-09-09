@@ -7,14 +7,14 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(uom)       :: kilometer      !< Kilometer unit.
-type(uom)       :: meter          !< Meter unit.
-type(uom)       :: kelvin         !< Kelvin unit.
-type(uom)       :: celsius        !< Celsius unit.
-type(qreal)     :: q1             !< A quantity.
-type(qreal)     :: q2             !< A quantity.
-type(qreal)     :: q3             !< A quantity.
-logical         :: test_passed(4) !< List of passed tests.
+type(uom)   :: kilometer      !< Kilometer unit.
+type(uom)   :: meter          !< Meter unit.
+type(uom)   :: kelvin         !< Kelvin unit.
+type(uom)   :: celsius        !< Celsius unit.
+type(qreal) :: q1             !< A quantity.
+type(qreal) :: q2             !< A quantity.
+type(qreal) :: q3             !< A quantity.
+logical     :: test_passed(4) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
