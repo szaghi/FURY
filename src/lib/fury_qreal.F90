@@ -3,7 +3,7 @@ module fury_qreal
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY class definition of real quantity with associated unit of measure.
 !<
-!< @TODO TODO: try to implement the "include" trick to generate PDT-like quantities
+!< @TODO TODO: try to implement the "include" trick to generate PDT-like quantities [Issue: https://github.com/szaghi/FURY/issues/16]
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_uom
