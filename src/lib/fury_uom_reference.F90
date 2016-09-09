@@ -4,6 +4,7 @@ module fury_uom_reference
 !< FURY class definition of unit reference.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
+use fury_uom_converter
 use fury_uom_symbol
 use penf, RKP => R_P
 use stringifor
@@ -60,6 +61,7 @@ type :: uom_reference
     procedure, pass(self) :: parse                      !< Parse reference from string.
     procedure, pass(self) :: prefixed                   !< Return a prefixed reference.
     procedure, pass(self) :: set                        !< Set reference.
+    procedure, pass(self) :: set_alias_conversion       !< Set alias conversion formula.
     procedure, pass(self) :: stringify                  !< Return a string representation of the reference.
     procedure, pass(self) :: to                         !< Convert magnitude with respect another alias.
     procedure, pass(self) :: unset                      !< Unset reference.
@@ -333,6 +335,25 @@ contains
   if (present(dimensions)) self%dimensions = dimensions
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
+
+  pure subroutine set_alias_conversion(self, alias_index, convert)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Set alias conversion formula.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(inout) :: self        !< The uom reference.
+  integer(I_P),         intent(in)    :: alias_index !< Index of the alias to which set the conversion formula.
+  class(converter),     intent(in)    :: convert     !< Generic conversion alias formula user-supplied.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    if (alias_index==1) then
+      ! TODO implement the error raising for trying to define a main alias with a conversion formula different from identity
+    endif
+    call self%aliases(alias_index)%set(convert_=convert)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine set_alias_conversion
 
   pure function stringify(self, with_dimensions, with_aliases, protect_aliases, compact_reals) result(raw)
   !---------------------------------------------------------------------------------------------------------------------------------

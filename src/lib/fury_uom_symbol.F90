@@ -4,6 +4,7 @@ module fury_uom_symbol
 !< FURY class definition of unit symbol.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
+use fury_uom_converter
 use penf, IKP => I_P, RKP => R_P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -22,9 +23,10 @@ type :: uom_symbol
   !<
   !< Provide math operations on symbols necessary to build complex (derived) units.
   !<
-  !< The string format definition of a valid FURY unit symbol definition is as following:
+  !< The string format definition of a valid FURY unit symbol definition are as following:
   !<
-  !< `real_offset + real_factor * litteral_symbol integer_exponent`
+  !<+ multiplicative-like definition: `real_offset + real_factor * litteral_symbol integer_exponent`
+  !<+ generic user-supplied definition: `@user litteral_symbol integer_exponent`
   !<
   !< where
   !<
@@ -34,7 +36,9 @@ type :: uom_symbol
   !<+`integer_exponent` is an optional integer literal constant that:
   !<   + could be omitted if it is equal to 1;
   !<   + do not have the `+` sign if positive;
-  !<   + must have the `-` sign if negative.
+  !<   + must have the `-` sign if negative;
+  !<+`@user ` is a place order for the parser indicating that the alias-conversion definition is not a simple
+  !<+ multiplicative-like conversion, but it is a generic user-supplied one.
   !<
   !< For example, valid definition are:
   !<
@@ -42,13 +46,17 @@ type :: uom_symbol
   !<  omitted because equal to 1;
   !<+ `1.E6 * m2`: a *square kilometer* definition;
   !<+ `1000 * s-1`: a *kiloherhz* definition;
-  !<+ `273.15 + K`: a *Celsius degree* definition.
+  !<+ `273.15 + K`: a *Celsius degree* definition;
+  !<+ `dBm = @user mW` where the placeholder `@user` will be set (not by the string parser) to `10 * log(mW)`.
   !<
   !< The terms composing a definition can be separated by any white spaces number (even zero).
-  integer(IKP), private :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(RKP),    private :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
-  real(RKP),    private :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
-  type(string), private :: symbol_         !< literal symbol, e.g. "m" for metres.
+  !<
+  !< In the case the user supply a generic conversion alias formula this one overrides the multiplicative-like optionally parsed.
+  integer(IKP),     private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(RKP),        private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),        private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
+  type(string),     private              :: symbol_         !< literal symbol, e.g. "m" for metres.
+  class(converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
   contains
     ! public methods
     procedure, pass(self) :: convert      !< Convert a magnitude with respect symbol definition.
@@ -135,11 +143,15 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   converted = magnitude
   if (self%is_defined()) then
-    inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
-    if (inverse_) then
-      converted = (magnitude - self%offset_) / self%factor_
+    if (allocated(self%convert_)) then
+      converted = self%convert_%convert(magnitude=magnitude, inverse=inverse)
     else
-      converted = self%offset_ + self%factor_ * magnitude
+      inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
+      if (inverse_) then
+        converted = (magnitude - self%offset_) / self%factor_
+      else
+        converted = self%offset_ + self%factor_ * magnitude
+      endif
     endif
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -223,19 +235,23 @@ contains
 
   !---------------------------------------------------------------------------------------------------------------------------------
   buffer = trim(adjustl(source))
-  if (buffer%count('+') > 0) then
-    call buffer%split(sep='+', tokens=tokens)
-    self%offset_ = cton(str=tokens(1)%chars(), knd=1._RKP)
-    buffer = tokens(2)
-  endif
-  if (buffer%count('*') > 0) then
-    call buffer%split(sep='*', tokens=tokens)
-    self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
-    if (self%factor_==0._RKP) then
-      write(stderr, "(A)") 'error: symbol cannot have "'//trim(str(n=self%factor_, compact=.true.))//'" multiplicative factor'
-      stop
+  if (buffer%count('@user') > 0) then
+    buffer = buffer%replace(old='@user', new='')
+  else
+    if (buffer%count('+') > 0) then
+      call buffer%split(sep='+', tokens=tokens)
+      self%offset_ = cton(str=tokens(1)%chars(), knd=1._RKP)
+      buffer = tokens(2)
     endif
-    buffer = tokens(2)
+    if (buffer%count('*') > 0) then
+      call buffer%split(sep='*', tokens=tokens)
+      self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
+      if (self%factor_==0._RKP) then
+        write(stderr, "(A)") 'error: symbol cannot have "'//trim(str(n=self%factor_, compact=.true.))//'" multiplicative factor'
+        stop
+      endif
+      buffer = tokens(2)
+    endif
   endif
   e = buffer%scan(set='-0123456789')
   if (e>0) then
@@ -265,7 +281,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction prefixed
 
-  elemental subroutine set(self, symbol_, exponent_, factor_, offset_)
+  elemental subroutine set(self, symbol_, exponent_, factor_, offset_, convert_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -274,6 +290,7 @@ contains
   integer(IKP),      intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
   real(RKP),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
   real(RKP),         intent(in), optional :: offset_    !< Symbol additive offset (used only for converters).
+  class(converter),  intent(in), optional :: convert_   !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -281,6 +298,10 @@ contains
   if (present(exponent_)) self%exponent_ = exponent_
   if (present(factor_)) self%factor_ = factor_
   if (present(offset_)) self%offset_ = offset_
+  if (present(convert_)) then
+    if (allocated(self%convert_)) deallocate(self%convert_)
+    allocate(self%convert_, source=convert_)
+  endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine set
 
@@ -350,6 +371,7 @@ contains
   self%exponent_ = 1_IKP
   self%factor_ = 1._RKP
   self%offset_ = 0._RKP
+  if (allocated(self%convert_)) deallocate(self%convert_)
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine unset
 
@@ -439,6 +461,7 @@ contains
     lhs%factor_ = rhs%factor_
     lhs%offset_ = rhs%offset_
     lhs%symbol_ = rhs%symbol_
+    if (allocated(rhs%convert_)) allocate(lhs%convert_, source=rhs%convert_)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assign_uom_symbol
