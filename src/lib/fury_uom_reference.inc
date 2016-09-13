@@ -44,6 +44,8 @@ type :: uom_reference
   contains
     ! public methods
     procedure, pass(self) :: dimensionality       !< Return a string representation of the symbol dimensions.
+    procedure, pass(self) :: get_aliases          !< Return the aliases list.
+    procedure, pass(self) :: get_dimensions       !< Return the dimensions.
     procedure, pass(self) :: get_main_symbol      !< Return the main symbol, i.e. aliases(1).
     procedure, pass(self) :: has_alias            !< Check if the reference has the queried alias.
     procedure, pass(self) :: has_dimensions       !< Check if the reference dimensions has been defined.
@@ -120,25 +122,38 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction dimensionality
 
-  pure function get_aliases(self) result(aliases)
+  pure subroutine get_aliases(self, aliases)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the aliases list.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: self       !< The uom reference.
-  type(string), allocatable        :: aliases(:) !< Aliases.
-  integer(I_P)                     :: a          !< Counter.
+  class(uom_reference),          intent(in)  :: self       !< The uom reference.
+  type(uom_symbol), allocatable, intent(out) :: aliases(:) !< Aliases.
+  integer(I_P)                               :: a          !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
   if (self%is_defined()) then
       allocate(aliases(1:self%aliases_number))
       do a=1, self%aliases_number
-        aliases(a) = self%aliases(a)%get_symbol()
+        aliases(a) = self%aliases(a)
       enddo
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_aliases
+  endsubroutine get_aliases
+                    
+  pure subroutine get_dimensions(self, dimensions)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the dimensions.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_reference), intent(in)  :: self       !< The uom reference.
+  type(uom_symbol),     intent(out) :: dimensions !< Dimensions.
+  !---------------------------------------------------------------------------------------------------------------------------------
 
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.self%dimensions%is_defined()) dimensions = self%dimensions
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine get_dimensions
+                    
   pure function get_first_compatible_alias(self, other) result(alias)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Get first alias-pairs compatible.

@@ -17,6 +17,7 @@ type :: qreal
   character(len=:), allocatable, public :: name             !< Quantity name.
   contains
     ! public methods
+    procedure, pass(self) :: allocate_unit   !< Allocate unit.
     procedure, pass(self) :: has_name        !< Check if the quantity has defined name.
     procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
@@ -228,6 +229,18 @@ contains
   endfunction I1P_mul_uom
 
   ! public methods
+  elemental subroutine allocate_unit(self)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< allocate_unit.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(qreal), intent(inout) :: self !< The quantity.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (.not.allocated(self%unit)) allocate(self%unit)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine allocate_unit  
+
   elemental function has_name(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if the quantity has defined name.

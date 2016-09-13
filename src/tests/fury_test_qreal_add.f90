@@ -36,8 +36,8 @@ print "(A)", 'u_acceleration = '//u_acceleration%stringify(with_dimensions=.true
 u_force = u_mass * u_acceleration
 print "(A)", 'u_force = '//u_force%stringify(with_dimensions=.true., with_name=.true.)
 
-force1 = qreal64(magnitude=1._R_P, unit=u_force)
-force2 = qreal64(magnitude=2._R_P, unit=u_force)
+force1 = qreal64(magnitude=1._R8P, unit=u_force)
+force2 = qreal64(magnitude=2._R8P, unit=u_force)
 print "(A)", 'force 1 = '//force1%stringify(format='(F3.1)', with_dimensions=.true., with_name=.true.)
 print "(A)", 'force 2 = '//force1%stringify(format='(F3.1)', with_dimensions=.true., with_name=.true.)
 
