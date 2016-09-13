@@ -26,6 +26,7 @@ use stringifor
 implicit none
 private
 public :: assignment(=)
+public :: operator(+)
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 interface assignment(=)
@@ -34,14 +35,19 @@ interface assignment(=)
   module procedure uom_reference32_assign_uom_reference64, uom_reference64_assign_uom_reference32
   module procedure uom_symbol32_assign_uom_symbol64, uom_symbol64_assign_uom_symbol32
 endinterface
+
+interface operator(+)
+  module procedure qreal32_add_qreal64, qreal64_add_qreal32
+endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
+  ! assignment(=)
   subroutine qreal32_assign_qreal64(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal32 = qreal64` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal32), intent(inout) :: lhs !< Left hand side.
-  class(qreal64), intent(in)    :: rhs !< Right hand side.
+  type(qreal32), intent(inout) :: lhs !< Left hand side.
+  type(qreal64), intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -66,8 +72,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `qreal64 = qreal32` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal64), intent(inout) :: lhs !< Left hand side.
-  class(qreal32), intent(in)    :: rhs !< Right hand side.
+  type(qreal64), intent(inout) :: lhs !< Left hand side.
+  type(qreal32), intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -92,8 +98,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom32 = uom64` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom32), intent(inout)        :: lhs               !< Left hand side.
-  class(uom64), intent(in)           :: rhs               !< Right hand side.
+  type(uom32), intent(inout)         :: lhs               !< Left hand side.
+  type(uom64), intent(in)            :: rhs               !< Right hand side.
   type(uom_reference64), allocatable :: rhs_references(:) !< RHS references.
   type(uom_reference64)              :: rhs_alias         !< RHS alias.
   type(uom_reference32), allocatable :: lhs_references(:) !< LHS references.
@@ -132,8 +138,8 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom64 = uom32` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom64), intent(inout)        :: lhs               !< Left hand side.
-  class(uom32), intent(in)           :: rhs               !< Right hand side.
+  type(uom64), intent(inout)         :: lhs               !< Left hand side.
+  type(uom32), intent(in)            :: rhs               !< Right hand side.
   type(uom_reference32), allocatable :: rhs_references(:) !< RHS references.
   type(uom_reference32)              :: rhs_alias         !< RHS alias.
   type(uom_reference64), allocatable :: lhs_references(:) !< LHS references.
@@ -172,13 +178,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference32 = uom_reference64` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference32), intent(inout) :: lhs            !< Left hand side.
-  type(uom_reference64), intent(in)     :: rhs            !< Right hand side.
-  type(uom_symbol64), allocatable       :: rhs_aliases(:) !< RHS uom symbol aliases.
-  type(uom_symbol64)                    :: rhs_dimensions !< RHS dimensions.
-  type(uom_symbol32), allocatable       :: lhs_aliases(:) !< LHS uom symbol aliases.
-  type(uom_symbol32)                    :: lhs_dimensions !< LHS dimensions.
-  integer(I_P)                          :: a              !< Counter.
+  type(uom_reference32), intent(inout) :: lhs            !< Left hand side.
+  type(uom_reference64), intent(in)    :: rhs            !< Right hand side.
+  type(uom_symbol64), allocatable      :: rhs_aliases(:) !< RHS uom symbol aliases.
+  type(uom_symbol64)                   :: rhs_dimensions !< RHS dimensions.
+  type(uom_symbol32), allocatable      :: lhs_aliases(:) !< LHS uom symbol aliases.
+  type(uom_symbol32)                   :: lhs_dimensions !< LHS dimensions.
+  integer(I_P)                         :: a              !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -211,13 +217,13 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_reference64 = uom_reference32` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference64), intent(inout) :: lhs            !< Left hand side.
-  type(uom_reference32), intent(in)     :: rhs            !< Right hand side.
-  type(uom_symbol32), allocatable       :: rhs_aliases(:) !< RHS uom symbol aliases.
-  type(uom_symbol32)                    :: rhs_dimensions !< RHS dimensions.
-  type(uom_symbol64), allocatable       :: lhs_aliases(:) !< LHS uom symbol aliases.
-  type(uom_symbol64)                    :: lhs_dimensions !< LHS dimensions.
-  integer(I_P)                          :: a              !< Counter.
+  type(uom_reference64), intent(inout) :: lhs            !< Left hand side.
+  type(uom_reference32), intent(in)    :: rhs            !< Right hand side.
+  type(uom_symbol32), allocatable      :: rhs_aliases(:) !< RHS uom symbol aliases.
+  type(uom_symbol32)                   :: rhs_dimensions !< RHS dimensions.
+  type(uom_symbol64), allocatable      :: lhs_aliases(:) !< LHS uom symbol aliases.
+  type(uom_symbol64)                   :: lhs_dimensions !< LHS dimensions.
+  integer(I_P)                         :: a              !< Counter.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -252,12 +258,12 @@ contains
   !<
   !< @TODO Handle convert_
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol32), intent(inout) :: lhs       !< Left hand side.
-  class(uom_symbol64), intent(in)    :: rhs       !< Right hand side.
-  integer(I_P)                       :: exponent_ !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R8P)                          :: factor_   !< Symbol multiplicative scale factor (used only for converters).
-  real(R8P)                          :: offset_   !< Symbol additive offset (used only for converters).
-  type(string)                       :: symbol_   !< literal symbol, e.g. "m" for metres.
+  type(uom_symbol32), intent(inout) :: lhs       !< Left hand side.
+  type(uom_symbol64), intent(in)    :: rhs       !< Right hand side.
+  integer(I_P)                      :: exponent_ !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(R8P)                         :: factor_   !< Symbol multiplicative scale factor (used only for converters).
+  real(R8P)                         :: offset_   !< Symbol additive offset (used only for converters).
+  type(string)                      :: symbol_   !< literal symbol, e.g. "m" for metres.
   ! class(converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
@@ -284,12 +290,12 @@ contains
   !<
   !< @TODO Handle convert_
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol64), intent(inout) :: lhs       !< Left hand side.
-  class(uom_symbol32), intent(in)    :: rhs       !< Right hand side.
-  integer(I_P)                       :: exponent_ !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(R4P)                          :: factor_   !< Symbol multiplicative scale factor (used only for converters).
-  real(R4P)                          :: offset_   !< Symbol additive offset (used only for converters).
-  type(string)                       :: symbol_   !< literal symbol, e.g. "m" for metres.
+  type(uom_symbol64), intent(inout) :: lhs       !< Left hand side.
+  type(uom_symbol32), intent(in)    :: rhs       !< Right hand side.
+  integer(I_P)                      :: exponent_ !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(R4P)                         :: factor_   !< Symbol multiplicative scale factor (used only for converters).
+  real(R4P)                         :: offset_   !< Symbol additive offset (used only for converters).
+  type(string)                      :: symbol_   !< literal symbol, e.g. "m" for metres.
   ! class(converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -310,4 +316,34 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine uom_symbol64_assign_uom_symbol32
+  ! operator(+)
+  function qreal32_add_qreal64(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal32 + qreal64` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  type(qreal32), intent(in) :: lhs !< Left hand side.
+  type(qreal64), intent(in) :: rhs !< Right hand side.
+  type(qreal64)             :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = lhs
+  opr = opr + rhs
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction qreal32_add_qreal64
+
+  function qreal64_add_qreal32(lhs, rhs) result(opr)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `qreal64 + qreal32` operator.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  type(qreal64), intent(in) :: lhs !< Left hand side.
+  type(qreal32), intent(in) :: rhs !< Right hand side.
+  type(qreal64)             :: opr !< Operator result.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  opr = rhs
+  opr = lhs + opr
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction qreal64_add_qreal32
 endmodule fury_mixed_kinds

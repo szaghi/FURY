@@ -28,6 +28,7 @@ implicit none
 private
 ! FURY objects
 public :: assignment(=)
+public :: operator(+)
 public :: operator(*)
 public :: qreal32, qreal64
 public :: system_si32, system_si64
