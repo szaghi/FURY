@@ -13,17 +13,39 @@ public :: dBm_to_mW
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, extends(converter64) :: dBm_to_mW
+type, extends(uom_converter) :: dBm_to_mW
   !< Converter (user-supplied) from dBm to mW.
   contains
-    procedure, nopass    :: convert          !< User-supplied conversion formulas from dBm to mW (and viceversa).
+    procedure, nopass    :: convert_float128 !< User-supplied conversion formulas from dBm to mW (and viceversa), float128.
+    procedure, nopass    :: convert_float64  !< User-supplied conversion formulas from dBm to mW (and viceversa), float128.
+    procedure, nopass    :: convert_float32  !< User-supplied conversion formulas from dBm to mW (and viceversa), float128.
     procedure, pass(lhs) :: assign_converter !< `converter = converter` assignment.
 endtype dBm_to_mW
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
-  pure function convert(magnitude, inverse) result(converted)
+  pure function convert_float128(magnitude, inverse) result(converted)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< User-supplied conversion formulas from dBm to mW (and viceversa).
+  !< User-supplied conversion formulas from dBm to mW (and viceversa), float128.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R16P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
+  logical ,   intent(in), optional :: inverse   !< Activate inverse conversion.
+  real(R16P)                       :: converted !< Converted magnitude.
+  logical                          :: inverse_  !< Activate inverse conversion, local variable.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
+  if (inverse_) then
+    converted = 10._R16P * log10(magnitude)
+  else
+    converted = 10._R16P ** (magnitude / 10._R16P)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction convert_float128
+
+  pure function convert_float64(magnitude, inverse) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< User-supplied conversion formulas from dBm to mW (and viceversa), float64.
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R8P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
   logical,   intent(in), optional :: inverse   !< Activate inverse conversion.
@@ -36,17 +58,37 @@ contains
   if (inverse_) then
     converted = 10._R8P * log10(magnitude)
   else
-    converted = 10._R8P**(magnitude / 10._R8P)
+    converted = 10._R8P ** (magnitude / 10._R8P)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction convert
+  endfunction convert_float64
+
+  pure function convert_float32(magnitude, inverse) result(converted)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< User-supplied conversion formulas from dBm to mW (and viceversa), float32.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  real(R4P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
+  logical,   intent(in), optional :: inverse   !< Activate inverse conversion.
+  real(R4P)                       :: converted !< Converted magnitude.
+  logical                         :: inverse_  !< Activate inverse conversion, local variable.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
+  if (inverse_) then
+    converted = 10._R4P * log10(magnitude)
+  else
+    converted = 10._R4P ** (magnitude / 10._R4P)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction convert_float32
 
   pure subroutine assign_converter(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `converter = converter` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(dBm_to_mW),   intent(inout) :: lhs !< Left hand side.
-  class(converter64), intent(in)    :: rhs !< Right hand side.
+  class(dBm_to_mW),     intent(inout) :: lhs !< Left hand side.
+  class(uom_converter), intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

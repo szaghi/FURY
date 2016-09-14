@@ -45,11 +45,11 @@ type :: uom_symbol
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   !<
   !< In the case the user supply a generic conversion alias formula this one overrides the multiplicative-like optionally parsed.
-  class(converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
-  integer(IKP),     private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(RKP),        private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
-  real(RKP),        private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
-  type(string),     private              :: symbol_         !< literal symbol, e.g. "m" for metres.
+  class(uom_converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
+  integer(IKP),         private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(RKP),            private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),            private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
+  type(string),         private              :: symbol_         !< literal symbol, e.g. "m" for metres.
   contains
     ! public methods
     procedure, pass(self) :: convert      !< Convert a magnitude with respect symbol definition.
@@ -151,12 +151,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
      
-  pure function get_convert(self) result(convert_)
+  pure subroutine get_convert(self, convert_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the symbol generic conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self     !< The uom symbol.
-  class(converter), allocatable :: convert_ !< The symbol generic conversion alias.
+  class(uom_symbol),                 intent(in)  :: self     !< The uom symbol.
+  class(uom_converter), allocatable, intent(out) :: convert_ !< The symbol generic conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ contains
     if (allocated(self%convert_)) allocate(convert_, source=self%convert_)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_convert
+  endsubroutine get_convert
      
   elemental function get_exponent(self) result(exponent_)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -294,12 +294,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set symbol.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(inout)        :: self       !< The uom symbol.
-  character(*),      intent(in), optional :: symbol_    !< literal symbol of the unit, e.g. "m" for metres.
-  integer(IKP),      intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(RKP),         intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
-  real(RKP),         intent(in), optional :: offset_    !< Symbol additive offset (used only for converters).
-  class(converter),  intent(in), optional :: convert_   !< Generic conversion alias formula user-supplied.
+  class(uom_symbol),    intent(inout)        :: self       !< The uom symbol.
+  character(*),         intent(in), optional :: symbol_    !< literal symbol of the unit, e.g. "m" for metres.
+  integer(IKP),         intent(in), optional :: exponent_  !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(RKP),            intent(in), optional :: factor_    !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),            intent(in), optional :: offset_    !< Symbol additive offset (used only for converters).
+  class(uom_converter), intent(in), optional :: convert_   !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

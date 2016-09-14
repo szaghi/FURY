@@ -372,10 +372,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set alias conversion formula.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(inout) :: self            !< The uom reference.
-  integer(I_P),     intent(in)    :: reference_index !< Index of the reference to which set the conversion formula.
-  integer(I_P),     intent(in)    :: alias_index     !< Index of the alias to which set the conversion formula.
-  class(converter), intent(in)    :: convert         !< Generic conversion alias formula user-supplied.
+  class(uom),           intent(inout) :: self            !< The uom reference.
+  integer(I_P),         intent(in)    :: reference_index !< Index of the reference to which set the conversion formula.
+  integer(I_P),         intent(in)    :: alias_index     !< Index of the alias to which set the conversion formula.
+  class(uom_converter), intent(in)    :: convert         !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

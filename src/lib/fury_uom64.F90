@@ -4,7 +4,7 @@ module fury_uom64
 !< FURY definition of unit of measure class with float64 real kind.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_converter64
+use fury_uom_converter
 use fury_uom_reference64
 use fury_uom_symbol64
 use penf, RKP => R8P
