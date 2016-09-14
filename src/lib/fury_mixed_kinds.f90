@@ -275,8 +275,6 @@ contains
   subroutine uom_symbol32_assign_uom_symbol64(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_symbol32 = uom_symbol64` assignment.
-  !<
-  !< @TODO Handle convert_
   !---------------------------------------------------------------------------------------------------------------------------------
   type(uom_symbol32), intent(inout) :: lhs       !< Left hand side.
   type(uom_symbol64), intent(in)    :: rhs       !< Right hand side.
@@ -284,7 +282,7 @@ contains
   real(R8P)                         :: factor_   !< Symbol multiplicative scale factor (used only for converters).
   real(R8P)                         :: offset_   !< Symbol additive offset (used only for converters).
   type(string)                      :: symbol_   !< literal symbol, e.g. "m" for metres.
-  ! class(uom_converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
+  class(uom_converter), allocatable :: convert_  !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -294,8 +292,14 @@ contains
       factor_ = rhs%get_factor()
       offset_ = rhs%get_offset()
       symbol_ = rhs%get_symbol()
-      ! convert_ = rhs%get_convert()
-      call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_, factor_=real(factor_, R4P), offset_=real(offset_, R4P))
+      call rhs%get_convert(convert_=convert_)
+      if (allocated(convert_)) then
+        call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_,           &
+                     factor_=real(factor_, R4P), offset_=real(offset_, R4P), &
+                     convert_=convert_)
+      else
+        call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_, factor_=real(factor_, R4P), offset_=real(offset_, R4P))
+      endif
     else
       write(stderr, "(A)") 'error: cannot assign between "'//lhs%stringify()//'" and "'//rhs%stringify()//'"'
       stop
@@ -307,8 +311,6 @@ contains
   subroutine uom_symbol64_assign_uom_symbol32(lhs, rhs)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `uom_symbol64 = uom_symbol32` assignment.
-  !<
-  !< @TODO Handle convert_
   !---------------------------------------------------------------------------------------------------------------------------------
   type(uom_symbol64), intent(inout) :: lhs       !< Left hand side.
   type(uom_symbol32), intent(in)    :: rhs       !< Right hand side.
@@ -316,8 +318,7 @@ contains
   real(R4P)                         :: factor_   !< Symbol multiplicative scale factor (used only for converters).
   real(R4P)                         :: offset_   !< Symbol additive offset (used only for converters).
   type(string)                      :: symbol_   !< literal symbol, e.g. "m" for metres.
-  ! class(converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
-  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_converter), allocatable :: convert_  !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -327,8 +328,14 @@ contains
       factor_ = rhs%get_factor()
       offset_ = rhs%get_offset()
       symbol_ = rhs%get_symbol()
-      ! convert_ = rhs%get_convert()
-      call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_, factor_=real(factor_, R8P), offset_=real(offset_, R8P))
+      call rhs%get_convert(convert_=convert_)
+      if (allocated(convert_)) then
+        call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_,           &
+                     factor_=real(factor_, R8P), offset_=real(offset_, R8P), &
+                     convert_=convert_)
+      else
+        call lhs%set(symbol_=symbol_%chars(), exponent_=exponent_, factor_=real(factor_, R8P), offset_=real(offset_, R8P))
+      endif
     else
       write(stderr, "(A)") 'error: cannot assign between "'//lhs%stringify()//'" and "'//rhs%stringify()//'"'
       stop

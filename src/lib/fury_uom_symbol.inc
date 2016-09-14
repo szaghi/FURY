@@ -151,12 +151,12 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
      
-  pure function get_convert(self) result(convert_)
+  pure subroutine get_convert(self, convert_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the symbol generic conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in)     :: self     !< The uom symbol.
-  class(uom_converter), allocatable :: convert_ !< The symbol generic conversion alias.
+  class(uom_symbol),                 intent(in)  :: self     !< The uom symbol.
+  class(uom_converter), allocatable, intent(out) :: convert_ !< The symbol generic conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ contains
     if (allocated(self%convert_)) allocate(convert_, source=self%convert_)
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_convert
+  endsubroutine get_convert
      
   elemental function get_exponent(self) result(exponent_)
   !---------------------------------------------------------------------------------------------------------------------------------
