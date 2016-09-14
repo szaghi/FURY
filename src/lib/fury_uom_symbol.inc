@@ -45,14 +45,15 @@ type :: uom_symbol
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   !<
   !< In the case the user supply a generic conversion alias formula this one overrides the multiplicative-like optionally parsed.
+  class(converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
   integer(IKP),     private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
   real(RKP),        private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
   real(RKP),        private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
   type(string),     private              :: symbol_         !< literal symbol, e.g. "m" for metres.
-  class(converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
   contains
     ! public methods
     procedure, pass(self) :: convert      !< Convert a magnitude with respect symbol definition.
+    procedure, pass(self) :: get_convert  !< Return the symbol generic conversion alias.
     procedure, pass(self) :: get_exponent !< Return the symbol exponent.
     procedure, pass(self) :: get_factor   !< Return the symbol factor.
     procedure, pass(self) :: get_offset   !< Return the symbol offset.
@@ -149,7 +150,22 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
+     
+  pure function get_convert(self) result(convert_)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the symbol generic conversion alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom_symbol), intent(in) :: self     !< The uom symbol.
+  class(converter), allocatable :: convert_ !< The symbol generic conversion alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
 
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    if (allocated(self%convert_)) allocate(convert_, source=self%convert_)
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endfunction get_convert
+     
   elemental function get_exponent(self) result(exponent_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the symbol exponent.

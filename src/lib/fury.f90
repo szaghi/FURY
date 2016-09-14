@@ -3,28 +3,42 @@ module fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY, Fortran Units (environment) for Reliable phYsical math.
 !-----------------------------------------------------------------------------------------------------------------------------------
-! FURY objects
+use, intrinsic :: iso_fortran_env, only : stderr => error_unit
+use fury_mixed_kinds
+use fury_qreal32, qreal32 => qreal
 use fury_qreal64, qreal64 => qreal
+use fury_system_abstract32, system_abstract32 => system_abstract
 use fury_system_abstract64, system_abstract64 => system_abstract
+use fury_system_si32, system_si32 => system_si
 use fury_system_si64, system_si64 => system_si
+use fury_uom32, uom32 => uom
 use fury_uom64, uom64 => uom
+use fury_uom_converter32, converter32 => converter
 use fury_uom_converter64, converter64 => converter
+use fury_uom_reference32, uom_reference32 => uom_reference
 use fury_uom_reference64, uom_reference64 => uom_reference
-
-! PENF objects
+use fury_uom_symbol32, uom_symbol32 => uom_symbol
+use fury_uom_symbol64, uom_symbol64 => uom_symbol
 use penf
+use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
 ! FURY objects
+public :: assignment(=)
+public :: operator(+)
+public :: operator(/)
 public :: operator(*)
-public :: qreal64
-public :: system_si64
-public :: converter64
-public :: uom64
-public :: uom_reference64
+public :: operator(-)
+public :: operator(==)
+public :: operator(/=)
+public :: qreal32, qreal64
+public :: system_si32, system_si64
+public :: converter32, converter64
+public :: uom32, uom64
+public :: uom_reference32, uom_reference64
 
 ! PENF objects
 ! kinds

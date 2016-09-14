@@ -50,8 +50,10 @@ type :: uom
   integer(I_P),                     private :: references_number=0_I_P !< References number.
   contains
     ! public methods
+    procedure, pass(self) :: get_alias            !< Return the alias.
     procedure, pass(self) :: get_main_reference   !< Return the main reference.
     procedure, pass(self) :: get_main_symbol      !< Return the main symbol.
+    procedure, pass(self) :: get_references       !< Return the references.
     procedure, pass(self) :: has_alias            !< Check if the unit has an alias.
     procedure, pass(self) :: has_name             !< Check if the unit has a name.
     procedure, pass(self) :: has_reference        !< Check if the unit has a queried reference unit.
@@ -178,6 +180,19 @@ contains
   endsubroutine remove_reference
 
   ! public methods
+  pure subroutine get_alias(self, alias)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(in)  :: self  !< The uom.
+  type(uom_reference), intent(out) :: alias !< Uom main alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.self%has_alias()) alias = self%alias
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine get_alias
+
   function get_main_symbol(self) result(symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the main symbol, i.e. `self%alias%aliases(1)%symbol_` if `self%alias` is defined or
@@ -200,7 +215,7 @@ contains
 
   pure function get_main_reference(self) result(reference)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return the main symbol, i.e. `self%alias` if `self%alias` is defined or `self%references(1)` if `self` has only 1
+  !< Return the main reference, i.e. `self%alias` if `self%alias` is defined or `self%references(1)` if `self` has only 1
   !< [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self      !< The uom.
@@ -221,6 +236,25 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_reference
+ 
+  pure subroutine get_references(self, references)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the references.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),                       intent(in)  :: self          !< The uom.
+  type(uom_reference), allocatable, intent(out) :: references(:) !< Uom references.
+  integer(I_P)                                  :: r             !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    allocate(references(1:self%references_number))
+    do r=1, self%references_number
+      references(r) = self%references(r)
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine get_references
 
   elemental function has_name(self)
   !---------------------------------------------------------------------------------------------------------------------------------

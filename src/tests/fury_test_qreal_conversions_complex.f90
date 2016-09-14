@@ -16,13 +16,14 @@ public :: dBm_to_mW
 type, extends(converter64) :: dBm_to_mW
   !< Converter (user-supplied) from dBm to mW.
   contains
-    procedure, nopass :: convert
+    procedure, nopass    :: convert          !< User-supplied conversion formulas from dBm to mW (and viceversa).
+    procedure, pass(lhs) :: assign_converter !< `converter = converter` assignment.
 endtype dBm_to_mW
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   pure function convert(magnitude, inverse) result(converted)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< User-supplied conversion from dBm to mW.
+  !< User-supplied conversion formulas from dBm to mW (and viceversa).
   !---------------------------------------------------------------------------------------------------------------------------------
   real(R8P), intent(in)           :: magnitude !< Magnitude (of the quantity) to be converted.
   logical,   intent(in), optional :: inverse   !< Activate inverse conversion.
@@ -39,6 +40,22 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
+
+  pure subroutine assign_converter(lhs, rhs)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< `converter = converter` assignment.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(dBm_to_mW),   intent(inout) :: lhs !< Left hand side.
+  class(converter64), intent(in)    :: rhs !< Right hand side.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  select type(rhs)
+  class is (dBm_to_mW)
+    lhs = rhs
+  endselect
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine assign_converter
 endmodule dBm_to_mW_converter
 
 program fury_test_qreal_conversions_complex
