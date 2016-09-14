@@ -63,7 +63,6 @@ type :: uom_symbol
     procedure, pass(self) :: prefixed     !< Return a prefixed symbol.
     procedure, pass(self) :: set          !< Set symbol.
     procedure, pass(self) :: stringify    !< Return a string representaion of the symbol.
-    ! procedure, pass(self) :: to           !< TO BE ELIMINATED!
     procedure, pass(self) :: unset        !< Unset symbol.
     ! public generic names
     generic :: assignment(=) => assign_uom_symbol        !< Overloading `=` assignment.
@@ -77,14 +76,14 @@ type :: uom_symbol
                                pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P          !< Overloading `**` operator.
     generic :: operator(==) => is_equal                  !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal              !< Overloading `/=` operator.
+    ! generic :: operator(/=) => is_not_equal              !< Overloading `/=` operator.
     generic :: operator(.compatible.) => is_compatible   !< Definition of `.compatible.` operator.
     generic :: operator(.convertible.) => is_convertible !< Definition of `.convertible.` operator.
     ! private methods
     procedure, pass(self), private :: is_compatible     !< Check if the symbol is compatible with another one.
     procedure, pass(self), private :: is_convertible    !< Check if the symbol is convertible with another one.
     procedure, pass(self), private :: is_equal          !< Check if the symbol is equal with another one.
-    procedure, pass(self), private :: is_not_equal      !< Check if the symbol is not equal with another one.
+    ! procedure, pass(self), private :: is_not_equal      !< Check if the symbol is not equal with another one.
     procedure, pass(lhs),  private :: assign_uom_symbol !< `uom_symbol = uom_symbol` assignment.
     procedure, pass(lhs),  private :: div               !< `uom_symbol / uom_symbol` operator.
     procedure, pass(lhs),  private :: mul               !< `uom_symbol * uom_symbol` operator.
@@ -97,25 +96,25 @@ type :: uom_symbol
     procedure, pass(lhs),  private :: pow_I1P           !< `uom_symbol ** integer(I1P)` operator.
 endtype uom_symbol
 
-interface uom_symbol
-  !< Overloading [[uom_symbol]] name with a creator function.
-  module procedure creator_from_string
-endinterface
+! interface uom_symbol
+!   !< Overloading [[uom_symbol]] name with a creator function.
+!   module procedure creator_from_string
+! endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
   ! private non type bound procedures
-  function creator_from_string(source) result(symbol)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of [[uom_symbol]].
-  !---------------------------------------------------------------------------------------------------------------------------------
-  character(*), intent(in) :: source !< Source input string definition of the symbol.
-  type(uom_symbol)         :: symbol !< The uom symbol.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  call symbol%parse(source=source)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction creator_from_string
+! function creator_from_string(source) result(symbol)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Create an instance of [[uom_symbol]].
+! !---------------------------------------------------------------------------------------------------------------------------------
+! character(*), intent(in) :: source !< Source input string definition of the symbol.
+! type(uom_symbol)         :: symbol !< The uom symbol.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! call symbol%parse(source=source)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction creator_from_string
 
   ! public methods
   elemental function convert(self, magnitude, inverse) result(converted)
@@ -151,7 +150,7 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction convert
      
-  pure subroutine get_convert(self, convert_)
+  subroutine get_convert(self, convert_)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the symbol generic conversion alias.
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -342,32 +341,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction stringify
 
-  pure function to(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< TO BE ELIMINATED!
-  !< Convert symbol to another.
-  !<
-  !< It is assumed a multiplicative-like conversion from the equivalence:
-  !<
-  !< `self%offset_ + self%factor_ * self%symbol_**self%exponent_ = other%offset_ + other%factor_ * other%symbol_**other%exponent_=>`
-  !< `=> to%symbol_ = other%symbol_`
-  !< `=> to%exponent_ = other%exponent_`
-  !< `=> to%factor_ = self%factor_ / other%factor_`
-  !< `=> to%offset_ = (self%factor_ - other%offset_) / other%factor_`
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self  !< The uom symbol.
-  type(uom_symbol),  intent(in) :: other !< Other symbol used for conversion.
-  type(uom_symbol)              :: to    !< The converted symbol.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  to%symbol_ = other%symbol_
-  to%exponent_ = other%exponent_
-  to%factor_ = self%factor_ / other%factor_
-  to%offset_ = (self%factor_ - other%offset_) / other%factor_
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction to
-
   elemental subroutine unset(self)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Unset symbol.
@@ -440,19 +413,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  elemental function is_not_equal(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if [[uom_symbol]] is not equal with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_symbol), intent(in) :: self         !< The uom symbol.
-  type(uom_symbol),  intent(in) :: other        !< The other symbol.
-  logical                       :: is_not_equal !< Check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_not_equal = .not.self%is_equal(other=other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_not_equal
+! elemental function is_not_equal(self, other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if [[uom_symbol]] is not equal with another one.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom_symbol), intent(in) :: self         !< The uom symbol.
+! type(uom_symbol),  intent(in) :: other        !< The other symbol.
+! logical                       :: is_not_equal !< Check result.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! is_not_equal = .not.self%is_equal(other=other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction is_not_equal
 
   ! operators
   pure subroutine assign_uom_symbol(lhs, rhs)

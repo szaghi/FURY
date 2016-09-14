@@ -19,7 +19,7 @@ type :: qreal
     ! public methods
     procedure, pass(self) :: allocate_unit   !< Allocate unit.
     procedure, pass(self) :: has_name        !< Check if the quantity has defined name.
-    procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
+    ! procedure, pass(self) :: is_compatible   !< Check if the quantity is compatible with another one.
     procedure, pass(self) :: is_unit_defined !< Check if the unit has been defined.
     procedure, pass(self) :: set             !< Set quantity.
     procedure, pass(self) :: stringify       !< Return a string representation of the quantity with unit symbol.
@@ -254,20 +254,20 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_name
 
-  elemental function is_compatible(self, other) result(compatible)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the quantity is compatible with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(qreal), intent(in) :: self       !< The quantity.
-  type(qreal),  intent(in) :: other      !< The other quantity.
-  logical                  :: compatible !< Compatibility check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  compatible = .false.
-  if (self%is_unit_defined().and.other%is_unit_defined()) compatible = self%unit.compatible.other%unit
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_compatible
+! elemental function is_compatible(self, other) result(compatible)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if the quantity is compatible with another one.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(qreal), intent(in) :: self       !< The quantity.
+! type(qreal),  intent(in) :: other      !< The other quantity.
+! logical                  :: compatible !< Compatibility check result.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! compatible = .false.
+! if (self%is_unit_defined().and.other%is_unit_defined()) compatible = self%unit.compatible.other%unit
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction is_compatible
 
   elemental function is_unit_defined(self) result(is_defined)
   !---------------------------------------------------------------------------------------------------------------------------------

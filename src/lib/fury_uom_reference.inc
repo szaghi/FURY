@@ -47,8 +47,8 @@ type :: uom_reference
     procedure, pass(self) :: get_aliases          !< Return the aliases list.
     procedure, pass(self) :: get_dimensions       !< Return the dimensions.
     procedure, pass(self) :: get_main_symbol      !< Return the main symbol, i.e. aliases(1).
-    procedure, pass(self) :: has_alias            !< Check if the reference has the queried alias.
-    procedure, pass(self) :: has_dimensions       !< Check if the reference dimensions has been defined.
+    ! procedure, pass(self) :: has_alias            !< Check if the reference has the queried alias.
+    ! procedure, pass(self) :: has_dimensions       !< Check if the reference dimensions has been defined.
     procedure, pass(self) :: is_defined           !< Check if the reference is defined.
     procedure, pass(self) :: parse                !< Parse reference from string.
     procedure, pass(self) :: prefixed             !< Return a prefixed reference.
@@ -69,12 +69,12 @@ type :: uom_reference
                                pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
+    ! generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
     generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
     procedure, pass(self), private :: is_compatible        !< Check if the reference is compatible with another one.
     procedure, pass(self), private :: is_equal             !< Check if the reference is equal with another one.
-    procedure, pass(self), private :: is_not_equal         !< Check if the reference is not equal with another one.
+    ! procedure, pass(self), private :: is_not_equal         !< Check if the reference is not equal with another one.
     procedure, pass(lhs),  private :: assign_uom_reference !< `uom_reference = uom_reference` assignment.
     procedure, pass(lhs),  private :: div                  !< `uom_reference / uom_reference` operator.
     procedure, pass(lhs),  private :: mul                  !< `uom_reference * uom_reference` operator.
@@ -154,33 +154,6 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine get_dimensions
                     
-  pure function get_first_compatible_alias(self, other) result(alias)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Get first alias-pairs compatible.
-  !<
-  !< The result is converted to `self%aliases(1)'.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in)  :: self  !< The uom reference.
-  type(uom_reference),  intent(in)  :: other !< Alias symbol queried.
-  type(uom_symbol)                  :: alias !< First compatible alias.
-  integer(I_P)                      :: o     !< Counter.
-  integer(I_P)                      :: s     !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  if (self%is_defined().and.other%is_defined()) then
-    outer_loop: do o=1, other%aliases_number
-      do s=1, self%aliases_number
-        if (self%aliases(s).compatible.other%aliases(o)) then
-          alias = other%aliases(o)
-          exit outer_loop
-        endif
-      enddo
-    enddo outer_loop
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction get_first_compatible_alias
-
   pure function get_main_symbol(self) result(alias)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the main symbol, i.e. aliases(1).
@@ -194,40 +167,40 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_symbol
 
-  elemental function has_alias(self, alias)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if [[uom_reference]] has the queried alias.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: self      !< The uom reference.
-  type(uom_symbol),     intent(in) :: alias     !< Alias queried.
-  logical                          :: has_alias !< Check result.
-  integer(I_P)                     :: a         !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
+! elemental function has_alias(self, alias)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if [[uom_reference]] has the queried alias.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom_reference), intent(in) :: self      !< The uom reference.
+! type(uom_symbol),     intent(in) :: alias     !< Alias queried.
+! logical                          :: has_alias !< Check result.
+! integer(I_P)                     :: a         !< Counter.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! has_alias = .false.
+! if (self%is_defined()) then
+!   do a=1, self%aliases_number
+!     has_alias = (alias==self%aliases(a))
+!     if (has_alias) exit
+!   enddo
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction has_alias
 
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_alias = .false.
-  if (self%is_defined()) then
-    do a=1, self%aliases_number
-      has_alias = (alias==self%aliases(a))
-      if (has_alias) exit
-    enddo
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_alias
-
-  elemental function has_dimensions(self)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if [[uom_reference]] has defined dimensions.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: self           !< The uom reference.
-  logical                          :: has_dimensions !< Check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_dimensions = .false.
-  if (self%is_defined()) has_dimensions = self%dimensions%is_defined()
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_dimensions
+! elemental function has_dimensions(self)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if [[uom_reference]] has defined dimensions.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom_reference), intent(in) :: self           !< The uom reference.
+! logical                          :: has_dimensions !< Check result.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! has_dimensions = .false.
+! if (self%is_defined()) has_dimensions = self%dimensions%is_defined()
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction has_dimensions
 
   elemental function is_defined(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -478,19 +451,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  elemental function is_not_equal(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if [[uom_reference]] is not equal with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom_reference), intent(in) :: self         !< The uom reference.
-  type(uom_reference),  intent(in) :: other        !< The other reference.
-  logical                          :: is_not_equal !< Check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_not_equal = .not.self%is_equal(other=other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_not_equal
+! elemental function is_not_equal(self, other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if [[uom_reference]] is not equal with another one.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom_reference), intent(in) :: self         !< The uom reference.
+! type(uom_reference),  intent(in) :: other        !< The other reference.
+! logical                          :: is_not_equal !< Check result.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! is_not_equal = .not.self%is_equal(other=other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction is_not_equal
 
   ! operators
   pure subroutine assign_uom_reference(lhs, rhs)
