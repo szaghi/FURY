@@ -8,8 +8,9 @@ use fury_qreal32, qreal32 => qreal
 use fury_qreal64, qreal64 => qreal
 use fury_uom32, uom32 => uom
 use fury_uom64, uom64 => uom
-use fury_uom_converter32, converter32 => converter
-use fury_uom_converter64, converter64 => converter
+use fury_uom_converter
+! use fury_uom_converter32, uom_converter32 => uom_converter
+! use fury_uom_converter64, uom_converter64 => uom_converter
 use fury_uom_reference32, uom_reference32 => uom_reference
 use fury_uom_reference64, uom_reference64 => uom_reference
 use fury_uom_symbol32, uom_symbol32 => uom_symbol
@@ -285,7 +286,7 @@ contains
   real(R8P)                         :: factor_   !< Symbol multiplicative scale factor (used only for converters).
   real(R8P)                         :: offset_   !< Symbol additive offset (used only for converters).
   type(string)                      :: symbol_   !< literal symbol, e.g. "m" for metres.
-  ! class(converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
+  ! class(uom_converter64), allocatable    :: convert_  !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------

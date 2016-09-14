@@ -6,11 +6,11 @@
 !-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
-public :: converter
+public :: uom_converter
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type, abstract :: converter
+type, abstract :: uom_converter
   !< A generic user-supplied [[uom_symbol]] converter.
   contains
     ! deferred methods
@@ -18,7 +18,7 @@ type, abstract :: converter
     procedure(assignment_converter), deferred, pass(lhs) :: assign_converter !< `converter = converter` assignment.
     ! operators
     generic :: assignment(=) => assign_converter !< Overloading `=` assignment.
-endtype converter
+endtype uom_converter
 
 abstract interface
   !< Generic conversion alias formula that must be user-supplied.
@@ -40,9 +40,9 @@ abstract interface
   !---------------------------------------------------------------------------------------------------------------------------------
   !< `converter = converter` assignment.
   !---------------------------------------------------------------------------------------------------------------------------------
-  import converter
-  class(converter), intent(inout) :: lhs !< Left hand side.
-  class(converter), intent(in)    :: rhs !< Right hand side.
+  import uom_converter
+  class(uom_converter), intent(inout) :: lhs !< Left hand side.
+  class(uom_converter), intent(in)    :: rhs !< Right hand side.
   !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine assignment_converter
 endinterface

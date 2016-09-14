@@ -4,7 +4,7 @@ module fury_uom_symbol64
 !< FURY class definition of unit symbol with float64 kind.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_converter64
+use fury_uom_converter
 use penf, IKP => I_P, RKP => R8P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
