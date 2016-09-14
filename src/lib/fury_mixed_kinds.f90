@@ -9,8 +9,6 @@ use fury_qreal64, qreal64 => qreal
 use fury_uom32, uom32 => uom
 use fury_uom64, uom64 => uom
 use fury_uom_converter
-! use fury_uom_converter32, uom_converter32 => uom_converter
-! use fury_uom_converter64, uom_converter64 => uom_converter
 use fury_uom_reference32, uom_reference32 => uom_reference
 use fury_uom_reference64, uom_reference64 => uom_reference
 use fury_uom_symbol32, uom_symbol32 => uom_symbol

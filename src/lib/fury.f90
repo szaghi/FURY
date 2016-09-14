@@ -14,8 +14,6 @@ use fury_system_si64, system_si64 => system_si
 use fury_uom32, uom32 => uom
 use fury_uom64, uom64 => uom
 use fury_uom_converter
-! use fury_uom_converter32, uom_converter32 => uom_converter
-! use fury_uom_converter64, uom_converter64 => uom_converter
 use fury_uom_reference32, uom_reference32 => uom_reference
 use fury_uom_reference64, uom_reference64 => uom_reference
 use fury_uom_symbol32, uom_symbol32 => uom_symbol
@@ -38,7 +36,6 @@ public :: operator(/=)
 public :: qreal32, qreal64
 public :: system_si32, system_si64
 public :: uom32, uom64
-! public :: uom_converter32, uom_converter64
 public :: uom_converter
 public :: uom_reference32, uom_reference64
 
