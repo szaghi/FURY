@@ -1,5 +1,5 @@
 !< FURY test of [[qreal]].
-program fury_test_bolt
+program fury_test_bolt64
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY test of [[qreal]].
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,4 +32,4 @@ print "(A,L1)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimension
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
-endprogram fury_test_bolt
+endprogram fury_test_bolt64

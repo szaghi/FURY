@@ -1,0 +1,8 @@
+[submodule "src/third_party/PENF"]
+	path = src/third_party/PENF
+	url = https://github.com/szaghi/PENF
+  branch = master
+[submodule "src/third_party/StringiFor"]
+	path = src/third_party/StringiFor
+	url = https://github.com/szaghi/StringiFor
+  branch = master

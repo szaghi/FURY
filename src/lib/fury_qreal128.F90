@@ -1,15 +1,15 @@
-!< FURY class definition of unit symbol with float64 kind.
-module fury_uom_symbol64
+!< FURY class definition of real (with float128 kind) quantity with associated unit of measure.
+module fury_qreal128
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY class definition of unit symbol with float64 kind.
+!< FURY class definition of real (with float128 kind) quantity with associated unit of measure.
 !-----------------------------------------------------------------------------------------------------------------------------------
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
-use fury_uom_converter
-use penf, IKP => I_P, RKP => R8P
+use fury_uom128
+use penf, RKP => R16P
 use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-#include "fury_uom_symbol.inc"
+#include "fury_qreal.inc"
 !-----------------------------------------------------------------------------------------------------------------------------------
-endmodule fury_uom_symbol64
+endmodule fury_qreal128

@@ -167,7 +167,7 @@ Go to [Top](#top)
 
 ## Download
 
-FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY). It uses a bunch of bash scripts to handle the third party dependencies. To download all the source files you can:
+FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY). To download all the source files you can:
 
 + clone recursively this repository: `git clone --recursive https://github.com/szaghi/FURY`
 + download the latest master-branch archive at [https://github.com/szaghi/FURY/archive/master.zip](https://github.com/szaghi/FURY/archive/master.zip)
@@ -177,7 +177,7 @@ Go to [Top](#top)
 
 ## Compilation
 
-FURY is a modern Fortran project thus a modern Fortran compiler is need to compile the project. In the following table the support for some widely-used Fortran compilers is summarized.
+FURY is a modern Fortran project thus a modern Fortran compiler is need to compile the project.
 
 The library is modular, namely it exploits Fortran modules. As a consequence, there is compilation-cascade hierarchy to build the library. To correctly build the library the following approaches are supported
 

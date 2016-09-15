@@ -114,7 +114,7 @@ contains
   call self%add_prefix('2.e80 * yobi = 2.e80 * Yi')
   ! common constants
   call self%add_constant(qreal(magnitude=4._RKP * atan(1._RKP), name='pi'))
-  call self%add_constant(qreal(magnitude=299792458_RKP, unit=self%unit('metre.second-1'), name='speed_of_light'))
+  call self%add_constant(qreal(magnitude=299792458._RKP, unit=self%unit('metre.second-1'), name='speed_of_light'))
   call self%add_constant(qreal(magnitude=9.806650_RKP, unit=self%unit('metre.second-2'), name='gravity'))
   call self%add_constant(qreal(magnitude=1.602176565e-19_RKP, unit=self%unit('coulomb'), name='elementary_charge'))
   call self%add_constant(qreal(magnitude=9.10938291e-31_RKP, unit=self%unit('kilogram'), name='electron_mass'))
@@ -137,7 +137,7 @@ contains
   pi = self%const('pi')
   c = self%const('speed_of_light')
 
-  mu_0 = 4_RKP * pi%magnitude * 1e-7_RKP * uom('kg [mass].m [length].s-2 [time-2].A-2 [current-2]')
+  mu_0 = 4._RKP * pi%magnitude * 1e-7_RKP * uom('kg [mass].m [length].s-2 [time-2].A-2 [current-2]')
   call mu_0%set(name='vacuum_permeability')
   call self%add_constant(mu_0)
 

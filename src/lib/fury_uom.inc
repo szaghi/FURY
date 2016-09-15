@@ -50,8 +50,10 @@ type :: uom
   integer(I_P),                     private :: references_number=0_I_P !< References number.
   contains
     ! public methods
+    procedure, pass(self) :: get_alias            !< Return the alias.
     procedure, pass(self) :: get_main_reference   !< Return the main reference.
     procedure, pass(self) :: get_main_symbol      !< Return the main symbol.
+    procedure, pass(self) :: get_references       !< Return the references.
     procedure, pass(self) :: has_alias            !< Check if the unit has an alias.
     procedure, pass(self) :: has_name             !< Check if the unit has a name.
     procedure, pass(self) :: has_reference        !< Check if the unit has a queried reference unit.
@@ -76,14 +78,14 @@ type :: uom
                                pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
-    generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
-    generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
+    ! generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
+    ! generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
     procedure, pass(self), private :: add_reference            !< Add a reference unit to unit.
-    procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible reference unit.
-    procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
+    ! procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible reference unit.
+    ! procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
     procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
-    procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
+    ! procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
     procedure, pass(self), private :: parse                    !< Parse unit definition from an input string.
     procedure, pass(self), private :: parse_alias              !< Parse unit alias from an input string.
     procedure, pass(self), private :: parse_name               !< Parse unit name from an input string.
@@ -106,7 +108,7 @@ endtype uom
 
 interface uom
   !< Ovearloading [[uom]] name with a set of creator functions.
-  module procedure creator_from_string, creator_from_other_unit
+  module procedure creator_from_string!, creator_from_other_unit
 endinterface
 !-----------------------------------------------------------------------------------------------------------------------------------
 contains
@@ -126,22 +128,22 @@ contains
   call unit%set(alias=alias, name=name)
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction creator_from_string
+ 
+! function creator_from_other_unit(source, alias, name) result(unit)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Create an instance of [[uom]] from another [[uom]].
+! !---------------------------------------------------------------------------------------------------------------------------------
+! type(uom),           intent(in)           :: source !< Source input unit.
+! type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
+! character(*),        intent(in), optional :: name   !< Unit name.
+! type(uom)                                 :: unit   !< The unit.
+! !---------------------------------------------------------------------------------------------------------------------------------
 !
-  function creator_from_other_unit(source, alias, name) result(unit)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Create an instance of [[uom]] from another [[uom]].
-  !---------------------------------------------------------------------------------------------------------------------------------
-  type(uom),           intent(in)           :: source !< Source input unit.
-  type(uom_reference), intent(in), optional :: alias  !< Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].
-  character(*),        intent(in), optional :: name   !< Unit name.
-  type(uom)                                 :: unit   !< The unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  unit = source
-  call unit%set(alias=alias, name=name)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction creator_from_other_unit
+! !---------------------------------------------------------------------------------------------------------------------------------
+! unit = source
+! call unit%set(alias=alias, name=name)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction creator_from_other_unit
 
   subroutine remove_reference(references, id)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -178,6 +180,19 @@ contains
   endsubroutine remove_reference
 
   ! public methods
+  pure subroutine get_alias(self, alias)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),          intent(in)  :: self  !< The uom.
+  type(uom_reference), intent(out) :: alias !< Uom main alias.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined().and.self%has_alias()) alias = self%alias
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine get_alias
+
   function get_main_symbol(self) result(symbol)
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the main symbol, i.e. `self%alias%aliases(1)%symbol_` if `self%alias` is defined or
@@ -200,7 +215,7 @@ contains
 
   pure function get_main_reference(self) result(reference)
   !---------------------------------------------------------------------------------------------------------------------------------
-  !< Return the main symbol, i.e. `self%alias` if `self%alias` is defined or `self%references(1)` if `self` has only 1
+  !< Return the main reference, i.e. `self%alias` if `self%alias` is defined or `self%references(1)` if `self` has only 1
   !< [[uom_reference]].
   !---------------------------------------------------------------------------------------------------------------------------------
   class(uom), intent(in) :: self      !< The uom.
@@ -221,6 +236,25 @@ contains
   endif
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction get_main_reference
+ 
+  pure subroutine get_references(self, references)
+  !---------------------------------------------------------------------------------------------------------------------------------
+  !< Return the references.
+  !---------------------------------------------------------------------------------------------------------------------------------
+  class(uom),                       intent(in)  :: self          !< The uom.
+  type(uom_reference), allocatable, intent(out) :: references(:) !< Uom references.
+  integer(I_P)                                  :: r             !< Counter.
+  !---------------------------------------------------------------------------------------------------------------------------------
+
+  !---------------------------------------------------------------------------------------------------------------------------------
+  if (self%is_defined()) then
+    allocate(references(1:self%references_number))
+    do r=1, self%references_number
+      references(r) = self%references(r)
+    enddo
+  endif
+  !---------------------------------------------------------------------------------------------------------------------------------
+  endsubroutine get_references
 
   elemental function has_name(self)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -338,10 +372,10 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   !< Set alias conversion formula.
   !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),       intent(inout) :: self            !< The uom reference.
-  integer(I_P),     intent(in)    :: reference_index !< Index of the reference to which set the conversion formula.
-  integer(I_P),     intent(in)    :: alias_index     !< Index of the alias to which set the conversion formula.
-  class(converter), intent(in)    :: convert         !< Generic conversion alias formula user-supplied.
+  class(uom),           intent(inout) :: self            !< The uom reference.
+  integer(I_P),         intent(in)    :: reference_index !< Index of the reference to which set the conversion formula.
+  integer(I_P),         intent(in)    :: alias_index     !< Index of the alias to which set the conversion formula.
+  class(uom_converter), intent(in)    :: convert         !< Generic conversion alias formula user-supplied.
   !---------------------------------------------------------------------------------------------------------------------------------
 
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -486,50 +520,50 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_alias
 
-  elemental function has_reference_compatible(self, reference)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if the unit has a compatible reference unit.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom),          intent(in) :: self                     !< The unit.
-  type(uom_reference), intent(in) :: reference                !< Reference unit to check the presence of.
-  logical                         :: has_reference_compatible !< Check result.
-  integer(I_P)                    :: r                        !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
+! elemental function has_reference_compatible(self, reference)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if the unit has a compatible reference unit.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom),          intent(in) :: self                     !< The unit.
+! type(uom_reference), intent(in) :: reference                !< Reference unit to check the presence of.
+! logical                         :: has_reference_compatible !< Check result.
+! integer(I_P)                    :: r                        !< Counter.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! has_reference_compatible = .false.
+! if (self%is_defined().and.reference%is_defined()) then
+!   do r=1, self%references_number
+!     has_reference_compatible = self%references(r).compatible.reference
+!     if (has_reference_compatible) exit
+!   enddo
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction has_reference_compatible
 
-  !---------------------------------------------------------------------------------------------------------------------------------
-  has_reference_compatible = .false.
-  if (self%is_defined().and.reference%is_defined()) then
-    do r=1, self%references_number
-      has_reference_compatible = self%references(r).compatible.reference
-      if (has_reference_compatible) exit
-    enddo
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction has_reference_compatible
-
-  elemental function is_compatible(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is compatible with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self          !< The unit.
-  class(uom), intent(in) :: other         !< The other unit.
-  logical                :: is_compatible !< Compatibility check result.
-  integer(I_P)           :: r             !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_compatible = .false.
-  if (self%is_defined().and.other%is_defined()) then
-    is_compatible = (self%references_number==other%references_number)
-    if (is_compatible) then
-      do r=1, self%references_number
-        is_compatible = other%has_reference_compatible(reference=self%references(r))
-        if (.not.is_compatible) exit
-      enddo
-    endif
-  endif
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_compatible
+! elemental function is_compatible(self, other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if unit is compatible with another one.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom), intent(in) :: self          !< The unit.
+! class(uom), intent(in) :: other         !< The other unit.
+! logical                :: is_compatible !< Compatibility check result.
+! integer(I_P)           :: r             !< Counter.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! is_compatible = .false.
+! if (self%is_defined().and.other%is_defined()) then
+!   is_compatible = (self%references_number==other%references_number)
+!   if (is_compatible) then
+!     do r=1, self%references_number
+!       is_compatible = other%has_reference_compatible(reference=self%references(r))
+!       if (.not.is_compatible) exit
+!     enddo
+!   endif
+! endif
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction is_compatible
 
   elemental function is_equal(self, other)
   !---------------------------------------------------------------------------------------------------------------------------------
@@ -563,19 +597,19 @@ contains
   !---------------------------------------------------------------------------------------------------------------------------------
   endfunction is_equal
 
-  elemental function is_not_equal(self, other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  !< Check if unit is not equal (has not the same references units) with another one.
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(uom), intent(in) :: self         !< The unit.
-  class(uom), intent(in) :: other        !< The other unit.
-  logical                :: is_not_equal !< Check result.
-  !---------------------------------------------------------------------------------------------------------------------------------
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  is_not_equal = .not.self%is_equal(other=other)
-  !---------------------------------------------------------------------------------------------------------------------------------
-  endfunction is_not_equal
+! elemental function is_not_equal(self, other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! !< Check if unit is not equal (has not the same references units) with another one.
+! !---------------------------------------------------------------------------------------------------------------------------------
+! class(uom), intent(in) :: self         !< The unit.
+! class(uom), intent(in) :: other        !< The other unit.
+! logical                :: is_not_equal !< Check result.
+! !---------------------------------------------------------------------------------------------------------------------------------
+!
+! !---------------------------------------------------------------------------------------------------------------------------------
+! is_not_equal = .not.self%is_equal(other=other)
+! !---------------------------------------------------------------------------------------------------------------------------------
+! endfunction is_not_equal
 
   subroutine parse(self, source)
   !---------------------------------------------------------------------------------------------------------------------------------

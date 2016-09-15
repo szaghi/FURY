@@ -1,12 +1,16 @@
-!< FURY class definition of unit converter with float64 real kind.
-module fury_uom_converter64
+!< FURY class definition of unit reference with float32 kind.
+module fury_uom_reference32
 !-----------------------------------------------------------------------------------------------------------------------------------
-!< FURY class definition of unit converter with float64 real kind.
+!< FURY class definition of unit reference with float32 kind.
 !-----------------------------------------------------------------------------------------------------------------------------------
-use penf, RKP => R8P
+use, intrinsic :: iso_fortran_env, only : stderr => error_unit
+use fury_uom_converter
+use fury_uom_symbol32
+use penf, RKP => R4P
+use stringifor
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-#include "fury_uom_converter.inc"
+#include "fury_uom_reference.inc"
 !-----------------------------------------------------------------------------------------------------------------------------------
-endmodule fury_uom_converter64
+endmodule fury_uom_reference32
