@@ -13,6 +13,10 @@ install:
 before_script:
     - lscpu
     - git submodule update --init --recursive
+    - mkdir -p "$HOME/.local/bin"
+    - export PATH="$HOME/.local/bin:$PATH"
+    - ln -fs /usr/bin/gfortran-6 "$HOME/.local/bin/gfortran" && gfortran --version
+    - ln -fs /usr/bin/gcov-6 "$HOME/.local/bin/gcov" && gcov --version
     
 script:
     - FoBiS.py rule -ex makecoverage
