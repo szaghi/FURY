@@ -1,0 +1,18 @@
+language: python
+
+install:
+    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+    - sudo apt-get update
+    - sudo apt-get instal gfortran-6 binutils python-pip graphviz
+    - sudo pip install --upgrade pygooglechart
+    - sudo pip install --upgrade graphviz
+    - sudo pip install --upgrade FoBiS.py
+    - sudo pip install --upgrade markdown-checklist 
+    - sudo pip install --upgrade ford
+
+before_script:
+    - lscpu
+    - git submodule update --init --recursive
+    
+script:
+    - FoBiS.py rule -ex makecoverage
