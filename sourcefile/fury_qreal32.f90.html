@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>fury_qreal32.F90 &ndash; FURY</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>fury_qreal32.F90
+    <small>Source File</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title=" 2.6% of total for source files.">524 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_qreal32.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li class="active">fury_qreal32.F90</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#mods-0">Modules</a></h3></div>
+  <div id="mods-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/fury_qreal32.f90.html#src">fury_qreal32.F90</a>
+  </div>
+</div>
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allfiles-0">All Source Files</a></h3></div>
+  <div id="allfiles-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../sourcefile/assignments.f90.html">assignments.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/basename_dir.f90.html">basename_dir.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64.f90.html">befor64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64.f90%7E2.html">befor64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64_pack_data_m.f90.html">befor64_pack_data_m.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64_pack_data_m.f90%7E2.html">befor64_pack_data_m.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/camelcase.f90.html">camelcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/capitalize.f90.html">capitalize.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90%7E2.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90%7E3.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/concatenation.f90.html">concatenation.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/csv_naive_parser.f90.html">csv_naive_parser.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/decode.f90.html">decode.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/encode.f90.html">encode.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/equal.f90.html">equal.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/escape.f90.html">escape.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/extension.f90.html">extension.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fill.f90.html">fill.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/free.f90.html">free.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury.f90.html">fury.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_mixed_kinds.f90.html">fury_mixed_kinds.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal128.f90.html">fury_qreal128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal32.f90.html">fury_qreal32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal64.f90.html">fury_qreal64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract128.f90.html">fury_system_abstract128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract32.f90.html">fury_system_abstract32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract64.f90.html">fury_system_abstract64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si128.f90.html">fury_system_si128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si32.f90.html">fury_system_si32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si64.f90.html">fury_system_si64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_bolt32.f90.html">fury_test_bolt32.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_bolt64.f90.html">fury_test_bolt64.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add.f90.html">fury_test_qreal_add.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_aliases_failure.f90.html">fury_test_qreal_add_aliases_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_failure.f90.html">fury_test_qreal_add_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_mixed.f90.html">fury_test_qreal_add_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_mixed_failure.f90.html">fury_test_qreal_add_mixed_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_aliases.f90.html">fury_test_qreal_aliases.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_assign.f90.html">fury_test_qreal_assign.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_complex.f90.html">fury_test_qreal_conversions_complex.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_si.f90.html">fury_test_qreal_conversions_si.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_simple.f90.html">fury_test_qreal_conversions_simple.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_div.f90.html">fury_test_qreal_div.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_div_mixed.f90.html">fury_test_qreal_div_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_eq.f90.html">fury_test_qreal_eq.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_eq_mixed.f90.html">fury_test_qreal_eq_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_mul.f90.html">fury_test_qreal_mul.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_mul_mixed.f90.html">fury_test_qreal_mul_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_not_eq.f90.html">fury_test_qreal_not_eq.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_not_eq_mixed.f90.html">fury_test_qreal_not_eq_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_pow.f90.html">fury_test_qreal_pow.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub.f90.html">fury_test_qreal_sub.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_failure.f90.html">fury_test_qreal_sub_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_mixed.f90.html">fury_test_qreal_sub_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_mixed_failure.f90.html">fury_test_qreal_sub_mixed_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_system_si.f90.html">fury_test_system_si.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_add.f90.html">fury_test_uom_add.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_add_failure.f90.html">fury_test_uom_add_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_aliases.f90.html">fury_test_uom_aliases.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_assign.f90.html">fury_test_uom_assign.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_assign_failure.f90.html">fury_test_uom_assign_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_div.f90.html">fury_test_uom_div.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_mul.f90.html">fury_test_uom_mul.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_parse_failure.f90.html">fury_test_uom_parse_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_pow.f90.html">fury_test_uom_pow.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_sub.f90.html">fury_test_uom_sub.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_sub_failure.f90.html">fury_test_uom_sub_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom128.f90.html">fury_uom128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom32.f90.html">fury_uom32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom64.f90.html">fury_uom64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_converter.f90.html">fury_uom_converter.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference128.f90.html">fury_uom_reference128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference32.f90.html">fury_uom_reference32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference64.f90.html">fury_uom_reference64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol128.f90.html">fury_uom_symbol128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol32.f90.html">fury_uom_symbol32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol64.f90.html">fury_uom_symbol64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/greater_equal_than.f90.html">greater_equal_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/greater_than.f90.html">greater_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/insert.f90.html">insert.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/io_basic.f90.html">io_basic.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/io_listdirected.f90.html">io_listdirected.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_digit.f90.html">is_digit.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_integer.f90.html">is_integer.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_number.f90.html">is_number.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_real.f90.html">is_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/join.f90.html">join.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/lower_equal_than.f90.html">lower_equal_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/lower_than.f90.html">lower_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/not_equal.f90.html">not_equal.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/partition.f90.html">partition.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E2.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E3.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E4.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E5.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_b_size.f90.html">penf_b_size.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_global_parameters_variables.f90.html">penf_global_parameters_variables.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_stringify.f90.html">penf_stringify.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_file.f90.html">read_file.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_line.f90.html">read_line.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_lines.f90.html">read_lines.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/replace.f90.html">replace.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/reverse.f90.html">reverse.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sadjustlr.f90.html">sadjustlr.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/scount.f90.html">scount.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/search.f90.html">search.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sindex.f90.html">sindex.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/slen.f90.html">slen.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/slice.f90.html">slice.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/snakecase.f90.html">snakecase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/split.f90.html">split.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/srepeat.f90.html">srepeat.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sscan.f90.html">sscan.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/start_end.f90.html">start_end.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/startcase.f90.html">startcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/strim.f90.html">strim.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/stringifor.f90.html">stringifor.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/stringifor_string_t.f90.html">stringifor_string_t.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/strip.f90.html">strip.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sverify.f90.html">sverify.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/swapcase.f90.html">swapcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90%7E2.html">test_all.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_driver.f90.html">Test_Driver.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/to_number.f90.html">to_number.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/unescape.f90.html">unescape.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/unique.f90.html">unique.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/upper_lower.f90.html">upper_lower.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/write_file.f90.html">write_file.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/write_lines.f90.html">write_lines.f90</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    <div class="col-md-9" id='text'>
+    <p>FURY class definition of real (with float32 kind) quantity with associated unit of measure.</p>
+    
+    <h3>This File Depends On</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: sourcefile~~fury_qreal32.f90~~EfferentGraph Pages: 1 -->
+<svg id="sourcefilefury_qreal32f90EfferentGraph" width="641pt" height="68pt"
+ viewBox="0.00 0.00 641.00 67.99" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="sourcefile~~fury_qreal32.f90~~EfferentGraph" class="graph" transform="scale(0.36133 0.36133) rotate(0) translate(4 184.174)">
+<title>sourcefile~~fury_qreal32.f90~~EfferentGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-184.174 1771,-184.174 1771,5 -4,5"/>
+<!-- sourcefile~fury_qreal32.f90 -->
+<g id="node1" class="node"><title>sourcefile~fury_qreal32.f90</title>
+<polygon fill="none" stroke="black" points="1766,-57.5853 1672,-57.5853 1672,-31.5853 1766,-31.5853 1766,-57.5853"/>
+<text text-anchor="middle" x="1719" y="-42.1353" font-family="Helvetica,sans-Serif" font-size="10.50">fury_qreal32.F90</text>
+</g>
+<!-- sourcefile~fury_uom32.f90 -->
+<g id="node2" class="node"><title>sourcefile~fury_uom32.f90</title>
+<a xlink:href="../sourcefile/fury_uom32.f90.html" xlink:title="fury_uom32.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1635,-57.5853 1545,-57.5853 1545,-31.5853 1635,-31.5853 1635,-57.5853"/>
+<text text-anchor="middle" x="1590" y="-42.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom32.F90</text>
+</a>
+</g>
+<!-- sourcefile~fury_uom32.f90&#45;&gt;sourcefile~fury_qreal32.f90 -->
+<g id="edge54" class="edge"><title>sourcefile~fury_uom32.f90&#45;&gt;sourcefile~fury_qreal32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1635.84,-44.5853C1644.28,-44.5853 1653.17,-44.5853 1661.89,-44.5853"/>
+<polygon fill="#000000" stroke="#000000" points="1662,-48.0854 1672,-44.5853 1662,-41.0854 1662,-48.0854"/>
+</g>
+<!-- sourcefile~penf.f90 -->
+<g id="node3" class="node"><title>sourcefile~penf.f90</title>
+<a xlink:href="../sourcefile/penf.f90.html" xlink:title="penf.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="553,-95.5853 499,-95.5853 499,-69.5853 553,-69.5853 553,-95.5853"/>
+<text text-anchor="middle" x="526" y="-80.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~fury_qreal32.f90 -->
+<g id="edge56" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~fury_qreal32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1436,-164.585C1531.91,-143.408 1636.18,-90.6578 1687.23,-62.6777"/>
+<polygon fill="#000000" stroke="#000000" points="1689.07,-65.6587 1696.12,-57.7546 1685.68,-59.5338 1689.07,-65.6587"/>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom32.f90 -->
+<g id="edge18" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M935,-123.585C978.191,-120.001 987.067,-139.659 1030,-145.585 1208.95,-170.286 1258.47,-197.949 1436,-164.585"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1436,-164.585C1469.37,-157.216 1479.86,-156.98 1508,-137.585 1536.1,-118.218 1560.84,-87.1713 1575.61,-66.3386"/>
+<polygon fill="#000000" stroke="#000000" points="1578.69,-68.0484 1581.49,-57.8321 1572.93,-64.0683 1578.69,-68.0484"/>
+</g>
+<!-- sourcefile~stringifor.f90 -->
+<g id="node4" class="node"><title>sourcefile~stringifor.f90</title>
+<a xlink:href="../sourcefile/stringifor.f90.html" xlink:title="stringifor.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1133,-54.5853 1057,-54.5853 1057,-28.5853 1133,-28.5853 1133,-54.5853"/>
+<text text-anchor="middle" x="1095" y="-39.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~stringifor.f90 -->
+<g id="edge50" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~stringifor.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M553.58,-93.9323C564.704,-98.0133 577.777,-102.196 590,-104.585 740.713,-134.048 781.746,-133.363 935,-123.585"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M935,-123.585C983.621,-119.551 986.267,-90.2116 1030,-68.5853 1037.01,-65.1195 1044.57,-61.6995 1051.98,-58.519"/>
+<polygon fill="#000000" stroke="#000000" points="1053.36,-61.7353 1061.22,-54.6328 1050.65,-55.2825 1053.36,-61.7353"/>
+</g>
+<!-- sourcefile~fury_uom_converter.f90 -->
+<g id="node5" class="node"><title>sourcefile~fury_uom_converter.f90</title>
+<a xlink:href="../sourcefile/fury_uom_converter.f90.html" xlink:title="fury_uom_converter.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1160,-136.585 1030,-136.585 1030,-110.585 1160,-110.585 1160,-136.585"/>
+<text text-anchor="middle" x="1095" y="-121.135" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_converter.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_converter.f90 -->
+<g id="edge2" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_converter.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M935,-123.585C962.654,-121.821 993.051,-121.432 1019.85,-121.614"/>
+<polygon fill="#000000" stroke="#000000" points="1019.9,-125.114 1029.94,-121.71 1019.97,-118.114 1019.9,-125.114"/>
+</g>
+<!-- sourcefile~fury_uom_reference32.f90 -->
+<g id="node6" class="node"><title>sourcefile~fury_uom_reference32.f90</title>
+<a xlink:href="../sourcefile/fury_uom_reference32.f90.html" xlink:title="fury_uom_reference32.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1507,-57.5853 1365,-57.5853 1365,-31.5853 1507,-31.5853 1507,-57.5853"/>
+<text text-anchor="middle" x="1436" y="-42.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference32.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_reference32.f90 -->
+<g id="edge6" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_reference32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M935,-123.585C1008.16,-117.515 1022.86,-96.1967 1095,-82.5853"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1095,-82.5853C1140.14,-74.0669 1150.51,-67.0198 1196,-60.5853 1248.39,-53.1748 1307.71,-49.1804 1354.27,-47.0358"/>
+<polygon fill="#000000" stroke="#000000" points="1354.47,-50.5306 1364.3,-46.593 1354.16,-43.5374 1354.47,-50.5306"/>
+</g>
+<!-- sourcefile~fury_uom_symbol32.f90 -->
+<g id="node7" class="node"><title>sourcefile~fury_uom_symbol32.f90</title>
+<a xlink:href="../sourcefile/fury_uom_symbol32.f90.html" xlink:title="fury_uom_symbol32.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1327,-95.5853 1197,-95.5853 1197,-69.5853 1327,-69.5853 1327,-95.5853"/>
+<text text-anchor="middle" x="1262" y="-80.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_symbol32.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90 -->
+<g id="edge14" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1095,-82.5853C1124.56,-77.007 1157.6,-75.9509 1186.43,-76.6674"/>
+<polygon fill="#000000" stroke="#000000" points="1186.34,-80.166 1196.44,-76.9903 1186.56,-73.1697 1186.34,-80.166"/>
+</g>
+<!-- sourcefile~stringifor_string_t.f90 -->
+<g id="node30" class="node"><title>sourcefile~stringifor_string_t.f90</title>
+<a xlink:href="../sourcefile/stringifor_string_t.f90.html" xlink:title="stringifor_string_t.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="993,-54.5853 877,-54.5853 877,-28.5853 993,-28.5853 993,-54.5853"/>
+<text text-anchor="middle" x="935" y="-39.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor_string_t.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~stringifor_string_t.f90 -->
+<g id="edge48" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~stringifor_string_t.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M553.75,-70.2469C580.567,-59.2712 622.655,-44.5141 661,-41.5853"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M661,-41.5853C730.769,-36.2563 810.823,-37.0513 866.308,-38.6921"/>
+<polygon fill="#000000" stroke="#000000" points="866.27,-42.1925 876.374,-39.007 866.489,-35.1959 866.27,-42.1925"/>
+</g>
+<!-- sourcefile~befor64.f90 -->
+<g id="node31" class="node"><title>sourcefile~befor64.f90</title>
+<a xlink:href="../sourcefile/befor64.f90.html" xlink:title="befor64.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="839,-95.5853 769,-95.5853 769,-69.5853 839,-69.5853 839,-95.5853"/>
+<text text-anchor="middle" x="804" y="-80.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~befor64.f90 -->
+<g id="edge42" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~befor64.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M661,-41.5853C699.175,-38.6695 741.089,-52.8789 769.611,-65.3578"/>
+<polygon fill="#000000" stroke="#000000" points="768.192,-68.5574 778.745,-69.4962 771.081,-62.1813 768.192,-68.5574"/>
+</g>
+<!-- sourcefile~befor64_pack_data_m.f90 -->
+<g id="node32" class="node"><title>sourcefile~befor64_pack_data_m.f90</title>
+<a xlink:href="../sourcefile/befor64_pack_data_m.f90.html" xlink:title="befor64_pack_data_m.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="732,-95.5853 590,-95.5853 590,-69.5853 732,-69.5853 732,-95.5853"/>
+<text text-anchor="middle" x="661" y="-80.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64_pack_data_m.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf.f90&#45;&gt;sourcefile~befor64_pack_data_m.f90 -->
+<g id="edge40" class="edge"><title>sourcefile~penf.f90&#45;&gt;sourcefile~befor64_pack_data_m.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M553.645,-82.5853C561.463,-82.5853 570.392,-82.5853 579.686,-82.5853"/>
+<polygon fill="#000000" stroke="#000000" points="579.879,-86.0854 589.879,-82.5853 579.879,-79.0854 579.879,-86.0854"/>
+</g>
+<!-- sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_qreal32.f90 -->
+<g id="edge58" class="edge"><title>sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_qreal32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1133.28,-28.957C1166.79,-18.8505 1217.02,-5.98204 1262,-3.58531"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1262,-3.58531C1339.22,0.529196 1358.84,1.52806 1436,-3.58531"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1436,-3.58531C1525.09,-9.48921 1548.1,-6.87154 1636,-22.5853 1645.58,-24.2988 1655.68,-26.5699 1665.4,-29.0027"/>
+<polygon fill="#000000" stroke="#000000" points="1664.81,-32.4633 1675.36,-31.5797 1666.56,-25.6864 1664.81,-32.4633"/>
+</g>
+<!-- sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom32.f90 -->
+<g id="edge24" class="edge"><title>sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1436,-3.58531C1474.24,-6.11921 1516.18,-17.9135 1546.62,-28.2056"/>
+<polygon fill="#000000" stroke="#000000" points="1545.49,-31.5169 1556.09,-31.4808 1547.78,-24.902 1545.49,-31.5169"/>
+</g>
+<!-- sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom_reference32.f90 -->
+<g id="edge8" class="edge"><title>sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom_reference32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1262,-3.58531C1308.4,-1.11306 1360.04,-15.5564 1394.92,-27.975"/>
+<polygon fill="#000000" stroke="#000000" points="1394.15,-31.4186 1404.74,-31.5752 1396.56,-24.8465 1394.15,-31.4186"/>
+</g>
+<!-- sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90 -->
+<g id="edge16" class="edge"><title>sourcefile~stringifor.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1133.31,-50.9915C1152.77,-55.7685 1176.91,-61.6955 1199.01,-67.1209"/>
+<polygon fill="#000000" stroke="#000000" points="1198.45,-70.5871 1209,-69.5724 1200.12,-63.789 1198.45,-70.5871"/>
+</g>
+<!-- sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom32.f90 -->
+<g id="edge20" class="edge"><title>sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1262,-123.585C1338.85,-114.972 1359.89,-137.305 1436,-123.585"/>
+</g>
+<!-- sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom_reference32.f90 -->
+<g id="edge4" class="edge"><title>sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom_reference32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1160.22,-126.946C1191.16,-127.683 1228.58,-127.331 1262,-123.585"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1262,-123.585C1317.75,-117.337 1375.77,-84.873 1408.74,-63.5537"/>
+<polygon fill="#000000" stroke="#000000" points="1410.93,-66.2985 1417.35,-57.8671 1407.07,-60.4574 1410.93,-66.2985"/>
+</g>
+<!-- sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90 -->
+<g id="edge12" class="edge"><title>sourcefile~fury_uom_converter.f90&#45;&gt;sourcefile~fury_uom_symbol32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1148.3,-110.5C1164.35,-106.56 1182.11,-102.198 1198.74,-98.116"/>
+<polygon fill="#000000" stroke="#000000" points="1200.04,-101.4 1208.92,-95.6167 1198.37,-94.602 1200.04,-101.4"/>
+</g>
+<!-- sourcefile~fury_uom_reference32.f90&#45;&gt;sourcefile~fury_uom32.f90 -->
+<g id="edge22" class="edge"><title>sourcefile~fury_uom_reference32.f90&#45;&gt;sourcefile~fury_uom32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1507.59,-44.5853C1516.41,-44.5853 1525.33,-44.5853 1533.88,-44.5853"/>
+<polygon fill="#000000" stroke="#000000" points="1534.09,-48.0854 1544.09,-44.5853 1534.09,-41.0854 1534.09,-48.0854"/>
+</g>
+<!-- sourcefile~fury_uom_symbol32.f90&#45;&gt;sourcefile~fury_uom32.f90 -->
+<g id="edge26" class="edge"><title>sourcefile~fury_uom_symbol32.f90&#45;&gt;sourcefile~fury_uom32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1301.22,-95.6731C1344.22,-109.334 1410.5,-128.183 1436,-123.585"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1436,-123.585C1485.04,-114.744 1535.17,-84.2034 1564.4,-63.7887"/>
+<polygon fill="#000000" stroke="#000000" points="1566.67,-66.4706 1572.78,-57.8134 1562.6,-60.7723 1566.67,-66.4706"/>
+</g>
+<!-- sourcefile~fury_uom_symbol32.f90&#45;&gt;sourcefile~fury_uom_reference32.f90 -->
+<g id="edge10" class="edge"><title>sourcefile~fury_uom_symbol32.f90&#45;&gt;sourcefile~fury_uom_reference32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1321.88,-69.5079C1336.18,-66.3855 1351.56,-63.026 1366.26,-59.8161"/>
+<polygon fill="#000000" stroke="#000000" points="1367.28,-63.1756 1376.3,-57.6225 1365.79,-56.3368 1367.28,-63.1756"/>
+</g>
+<!-- sourcefile~penf_b_size.f90 -->
+<g id="node21" class="node"><title>sourcefile~penf_b_size.f90</title>
+<a xlink:href="../sourcefile/penf_b_size.f90.html" xlink:title="penf_b_size.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="328,-75.5853 236,-75.5853 236,-49.5853 328,-49.5853 328,-75.5853"/>
+<text text-anchor="middle" x="282" y="-60.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge34" class="edge"><title>sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M307.365,-75.7873C333.234,-87.9774 374.874,-104.129 413,-103.585"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M413,-103.585C438.492,-103.222 466.685,-97.9904 488.534,-92.8405"/>
+<polygon fill="#000000" stroke="#000000" points="489.523,-96.2017 498.401,-90.4196 487.855,-89.4033 489.523,-96.2017"/>
+</g>
+<!-- sourcefile~penf_stringify.f90 -->
+<g id="node23" class="node"><title>sourcefile~penf_stringify.f90</title>
+<a xlink:href="../sourcefile/penf_stringify.f90.html" xlink:title="penf_stringify.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="462,-75.5853 364,-75.5853 364,-49.5853 462,-49.5853 462,-75.5853"/>
+<text text-anchor="middle" x="413" y="-60.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf_stringify.f90 -->
+<g id="edge30" class="edge"><title>sourcefile~penf_b_size.f90&#45;&gt;sourcefile~penf_stringify.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M328.186,-62.5853C336.355,-62.5853 344.965,-62.5853 353.442,-62.5853"/>
+<polygon fill="#000000" stroke="#000000" points="353.676,-66.0854 363.676,-62.5853 353.676,-59.0854 353.676,-66.0854"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90 -->
+<g id="node22" class="node"><title>sourcefile~penf_global_parameters_variables.f90</title>
+<a xlink:href="../sourcefile/penf_global_parameters_variables.f90.html" xlink:title="penf_global_parameters_variables.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="199,-75.5853 1,-75.5853 1,-49.5853 199,-49.5853 199,-75.5853"/>
+<text text-anchor="middle" x="100" y="-60.1353" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables.F90</text>
+</a>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge36" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.704,-75.6214C222.465,-88.0964 324.226,-104.851 413,-103.585"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_b_size.f90 -->
+<g id="edge28" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_b_size.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M199.52,-62.5853C208.389,-62.5853 217.15,-62.5853 225.46,-62.5853"/>
+<polygon fill="#000000" stroke="#000000" points="225.721,-66.0854 235.721,-62.5853 225.721,-59.0854 225.721,-66.0854"/>
+</g>
+<!-- sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_stringify.f90 -->
+<g id="edge32" class="edge"><title>sourcefile~penf_global_parameters_variables.f90&#45;&gt;sourcefile~penf_stringify.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.638,-49.5703C205.702,-41.2728 270.997,-33.328 328,-40.5853 338.883,-41.9708 350.364,-44.316 361.248,-46.9719"/>
+<polygon fill="#000000" stroke="#000000" points="360.485,-50.3894 371.041,-49.4796 362.221,-43.6082 360.485,-50.3894"/>
+</g>
+<!-- sourcefile~penf_stringify.f90&#45;&gt;sourcefile~penf.f90 -->
+<g id="edge38" class="edge"><title>sourcefile~penf_stringify.f90&#45;&gt;sourcefile~penf.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M462.235,-71.2994C471.03,-72.856 480.063,-74.4549 488.464,-75.9418"/>
+<polygon fill="#000000" stroke="#000000" points="487.882,-79.3931 498.339,-77.6896 489.102,-72.5002 487.882,-79.3931"/>
+</g>
+<!-- sourcefile~stringifor_string_t.f90&#45;&gt;sourcefile~stringifor.f90 -->
+<g id="edge52" class="edge"><title>sourcefile~stringifor_string_t.f90&#45;&gt;sourcefile~stringifor.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M993.67,-41.5853C1011.1,-41.5853 1029.99,-41.5853 1046.68,-41.5853"/>
+<polygon fill="#000000" stroke="#000000" points="1046.76,-45.0854 1056.76,-41.5853 1046.76,-38.0854 1046.76,-45.0854"/>
+</g>
+<!-- sourcefile~befor64.f90&#45;&gt;sourcefile~stringifor_string_t.f90 -->
+<g id="edge46" class="edge"><title>sourcefile~befor64.f90&#45;&gt;sourcefile~stringifor_string_t.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M839.796,-71.3819C853.214,-67.1823 868.743,-62.3224 883.315,-57.7615"/>
+<polygon fill="#000000" stroke="#000000" points="884.715,-60.9908 893.213,-54.6636 882.624,-54.3104 884.715,-60.9908"/>
+</g>
+<!-- sourcefile~befor64_pack_data_m.f90&#45;&gt;sourcefile~befor64.f90 -->
+<g id="edge44" class="edge"><title>sourcefile~befor64_pack_data_m.f90&#45;&gt;sourcefile~befor64.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M732.081,-82.5853C740.953,-82.5853 749.833,-82.5853 758.175,-82.5853"/>
+<polygon fill="#000000" stroke="#000000" points="758.413,-86.0854 768.413,-82.5853 758.413,-79.0854 758.413,-86.0854"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var pansourcefilefury_qreal32f90EfferentGraph = svgPanZoom('#sourcefilefury_qreal32f90EfferentGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="188pt" height="34pt"
+ viewBox="0.00 0.00 188.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 185,-30 185,5 -4,5"/>
+<!-- Source File -->
+<g id="node1" class="node"><title>Source File</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="66,-26 2.84217e-14,-26 0,-1.24345e-14 66,-3.55271e-15 66,-26"/>
+<text text-anchor="middle" x="33" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Source File</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="180,-26 84,-26 84,-1.24345e-14 180,-3.55271e-15 180,-26"/>
+<text text-anchor="middle" x="132" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a file to a file which depends upon it. A file 
+    is dependent upon another if the latter must be compiled before the former
+    can be.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+      
+      <h3>Files Dependent On This One</h3>
+      
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: sourcefile~~fury_qreal32.f90~~AfferentGraph Pages: 1 -->
+<svg id="sourcefilefury_qreal32f90AfferentGraph" width="641pt" height="1333pt"
+ viewBox="0.00 0.00 641.00 1333.08" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="sourcefile~~fury_qreal32.f90~~AfferentGraph" class="graph" transform="scale(0.823907 0.823907) rotate(0) translate(4 1614)">
+<title>sourcefile~~fury_qreal32.f90~~AfferentGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-1614 775,-1614 775,5 -4,5"/>
+<!-- sourcefile~fury_qreal32.f90 -->
+<g id="node1" class="node"><title>sourcefile~fury_qreal32.f90</title>
+<polygon fill="none" stroke="black" points="94,-839 3.55271e-14,-839 -7.10543e-15,-813 94,-813 94,-839"/>
+<text text-anchor="middle" x="47" y="-823.55" font-family="Helvetica,sans-Serif" font-size="10.50">fury_qreal32.F90</text>
+</g>
+<!-- sourcefile~fury_system_si32.f90 -->
+<g id="node2" class="node"><title>sourcefile~fury_system_si32.f90</title>
+<a xlink:href="../sourcefile/fury_system_si32.f90.html" xlink:title="fury_system_si32.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="432,-880 314,-880 314,-854 432,-854 432,-880"/>
+<text text-anchor="middle" x="373" y="-864.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si32.F90</text>
+</a>
+</g>
+<!-- sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_system_si32.f90 -->
+<g id="edge84" class="edge"><title>sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_system_si32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M90.1819,-839.03C102.904,-842.437 116.921,-845.774 130,-848 188.03,-857.876 254.744,-862.629 303.571,-864.91"/>
+<polygon fill="#000000" stroke="#000000" points="303.563,-868.413 313.709,-865.361 303.874,-861.42 303.563,-868.413"/>
+</g>
+<!-- sourcefile~fury_mixed_kinds.f90 -->
+<g id="node3" class="node"><title>sourcefile~fury_mixed_kinds.f90</title>
+<a xlink:href="../sourcefile/fury_mixed_kinds.f90.html" xlink:title="fury_mixed_kinds.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="432,-798 314,-798 314,-772 432,-772 432,-798"/>
+<text text-anchor="middle" x="373" y="-782.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_mixed_kinds.F90</text>
+</a>
+</g>
+<!-- sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_mixed_kinds.f90 -->
+<g id="edge86" class="edge"><title>sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_mixed_kinds.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M204,-744C250.768,-735.475 303.939,-752.947 337.944,-767.662"/>
+<polygon fill="#000000" stroke="#000000" points="336.872,-771.017 347.429,-771.911 339.734,-764.629 336.872,-771.017"/>
+</g>
+<!-- sourcefile~fury_system_abstract32.f90 -->
+<g id="node4" class="node"><title>sourcefile~fury_system_abstract32.f90</title>
+<a xlink:href="../sourcefile/fury_system_abstract32.f90.html" xlink:title="fury_system_abstract32.F90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="278,-839 130,-839 130,-813 278,-813 278,-839"/>
+<text text-anchor="middle" x="204" y="-823.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract32.F90</text>
+</a>
+</g>
+<!-- sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_system_abstract32.f90 -->
+<g id="edge88" class="edge"><title>sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury_system_abstract32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M94.1052,-826C102.308,-826 111.059,-826 119.905,-826"/>
+<polygon fill="#000000" stroke="#000000" points="119.909,-829.5 129.909,-826 119.909,-822.5 119.909,-829.5"/>
+</g>
+<!-- sourcefile~fury.f90 -->
+<g id="node5" class="node"><title>sourcefile~fury.f90</title>
+<a xlink:href="../sourcefile/fury.f90.html" xlink:title="fury.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="522,-818 468,-818 468,-792 522,-792 522,-818"/>
+<text text-anchor="middle" x="495" y="-802.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury.f90 -->
+<g id="edge90" class="edge"><title>sourcefile~fury_qreal32.f90&#45;&gt;sourcefile~fury.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M63.6157,-812.931C90.9656,-792.482 148.033,-754.202 204,-744"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M204,-744C304.036,-725.765 335.987,-729.514 432,-763 446.441,-768.036 460.768,-777.17 472.102,-785.636"/>
+<polygon fill="#000000" stroke="#000000" points="470.1,-788.513 480.138,-791.901 474.404,-782.992 470.1,-788.513"/>
+</g>
+<!-- sourcefile~fury_system_si32.f90&#45;&gt;sourcefile~fury.f90 -->
+<g id="edge2" class="edge"><title>sourcefile~fury_system_si32.f90&#45;&gt;sourcefile~fury.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M402.625,-853.988C412.086,-849.687 422.55,-844.778 432,-840 442.43,-834.727 453.635,-828.642 463.663,-823.04"/>
+<polygon fill="#000000" stroke="#000000" points="465.491,-826.027 472.484,-818.068 462.054,-819.929 465.491,-826.027"/>
+</g>
+<!-- sourcefile~fury_mixed_kinds.f90&#45;&gt;sourcefile~fury.f90 -->
+<g id="edge4" class="edge"><title>sourcefile~fury_mixed_kinds.f90&#45;&gt;sourcefile~fury.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M432.213,-794.707C441.007,-796.149 449.85,-797.598 458.011,-798.936"/>
+<polygon fill="#000000" stroke="#000000" points="457.493,-802.398 467.928,-800.562 458.626,-795.49 457.493,-802.398"/>
+</g>
+<!-- sourcefile~fury_system_abstract32.f90&#45;&gt;sourcefile~fury_system_si32.f90 -->
+<g id="edge8" class="edge"><title>sourcefile~fury_system_abstract32.f90&#45;&gt;sourcefile~fury_system_si32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M257.937,-839.085C274.33,-843.062 292.496,-847.469 309.459,-851.585"/>
+<polygon fill="#000000" stroke="#000000" points="308.742,-855.012 319.285,-853.969 310.392,-848.21 308.742,-855.012"/>
+</g>
+<!-- sourcefile~fury_system_abstract32.f90&#45;&gt;sourcefile~fury.f90 -->
+<g id="edge6" class="edge"><title>sourcefile~fury_system_abstract32.f90&#45;&gt;sourcefile~fury.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M278.185,-820.646C335.553,-816.506 412.573,-810.948 457.691,-807.692"/>
+<polygon fill="#000000" stroke="#000000" points="458.179,-811.166 467.901,-806.956 457.675,-804.185 458.179,-811.166"/>
+</g>
+<!-- sourcefile~fury_test_qreal_assign.f90 -->
+<g id="node10" class="node"><title>sourcefile~fury_test_qreal_assign.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_assign.f90.html" xlink:title="fury_test_qreal_assign.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="733,-1610 595,-1610 595,-1584 733,-1584 733,-1610"/>
+<text text-anchor="middle" x="664" y="-1594.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_assign.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_assign.f90 -->
+<g id="edge10" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_assign.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.145,-818.191C496.33,-915.184 505.755,-1515.9 558,-1575 565.122,-1583.06 574.355,-1588.61 584.401,-1592.38"/>
+<polygon fill="#000000" stroke="#000000" points="583.648,-1595.81 594.238,-1595.47 585.745,-1589.13 583.648,-1595.81"/>
+</g>
+<!-- sourcefile~fury_test_qreal_conversions_complex.f90 -->
+<g id="node11" class="node"><title>sourcefile~fury_test_qreal_conversions_complex.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_conversions_complex.f90.html" xlink:title="fury_test_qreal_conversions_complex.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="769,-1566 559,-1566 559,-1540 769,-1540 769,-1566"/>
+<text text-anchor="middle" x="664" y="-1550.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_complex.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_complex.f90 -->
+<g id="edge12" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_complex.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.211,-818.029C496.838,-911.31 508.688,-1475.49 558,-1531 558.749,-1531.84 559.521,-1532.66 560.315,-1533.45"/>
+<polygon fill="#000000" stroke="#000000" points="558.078,-1536.14 568.002,-1539.85 562.559,-1530.76 558.078,-1536.14"/>
+</g>
+<!-- sourcefile~fury_test_qreal_conversions_si.f90 -->
+<g id="node12" class="node"><title>sourcefile~fury_test_qreal_conversions_si.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_conversions_si.f90.html" xlink:title="fury_test_qreal_conversions_si.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="753,-1522 575,-1522 575,-1496 753,-1496 753,-1522"/>
+<text text-anchor="middle" x="664" y="-1506.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_si.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_si.f90 -->
+<g id="edge14" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_si.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.289,-818.095C497.398,-908.266 511.657,-1435.13 558,-1487 560.453,-1489.75 563.152,-1492.2 566.045,-1494.39"/>
+<polygon fill="#000000" stroke="#000000" points="564.353,-1497.47 574.665,-1499.9 568.12,-1491.57 564.353,-1497.47"/>
+</g>
+<!-- sourcefile~fury_test_qreal_conversions_simple.f90 -->
+<g id="node13" class="node"><title>sourcefile~fury_test_qreal_conversions_simple.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_conversions_simple.f90.html" xlink:title="fury_test_qreal_conversions_simple.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="765,-1478 563,-1478 563,-1452 765,-1452 765,-1478"/>
+<text text-anchor="middle" x="664" y="-1462.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_simple.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_simple.f90 -->
+<g id="edge16" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_conversions_simple.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.376,-818.077C497.987,-904.778 514.607,-1394.73 558,-1443 558.754,-1443.84 559.531,-1444.65 560.329,-1445.43"/>
+<polygon fill="#000000" stroke="#000000" points="558.111,-1448.14 568.051,-1451.81 562.567,-1442.74 558.111,-1448.14"/>
+</g>
+<!-- sourcefile~fury_test_qreal_div.f90 -->
+<g id="node14" class="node"><title>sourcefile~fury_test_qreal_div.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_div.f90.html" xlink:title="fury_test_qreal_div.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="724,-1434 604,-1434 604,-1408 724,-1408 724,-1434"/>
+<text text-anchor="middle" x="664" y="-1418.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_div.f90 -->
+<g id="edge18" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_div.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.482,-818.237C498.648,-901.821 517.581,-1354.37 558,-1399 567.289,-1409.26 580.004,-1415.43 593.404,-1419.03"/>
+<polygon fill="#000000" stroke="#000000" points="592.724,-1422.46 603.244,-1421.21 594.24,-1415.63 592.724,-1422.46"/>
+</g>
+<!-- sourcefile~fury_test_uom_assign.f90 -->
+<g id="node15" class="node"><title>sourcefile~fury_test_uom_assign.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_assign.f90.html" xlink:title="fury_test_uom_assign.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="732,-1390 596,-1390 596,-1364 732,-1364 732,-1390"/>
+<text text-anchor="middle" x="664" y="-1374.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_assign.f90 -->
+<g id="edge20" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_assign.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.59,-818.02C499.302,-897.374 520.489,-1313.93 558,-1355 565.569,-1363.29 575.375,-1368.91 585.963,-1372.65"/>
+<polygon fill="#000000" stroke="#000000" points="585.281,-1376.1 595.864,-1375.58 587.27,-1369.39 585.281,-1376.1"/>
+</g>
+<!-- sourcefile~fury_test_qreal_div_mixed.f90 -->
+<g id="node16" class="node"><title>sourcefile~fury_test_qreal_div_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_div_mixed.f90.html" xlink:title="fury_test_qreal_div_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="742,-1346 586,-1346 586,-1320 742,-1320 742,-1346"/>
+<text text-anchor="middle" x="664" y="-1330.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_div_mixed.f90 -->
+<g id="edge22" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_div_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.75,-818.44C500.137,-894.962 523.489,-1273.58 558,-1311 563.213,-1316.65 569.466,-1321.06 576.294,-1324.47"/>
+<polygon fill="#000000" stroke="#000000" points="575.344,-1327.87 585.918,-1328.54 578.069,-1321.43 575.344,-1327.87"/>
+</g>
+<!-- sourcefile~fury_test_qreal_eq.f90 -->
+<g id="node17" class="node"><title>sourcefile~fury_test_qreal_eq.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_eq.f90.html" xlink:title="fury_test_qreal_eq.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="724,-1302 604,-1302 604,-1276 724,-1276 724,-1302"/>
+<text text-anchor="middle" x="664" y="-1286.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_eq.f90 -->
+<g id="edge24" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_eq.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.899,-818.203C500.919,-890.167 526.381,-1233.12 558,-1267 567.493,-1277.17 580.36,-1283.3 593.856,-1286.88"/>
+<polygon fill="#000000" stroke="#000000" points="593.237,-1290.32 603.755,-1289.05 594.737,-1283.49 593.237,-1290.32"/>
+</g>
+<!-- sourcefile~fury_test_qreal_eq_mixed.f90 -->
+<g id="node18" class="node"><title>sourcefile~fury_test_qreal_eq_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_eq_mixed.f90.html" xlink:title="fury_test_qreal_eq_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="741,-1258 587,-1258 587,-1232 741,-1232 741,-1258"/>
+<text text-anchor="middle" x="664" y="-1242.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_eq_mixed.f90 -->
+<g id="edge26" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_eq_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.102,-818.261C501.858,-886.14 529.309,-1192.68 558,-1223 563.541,-1228.85 570.201,-1233.37 577.449,-1236.82"/>
+<polygon fill="#000000" stroke="#000000" points="576.322,-1240.14 586.905,-1240.65 578.949,-1233.65 576.322,-1240.14"/>
+</g>
+<!-- sourcefile~fury_test_qreal_mul.f90 -->
+<g id="node19" class="node"><title>sourcefile~fury_test_qreal_mul.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_mul.f90.html" xlink:title="fury_test_qreal_mul.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="726,-1214 602,-1214 602,-1188 726,-1188 726,-1214"/>
+<text text-anchor="middle" x="664" y="-1198.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_mul.f90 -->
+<g id="edge28" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_mul.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.298,-818.176C496.933,-878.274 506.733,-1125.76 558,-1179 566.95,-1188.29 578.722,-1194.19 591.159,-1197.83"/>
+<polygon fill="#000000" stroke="#000000" points="590.69,-1201.32 601.235,-1200.3 592.353,-1194.52 590.69,-1201.32"/>
+</g>
+<!-- sourcefile~fury_test_uom_sub.f90 -->
+<g id="node20" class="node"><title>sourcefile~fury_test_uom_sub.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_sub.f90.html" xlink:title="fury_test_uom_sub.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="725,-1170 603,-1170 603,-1144 725,-1144 725,-1170"/>
+<text text-anchor="middle" x="664" y="-1154.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_sub.f90 -->
+<g id="edge30" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_sub.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.616,-818.098C498.498,-873.612 512.486,-1088.75 558,-1135 567.402,-1144.55 579.793,-1150.49 592.777,-1154.09"/>
+<polygon fill="#000000" stroke="#000000" points="592.251,-1157.56 602.782,-1156.4 593.828,-1150.74 592.251,-1157.56"/>
+</g>
+<!-- sourcefile~fury_test_qreal_mul_mixed.f90 -->
+<g id="node21" class="node"><title>sourcefile~fury_test_qreal_mul_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_mul_mixed.f90.html" xlink:title="fury_test_qreal_mul_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="744,-1126 584,-1126 584,-1100 744,-1100 744,-1126"/>
+<text text-anchor="middle" x="664" y="-1110.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_mul_mixed.f90 -->
+<g id="edge32" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_mul_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.027,-818.045C500.283,-868.727 518.213,-1051.69 558,-1091 562.896,-1095.84 568.56,-1099.74 574.672,-1102.88"/>
+<polygon fill="#000000" stroke="#000000" points="573.348,-1106.12 583.911,-1106.95 576.17,-1099.71 573.348,-1106.12"/>
+</g>
+<!-- sourcefile~fury_test_qreal_not_eq.f90 -->
+<g id="node22" class="node"><title>sourcefile~fury_test_qreal_not_eq.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_not_eq.f90.html" xlink:title="fury_test_qreal_not_eq.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="734,-1082 594,-1082 594,-1056 734,-1056 734,-1082"/>
+<text text-anchor="middle" x="664" y="-1066.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_not_eq.f90 -->
+<g id="edge34" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_not_eq.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.605,-818.193C502.433,-863.923 523.948,-1014.61 558,-1047 565.303,-1053.95 574.197,-1058.95 583.696,-1062.51"/>
+<polygon fill="#000000" stroke="#000000" points="582.769,-1065.89 593.36,-1065.62 584.911,-1059.23 582.769,-1065.89"/>
+</g>
+<!-- sourcefile~fury_test_uom_assign_failure.f90 -->
+<g id="node23" class="node"><title>sourcefile~fury_test_uom_assign_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_assign_failure.f90.html" xlink:title="fury_test_uom_assign_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="749,-1038 579,-1038 579,-1012 749,-1012 749,-1038"/>
+<text text-anchor="middle" x="664" y="-1022.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_assign_failure.f90 -->
+<g id="edge36" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_assign_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M497.427,-818.268C505.033,-858.412 529.601,-977.396 558,-1003 561.47,-1006.13 565.266,-1008.86 569.291,-1011.23"/>
+<polygon fill="#000000" stroke="#000000" points="567.934,-1014.47 578.433,-1015.89 571.113,-1008.23 567.934,-1014.47"/>
+</g>
+<!-- sourcefile~fury_test_qreal_not_eq_mixed.f90 -->
+<g id="node24" class="node"><title>sourcefile~fury_test_qreal_not_eq_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_not_eq_mixed.f90.html" xlink:title="fury_test_qreal_not_eq_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="751,-994 577,-994 577,-968 751,-968 751,-994"/>
+<text text-anchor="middle" x="664" y="-978.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_not_eq_mixed.f90 -->
+<g id="edge38" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_not_eq_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.292,-818.131C499.977,-848.114 513.351,-921.882 558,-959 560.918,-961.426 564.034,-963.605 567.3,-965.563"/>
+<polygon fill="#000000" stroke="#000000" points="565.777,-968.716 576.261,-970.243 569.018,-962.511 565.777,-968.716"/>
+</g>
+<!-- sourcefile~fury_test_qreal_pow.f90 -->
+<g id="node25" class="node"><title>sourcefile~fury_test_qreal_pow.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_pow.f90.html" xlink:title="fury_test_qreal_pow.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="727,-950 601,-950 601,-924 727,-924 727,-950"/>
+<text text-anchor="middle" x="664" y="-934.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_pow.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_pow.f90 -->
+<g id="edge40" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_pow.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M498.654,-818.268C505.846,-841.746 524.155,-890.445 558,-915 567.627,-921.985 578.971,-926.86 590.596,-930.243"/>
+<polygon fill="#000000" stroke="#000000" points="589.84,-933.662 600.395,-932.747 591.573,-926.88 589.84,-933.662"/>
+</g>
+<!-- sourcefile~fury_test_qreal_sub.f90 -->
+<g id="node26" class="node"><title>sourcefile~fury_test_qreal_sub.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_sub.f90.html" xlink:title="fury_test_qreal_sub.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="726,-906 602,-906 602,-880 726,-880 726,-906"/>
+<text text-anchor="middle" x="664" y="-890.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub.f90 -->
+<g id="edge42" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M503.773,-818.186C514.634,-833.407 534.592,-858.01 558,-871 568.271,-876.7 579.845,-880.928 591.474,-884.063"/>
+<polygon fill="#000000" stroke="#000000" points="590.682,-887.473 601.227,-886.448 592.345,-880.673 590.682,-887.473"/>
+</g>
+<!-- sourcefile~fury_test_qreal_sub_failure.f90 -->
+<g id="node27" class="node"><title>sourcefile~fury_test_qreal_sub_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_sub_failure.f90.html" xlink:title="fury_test_qreal_sub_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="744,-862 584,-862 584,-836 744,-836 744,-862"/>
+<text text-anchor="middle" x="664" y="-846.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_failure.f90 -->
+<g id="edge44" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M522.042,-815.319C533.088,-819.303 546.054,-823.69 558,-827 566.646,-829.396 575.753,-831.663 584.849,-833.766"/>
+<polygon fill="#000000" stroke="#000000" points="584.167,-837.2 594.691,-835.982 585.705,-830.371 584.167,-837.2"/>
+</g>
+<!-- sourcefile~fury_test_uom_sub_failure.f90 -->
+<g id="node28" class="node"><title>sourcefile~fury_test_uom_sub_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_sub_failure.f90.html" xlink:title="fury_test_uom_sub_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="742,-818 586,-818 586,-792 742,-792 742,-818"/>
+<text text-anchor="middle" x="664" y="-802.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_sub_failure.f90 -->
+<g id="edge46" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_sub_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M522.153,-805C536.852,-805 555.935,-805 575.312,-805"/>
+<polygon fill="#000000" stroke="#000000" points="575.451,-808.5 585.451,-805 575.451,-801.5 575.451,-808.5"/>
+</g>
+<!-- sourcefile~fury_test_qreal_sub_mixed.f90 -->
+<g id="node29" class="node"><title>sourcefile~fury_test_qreal_sub_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_sub_mixed.f90.html" xlink:title="fury_test_qreal_sub_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="744,-774 584,-774 584,-748 744,-748 744,-774"/>
+<text text-anchor="middle" x="664" y="-758.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_mixed.f90 -->
+<g id="edge48" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M522.042,-794.681C533.088,-790.697 546.054,-786.31 558,-783 566.646,-780.604 575.753,-778.337 584.849,-776.234"/>
+<polygon fill="#000000" stroke="#000000" points="585.705,-779.629 594.691,-774.018 584.167,-772.8 585.705,-779.629"/>
+</g>
+<!-- sourcefile~fury_test_qreal_sub_mixed_failure.f90 -->
+<g id="node30" class="node"><title>sourcefile~fury_test_qreal_sub_mixed_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_sub_mixed_failure.f90.html" xlink:title="fury_test_qreal_sub_mixed_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="761,-730 567,-730 567,-704 761,-704 761,-730"/>
+<text text-anchor="middle" x="664" y="-714.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_mixed_failure.f90 -->
+<g id="edge50" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_sub_mixed_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M503.773,-791.814C514.634,-776.593 534.592,-751.99 558,-739 561.46,-737.08 565.068,-735.327 568.776,-733.726"/>
+<polygon fill="#000000" stroke="#000000" points="570.133,-736.954 578.172,-730.053 567.584,-730.434 570.133,-736.954"/>
+</g>
+<!-- sourcefile~fury_test_uom_div.f90 -->
+<g id="node31" class="node"><title>sourcefile~fury_test_uom_div.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_div.f90.html" xlink:title="fury_test_uom_div.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="723,-686 605,-686 605,-660 723,-660 723,-686"/>
+<text text-anchor="middle" x="664" y="-670.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_div.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_div.f90 -->
+<g id="edge52" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_div.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M498.654,-791.732C505.846,-768.254 524.155,-719.555 558,-695 568.789,-687.172 581.736,-681.993 594.817,-678.596"/>
+<polygon fill="#000000" stroke="#000000" points="595.833,-681.954 604.812,-676.331 594.286,-675.127 595.833,-681.954"/>
+</g>
+<!-- sourcefile~fury_test_system_si.f90 -->
+<g id="node32" class="node"><title>sourcefile~fury_test_system_si.f90</title>
+<a xlink:href="../sourcefile/fury_test_system_si.f90.html" xlink:title="fury_test_system_si.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="726,-642 602,-642 602,-616 726,-616 726,-642"/>
+<text text-anchor="middle" x="664" y="-626.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_system_si.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_system_si.f90 -->
+<g id="edge54" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_system_si.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.292,-791.869C499.977,-761.886 513.351,-688.118 558,-651 567.637,-642.989 579.444,-637.658 591.638,-634.155"/>
+<polygon fill="#000000" stroke="#000000" points="592.6,-637.523 601.466,-631.722 590.917,-630.728 592.6,-637.523"/>
+</g>
+<!-- sourcefile~fury_test_uom_add.f90 -->
+<g id="node33" class="node"><title>sourcefile~fury_test_uom_add.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_add.f90.html" xlink:title="fury_test_uom_add.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="725,-598 603,-598 603,-572 725,-572 725,-598"/>
+<text text-anchor="middle" x="664" y="-582.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_add.f90 -->
+<g id="edge56" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_add.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M497.427,-791.732C505.033,-751.588 529.601,-632.604 558,-607 567.678,-598.275 579.888,-592.662 592.549,-589.116"/>
+<polygon fill="#000000" stroke="#000000" points="593.371,-592.518 602.284,-586.789 591.744,-585.709 593.371,-592.518"/>
+</g>
+<!-- sourcefile~fury_test_uom_add_failure.f90 -->
+<g id="node34" class="node"><title>sourcefile~fury_test_uom_add_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_add_failure.f90.html" xlink:title="fury_test_uom_add_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="743,-554 585,-554 585,-528 743,-528 743,-554"/>
+<text text-anchor="middle" x="664" y="-538.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_add_failure.f90 -->
+<g id="edge58" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_add_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.605,-791.807C502.433,-746.077 523.948,-595.389 558,-563 563.124,-558.126 569.031,-554.21 575.381,-551.075"/>
+<polygon fill="#000000" stroke="#000000" points="577.117,-554.141 584.962,-547.02 574.388,-547.695 577.117,-554.141"/>
+</g>
+<!-- sourcefile~fury_test_uom_aliases.f90 -->
+<g id="node35" class="node"><title>sourcefile~fury_test_uom_aliases.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_aliases.f90.html" xlink:title="fury_test_uom_aliases.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="733,-510 595,-510 595,-484 733,-484 733,-510"/>
+<text text-anchor="middle" x="664" y="-494.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_aliases.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_aliases.f90 -->
+<g id="edge60" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_aliases.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.027,-791.955C500.283,-741.273 518.213,-558.305 558,-519 565.549,-511.543 574.923,-506.305 584.951,-502.67"/>
+<polygon fill="#000000" stroke="#000000" points="586.203,-505.946 594.728,-499.655 584.14,-499.257 586.203,-505.946"/>
+</g>
+<!-- sourcefile~fury_test_bolt32.f90 -->
+<g id="node36" class="node"><title>sourcefile~fury_test_bolt32.f90</title>
+<a xlink:href="../sourcefile/fury_test_bolt32.f90.html" xlink:title="fury_test_bolt32.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="717,-466 611,-466 611,-440 717,-440 717,-466"/>
+<text text-anchor="middle" x="664" y="-450.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt32.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_bolt32.f90 -->
+<g id="edge62" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_bolt32.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.616,-791.902C498.498,-736.388 512.486,-521.248 558,-475 569.193,-463.627 584.621,-457.377 600.243,-454.104"/>
+<polygon fill="#000000" stroke="#000000" points="601.224,-457.488 610.495,-452.359 600.049,-450.587 601.224,-457.488"/>
+</g>
+<!-- sourcefile~fury_test_bolt64.f90 -->
+<g id="node37" class="node"><title>sourcefile~fury_test_bolt64.f90</title>
+<a xlink:href="../sourcefile/fury_test_bolt64.f90.html" xlink:title="fury_test_bolt64.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="717,-422 611,-422 611,-396 717,-396 717,-422"/>
+<text text-anchor="middle" x="664" y="-406.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt64.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_bolt64.f90 -->
+<g id="edge64" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_bolt64.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.298,-791.824C496.933,-731.726 506.733,-484.241 558,-431 569.069,-419.505 584.454,-413.215 600.077,-409.942"/>
+<polygon fill="#000000" stroke="#000000" points="601.06,-413.325 610.334,-408.202 599.889,-406.424 601.06,-413.325"/>
+</g>
+<!-- sourcefile~fury_test_qreal_add.f90 -->
+<g id="node38" class="node"><title>sourcefile~fury_test_qreal_add.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_add.f90.html" xlink:title="fury_test_qreal_add.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="727,-378 601,-378 601,-352 727,-352 727,-378"/>
+<text text-anchor="middle" x="664" y="-362.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add.f90 -->
+<g id="edge66" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.102,-791.739C501.858,-723.86 529.309,-417.316 558,-387 566.818,-377.683 578.469,-371.77 590.815,-368.109"/>
+<polygon fill="#000000" stroke="#000000" points="591.958,-371.431 600.825,-365.633 590.277,-364.636 591.958,-371.431"/>
+</g>
+<!-- sourcefile~fury_test_uom_mul.f90 -->
+<g id="node39" class="node"><title>sourcefile~fury_test_uom_mul.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_mul.f90.html" xlink:title="fury_test_uom_mul.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="725,-334 603,-334 603,-308 725,-308 725,-334"/>
+<text text-anchor="middle" x="664" y="-318.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_mul.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_mul.f90 -->
+<g id="edge68" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_mul.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.899,-791.797C500.919,-719.833 526.381,-376.883 558,-343 567.248,-333.09 579.697,-327.018 592.81,-323.407"/>
+<polygon fill="#000000" stroke="#000000" points="593.953,-326.737 602.926,-321.103 592.398,-319.912 593.953,-326.737"/>
+</g>
+<!-- sourcefile~fury_test_qreal_add_aliases_failure.f90 -->
+<g id="node40" class="node"><title>sourcefile~fury_test_qreal_add_aliases_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_add_aliases_failure.f90.html" xlink:title="fury_test_qreal_add_aliases_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="764,-290 564,-290 564,-264 764,-264 764,-290"/>
+<text text-anchor="middle" x="664" y="-274.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_aliases_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_aliases_failure.f90 -->
+<g id="edge70" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_aliases_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.75,-791.56C500.137,-715.038 523.489,-336.417 558,-299 558.765,-298.171 559.552,-297.369 560.359,-296.593"/>
+<polygon fill="#000000" stroke="#000000" points="562.582,-299.297 568.155,-290.287 558.179,-293.854 562.582,-299.297"/>
+</g>
+<!-- sourcefile~fury_test_uom_pow.f90 -->
+<g id="node41" class="node"><title>sourcefile~fury_test_uom_pow.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_pow.f90.html" xlink:title="fury_test_uom_pow.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="726,-246 602,-246 602,-220 726,-220 726,-246"/>
+<text text-anchor="middle" x="664" y="-230.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_pow.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_pow.f90 -->
+<g id="edge72" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_pow.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.59,-791.98C499.302,-712.626 520.489,-296.073 558,-255 566.989,-245.157 579.133,-239.08 591.994,-235.437"/>
+<polygon fill="#000000" stroke="#000000" points="592.993,-238.797 601.928,-233.103 591.393,-231.983 592.993,-238.797"/>
+</g>
+<!-- sourcefile~fury_test_qreal_add_failure.f90 -->
+<g id="node42" class="node"><title>sourcefile~fury_test_qreal_add_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_add_failure.f90.html" xlink:title="fury_test_qreal_add_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="744,-202 584,-202 584,-176 744,-176 744,-202"/>
+<text text-anchor="middle" x="664" y="-186.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_failure.f90 -->
+<g id="edge74" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.482,-791.763C498.648,-708.179 517.581,-255.631 558,-211 562.662,-205.852 568.187,-201.732 574.228,-198.45"/>
+<polygon fill="#000000" stroke="#000000" points="575.792,-201.583 583.409,-194.219 572.862,-195.226 575.792,-201.583"/>
+</g>
+<!-- sourcefile~fury_test_qreal_add_mixed.f90 -->
+<g id="node43" class="node"><title>sourcefile~fury_test_qreal_add_mixed.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_add_mixed.f90.html" xlink:title="fury_test_qreal_add_mixed.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="744,-158 584,-158 584,-132 744,-132 744,-158"/>
+<text text-anchor="middle" x="664" y="-142.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_mixed.f90 -->
+<g id="edge76" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_mixed.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.376,-791.923C497.987,-705.222 514.607,-215.265 558,-167 562.728,-161.741 568.356,-157.553 574.517,-154.234"/>
+<polygon fill="#000000" stroke="#000000" points="576.231,-157.299 583.883,-149.971 573.331,-150.929 576.231,-157.299"/>
+</g>
+<!-- sourcefile~fury_test_uom_parse_failure.f90 -->
+<g id="node44" class="node"><title>sourcefile~fury_test_uom_parse_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_uom_parse_failure.f90.html" xlink:title="fury_test_uom_parse_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="747,-114 581,-114 581,-88 747,-88 747,-114"/>
+<text text-anchor="middle" x="664" y="-98.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_parse_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_parse_failure.f90 -->
+<g id="edge78" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_uom_parse_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.289,-791.905C497.398,-701.734 511.657,-174.875 558,-123 561.874,-118.664 566.36,-115.054 571.253,-112.059"/>
+<polygon fill="#000000" stroke="#000000" points="573.176,-115.005 580.456,-107.307 569.964,-108.785 573.176,-115.005"/>
+</g>
+<!-- sourcefile~fury_test_qreal_add_mixed_failure.f90 -->
+<g id="node45" class="node"><title>sourcefile~fury_test_qreal_add_mixed_failure.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_add_mixed_failure.f90.html" xlink:title="fury_test_qreal_add_mixed_failure.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="762,-70 566,-70 566,-44 762,-44 762,-70"/>
+<text text-anchor="middle" x="664" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed_failure.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_mixed_failure.f90 -->
+<g id="edge80" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_add_mixed_failure.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.211,-791.971C496.838,-698.69 508.688,-134.508 558,-79 558.749,-78.1569 559.521,-77.3413 560.315,-76.5523"/>
+<polygon fill="#000000" stroke="#000000" points="562.559,-79.2377 568.002,-70.1474 558.078,-73.8599 562.559,-79.2377"/>
+</g>
+<!-- sourcefile~fury_test_qreal_aliases.f90 -->
+<g id="node46" class="node"><title>sourcefile~fury_test_qreal_aliases.f90</title>
+<a xlink:href="../sourcefile/fury_test_qreal_aliases.f90.html" xlink:title="fury_test_qreal_aliases.f90">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="734,-26 594,-26 594,-1.24345e-14 734,-3.55271e-15 734,-26"/>
+<text text-anchor="middle" x="664" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_aliases.f90</text>
+</a>
+</g>
+<!-- sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_aliases.f90 -->
+<g id="edge82" class="edge"><title>sourcefile~fury.f90&#45;&gt;sourcefile~fury_test_qreal_aliases.f90</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M495.145,-791.809C496.33,-694.816 505.755,-94.1021 558,-35 564.981,-27.1032 573.989,-21.6104 583.803,-17.8473"/>
+<polygon fill="#000000" stroke="#000000" points="584.974,-21.147 593.418,-14.7474 582.827,-14.4847 584.974,-21.147"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var pansourcefilefury_qreal32f90AfferentGraph = svgPanZoom('#sourcefilefury_qreal32f90AfferentGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="188pt" height="34pt"
+ viewBox="0.00 0.00 188.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 185,-30 185,5 -4,5"/>
+<!-- Source File -->
+<g id="node1" class="node"><title>Source File</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="66,-26 2.84217e-14,-26 0,-1.24345e-14 66,-3.55271e-15 66,-26"/>
+<text text-anchor="middle" x="33" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Source File</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="180,-26 84,-26 84,-1.24345e-14 180,-3.55271e-15 180,-26"/>
+<text text-anchor="middle" x="132" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a file to a file which depends upon it. A file 
+    is dependent upon another if the latter must be compiled before the former
+    can be.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+      
+      <br>
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#mods-1">Modules</a></h3></div>
+  <div id="mods-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/fury_qreal32.f90.html#src">fury_qreal32.F90</a>
+  </div>
+</div>
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    <section>
+      <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="c">!&lt; FURY class definition of real (with float32 kind) quantity with associated unit of measure.</span>
+<a name="ln-2"></a><span class="k">module </span><span class="n">fury_qreal32</span>
+<a name="ln-3"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-4"></a><span class="c">!&lt; FURY class definition of real (with float32 kind) quantity with associated unit of measure.</span>
+<a name="ln-5"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-6"></a><span class="k">use</span><span class="p">,</span> <span class="k">intrinsic</span> <span class="kd">::</span> <span class="n">iso_fortran_env</span><span class="p">,</span> <span class="n">only</span> <span class="p">:</span> <span class="n">stderr</span> <span class="o">=&gt;</span> <span class="n">error_unit</span>
+<a name="ln-7"></a><span class="k">use </span><span class="n">fury_uom32</span>
+<a name="ln-8"></a><span class="k">use </span><span class="n">penf</span><span class="p">,</span> <span class="n">RKP</span> <span class="o">=&gt;</span> <span class="n">R4P</span>
+<a name="ln-9"></a><span class="k">use </span><span class="n">stringifor</span>
+<a name="ln-10"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-11"></a>
+<a name="ln-12"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-13"></a><span class="cp">#include &quot;fury_qreal.inc&quot;</span>
+<a name="ln-14"></a><span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="ln-15"></a><span class="n">endmodule</span> <span class="n">fury_qreal32</span>
+</pre></div>
+
+    </section>
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allfiles-1">All Source Files</a></h3></div>
+  <div id="allfiles-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../sourcefile/assignments.f90.html">assignments.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/basename_dir.f90.html">basename_dir.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64.f90.html">befor64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64.f90%7E2.html">befor64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64_pack_data_m.f90.html">befor64_pack_data_m.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/befor64_pack_data_m.f90%7E2.html">befor64_pack_data_m.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/camelcase.f90.html">camelcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/capitalize.f90.html">capitalize.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90%7E2.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/compact_real.f90%7E3.html">compact_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/concatenation.f90.html">concatenation.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/csv_naive_parser.f90.html">csv_naive_parser.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/decode.f90.html">decode.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/encode.f90.html">encode.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/equal.f90.html">equal.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/escape.f90.html">escape.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/extension.f90.html">extension.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fill.f90.html">fill.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/free.f90.html">free.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury.f90.html">fury.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_mixed_kinds.f90.html">fury_mixed_kinds.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal128.f90.html">fury_qreal128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal32.f90.html">fury_qreal32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_qreal64.f90.html">fury_qreal64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract128.f90.html">fury_system_abstract128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract32.f90.html">fury_system_abstract32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_abstract64.f90.html">fury_system_abstract64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si128.f90.html">fury_system_si128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si32.f90.html">fury_system_si32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_system_si64.f90.html">fury_system_si64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_bolt32.f90.html">fury_test_bolt32.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_bolt64.f90.html">fury_test_bolt64.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add.f90.html">fury_test_qreal_add.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_aliases_failure.f90.html">fury_test_qreal_add_aliases_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_failure.f90.html">fury_test_qreal_add_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_mixed.f90.html">fury_test_qreal_add_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_add_mixed_failure.f90.html">fury_test_qreal_add_mixed_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_aliases.f90.html">fury_test_qreal_aliases.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_assign.f90.html">fury_test_qreal_assign.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_complex.f90.html">fury_test_qreal_conversions_complex.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_si.f90.html">fury_test_qreal_conversions_si.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_conversions_simple.f90.html">fury_test_qreal_conversions_simple.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_div.f90.html">fury_test_qreal_div.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_div_mixed.f90.html">fury_test_qreal_div_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_eq.f90.html">fury_test_qreal_eq.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_eq_mixed.f90.html">fury_test_qreal_eq_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_mul.f90.html">fury_test_qreal_mul.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_mul_mixed.f90.html">fury_test_qreal_mul_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_not_eq.f90.html">fury_test_qreal_not_eq.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_not_eq_mixed.f90.html">fury_test_qreal_not_eq_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_pow.f90.html">fury_test_qreal_pow.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub.f90.html">fury_test_qreal_sub.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_failure.f90.html">fury_test_qreal_sub_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_mixed.f90.html">fury_test_qreal_sub_mixed.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_qreal_sub_mixed_failure.f90.html">fury_test_qreal_sub_mixed_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_system_si.f90.html">fury_test_system_si.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_add.f90.html">fury_test_uom_add.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_add_failure.f90.html">fury_test_uom_add_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_aliases.f90.html">fury_test_uom_aliases.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_assign.f90.html">fury_test_uom_assign.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_assign_failure.f90.html">fury_test_uom_assign_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_div.f90.html">fury_test_uom_div.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_mul.f90.html">fury_test_uom_mul.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_parse_failure.f90.html">fury_test_uom_parse_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_pow.f90.html">fury_test_uom_pow.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_sub.f90.html">fury_test_uom_sub.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_test_uom_sub_failure.f90.html">fury_test_uom_sub_failure.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom128.f90.html">fury_uom128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom32.f90.html">fury_uom32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom64.f90.html">fury_uom64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_converter.f90.html">fury_uom_converter.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference128.f90.html">fury_uom_reference128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference32.f90.html">fury_uom_reference32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_reference64.f90.html">fury_uom_reference64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol128.f90.html">fury_uom_symbol128.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol32.f90.html">fury_uom_symbol32.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/fury_uom_symbol64.f90.html">fury_uom_symbol64.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/greater_equal_than.f90.html">greater_equal_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/greater_than.f90.html">greater_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/insert.f90.html">insert.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/io_basic.f90.html">io_basic.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/io_listdirected.f90.html">io_listdirected.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_digit.f90.html">is_digit.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_integer.f90.html">is_integer.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_number.f90.html">is_number.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/is_real.f90.html">is_real.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/join.f90.html">join.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/lower_equal_than.f90.html">lower_equal_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/lower_than.f90.html">lower_than.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/not_equal.f90.html">not_equal.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/partition.f90.html">partition.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E2.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E3.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E4.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf.f90%7E5.html">penf.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_b_size.f90.html">penf_b_size.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_global_parameters_variables.f90.html">penf_global_parameters_variables.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/penf_stringify.f90.html">penf_stringify.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_file.f90.html">read_file.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_line.f90.html">read_line.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/read_lines.f90.html">read_lines.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/replace.f90.html">replace.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/reverse.f90.html">reverse.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sadjustlr.f90.html">sadjustlr.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/scount.f90.html">scount.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/search.f90.html">search.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sindex.f90.html">sindex.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/slen.f90.html">slen.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/slice.f90.html">slice.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/snakecase.f90.html">snakecase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/split.f90.html">split.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/srepeat.f90.html">srepeat.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sscan.f90.html">sscan.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/start_end.f90.html">start_end.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/startcase.f90.html">startcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/strim.f90.html">strim.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/stringifor.f90.html">stringifor.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/stringifor_string_t.f90.html">stringifor_string_t.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/strip.f90.html">strip.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/sverify.f90.html">sverify.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/swapcase.f90.html">swapcase.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.F90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90.html">test_all.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_all.f90%7E2.html">test_all.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/test_driver.f90.html">Test_Driver.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/to_number.f90.html">to_number.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/unescape.f90.html">unescape.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/unique.f90.html">unique.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/upper_lower.f90.html">upper_lower.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/write_file.f90.html">write_file.f90</a>
+      
+      <a class="list-group-item" href="../sourcefile/write_lines.f90.html">write_lines.f90</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

@@ -1,0 +1,8375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>qreal &ndash; FURY </title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>qreal
+    <small>Derived Type</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title="<p> 7.5% of total for derived types.</p>Including implementation: 760 statements,  6.3% of total for derived types.">58 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_qreal128.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/fury_qreal128.f90.html'>fury_qreal128.F90</a></li>
+  
+     <li><a href='../module/fury_qreal128.html'>fury_qreal128</a></li>
+  
+     <li class="active">qreal</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-magnitude">magnitude</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-unit">unit</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-name">name</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#cons-0">Constructor</a></h3></div>
+  <div id="cons-0" class="panel-collapse collapse">
+    <div class="list-group">
+      <a class="list-group-item" href="../type/qreal.html#interface-qreal">qreal</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#boundprocs-0">Type-Bound Procedures</a></h3></div>
+  <div id="boundprocs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-allocate_unit">allocate_unit</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-has_name">has_name</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_unit_defined">is_unit_defined</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-set">set</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-stringify">stringify</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-to">to</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-unset">unset</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-assignment%28%3D%29">assignment(=)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2A%29">operator(*)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28-%29">operator(-)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2A%2A%29">operator(**)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%3D%3D%29">operator(==)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28SLASH%3D%29">operator(/=)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_equal">is_equal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_not_equal">is_not_equal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-assign_qreal">assign_qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-add">add</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-positive">positive</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div">div</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r16p">div_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r8p">div_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r4p">div_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i8p">div_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i4p">div_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i2p">div_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i1p">div_I1P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul">mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r16p">mul_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r8p">mul_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r4p">mul_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i8p">mul_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i4p">mul_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i2p">mul_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i1p">mul_I1P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r16p_mul">R16P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r8p_mul">R8P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r4p_mul">R4P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i8p_mul">I8P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i4p_mul">I4P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i2p_mul">I2P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i1p_mul">I1P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-sub">sub</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-negative">negative</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r16p">pow_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r8p">pow_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r4p">pow_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i8p">pow_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i4p">pow_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i2p">pow_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i1p">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#alltypes-0">All Derived Types</a></h3></div>
+  <div id="alltypes-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/dbm_to_mw.html">dBm_to_mW</a>
+      
+      <a class="list-group-item" href="../type/qreal.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E2.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E3.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/string.html">string</a>
+      
+      <a class="list-group-item" href="../type/system_abstract.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E2.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E3.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_si.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E2.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E3.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/uom.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E2.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E3.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom_converter.html">uom_converter</a>
+      
+      <a class="list-group-item" href="../type/uom_reference.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E2.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E3.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E2.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E3.html">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+      <h2>type, public :: qreal</h2>
+    
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: type~~qreal~~InheritsGraph Pages: 1 -->
+<svg id="typeqrealInheritsGraph" width="641pt" height="70pt"
+ viewBox="0.00 0.00 641.00 70.03" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="type~~qreal~~InheritsGraph" class="graph" transform="scale(0.897759 0.897759) rotate(0) translate(4 74)">
+<title>type~~qreal~~InheritsGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-74 711,-74 711,5 -4,5"/>
+<!-- type~qreal -->
+<g id="node1" class="node"><title>type~qreal</title>
+<polygon fill="none" stroke="black" points="706,-48 652,-48 652,-22 706,-22 706,-48"/>
+<text text-anchor="middle" x="679" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50">qreal</text>
+</g>
+<!-- type~uom -->
+<g id="node2" class="node"><title>type~uom</title>
+<a xlink:href="../type/uom.html" xlink:title="uom">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="600,-48 546,-48 546,-22 600,-22 600,-48"/>
+<text text-anchor="middle" x="573" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom</text>
+</a>
+</g>
+<!-- type~uom&#45;&gt;type~qreal -->
+<g id="edge10" class="edge"><title>type~uom&#45;&gt;type~qreal</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600.023,-35C612.633,-35 627.851,-35 641.548,-35"/>
+<polygon fill="#000000" stroke="#000000" points="641.658,-38.5001 651.658,-35 641.658,-31.5001 641.658,-38.5001"/>
+<text text-anchor="middle" x="626" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">unit</text>
+</g>
+<!-- type~uom_reference -->
+<g id="node3" class="node"><title>type~uom_reference</title>
+<a xlink:href="../type/uom_reference.html" xlink:title="uom_reference">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="439,-48 355,-48 355,-22 439,-22 439,-48"/>
+<text text-anchor="middle" x="397" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_reference</text>
+</a>
+</g>
+<!-- type~uom_reference&#45;&gt;type~uom -->
+<g id="edge8" class="edge"><title>type~uom_reference&#45;&gt;type~uom</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M439.605,-35C468.923,-35 507.498,-35 535.621,-35"/>
+<polygon fill="#000000" stroke="#000000" points="535.847,-38.5001 545.847,-35 535.847,-31.5001 535.847,-38.5001"/>
+<text text-anchor="middle" x="493" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">alias, references</text>
+</g>
+<!-- type~uom_symbol -->
+<g id="node4" class="node"><title>type~uom_symbol</title>
+<a xlink:href="../type/uom_symbol.html" xlink:title="uom_symbol">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="233,-48 161,-48 161,-22 233,-22 233,-48"/>
+<text text-anchor="middle" x="197" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_symbol</text>
+</a>
+</g>
+<!-- type~uom_symbol&#45;&gt;type~uom_reference -->
+<g id="edge6" class="edge"><title>type~uom_symbol&#45;&gt;type~uom_reference</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M233.683,-35C264.68,-35 309.465,-35 344.3,-35"/>
+<polygon fill="#000000" stroke="#000000" points="344.302,-38.5001 354.302,-35 344.302,-31.5001 344.302,-38.5001"/>
+<text text-anchor="middle" x="294" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">aliases, dimensions</text>
+</g>
+<!-- type~uom_converter -->
+<g id="node5" class="node"><title>type~uom_converter</title>
+<a xlink:href="../type/uom_converter.html" xlink:title="uom_converter">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="85,-70 1,-70 1,-44 85,-44 85,-70"/>
+<text text-anchor="middle" x="43" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_converter</text>
+</a>
+</g>
+<!-- type~uom_converter&#45;&gt;type~uom_symbol -->
+<g id="edge2" class="edge"><title>type~uom_converter&#45;&gt;type~uom_symbol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M85.8976,-50.8718C105.921,-48.0112 129.801,-44.5999 150.281,-41.6742"/>
+<polygon fill="#000000" stroke="#000000" points="150.93,-45.117 160.335,-40.2379 149.94,-38.1874 150.93,-45.117"/>
+<text text-anchor="middle" x="123" y="-51.45" font-family="Helvetica,sans-Serif" font-size="9.50">convert_</text>
+</g>
+<!-- type~string -->
+<g id="node6" class="node"><title>type~string</title>
+<a xlink:href="../type/string.html" xlink:title="string">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="70,-26 16,-26 16,-1.24345e-14 70,-3.55271e-15 70,-26"/>
+<text text-anchor="middle" x="43" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">string</text>
+</a>
+</g>
+<!-- type~string&#45;&gt;type~uom_symbol -->
+<g id="edge4" class="edge"><title>type~string&#45;&gt;type~uom_symbol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M70.3459,-16.3548C90.2422,-18.8532 117.819,-22.4348 142,-26 144.689,-26.3965 147.45,-26.8143 150.236,-27.2441"/>
+<polygon fill="#000000" stroke="#000000" points="149.917,-30.737 160.34,-28.8355 151.006,-23.8222 149.917,-30.737"/>
+<text text-anchor="middle" x="123" y="-30.45" font-family="Helvetica,sans-Serif" font-size="9.50">symbol_</text>
+</g>
+</g>
+</svg>
+</div>
+                <script>var pantypeqrealInheritsGraph = svgPanZoom('#typeqrealInheritsGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="176pt" height="34pt"
+ viewBox="0.00 0.00 176.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 173,-30 173,5 -4,5"/>
+<!-- Type -->
+<g id="node1" class="node"><title>Type</title>
+<polygon fill="#5cb85c" stroke="#5cb85c" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="168,-26 72,-26 72,-1.24345e-14 168,-3.55271e-15 168,-26"/>
+<text text-anchor="middle" x="120" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from one derived type to another which extends
+    (inherits from) it. Dashed arrows point from a derived type to another
+    type containing it as a components, with a label listing the name(s) of
+    said component(s).
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    <br><br>
+    
+    <p>Real quantity with associated unit of measure.</p>
+    
+    
+    <h3>Inherited By</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: type~~qreal~~InheritedByGraph Pages: 1 -->
+<svg id="typeqrealInheritedByGraph" width="330pt" height="78pt"
+ viewBox="0.00 0.00 330.00 78.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="type~~qreal~~InheritedByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 74)">
+<title>type~~qreal~~InheritedByGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-74 327,-74 327,5 -4,5"/>
+<!-- type~qreal -->
+<g id="node1" class="node"><title>type~qreal</title>
+<polygon fill="none" stroke="black" points="54,-45 2.13163e-14,-45 0,-19 54,-19 54,-45"/>
+<text text-anchor="middle" x="27" y="-29.55" font-family="Helvetica,sans-Serif" font-size="10.50">qreal</text>
+</g>
+<!-- type~system_abstract -->
+<g id="node2" class="node"><title>type~system_abstract</title>
+<a xlink:href="../type/system_abstract.html" xlink:title="system_abstract">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="223,-70 133,-70 133,-44 223,-44 223,-70"/>
+<text text-anchor="middle" x="178" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">system_abstract</text>
+</a>
+</g>
+<!-- type~qreal&#45;&gt;type~system_abstract -->
+<g id="edge4" class="edge"><title>type~qreal&#45;&gt;type~system_abstract</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M54.345,-36.5273C73.2974,-39.6651 99.1979,-43.9533 122.399,-47.7945"/>
+<polygon fill="#000000" stroke="#000000" points="122.053,-51.2848 132.49,-49.4653 123.196,-44.3788 122.053,-51.2848"/>
+<text text-anchor="middle" x="93" y="-49.45" font-family="Helvetica,sans-Serif" font-size="9.50">constants</text>
+</g>
+<!-- type~system_si -->
+<g id="node3" class="node"><title>type~system_si</title>
+<a xlink:href="../type/system_si.html" xlink:title="system_si">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="322,-26 262,-26 262,-1.24345e-14 322,-3.55271e-15 322,-26"/>
+<text text-anchor="middle" x="292" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">system_si</text>
+</a>
+</g>
+<!-- type~qreal&#45;&gt;type~system_si -->
+<g id="edge6" class="edge"><title>type~qreal&#45;&gt;type~system_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M54.1848,-29.3053C75.3778,-27.2301 105.551,-24.3316 132,-22 181.304,-17.6536 194.162,-21.0408 243,-13"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M243,-13C245.817,-12.4477 248.744,-12.0411 251.701,-11.7513"/>
+<polygon fill="#000000" stroke="#000000" points="251.98,-15.2411 261.763,-11.1741 251.579,-8.2526 251.98,-15.2411"/>
+<text text-anchor="middle" x="178" y="-26.45" font-family="Helvetica,sans-Serif" font-size="9.50">constants</text>
+</g>
+<!-- type~system_abstract&#45;&gt;type~system_si -->
+<g id="edge2" class="edge"><title>type~system_abstract&#45;&gt;type~system_si</title>
+<path fill="none" stroke="#000000" d="M202.449,-43.8613C209.583,-39.7077 217.267,-34.9123 224,-30 233.154,-23.3212 231.819,-14.8408 243,-13"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="176pt" height="34pt"
+ viewBox="0.00 0.00 176.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 173,-30 173,5 -4,5"/>
+<!-- Type -->
+<g id="node1" class="node"><title>Type</title>
+<polygon fill="#5cb85c" stroke="#5cb85c" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="168,-26 72,-26 72,-1.24345e-14 168,-3.55271e-15 168,-26"/>
+<text text-anchor="middle" x="120" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from one derived type to another which extends
+    (inherits from) it. Dashed arrows point from a derived type to another
+    type containing it as a components, with a label listing the name(s) of
+    said component(s).
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-magnitude">magnitude</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-unit">unit</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#variable-name">name</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#cons-1">Constructor</a></h3></div>
+  <div id="cons-1" class="panel-collapse collapse">
+    <div class="list-group">
+      <a class="list-group-item" href="../type/qreal.html#interface-qreal">qreal</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#boundprocs-1">Type-Bound Procedures</a></h3></div>
+  <div id="boundprocs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-allocate_unit">allocate_unit</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-has_name">has_name</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_unit_defined">is_unit_defined</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-set">set</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-stringify">stringify</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-to">to</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-unset">unset</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-assignment%28%3D%29">assignment(=)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2B%29">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28SLASH%29">operator(/)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2A%29">operator(*)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28-%29">operator(-)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%2A%2A%29">operator(**)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28%3D%3D%29">operator(==)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-operator%28SLASH%3D%29">operator(/=)</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_equal">is_equal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-is_not_equal">is_not_equal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-assign_qreal">assign_qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-add">add</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-positive">positive</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div">div</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r16p">div_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r8p">div_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_r4p">div_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i8p">div_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i4p">div_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i2p">div_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-div_i1p">div_I1P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul">mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r16p">mul_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r8p">mul_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_r4p">mul_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i8p">mul_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i4p">mul_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i2p">mul_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-mul_i1p">mul_I1P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r16p_mul">R16P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r8p_mul">R8P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-r4p_mul">R4P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i8p_mul">I8P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i4p_mul">I4P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i2p_mul">I2P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-i1p_mul">I1P_mul</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-sub">sub</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-negative">negative</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r16p">pow_R16P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r8p">pow_R8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_r4p">pow_R4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i8p">pow_I8P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i4p">pow_I4P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i2p">pow_I2P</a>
+      
+      <a class="list-group-item" href="../type/qreal.html#boundprocedure-pow_i1p">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    
+    <section>
+    <h2>Components</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-magnitude"></span>real(kind=RKP),</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td> =</td><td>0._RKP</td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-unit"></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  
+  <td>public,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>unit</strong></td><td></td><td></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-name"></span>character(len=:),</td>
+  
+  <td>public,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>name</strong></td><td></td><td></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+	 <section>
+	 <h2>Constructor</h2>
+	   
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-qreal"></span><h3>public interface <a href='../interface/qreal.html'>qreal</a>
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Ovearloading <a href="../interface/qreal.html">qreal</a> name with a creator function.</p>
+  </div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/creator.html'>creator</a>(magnitude, unit, name) result(quantity)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Create an instance of qreal quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>The quantity.</p>
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+	   
+	 </section>
+	 <br>
+    
+    
+    
+    
+     
+    <section>
+    <h2>Type-Bound Procedures</h2>
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-allocate_unit"></span><h3>procedure, public, pass(self) :: <strong>allocate_unit</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Allocate unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental subroutine <a href='../proc/allocate_unit.html'>allocate_unit</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>allocate_unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-has_name"></span><h3>procedure, public, pass(self) :: <strong>has_name</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the quantity has defined name.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/has_name.html'>has_name</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the quantity has defined name.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-is_unit_defined"></span><h3>procedure, public, pass(self) :: <strong>is_unit_defined</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the unit has been defined.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/is_unit_defined.html'>is_unit_defined</a>(self) result(is_defined)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the unit has been defined.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Unit definition status.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set"></span><h3>procedure, public, pass(self) :: <strong>set</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Set quantity.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/set.html'>set</a>(self, magnitude, unit, name)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Set quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-stringify"></span><h3>procedure, public, pass(self) :: <strong>stringify</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return a string representation of the quantity with unit symbol.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/stringify.html'>stringify</a>(self, format, with_dimensions, with_aliases, with_name, compact_reals) result(raw)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return a string representation of the quantity with unit symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>format</strong></td><td><p>Format to string magnitude.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_dimensions</strong></td><td><p>Flag to activate dimensions printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_aliases</strong></td><td><p>Flag to activate aliases printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_name</strong></td><td><p>Flag to activate name printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>compact_reals</strong></td><td><p>Flag to activate real numbers compacting.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  <p>Raw characters data.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-to"></span><h3>procedure, public, pass(self) :: <strong>to</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Convert quantity with respect another unit if its unit has a conversion alias.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/to.html'>to</a>(self, unit) result(converted)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Convert quantity with respect another unit if its unit has a conversion alias.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of conversion.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Quantity converted.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-unset"></span><h3>procedure, public, pass(self) :: <strong>unset</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Unset quantity.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental subroutine <a href='../proc/unset.html'>unset</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Unset quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-assignment%28%3D%29"></span><h3>generic, public :: <strong>assignment(=)</strong>  => <a href='../type/qreal.html#boundprocedure-assign_qreal'>assign_qreal</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>=</code> assignment.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private subroutine <a href='../proc/assign_qreal.html'>assign_qreal</a>(lhs, rhs)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal = qreal</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2B%29"></span><h3>generic, public :: <strong>operator(+)</strong>  => <a href='../type/qreal.html#boundprocedure-add'>add</a>, <a href='../type/qreal.html#boundprocedure-positive'>positive</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>+</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/add.html'>add</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal + qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/positive.html'>positive</a>(self) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>+ qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28SLASH%29"></span><h3>generic, public :: <strong>operator(/)</strong>  => <a href='../type/qreal.html#boundprocedure-div'>div</a>, <a href='../type/qreal.html#boundprocedure-div_r8p'>div_R8P</a>, <a href='../type/qreal.html#boundprocedure-div_r4p'>div_R4P</a>, <a href='../type/qreal.html#boundprocedure-div_i8p'>div_I8P</a>, <a href='../type/qreal.html#boundprocedure-div_i4p'>div_I4P</a>, <a href='../type/qreal.html#boundprocedure-div_i2p'>div_I2P</a>, <a href='../type/qreal.html#boundprocedure-div_i1p'>div_I1P</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>/</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_r8p.html'>div_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_r4p.html'>div_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_i8p.html'>div_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_i4p.html'>div_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_i2p.html'>div_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div_i1p.html'>div_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%29"></span><h3>generic, public :: <strong>operator(*)</strong>  => <a href='../type/qreal.html#boundprocedure-mul'>mul</a>, <a href='../type/qreal.html#boundprocedure-mul_r8p'>mul_R8P</a>, <a href='../type/qreal.html#boundprocedure-mul_r4p'>mul_R4P</a>, <a href='../type/qreal.html#boundprocedure-mul_i8p'>mul_I8P</a>, <a href='../type/qreal.html#boundprocedure-mul_i4p'>mul_I4P</a>, <a href='../type/qreal.html#boundprocedure-mul_i2p'>mul_I2P</a>, <a href='../type/qreal.html#boundprocedure-mul_i1p'>mul_I1P</a>, <a href='../type/qreal.html#boundprocedure-r8p_mul'>R8P_mul</a>, <a href='../type/qreal.html#boundprocedure-r4p_mul'>R4P_mul</a>, <a href='../type/qreal.html#boundprocedure-i8p_mul'>I8P_mul</a>, <a href='../type/qreal.html#boundprocedure-i4p_mul'>I4P_mul</a>, <a href='../type/qreal.html#boundprocedure-i2p_mul'>I2P_mul</a>, <a href='../type/qreal.html#boundprocedure-i1p_mul'>I1P_mul</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>*</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_r8p.html'>mul_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_r4p.html'>mul_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_i8p.html'>mul_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_i4p.html'>mul_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_i2p.html'>mul_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul_i1p.html'>mul_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/r8p_mul.html'>R8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/r4p_mul.html'>R4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/i8p_mul.html'>I8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/i4p_mul.html'>I4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/i2p_mul.html'>I2P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I2P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/i1p_mul.html'>I1P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I1P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28-%29"></span><h3>generic, public :: <strong>operator(-)</strong>  => <a href='../type/qreal.html#boundprocedure-sub'>sub</a>, <a href='../type/qreal.html#boundprocedure-negative'>negative</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>-</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/sub.html'>sub</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal - qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/negative.html'>negative</a>(self) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>- qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%2A%29"></span><h3>generic, public :: <strong>operator(**)</strong>  => <a href='../type/qreal.html#boundprocedure-pow_r8p'>pow_R8P</a>, <a href='../type/qreal.html#boundprocedure-pow_r4p'>pow_R4P</a>, <a href='../type/qreal.html#boundprocedure-pow_i8p'>pow_I8P</a>, <a href='../type/qreal.html#boundprocedure-pow_i4p'>pow_I4P</a>, <a href='../type/qreal.html#boundprocedure-pow_i2p'>pow_I2P</a>, <a href='../type/qreal.html#boundprocedure-pow_i1p'>pow_I1P</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>**</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_r8p.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_r4p.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i8p.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i4p.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i2p.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i1p.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%3D%3D%29"></span><h3>generic, public :: <strong>operator(==)</strong>  => <a href='../type/qreal.html#boundprocedure-is_equal'>is_equal</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>==</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function <a href='../proc/is_equal.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if qreal is equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28SLASH%3D%29"></span><h3>generic, public :: <strong>operator(/=)</strong>  => <a href='../type/qreal.html#boundprocedure-is_not_equal'>is_not_equal</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>/=</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function <a href='../proc/is_not_equal.html'>is_not_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if qreal is not equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-is_equal"></span><h3>procedure, private, pass(self) :: <strong>is_equal</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if qreal is equal with another one.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/is_equal.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if qreal is equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-is_not_equal"></span><h3>procedure, private, pass(self) :: <strong>is_not_equal</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if qreal is not equal with another one.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/is_not_equal.html'>is_not_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if qreal is not equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-assign_qreal"></span><h3>procedure, private, pass(lhs) :: <strong>assign_qreal</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal = qreal</code> assignment.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/assign_qreal.html'>assign_qreal</a>(lhs, rhs)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal = qreal</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-add"></span><h3>procedure, private, pass(lhs) :: <strong>add</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal + qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/add.html'>add</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal + qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-positive"></span><h3>procedure, private, pass(self) :: <strong>positive</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>+ qreal</code> unary operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/positive.html'>positive</a>(self) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>+ qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div"></span><h3>procedure, private, pass(lhs) :: <strong>div</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_r16p"></span><h3>procedure, private, pass(lhs) :: <strong>div_R16P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / real(R16P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_r16p.html'>div_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_r8p"></span><h3>procedure, private, pass(lhs) :: <strong>div_R8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / real(R8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_r8p.html'>div_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_r4p"></span><h3>procedure, private, pass(lhs) :: <strong>div_R4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / real(R4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_r4p.html'>div_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_i8p"></span><h3>procedure, private, pass(lhs) :: <strong>div_I8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / integer(I8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_i8p.html'>div_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_i4p"></span><h3>procedure, private, pass(lhs) :: <strong>div_I4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / integer(I4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_i4p.html'>div_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_i2p"></span><h3>procedure, private, pass(lhs) :: <strong>div_I2P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / integer(I2P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_i2p.html'>div_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div_i1p"></span><h3>procedure, private, pass(lhs) :: <strong>div_I1P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal / integer(I1P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div_i1p.html'>div_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul"></span><h3>procedure, private, pass(lhs) :: <strong>mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_r16p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_R16P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * real(R16P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_r16p.html'>mul_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_r8p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_R8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * real(R8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_r8p.html'>mul_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_r4p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_R4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * real(R4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_r4p.html'>mul_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_i8p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_I8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * integer(I8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_i8p.html'>mul_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_i4p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_I4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * integer(I4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_i4p.html'>mul_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_i2p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_I2P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * integer(I2P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_i2p.html'>mul_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul_i1p"></span><h3>procedure, private, pass(lhs) :: <strong>mul_I1P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal * integer(I1P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul_i1p.html'>mul_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-r16p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>R16P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>real(R16P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/r16p_mul.html'>R16P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R16P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-r8p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>R8P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>real(R8P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/r8p_mul.html'>R8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-r4p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>R4P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>real(R4P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/r4p_mul.html'>R4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-i8p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>I8P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>integer(I8P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/i8p_mul.html'>I8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-i4p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>I4P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>integer(I4P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/i4p_mul.html'>I4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-i2p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>I2P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>integer(I2P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/i2p_mul.html'>I2P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I2P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-i1p_mul"></span><h3>procedure, private, pass(rhs) :: <strong>I1P_mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>integer(I1P) * qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/i1p_mul.html'>I1P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I1P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-sub"></span><h3>procedure, private, pass(lhs) :: <strong>sub</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal - qreal</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/sub.html'>sub</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal - qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-negative"></span><h3>procedure, private, pass(self) :: <strong>negative</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>- qreal</code> unary operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/negative.html'>negative</a>(self) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>- qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r16p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R16P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** real(R16P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r16p.html'>pow_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r8p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** real(R8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r8p.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r4p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** real(R4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r4p.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i8p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** integer(I8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i8p.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i4p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** integer(I4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i4p.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i2p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I2P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** integer(I2P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i2p.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i1p"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I1P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>qreal ** integer(I1P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i1p.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+    </section>
+    
+    
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#alltypes-1">All Derived Types</a></h3></div>
+  <div id="alltypes-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/dbm_to_mw.html">dBm_to_mW</a>
+      
+      <a class="list-group-item" href="../type/qreal.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E2.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E3.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/string.html">string</a>
+      
+      <a class="list-group-item" href="../type/system_abstract.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E2.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E3.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_si.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E2.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E3.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/uom.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E2.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E3.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom_converter.html">uom_converter</a>
+      
+      <a class="list-group-item" href="../type/uom_reference.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E2.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E3.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E2.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E3.html">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

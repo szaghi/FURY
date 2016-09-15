@@ -1,0 +1,6979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>fury_qreal64 &ndash; FURY</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>fury_qreal64 
+    <small>Module</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title=" 3.0% of total for modules and submodules.">524 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_qreal64.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/fury_qreal64.f90.html'>fury_qreal64.F90</a></li>
+  
+     <li class="active">fury_qreal64</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#inters-0">Interfaces</a></h3></div>
+  <div id="inters-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#interface-qreal%7E3">qreal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#interface-operator%28%2A%29%7E4">operator(*)</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#types-0">Derived Types</a></h3></div>
+  <div id="types-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#type-qreal%7E3">qreal</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-creator%7E3">creator</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r16p_mul_uom%7E3">R16P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r8p_mul_uom%7E3">R8P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r4p_mul_uom%7E3">R4P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i8p_mul_uom%7E3">I8P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i4p_mul_uom%7E3">I4P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i2p_mul_uom%7E3">I2P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i1p_mul_uom%7E3">I1P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-has_name%7E3">has_name</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_unit_defined%7E3">is_unit_defined</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-stringify%7E3">stringify</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-to%7E3">to</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_equal%7E3">is_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_not_equal%7E3">is_not_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-add%7E3">add</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-positive%7E3">positive</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div%7E3">div</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r16p%7E3">div_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r8p%7E3">div_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r4p%7E3">div_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i8p%7E3">div_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i4p%7E3">div_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i2p%7E3">div_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i1p%7E3">div_I1P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul%7E3">mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r16p%7E3">mul_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r8p%7E3">mul_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r4p%7E3">mul_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i8p%7E3">mul_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i4p%7E3">mul_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i2p%7E3">mul_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i1p%7E3">mul_I1P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r16p_mul%7E3">R16P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r8p_mul%7E3">R8P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r4p_mul%7E3">R4P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i8p_mul%7E3">I8P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i4p_mul%7E3">I4P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i2p_mul%7E3">I2P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i1p_mul%7E3">I1P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-sub%7E3">sub</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-negative%7E3">negative</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r16p%7E3">pow_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r8p%7E3">pow_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r4p%7E3">pow_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i8p%7E3">pow_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i4p%7E3">pow_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i2p%7E3">pow_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i1p%7E3">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-0" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-allocate_unit%7E3">allocate_unit</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-set%7E3">set</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-unset%7E3">unset</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-assign_qreal%7E3">assign_qreal</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allmods-0">All Modules</a></h3></div>
+  <div id="allmods-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/befor64.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64%7E2.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m%7E2.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/dbm_to_mw_converter.html">dBm_to_mW_converter</a>
+      
+      <a class="list-group-item" href="../module/fury.html">fury</a>
+      
+      <a class="list-group-item" href="../module/fury_mixed_kinds.html">fury_mixed_kinds</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal128.html">fury_qreal128</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html">fury_qreal64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract128.html">fury_system_abstract128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract32.html">fury_system_abstract32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract64.html">fury_system_abstract64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si128.html">fury_system_si128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si32.html">fury_system_si32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si64.html">fury_system_si64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom128.html">fury_uom128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom32.html">fury_uom32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom64.html">fury_uom64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_converter.html">fury_uom_converter</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference128.html">fury_uom_reference128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference32.html">fury_uom_reference32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference64.html">fury_uom_reference64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol128.html">fury_uom_symbol128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html">fury_uom_symbol32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol64.html">fury_uom_symbol64</a>
+      
+      <a class="list-group-item" href="../module/penf%7E2.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E4.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E3.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E5.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E2.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E5.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E3.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E4.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E4.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E2.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E5.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E3.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E5.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E3.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E4.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E2.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/stringifor.html">stringifor</a>
+      
+      <a class="list-group-item" href="../module/stringifor_string_t.html">stringifor_string_t</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+      
+    
+  
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html">iso_fortran_env</a></li>
+      
+      <li><a href='../module/fury_uom64.html'>fury_uom64</a></li>
+      
+      <li><a href='../module/penf%7E2.html'>penf</a></li>
+      
+      <li><a href='../module/stringifor.html'>stringifor</a></li>
+      
+    </ul>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: module~~fury_qreal64~~UsesGraph Pages: 1 -->
+<svg id="modulefury_qreal64UsesGraph" width="641pt" height="110pt"
+ viewBox="0.00 0.00 641.00 109.62" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~fury_qreal64~~UsesGraph" class="graph" transform="scale(0.411954 0.411954) rotate(0) translate(4 262.105)">
+<title>module~~fury_qreal64~~UsesGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-262.105 1553,-262.105 1553,5 -4,5"/>
+<!-- module~fury_qreal64 -->
+<g id="node1" class="node"><title>module~fury_qreal64</title>
+<polygon fill="none" stroke="black" points="1547,-38.2391 1475,-38.2391 1475,-12.2391 1547,-12.2391 1547,-38.2391"/>
+<text text-anchor="middle" x="1511" y="-22.7891" font-family="Helvetica,sans-Serif" font-size="10.50">fury_qreal64</text>
+</g>
+<!-- module~fury_uom64 -->
+<g id="node2" class="node"><title>module~fury_uom64</title>
+<a xlink:href="../module/fury_uom64.html" xlink:title="fury_uom64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1438,-38.2391 1368,-38.2391 1368,-12.2391 1438,-12.2391 1438,-38.2391"/>
+<text text-anchor="middle" x="1403" y="-22.7891" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom64</text>
+</a>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury_qreal64 -->
+<g id="edge62" class="edge"><title>module~fury_uom64&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1438.06,-25.2391C1446.39,-25.2391 1455.4,-25.2391 1464.15,-25.2391"/>
+<polygon fill="#000000" stroke="#000000" points="1464.25,-28.7392 1474.25,-25.2391 1464.25,-21.7392 1464.25,-28.7392"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node3" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-120.239 215,-120.239 215,-94.2391 301,-94.2391 301,-120.239"/>
+<text text-anchor="middle" x="258" y="-104.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_qreal64 -->
+<g id="edge64" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.582,-111.548C346.044,-114.94 416.856,-117.561 477,-107.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-107.239C636.117,-74.2279 672.868,-49.3178 834,-28.2391"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-28.2391C1023.58,13.9974 1078.86,3.17701 1271,-25.2391"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1271,-25.2391C1315.2,-24.5823 1324.07,-8.15855 1368,-3.23911 1398.92,0.223075 1407.22,1.29797 1438,-3.23911 1446.94,-4.55748 1456.31,-6.73824 1465.24,-9.22741"/>
+<polygon fill="#000000" stroke="#000000" points="1464.51,-12.6601 1475.09,-12.1393 1466.49,-5.94737 1464.51,-12.6601"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom64 -->
+<g id="edge28" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1271,-25.2391C1299.59,-29.4678 1332.05,-29.5298 1357.63,-28.5043"/>
+<polygon fill="#000000" stroke="#000000" points="1357.95,-31.9929 1367.78,-28.0265 1357.62,-25.0006 1357.95,-31.9929"/>
+</g>
+<!-- module~fury_uom_symbol64 -->
+<g id="node6" class="node"><title>module~fury_uom_symbol64</title>
+<a xlink:href="../module/fury_uom_symbol64.html" xlink:title="fury_uom_symbol64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1173,-158.239 1065,-158.239 1065,-132.239 1173,-132.239 1173,-158.239"/>
+<text text-anchor="middle" x="1119" y="-142.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_symbol64</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge4" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-107.239C655.227,-79.3235 702.683,-114.505 882,-134.239 922.675,-138.715 932.152,-145.809 973,-148.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-148.239C999.508,-148.919 1028.73,-148.542 1054.01,-147.859"/>
+<polygon fill="#000000" stroke="#000000" points="1054.33,-151.352 1064.23,-147.562 1054.13,-144.355 1054.33,-151.352"/>
+</g>
+<!-- module~fury_uom_reference64 -->
+<g id="node8" class="node"><title>module~fury_uom_reference64</title>
+<a xlink:href="../module/fury_uom_reference64.html" xlink:title="fury_uom_reference64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1331,-117.239 1211,-117.239 1211,-91.2391 1331,-91.2391 1331,-117.239"/>
+<text text-anchor="middle" x="1271" y="-101.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference64</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge16" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-28.2391C978.92,-8.7868 1149.27,-60.0013 1227.6,-87.7549"/>
+<polygon fill="#000000" stroke="#000000" points="1226.55,-91.0937 1237.14,-91.1798 1228.91,-84.5057 1226.55,-91.0937"/>
+</g>
+<!-- module~penf_stringify~5 -->
+<g id="node37" class="node"><title>module~penf_stringify~5</title>
+<a xlink:href="../module/penf_stringify%7E5.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-169.239 338,-169.239 338,-143.239 414,-143.239 414,-169.239"/>
+<text text-anchor="middle" x="376" y="-153.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify~5 -->
+<g id="edge52" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M289.312,-120.242C303.314,-126.056 320.007,-132.988 334.989,-139.209"/>
+<polygon fill="#000000" stroke="#000000" points="333.964,-142.573 344.542,-143.176 336.649,-136.108 333.964,-142.573"/>
+</g>
+<!-- module~stringifor -->
+<g id="node4" class="node"><title>module~stringifor</title>
+<a xlink:href="../module/stringifor.html" xlink:title="stringifor">
+<polygon fill="#337ab7" stroke="#337ab7" points="1000,-202.239 946,-202.239 946,-176.239 1000,-176.239 1000,-202.239"/>
+<text text-anchor="middle" x="973" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor</text>
+</a>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_qreal64 -->
+<g id="edge66" class="edge"><title>module~stringifor&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1271,-190.239C1327.39,-174.066 1353.52,-221.754 1403,-190.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1403,-190.239C1456.62,-156.092 1489.27,-84.6818 1503.17,-48.0237"/>
+<polygon fill="#000000" stroke="#000000" points="1506.59,-48.8469 1506.73,-38.253 1500.02,-46.4454 1506.59,-48.8469"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom64 -->
+<g id="edge22" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1119,-190.239C1185.95,-181.186 1206.06,-208.863 1271,-190.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1271,-190.239C1301.26,-181.561 1310.08,-176.831 1332,-154.239 1362.47,-122.843 1383.93,-75.7741 1394.81,-48.0178"/>
+<polygon fill="#000000" stroke="#000000" points="1398.19,-48.9897 1398.46,-38.3984 1391.64,-46.507 1398.19,-48.9897"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge6" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.12,-181.066C1018.58,-175.502 1043.63,-167.955 1065.97,-161.221"/>
+<polygon fill="#000000" stroke="#000000" points="1067.11,-164.531 1075.68,-158.295 1065.09,-157.829 1067.11,-164.531"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge18" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.05,-191.692C1029.47,-193.833 1077.8,-195.81 1119,-190.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1119,-190.239C1170.46,-183.279 1221.11,-147.135 1248.99,-123.974"/>
+<polygon fill="#000000" stroke="#000000" points="1251.54,-126.397 1256.88,-117.25 1247,-121.067 1251.54,-126.397"/>
+</g>
+<!-- module~penf~2 -->
+<g id="node5" class="node"><title>module~penf~2</title>
+<a xlink:href="../module/penf%7E2.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-180.239 450,-180.239 450,-154.239 504,-154.239 504,-180.239"/>
+<text text-anchor="middle" x="477" y="-164.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_qreal64 -->
+<g id="edge68" class="edge"><title>module~penf~2&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-230.239C1086.83,-211.695 1189.17,-326.422 1403,-190.239"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom64 -->
+<g id="edge32" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.078,-159.791C572.683,-141.288 759.172,-93.2839 918,-73.2391 982.433,-65.1074 999.086,-69.1999 1064,-67.2391 1155.98,-64.4609 1179.09,-67.7522 1271,-63.2391"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1271,-63.2391C1300.54,-58.0266 1332.93,-48.7607 1358.23,-40.6839"/>
+<polygon fill="#000000" stroke="#000000" points="1359.47,-43.9593 1367.9,-37.5426 1357.31,-37.3013 1359.47,-43.9593"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor -->
+<g id="edge46" class="edge"><title>module~penf~2&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-230.239C772.128,-225.741 784.799,-233.848 834,-230.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-230.239C869.757,-227.617 908.775,-215.21 936.345,-204.724"/>
+<polygon fill="#000000" stroke="#000000" points="937.916,-207.868 945.957,-200.97 935.369,-201.348 937.916,-207.868"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge8" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-148.239C895.144,-139.41 911.331,-144.571 973,-148.239"/>
+</g>
+<!-- module~fury_uom_converter -->
+<g id="node7" class="node"><title>module~fury_uom_converter</title>
+<a xlink:href="../module/fury_uom_converter.html" xlink:title="fury_uom_converter">
+<polygon fill="#337ab7" stroke="#337ab7" points="1027,-120.239 919,-120.239 919,-94.2391 1027,-94.2391 1027,-120.239"/>
+<text text-anchor="middle" x="973" y="-104.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_converter</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_converter -->
+<g id="edge10" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_converter</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-148.239C866.602,-143.531 902.212,-132.915 929.227,-123.666"/>
+<polygon fill="#000000" stroke="#000000" points="930.483,-126.935 938.769,-120.333 928.175,-120.326 930.483,-126.935"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge14" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.243,-166.426C576.246,-164.176 770.42,-157.42 834,-148.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-148.239C879.918,-139.912 873.728,-99.9964 918,-85.2391 964.38,-69.7791 979.37,-80.2165 1028,-85.2391 1069.1,-89.4838 1077.76,-101.776 1119,-104.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1119,-104.239C1145.54,-105.147 1174.71,-105.341 1200.33,-105.242"/>
+<polygon fill="#000000" stroke="#000000" points="1200.35,-108.742 1210.33,-105.188 1200.31,-101.742 1200.35,-108.742"/>
+</g>
+<!-- module~stringifor_string_t -->
+<g id="node25" class="node"><title>module~stringifor_string_t</title>
+<a xlink:href="../module/stringifor_string_t.html" xlink:title="stringifor_string_t">
+<polygon fill="#337ab7" stroke="#337ab7" points="881,-202.239 787,-202.239 787,-176.239 881,-176.239 881,-202.239"/>
+<text text-anchor="middle" x="834" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor_string_t</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor_string_t -->
+<g id="edge42" class="edge"><title>module~penf~2&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-230.239C654.019,-238.63 668.561,-235.224 723,-230.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-230.239C750.266,-227.742 779.227,-216.733 800.728,-206.751"/>
+<polygon fill="#000000" stroke="#000000" points="802.254,-209.901 809.754,-202.418 799.224,-203.59 802.254,-209.901"/>
+</g>
+<!-- module~befor64 -->
+<g id="node26" class="node"><title>module~befor64</title>
+<a xlink:href="../module/befor64.html" xlink:title="befor64">
+<polygon fill="#337ab7" stroke="#337ab7" points="750,-202.239 696,-202.239 696,-176.239 750,-176.239 750,-202.239"/>
+<text text-anchor="middle" x="723" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64 -->
+<g id="edge38" class="edge"><title>module~penf~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M492.731,-180.256C504.99,-189.882 522.77,-202.742 540,-211.239 565.087,-223.611 572.36,-225.946 600,-230.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-230.239C633.332,-235.417 669.788,-220.484 694.289,-207.21"/>
+<polygon fill="#000000" stroke="#000000" points="696.08,-210.218 703.062,-202.249 692.635,-204.125 696.08,-210.218"/>
+</g>
+<!-- module~befor64_pack_data_m~2 -->
+<g id="node27" class="node"><title>module~befor64_pack_data_m~2</title>
+<a xlink:href="../module/befor64_pack_data_m%7E2.html" xlink:title="befor64_pack_data_m">
+<polygon fill="#337ab7" stroke="#337ab7" points="660,-202.239 540,-202.239 540,-176.239 660,-176.239 660,-202.239"/>
+<text text-anchor="middle" x="600" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64_pack_data_m</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64_pack_data_m~2 -->
+<g id="edge34" class="edge"><title>module~penf~2&#45;&gt;module~befor64_pack_data_m~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.298,-172.122C512.042,-173.507 520.847,-175.082 529.906,-176.702"/>
+<polygon fill="#000000" stroke="#000000" points="529.338,-180.156 539.798,-178.471 530.57,-173.265 529.338,-180.156"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury_uom64 -->
+<g id="edge24" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1173.51,-152.484C1218.93,-155.818 1283.77,-154.08 1332,-126.239 1362.54,-108.612 1383.14,-71.935 1393.98,-47.9684"/>
+<polygon fill="#000000" stroke="#000000" points="1397.28,-49.1371 1398.02,-38.5679 1390.85,-46.371 1397.28,-49.1371"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge20" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1167.51,-132.154C1181.98,-128.251 1197.98,-123.934 1212.99,-119.885"/>
+<polygon fill="#000000" stroke="#000000" points="1213.95,-123.254 1222.69,-117.271 1212.12,-116.496 1213.95,-123.254"/>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom64 -->
+<g id="edge26" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1027.58,-95.1724C1087.08,-82.9604 1185.26,-65.5537 1271,-63.2391"/>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge2" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1023.24,-120.317C1034.72,-123.302 1047.02,-126.504 1058.86,-129.585"/>
+<polygon fill="#000000" stroke="#000000" points="1058.1,-133.006 1068.66,-132.138 1059.87,-126.232 1058.1,-133.006"/>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge12" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1027.81,-104.036C1055.22,-102.962 1088.88,-102.441 1119,-104.239"/>
+</g>
+<!-- module~fury_uom_reference64&#45;&gt;module~fury_uom64 -->
+<g id="edge30" class="edge"><title>module~fury_uom_reference64&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1303.93,-91.21C1313.21,-87.1273 1323.18,-82.3421 1332,-77.2391 1348.49,-67.7002 1365.76,-55.1175 1379.14,-44.7189"/>
+<polygon fill="#000000" stroke="#000000" points="1381.64,-47.2004 1387.32,-38.2549 1377.3,-41.7077 1381.64,-47.2004"/>
+</g>
+<!-- module~stringifor_string_t&#45;&gt;module~stringifor -->
+<g id="edge44" class="edge"><title>module~stringifor_string_t&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M881.836,-189.239C899.358,-189.239 918.922,-189.239 935.419,-189.239"/>
+<polygon fill="#000000" stroke="#000000" points="935.766,-192.739 945.766,-189.239 935.766,-185.739 935.766,-192.739"/>
+</g>
+<!-- module~befor64&#45;&gt;module~stringifor_string_t -->
+<g id="edge40" class="edge"><title>module~befor64&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M750.154,-189.239C758.081,-189.239 767.063,-189.239 776.13,-189.239"/>
+<polygon fill="#000000" stroke="#000000" points="776.351,-192.739 786.351,-189.239 776.351,-185.739 776.351,-192.739"/>
+</g>
+<!-- module~befor64_pack_data_m~2&#45;&gt;module~befor64 -->
+<g id="edge36" class="edge"><title>module~befor64_pack_data_m~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M660.059,-189.239C668.793,-189.239 677.567,-189.239 685.674,-189.239"/>
+<polygon fill="#000000" stroke="#000000" points="685.888,-192.739 695.888,-189.239 685.888,-185.739 685.888,-192.739"/>
+</g>
+<!-- module~penf_global_parameters_variables~4 -->
+<g id="node35" class="node"><title>module~penf_global_parameters_variables~4</title>
+<a xlink:href="../module/penf_global_parameters_variables%7E4.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-202.239 8.52651e-14,-202.239 0,-176.239 178,-176.239 178,-202.239"/>
+<text text-anchor="middle" x="89" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf~2 -->
+<g id="edge56" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M125.898,-202.377C180.728,-220.127 286.834,-247.651 376,-230.239"/>
+</g>
+<!-- module~penf_b_size~2 -->
+<g id="node36" class="node"><title>module~penf_b_size~2</title>
+<a xlink:href="../module/penf_b_size%7E2.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-202.239 223,-202.239 223,-176.239 293,-176.239 293,-202.239"/>
+<text text-anchor="middle" x="258" y="-186.789" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2 -->
+<g id="edge48" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-189.239C190.206,-189.239 201.835,-189.239 212.422,-189.239"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-192.739 222.627,-189.239 212.627,-185.739 212.627,-192.739"/>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5 -->
+<g id="edge50" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M155.298,-176.218C174.201,-172.873 194.86,-169.566 214,-167.239 252.129,-162.603 295.562,-159.786 327.851,-158.165"/>
+<polygon fill="#000000" stroke="#000000" points="328.103,-161.657 337.923,-157.679 327.766,-154.665 328.103,-161.657"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf~2 -->
+<g id="edge58" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M285.21,-202.278C314.229,-215.535 358.386,-233.679 376,-230.239"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-230.239C406.743,-224.236 436.488,-203.257 455.639,-187.14"/>
+<polygon fill="#000000" stroke="#000000" points="458.171,-189.575 463.414,-180.368 453.574,-184.297 458.171,-189.575"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf_stringify~5 -->
+<g id="edge54" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-179.427C304.124,-176.34 316.508,-172.877 328.272,-169.587"/>
+<polygon fill="#000000" stroke="#000000" points="329.276,-172.94 337.964,-166.876 327.391,-166.199 329.276,-172.94"/>
+</g>
+<!-- module~penf_stringify~5&#45;&gt;module~penf~2 -->
+<g id="edge60" class="edge"><title>module~penf_stringify~5&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.184,-160.398C422.511,-161.305 431.313,-162.263 439.609,-163.167"/>
+<polygon fill="#000000" stroke="#000000" points="439.452,-166.67 449.772,-164.274 440.21,-159.711 439.452,-166.67"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var panmodulefury_qreal64UsesGraph = svgPanZoom('#modulefury_qreal64UsesGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    
+    <p>FURY class definition of real (with float64 kind) quantity with associated unit of measure.</p>
+<p>FURY class implementation of real quantity of generic kind with associated unit of measure.</p>
+    
+    
+    <h3>Used By</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: module~~fury_qreal64~~UsedByGraph Pages: 1 -->
+<svg id="modulefury_qreal64UsedByGraph" width="641pt" height="1156pt"
+ viewBox="0.00 0.00 641.00 1156.31" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~fury_qreal64~~UsedByGraph" class="graph" transform="scale(0.698257 0.698257) rotate(0) translate(4 1652)">
+<title>module~~fury_qreal64~~UsedByGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-1652 915,-1652 915,5 -4,5"/>
+<!-- module~fury_qreal64 -->
+<g id="node1" class="node"><title>module~fury_qreal64</title>
+<polygon fill="none" stroke="black" points="73,-840 1,-840 1,-814 73,-814 73,-840"/>
+<text text-anchor="middle" x="37" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50">fury_qreal64</text>
+</g>
+<!-- module~fury_mixed_kinds -->
+<g id="node2" class="node"><title>module~fury_mixed_kinds</title>
+<a xlink:href="../module/fury_mixed_kinds.html" xlink:title="fury_mixed_kinds">
+<polygon fill="#337ab7" stroke="#337ab7" points="370,-884 274,-884 274,-858 370,-858 370,-884"/>
+<text text-anchor="middle" x="322" y="-868.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_mixed_kinds</text>
+</a>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge88" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M174,-869C203.523,-871.414 236.467,-872.059 263.764,-872.04"/>
+<polygon fill="#000000" stroke="#000000" points="263.944,-875.539 273.931,-872.002 263.918,-868.539 263.944,-875.539"/>
+</g>
+<!-- module~fury_system_si64 -->
+<g id="node3" class="node"><title>module~fury_system_si64</title>
+<a xlink:href="../module/fury_system_si64.html" xlink:title="fury_system_si64">
+<polygon fill="#337ab7" stroke="#337ab7" points="370,-840 274,-840 274,-814 370,-814 370,-840"/>
+<text text-anchor="middle" x="322" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si64</text>
+</a>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_system_si64 -->
+<g id="edge90" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M66.4656,-840.095C93.7236,-851.219 135.692,-865.868 174,-869"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M174,-869C193.953,-870.631 241.286,-855.951 277.092,-843.502"/>
+<polygon fill="#000000" stroke="#000000" points="278.583,-846.688 286.853,-840.066 276.258,-840.085 278.583,-846.688"/>
+</g>
+<!-- module~fury_system_abstract64 -->
+<g id="node4" class="node"><title>module~fury_system_abstract64</title>
+<a xlink:href="../module/fury_system_abstract64.html" xlink:title="fury_system_abstract64">
+<polygon fill="#337ab7" stroke="#337ab7" points="237,-840 111,-840 111,-814 237,-814 237,-840"/>
+<text text-anchor="middle" x="174" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract64</text>
+</a>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge92" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M73.7135,-827C82.037,-827 91.1651,-827 100.418,-827"/>
+<polygon fill="#000000" stroke="#000000" points="100.474,-830.5 110.474,-827 100.474,-823.5 100.474,-830.5"/>
+</g>
+<!-- module~fury -->
+<g id="node5" class="node"><title>module~fury</title>
+<a xlink:href="../module/fury.html" xlink:title="fury">
+<polygon fill="#337ab7" stroke="#337ab7" points="460,-840 406,-840 406,-814 460,-814 460,-840"/>
+<text text-anchor="middle" x="433" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury</text>
+</a>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury -->
+<g id="edge94" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M73.772,-814.329C85.2532,-810.804 98.0439,-807.312 110,-805 202.879,-787.037 227.952,-775.794 322,-786"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M322,-786C349.257,-788.594 378.218,-799.6 399.722,-809.556"/>
+<polygon fill="#000000" stroke="#000000" points="398.218,-812.716 408.749,-813.876 401.24,-806.402 398.218,-812.716"/>
+</g>
+<!-- module~fury_mixed_kinds&#45;&gt;module~fury -->
+<g id="edge2" class="edge"><title>module~fury_mixed_kinds&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M355.003,-857.918C368.065,-852.74 383.128,-846.769 396.513,-841.463"/>
+<polygon fill="#000000" stroke="#000000" points="397.903,-844.677 405.91,-837.739 395.324,-838.17 397.903,-844.677"/>
+</g>
+<!-- module~fury_system_si64&#45;&gt;module~fury -->
+<g id="edge4" class="edge"><title>module~fury_system_si64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M370.041,-827C378.692,-827 387.59,-827 395.872,-827"/>
+<polygon fill="#000000" stroke="#000000" points="395.969,-830.5 405.969,-827 395.969,-823.5 395.969,-830.5"/>
+</g>
+<!-- module~fury_system_abstract64&#45;&gt;module~fury_system_si64 -->
+<g id="edge8" class="edge"><title>module~fury_system_abstract64&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M237.624,-827C246.202,-827 254.969,-827 263.453,-827"/>
+<polygon fill="#000000" stroke="#000000" points="263.629,-830.5 273.629,-827 263.629,-823.5 263.629,-830.5"/>
+</g>
+<!-- module~fury_system_abstract64&#45;&gt;module~fury -->
+<g id="edge6" class="edge"><title>module~fury_system_abstract64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M209.517,-813.889C245.971,-801.025 300.331,-783.649 322,-786"/>
+</g>
+<!-- program~fury_test_qreal_assign -->
+<g id="node10" class="node"><title>program~fury_test_qreal_assign</title>
+<a xlink:href="../program/fury_test_qreal_assign.html" xlink:title="fury_test_qreal_assign">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="648,-1648 528,-1648 528,-1622 648,-1622 648,-1648"/>
+<text text-anchor="middle" x="588" y="-1632.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_assign</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_assign -->
+<g id="edge12" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_assign</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.139,-840.136C434.291,-938.037 443.584,-1551.77 496,-1613 501.82,-1619.8 509.331,-1624.7 517.549,-1628.2"/>
+<polygon fill="#000000" stroke="#000000" points="516.48,-1631.54 527.075,-1631.59 518.826,-1624.94 516.48,-1631.54"/>
+</g>
+<!-- program~fury_test_uom_pow -->
+<g id="node11" class="node"><title>program~fury_test_uom_pow</title>
+<a xlink:href="../program/fury_test_uom_pow.html" xlink:title="fury_test_uom_pow">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="641,-1604 535,-1604 535,-1578 641,-1578 641,-1604"/>
+<text text-anchor="middle" x="588" y="-1588.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_pow</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_pow -->
+<g id="edge14" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_pow</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.244,-840.185C435.106,-934.588 448.301,-1505.65 496,-1564 503.415,-1573.07 513.707,-1579.19 524.733,-1583.31"/>
+<polygon fill="#000000" stroke="#000000" points="523.968,-1586.74 534.558,-1586.43 526.086,-1580.06 523.968,-1586.74"/>
+</g>
+<!-- program~fury_test_qreal_conversions_complex -->
+<g id="node12" class="node"><title>program~fury_test_qreal_conversions_complex</title>
+<a xlink:href="../program/fury_test_qreal_conversions_complex.html" xlink:title="fury_test_qreal_conversions_complex">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="909,-1014 717,-1014 717,-988 909,-988 909,-1014"/>
+<text text-anchor="middle" x="813" y="-998.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_complex</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_complex -->
+<g id="edge16" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_complex</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.135,-840.035C434.221,-932.13 442.913,-1482.45 496,-1531 526.174,-1558.59 647.76,-1556.15 680,-1531 762.66,-1466.52 801.725,-1118.34 810.859,-1024.38"/>
+<polygon fill="#000000" stroke="#000000" points="814.362,-1024.5 811.825,-1014.21 807.394,-1023.84 814.362,-1024.5"/>
+</g>
+<!-- program~fury_test_qreal_conversions_si -->
+<g id="node13" class="node"><title>program~fury_test_qreal_conversions_si</title>
+<a xlink:href="../program/fury_test_qreal_conversions_si.html" xlink:title="fury_test_qreal_conversions_si">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="668,-1522 508,-1522 508,-1496 668,-1496 668,-1522"/>
+<text text-anchor="middle" x="588" y="-1506.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_si</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_si -->
+<g id="edge18" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.353,-840.224C435.838,-929.004 451.916,-1436.29 496,-1487 497.185,-1488.36 498.438,-1489.65 499.752,-1490.86"/>
+<polygon fill="#000000" stroke="#000000" points="497.798,-1493.78 507.872,-1497.05 502.041,-1488.21 497.798,-1493.78"/>
+</g>
+<!-- program~fury_test_qreal_conversions_simple -->
+<g id="node14" class="node"><title>program~fury_test_qreal_conversions_simple</title>
+<a xlink:href="../program/fury_test_qreal_conversions_simple.html" xlink:title="fury_test_qreal_conversions_simple">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="680,-1478 496,-1478 496,-1452 680,-1452 680,-1478"/>
+<text text-anchor="middle" x="588" y="-1462.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_simple</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_simple -->
+<g id="edge20" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_simple</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.445,-840.155C436.44,-925.26 454.801,-1395.93 496,-1443 496.757,-1443.87 497.542,-1444.7 498.352,-1445.5"/>
+<polygon fill="#000000" stroke="#000000" points="496.308,-1448.35 506.268,-1451.97 500.735,-1442.93 496.308,-1448.35"/>
+</g>
+<!-- program~fury_test_qreal_div -->
+<g id="node15" class="node"><title>program~fury_test_qreal_div</title>
+<a xlink:href="../program/fury_test_qreal_div.html" xlink:title="fury_test_qreal_div">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="639,-1434 537,-1434 537,-1408 639,-1408 639,-1434"/>
+<text text-anchor="middle" x="588" y="-1418.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_div -->
+<g id="edge22" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_div</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.558,-840.257C437.116,-922.011 457.707,-1355.59 496,-1399 503.979,-1408.04 514.95,-1413.71 526.542,-1417.19"/>
+<polygon fill="#000000" stroke="#000000" points="525.823,-1420.62 536.372,-1419.63 527.508,-1413.82 525.823,-1420.62"/>
+</g>
+<!-- program~fury_test_uom_assign -->
+<g id="node16" class="node"><title>program~fury_test_uom_assign</title>
+<a xlink:href="../program/fury_test_uom_assign.html" xlink:title="fury_test_uom_assign">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="647,-1390 529,-1390 529,-1364 647,-1364 647,-1390"/>
+<text text-anchor="middle" x="588" y="-1374.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_assign -->
+<g id="edge24" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_assign</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.684,-840.236C437.829,-918.173 460.588,-1315.22 496,-1355 502.255,-1362.03 510.317,-1367.01 519.064,-1370.51"/>
+<polygon fill="#000000" stroke="#000000" points="518.178,-1373.91 528.772,-1373.76 520.398,-1367.27 518.178,-1373.91"/>
+</g>
+<!-- program~fury_test_uom_aliases -->
+<g id="node17" class="node"><title>program~fury_test_uom_aliases</title>
+<a xlink:href="../program/fury_test_uom_aliases.html" xlink:title="fury_test_uom_aliases">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="648,-1346 528,-1346 528,-1320 648,-1320 648,-1346"/>
+<text text-anchor="middle" x="588" y="-1330.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_aliases</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_aliases -->
+<g id="edge26" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_aliases</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.84,-840.323C438.635,-914.535 463.479,-1274.86 496,-1311 502.066,-1317.74 509.795,-1322.6 518.189,-1326.07"/>
+<polygon fill="#000000" stroke="#000000" points="517.299,-1329.46 527.894,-1329.43 519.587,-1322.85 517.299,-1329.46"/>
+</g>
+<!-- program~fury_test_qreal_div_mixed -->
+<g id="node18" class="node"><title>program~fury_test_qreal_div_mixed</title>
+<a xlink:href="../program/fury_test_qreal_div_mixed.html" xlink:title="fury_test_qreal_div_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="657,-1302 519,-1302 519,-1276 657,-1276 657,-1302"/>
+<text text-anchor="middle" x="588" y="-1286.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_div_mixed -->
+<g id="edge28" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_div_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.997,-840.013C439.428,-909.455 466.304,-1234.42 496,-1267 499.872,-1271.25 504.405,-1274.75 509.346,-1277.62"/>
+<polygon fill="#000000" stroke="#000000" points="508.103,-1280.91 518.625,-1282.14 511.17,-1274.61 508.103,-1280.91"/>
+</g>
+<!-- program~fury_test_uom_sub_failure -->
+<g id="node19" class="node"><title>program~fury_test_uom_sub_failure</title>
+<a xlink:href="../program/fury_test_uom_sub_failure.html" xlink:title="fury_test_uom_sub_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="657,-1258 519,-1258 519,-1232 657,-1232 657,-1258"/>
+<text text-anchor="middle" x="588" y="-1242.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_sub_failure -->
+<g id="edge30" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_sub_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.199,-840.071C434.411,-902.015 442.675,-1165.4 496,-1223 499.835,-1227.14 504.299,-1230.57 509.154,-1233.4"/>
+<polygon fill="#000000" stroke="#000000" points="507.744,-1236.6 518.264,-1237.87 510.828,-1230.32 507.744,-1236.6"/>
+</g>
+<!-- program~fury_test_qreal_eq -->
+<g id="node20" class="node"><title>program~fury_test_qreal_eq</title>
+<a xlink:href="../program/fury_test_qreal_eq.html" xlink:title="fury_test_qreal_eq">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="639,-1214 537,-1214 537,-1188 639,-1188 639,-1214"/>
+<text text-anchor="middle" x="588" y="-1198.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_eq -->
+<g id="edge32" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_eq</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.486,-840.14C435.889,-897.892 448.377,-1128.55 496,-1179 504.279,-1187.77 515.379,-1193.32 527,-1196.77"/>
+<polygon fill="#000000" stroke="#000000" points="526.285,-1200.2 536.833,-1199.21 527.967,-1193.41 526.285,-1200.2"/>
+</g>
+<!-- program~fury_test_uom_div -->
+<g id="node21" class="node"><title>program~fury_test_uom_div</title>
+<a xlink:href="../program/fury_test_uom_div.html" xlink:title="fury_test_uom_div">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="638,-1170 538,-1170 538,-1144 638,-1144 638,-1170"/>
+<text text-anchor="middle" x="588" y="-1154.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_div</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_div -->
+<g id="edge34" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_div</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.859,-840.267C437.582,-893.61 454.063,-1091.66 496,-1135 504.565,-1143.85 516.007,-1149.41 527.907,-1152.83"/>
+<polygon fill="#000000" stroke="#000000" points="527.416,-1156.31 537.956,-1155.24 529.046,-1149.51 527.416,-1156.31"/>
+</g>
+<!-- program~fury_test_qreal_eq_mixed -->
+<g id="node22" class="node"><title>program~fury_test_qreal_eq_mixed</title>
+<a xlink:href="../program/fury_test_qreal_eq_mixed.html" xlink:title="fury_test_qreal_eq_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="656,-1126 520,-1126 520,-1100 656,-1100 656,-1126"/>
+<text text-anchor="middle" x="588" y="-1110.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_eq_mixed -->
+<g id="edge36" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_eq_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M434.352,-840.323C439.536,-888.774 459.691,-1054.67 496,-1091 500.239,-1095.24 505.141,-1098.72 510.43,-1101.57"/>
+<polygon fill="#000000" stroke="#000000" points="509.099,-1104.81 519.648,-1105.79 512.013,-1098.44 509.099,-1104.81"/>
+</g>
+<!-- program~fury_test_uom_mul -->
+<g id="node23" class="node"><title>program~fury_test_uom_mul</title>
+<a xlink:href="../program/fury_test_uom_mul.html" xlink:title="fury_test_uom_mul">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="640,-1082 536,-1082 536,-1056 640,-1056 640,-1082"/>
+<text text-anchor="middle" x="588" y="-1066.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_mul</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_mul -->
+<g id="edge38" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_mul</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.003,-840.148C441.788,-882.996 465.212,-1017.54 496,-1047 504.26,-1054.9 514.83,-1060.13 525.843,-1063.56"/>
+<polygon fill="#000000" stroke="#000000" points="525.027,-1066.97 535.589,-1066.13 526.812,-1060.2 525.027,-1066.97"/>
+</g>
+<!-- program~fury_test_qreal_mul -->
+<g id="node24" class="node"><title>program~fury_test_qreal_mul</title>
+<a xlink:href="../program/fury_test_qreal_mul.html" xlink:title="fury_test_qreal_mul">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="641,-1038 535,-1038 535,-1012 641,-1012 641,-1038"/>
+<text text-anchor="middle" x="588" y="-1022.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_mul -->
+<g id="edge40" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_mul</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.64,-840.365C435.968,-873.284 446.704,-958.805 496,-1003 503.969,-1010.14 513.843,-1015.08 524.136,-1018.46"/>
+<polygon fill="#000000" stroke="#000000" points="523.51,-1021.92 534.084,-1021.25 525.401,-1015.18 523.51,-1021.92"/>
+</g>
+<!-- program~fury_test_uom_add_failure -->
+<g id="node25" class="node"><title>program~fury_test_uom_add_failure</title>
+<a xlink:href="../program/fury_test_uom_add_failure.html" xlink:title="fury_test_uom_add_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="658,-994 518,-994 518,-968 658,-968 658,-994"/>
+<text text-anchor="middle" x="588" y="-978.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_add_failure -->
+<g id="edge42" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_add_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.383,-840.196C440.932,-866.952 457.303,-927.701 496,-959 499.791,-962.066 503.939,-964.717 508.312,-967.007"/>
+<polygon fill="#000000" stroke="#000000" points="507.008,-970.26 517.56,-971.221 509.911,-963.89 507.008,-970.26"/>
+</g>
+<!-- program~fury_test_bolt32 -->
+<g id="node26" class="node"><title>program~fury_test_bolt32</title>
+<a xlink:href="../program/fury_test_bolt32.html" xlink:title="fury_test_bolt32">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="632,-950 544,-950 544,-924 632,-924 632,-950"/>
+<text text-anchor="middle" x="588" y="-934.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt32</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_bolt32 -->
+<g id="edge44" class="edge"><title>module~fury&#45;&gt;program~fury_test_bolt32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M438.636,-840.024C447.753,-859.488 467.625,-895.915 496,-915 507.076,-922.45 520.393,-927.387 533.412,-930.655"/>
+<polygon fill="#000000" stroke="#000000" points="532.746,-934.093 543.267,-932.844 534.263,-927.259 532.746,-934.093"/>
+</g>
+<!-- program~fury_test_qreal_mul_mixed -->
+<g id="node27" class="node"><title>program~fury_test_qreal_mul_mixed</title>
+<a xlink:href="../program/fury_test_qreal_mul_mixed.html" xlink:title="fury_test_qreal_mul_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="659,-906 517,-906 517,-880 659,-880 659,-906"/>
+<text text-anchor="middle" x="588" y="-890.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_mul_mixed -->
+<g id="edge46" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_mul_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M448.562,-840.376C460.733,-850.19 478.476,-863.128 496,-871 500.656,-873.091 505.537,-874.999 510.52,-876.737"/>
+<polygon fill="#000000" stroke="#000000" points="509.605,-880.12 520.197,-879.874 511.763,-873.461 509.605,-880.12"/>
+</g>
+<!-- program~fury_test_system_si -->
+<g id="node28" class="node"><title>program~fury_test_system_si</title>
+<a xlink:href="../program/fury_test_system_si.html" xlink:title="fury_test_system_si">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="641,-862 535,-862 535,-836 641,-836 641,-862"/>
+<text text-anchor="middle" x="588" y="-846.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_system_si</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_system_si -->
+<g id="edge48" class="edge"><title>module~fury&#45;&gt;program~fury_test_system_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.354,-830.883C478.065,-833.396 501.9,-836.779 524.177,-839.941"/>
+<polygon fill="#000000" stroke="#000000" points="523.883,-843.434 534.275,-841.375 524.866,-836.504 523.883,-843.434"/>
+</g>
+<!-- program~fury_test_bolt64 -->
+<g id="node29" class="node"><title>program~fury_test_bolt64</title>
+<a xlink:href="../program/fury_test_bolt64.html" xlink:title="fury_test_bolt64">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="632,-818 544,-818 544,-792 632,-792 632,-818"/>
+<text text-anchor="middle" x="588" y="-802.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt64</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_bolt64 -->
+<g id="edge50" class="edge"><title>module~fury&#45;&gt;program~fury_test_bolt64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.354,-823.117C480.52,-820.255 508.623,-816.266 533.329,-812.76"/>
+<polygon fill="#000000" stroke="#000000" points="533.908,-816.213 543.317,-811.342 532.924,-809.282 533.908,-816.213"/>
+</g>
+<!-- program~fury_test_qreal_not_eq -->
+<g id="node30" class="node"><title>program~fury_test_qreal_not_eq</title>
+<a xlink:href="../program/fury_test_qreal_not_eq.html" xlink:title="fury_test_qreal_not_eq">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="649,-774 527,-774 527,-748 649,-748 649,-774"/>
+<text text-anchor="middle" x="588" y="-758.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_not_eq -->
+<g id="edge52" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_not_eq</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M448.562,-813.624C460.733,-803.81 478.476,-790.872 496,-783 502.488,-780.085 509.415,-777.527 516.445,-775.288"/>
+<polygon fill="#000000" stroke="#000000" points="517.477,-778.633 526.065,-772.43 515.483,-771.923 517.477,-778.633"/>
+</g>
+<!-- program~fury_test_qreal_sub_failure -->
+<g id="node31" class="node"><title>program~fury_test_qreal_sub_failure</title>
+<a xlink:href="../program/fury_test_qreal_sub_failure.html" xlink:title="fury_test_qreal_sub_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="659,-730 517,-730 517,-704 659,-704 659,-730"/>
+<text text-anchor="middle" x="588" y="-714.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_failure -->
+<g id="edge54" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M438.636,-813.976C447.753,-794.512 467.625,-758.085 496,-739 499.703,-736.51 503.656,-734.3 507.765,-732.34"/>
+<polygon fill="#000000" stroke="#000000" points="509.132,-735.562 516.971,-728.434 506.398,-729.117 509.132,-735.562"/>
+</g>
+<!-- program~fury_test_uom_sub -->
+<g id="node32" class="node"><title>program~fury_test_uom_sub</title>
+<a xlink:href="../program/fury_test_uom_sub.html" xlink:title="fury_test_uom_sub">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="640,-686 536,-686 536,-660 640,-660 640,-686"/>
+<text text-anchor="middle" x="588" y="-670.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_sub -->
+<g id="edge56" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_sub</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.383,-813.804C440.932,-787.048 457.303,-726.299 496,-695 504.603,-688.042 515.05,-683.222 525.774,-679.898"/>
+<polygon fill="#000000" stroke="#000000" points="526.905,-683.218 535.657,-677.246 525.091,-676.457 526.905,-683.218"/>
+</g>
+<!-- program~fury_test_qreal_not_eq_mixed -->
+<g id="node33" class="node"><title>program~fury_test_qreal_not_eq_mixed</title>
+<a xlink:href="../program/fury_test_qreal_not_eq_mixed.html" xlink:title="fury_test_qreal_not_eq_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="666,-642 510,-642 510,-616 666,-616 666,-642"/>
+<text text-anchor="middle" x="588" y="-626.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_not_eq_mixed -->
+<g id="edge58" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_not_eq_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.64,-813.635C435.968,-780.716 446.704,-695.195 496,-651 497.513,-649.643 499.095,-648.367 500.735,-647.165"/>
+<polygon fill="#000000" stroke="#000000" points="502.754,-650.031 509.378,-641.762 499.043,-644.095 502.754,-650.031"/>
+</g>
+<!-- program~fury_test_qreal_pow -->
+<g id="node34" class="node"><title>program~fury_test_qreal_pow</title>
+<a xlink:href="../program/fury_test_qreal_pow.html" xlink:title="fury_test_qreal_pow">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="642,-598 534,-598 534,-572 642,-572 642,-598"/>
+<text text-anchor="middle" x="588" y="-582.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_pow</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_pow -->
+<g id="edge60" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_pow</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.003,-813.852C441.788,-771.004 465.212,-636.457 496,-607 503.643,-599.687 513.265,-594.661 523.386,-591.235"/>
+<polygon fill="#000000" stroke="#000000" points="524.548,-594.542 533.193,-588.417 522.615,-587.815 524.548,-594.542"/>
+</g>
+<!-- program~fury_test_uom_parse_failure -->
+<g id="node35" class="node"><title>program~fury_test_uom_parse_failure</title>
+<a xlink:href="../program/fury_test_uom_parse_failure.html" xlink:title="fury_test_uom_parse_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="662,-554 514,-554 514,-528 662,-528 662,-554"/>
+<text text-anchor="middle" x="588" y="-538.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_parse_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_parse_failure -->
+<g id="edge62" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_parse_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M434.352,-813.677C439.536,-765.226 459.691,-599.326 496,-563 498.574,-560.425 501.392,-558.13 504.393,-556.088"/>
+<polygon fill="#000000" stroke="#000000" points="506.36,-558.994 513.283,-550.974 502.87,-552.927 506.36,-558.994"/>
+</g>
+<!-- program~fury_test_qreal_sub -->
+<g id="node36" class="node"><title>program~fury_test_qreal_sub</title>
+<a xlink:href="../program/fury_test_qreal_sub.html" xlink:title="fury_test_qreal_sub">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="641,-510 535,-510 535,-484 641,-484 641,-510"/>
+<text text-anchor="middle" x="588" y="-494.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub -->
+<g id="edge64" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.859,-813.733C437.582,-760.39 454.063,-562.343 496,-519 503.694,-511.048 513.71,-505.758 524.294,-502.28"/>
+<polygon fill="#000000" stroke="#000000" points="525.413,-505.602 534.123,-499.57 523.552,-498.854 525.413,-505.602"/>
+</g>
+<!-- module~dbm_to_mw_converter -->
+<g id="node37" class="node"><title>module~dbm_to_mw_converter</title>
+<a xlink:href="../module/dbm_to_mw_converter.html" xlink:title="dBm_to_mW_converter">
+<polygon fill="#337ab7" stroke="#337ab7" points="650,-466 526,-466 526,-440 650,-440 650,-466"/>
+<text text-anchor="middle" x="588" y="-450.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">dBm_to_mW_converter</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;module~dbm_to_mw_converter -->
+<g id="edge66" class="edge"><title>module~fury&#45;&gt;module~dbm_to_mw_converter</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.486,-813.86C435.889,-756.108 448.377,-525.45 496,-475 501.549,-469.122 508.364,-464.691 515.755,-461.368"/>
+<polygon fill="#000000" stroke="#000000" points="517.259,-464.541 525.371,-457.726 514.78,-457.995 517.259,-464.541"/>
+</g>
+<!-- program~fury_test_qreal_add_aliases_failure -->
+<g id="node38" class="node"><title>program~fury_test_qreal_add_aliases_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_aliases_failure.html" xlink:title="fury_test_qreal_add_aliases_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="679,-422 497,-422 497,-396 679,-396 679,-422"/>
+<text text-anchor="middle" x="588" y="-406.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_aliases_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_aliases_failure -->
+<g id="edge68" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_aliases_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.199,-813.929C434.411,-751.985 442.675,-488.595 496,-431 496.781,-430.156 497.588,-429.343 498.419,-428.557"/>
+<polygon fill="#000000" stroke="#000000" points="500.776,-431.157 506.495,-422.239 496.462,-425.644 500.776,-431.157"/>
+</g>
+<!-- program~fury_test_qreal_add_failure -->
+<g id="node39" class="node"><title>program~fury_test_qreal_add_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_failure.html" xlink:title="fury_test_qreal_add_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="659,-378 517,-378 517,-352 659,-352 659,-378"/>
+<text text-anchor="middle" x="588" y="-362.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_failure -->
+<g id="edge70" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.997,-813.987C439.428,-744.545 466.304,-419.579 496,-387 499.35,-383.325 503.195,-380.211 507.37,-377.578"/>
+<polygon fill="#000000" stroke="#000000" points="509.154,-380.594 516.353,-372.821 505.878,-374.408 509.154,-380.594"/>
+</g>
+<!-- program~fury_test_qreal_add -->
+<g id="node40" class="node"><title>program~fury_test_qreal_add</title>
+<a xlink:href="../program/fury_test_qreal_add.html" xlink:title="fury_test_qreal_add">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="642,-334 534,-334 534,-308 642,-308 642,-334"/>
+<text text-anchor="middle" x="588" y="-318.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add -->
+<g id="edge72" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.84,-813.677C438.635,-739.465 463.479,-379.139 496,-343 503.401,-334.775 513.279,-329.356 523.818,-325.835"/>
+<polygon fill="#000000" stroke="#000000" points="524.931,-329.158 533.629,-323.109 523.057,-322.414 524.931,-329.158"/>
+</g>
+<!-- program~fury_test_qreal_sub_mixed -->
+<g id="node41" class="node"><title>program~fury_test_qreal_sub_mixed</title>
+<a xlink:href="../program/fury_test_qreal_sub_mixed.html" xlink:title="fury_test_qreal_sub_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="659,-290 517,-290 517,-264 659,-264 659,-290"/>
+<text text-anchor="middle" x="588" y="-274.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_mixed -->
+<g id="edge74" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.684,-813.764C437.829,-735.827 460.588,-338.776 496,-299 499.372,-295.213 503.268,-292.019 507.514,-289.331"/>
+<polygon fill="#000000" stroke="#000000" points="509.458,-292.262 516.663,-284.495 506.187,-286.074 509.458,-292.262"/>
+</g>
+<!-- program~fury_test_qreal_add_mixed -->
+<g id="node42" class="node"><title>program~fury_test_qreal_add_mixed</title>
+<a xlink:href="../program/fury_test_qreal_add_mixed.html" xlink:title="fury_test_qreal_add_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="659,-246 517,-246 517,-220 659,-220 659,-246"/>
+<text text-anchor="middle" x="588" y="-230.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_mixed -->
+<g id="edge76" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.558,-813.743C437.116,-731.989 457.707,-298.407 496,-255 499.354,-251.198 503.238,-247.992 507.474,-245.296"/>
+<polygon fill="#000000" stroke="#000000" points="509.417,-248.227 516.608,-240.446 506.134,-242.044 509.417,-248.227"/>
+</g>
+<!-- program~fury_test_qreal_sub_mixed_failure -->
+<g id="node43" class="node"><title>program~fury_test_qreal_sub_mixed_failure</title>
+<a xlink:href="../program/fury_test_qreal_sub_mixed_failure.html" xlink:title="fury_test_qreal_sub_mixed_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="676,-202 500,-202 500,-176 676,-176 676,-202"/>
+<text text-anchor="middle" x="588" y="-186.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_mixed_failure -->
+<g id="edge78" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_mixed_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.445,-813.845C436.44,-728.74 454.801,-258.069 496,-211 496.757,-210.135 497.542,-209.301 498.352,-208.496"/>
+<polygon fill="#000000" stroke="#000000" points="500.735,-211.069 506.268,-202.034 496.308,-205.647 500.735,-211.069"/>
+</g>
+<!-- program~fury_test_qreal_add_mixed_failure -->
+<g id="node44" class="node"><title>program~fury_test_qreal_add_mixed_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_mixed_failure.html" xlink:title="fury_test_qreal_add_mixed_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="677,-158 499,-158 499,-132 677,-132 677,-158"/>
+<text text-anchor="middle" x="588" y="-142.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_mixed_failure -->
+<g id="edge80" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_mixed_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.353,-813.776C435.838,-724.996 451.916,-217.709 496,-167 496.754,-166.132 497.536,-165.296 498.343,-164.489"/>
+<polygon fill="#000000" stroke="#000000" points="500.729,-167.059 506.24,-158.01 496.289,-161.647 500.729,-167.059"/>
+</g>
+<!-- program~fury_test_qreal_aliases -->
+<g id="node45" class="node"><title>program~fury_test_qreal_aliases</title>
+<a xlink:href="../program/fury_test_qreal_aliases.html" xlink:title="fury_test_qreal_aliases">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="649,-114 527,-114 527,-88 649,-88 649,-114"/>
+<text text-anchor="middle" x="588" y="-98.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_aliases</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_aliases -->
+<g id="edge82" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_aliases</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.269,-813.796C435.266,-721.696 449.013,-177.373 496,-123 501.634,-116.48 508.823,-111.709 516.694,-108.243"/>
+<polygon fill="#000000" stroke="#000000" points="518.017,-111.486 526.193,-104.748 515.599,-104.917 518.017,-111.486"/>
+</g>
+<!-- program~fury_test_uom_assign_failure -->
+<g id="node46" class="node"><title>program~fury_test_uom_assign_failure</title>
+<a xlink:href="../program/fury_test_uom_assign_failure.html" xlink:title="fury_test_uom_assign_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="664,-70 512,-70 512,-44 664,-44 664,-70"/>
+<text text-anchor="middle" x="588" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_assign_failure -->
+<g id="edge84" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_assign_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.195,-813.898C434.724,-718.84 446.09,-137.06 496,-79 498.007,-76.6649 500.214,-74.5539 502.58,-72.6466"/>
+<polygon fill="#000000" stroke="#000000" points="504.799,-75.3739 511.182,-66.9174 500.919,-69.5479 504.799,-75.3739"/>
+</g>
+<!-- program~fury_test_uom_add -->
+<g id="node47" class="node"><title>program~fury_test_uom_add</title>
+<a xlink:href="../program/fury_test_uom_add.html" xlink:title="fury_test_uom_add">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="640,-26 536,-26 536,-1.24345e-14 640,-3.55271e-15 640,-26"/>
+<text text-anchor="middle" x="588" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_add -->
+<g id="edge86" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_add</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M433.132,-813.764C434.23,-715.118 443.206,-96.7059 496,-35 503.597,-26.1207 514.078,-20.4778 525.254,-16.9582"/>
+<polygon fill="#000000" stroke="#000000" points="526.395,-20.2783 535.199,-14.3838 524.641,-13.5017 526.395,-20.2783"/>
+</g>
+<!-- module~dbm_to_mw_converter&#45;&gt;program~fury_test_qreal_conversions_complex -->
+<g id="edge10" class="edge"><title>module~dbm_to_mw_converter&#45;&gt;program~fury_test_qreal_conversions_complex</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M650.643,-458.324C661.535,-461.772 671.936,-467.039 680,-475 753.917,-547.967 799.182,-885.573 810.305,-977.713"/>
+<polygon fill="#000000" stroke="#000000" points="806.836,-978.182 811.492,-987.699 813.788,-977.356 806.836,-978.182"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var panmodulefury_qreal64UsedByGraph = svgPanZoom('#modulefury_qreal64UsedByGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    <br>
+    
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#inters-1">Interfaces</a></h3></div>
+  <div id="inters-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#interface-qreal%7E3">qreal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#interface-operator%28%2A%29%7E4">operator(*)</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#types-1">Derived Types</a></h3></div>
+  <div id="types-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#type-qreal%7E3">qreal</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-creator%7E3">creator</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r16p_mul_uom%7E3">R16P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r8p_mul_uom%7E3">R8P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r4p_mul_uom%7E3">R4P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i8p_mul_uom%7E3">I8P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i4p_mul_uom%7E3">I4P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i2p_mul_uom%7E3">I2P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i1p_mul_uom%7E3">I1P_mul_uom</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-has_name%7E3">has_name</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_unit_defined%7E3">is_unit_defined</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-stringify%7E3">stringify</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-to%7E3">to</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_equal%7E3">is_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-is_not_equal%7E3">is_not_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-add%7E3">add</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-positive%7E3">positive</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div%7E3">div</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r16p%7E3">div_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r8p%7E3">div_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_r4p%7E3">div_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i8p%7E3">div_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i4p%7E3">div_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i2p%7E3">div_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-div_i1p%7E3">div_I1P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul%7E3">mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r16p%7E3">mul_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r8p%7E3">mul_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_r4p%7E3">mul_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i8p%7E3">mul_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i4p%7E3">mul_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i2p%7E3">mul_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-mul_i1p%7E3">mul_I1P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r16p_mul%7E3">R16P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r8p_mul%7E3">R8P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-r4p_mul%7E3">R4P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i8p_mul%7E3">I8P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i4p_mul%7E3">I4P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i2p_mul%7E3">I2P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-i1p_mul%7E3">I1P_mul</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-sub%7E3">sub</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-negative%7E3">negative</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r16p%7E3">pow_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r8p%7E3">pow_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_r4p%7E3">pow_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i8p%7E3">pow_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i4p%7E3">pow_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i2p%7E3">pow_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-pow_i1p%7E3">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-1">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-1" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-allocate_unit%7E3">allocate_unit</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-set%7E3">set</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-unset%7E3">unset</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html#proc-assign_qreal%7E3">assign_qreal</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    
+
+    
+    
+    
+    
+    
+    <section>
+	 <h2>Interfaces</h2>
+	 
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-qreal%7E3"></span><h3>public interface <a href='../interface/qreal%7E3.html'>qreal</a>
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Ovearloading <a href="../interface/qreal.html">qreal</a> name with a creator function.</p>
+  </div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/creator%7E3.html'>creator</a>(magnitude, unit, name) result(quantity)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Create an instance of qreal quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>The quantity.</p>
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-operator%28%2A%29%7E4"></span><h3>public interface <a href='../interface/operator%28%2A%29%7E4.html'>operator(*)</a>
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Ovearloading operator <code>*</code>: <code>number *</code> <a href="../interface/uom.html">uom</a> generates <a href="../interface/qreal.html">qreal</a>.</p>
+  </div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/r8p_mul_uom%7E3.html'>R8P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R8P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/r4p_mul_uom%7E3.html'>R4P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>real(R4P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/i8p_mul_uom%7E3.html'>I8P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I8P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/i4p_mul_uom%7E3.html'>I4P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I4P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/i2p_mul_uom%7E3.html'>I2P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I2P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/i1p_mul_uom%7E3.html'>I1P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>integer(I1P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+    
+    </section>
+	<br>
+    
+
+    
+    
+    
+    <section>
+     <h2>Derived Types</h2>
+	 
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="type-qreal%7E3"></span><h3>type, public :: <a href='../type/qreal%7E3.html'>qreal</a>
+    
+  </h3></div>
+  <div class="panel-body">
+    
+    
+    <p>Real quantity with associated unit of measure.</p>
+    
+     
+     <h4>Components</h4>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-magnitude%7E3"></span>real(kind=RKP),</td>
+  
+  <td>public</td>
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td> =</td><td>0._RKP</td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-unit%7E3"></span>class(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  
+  <td>public,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>unit</strong></td><td></td><td></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-name%7E3"></span>character(len=:),</td>
+  
+  <td>public,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>name</strong></td><td></td><td></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+     
+     
+     <h4>Constructor</h4>
+       
+         <p>Ovearloading <a href="../interface/qreal.html">qreal</a> name with a creator function.</p>
+       
+       <table class="table table-striped varlist">
+      <tbody>
+        
+             
+             
+             
+             <tr><td>private  function <strong><a href='../proc/creator%7E3.html'>creator</a></strong>(magnitude, unit, name)</td><td><p>Create an instance of qreal quantity.</p></td></tr>
+             
+        
+       </tbody>
+       </table>
+     
+          
+     
+     <h4>Type-Bound Procedures</h4>
+      <table class="table table-striped varlist">
+      <tbody>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-allocate_unit%7E3'>allocate_unit</a></strong>  </td>
+       <td><p>Allocate unit.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-has_name%7E3'>has_name</a></strong>  </td>
+       <td><p>Check if the quantity has defined name.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-is_unit_defined%7E3'>is_unit_defined</a></strong>  </td>
+       <td><p>Check if the unit has been defined.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-set%7E3'>set</a></strong>  </td>
+       <td><p>Set quantity.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-stringify%7E3'>stringify</a></strong>  </td>
+       <td><p>Return a string representation of the quantity with unit symbol.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-to%7E3'>to</a></strong>  </td>
+       <td><p>Convert quantity with respect another unit if its unit has a conversion alias.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-unset%7E3'>unset</a></strong>  </td>
+       <td><p>Unset quantity.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-assignment%28%3D%29%7E3'>assignment(=)</a></strong>  => assign_qreal </td>
+       <td><p>Overloading <code>=</code> assignment.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28%2B%29%7E3'>operator(+)</a></strong>  => add, positive </td>
+       <td><p>Overloading <code>+</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28SLASH%29%7E3'>operator(/)</a></strong>  => div, div_R8P, div_R4P, div_I8P, div_I4P, div_I2P, div_I1P </td>
+       <td><p>Overloading <code>/</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28%2A%29%7E3'>operator(*)</a></strong>  => mul, mul_R8P, mul_R4P, mul_I8P, mul_I4P, mul_I2P, mul_I1P, R8P_mul, R4P_mul, I8P_mul, I4P_mul, I2P_mul, I1P_mul </td>
+       <td><p>Overloading <code>*</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28-%29%7E3'>operator(-)</a></strong>  => sub, negative </td>
+       <td><p>Overloading <code>-</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28%2A%2A%29%7E3'>operator(**)</a></strong>  => pow_R8P, pow_R4P, pow_I8P, pow_I4P, pow_I2P, pow_I1P </td>
+       <td><p>Overloading <code>**</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28%3D%3D%29%7E3'>operator(==)</a></strong>  => is_equal </td>
+       <td><p>Overloading <code>==</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/qreal%7E3.html#boundprocedure-operator%28SLASH%3D%29%7E3'>operator(/=)</a></strong>  => is_not_equal </td>
+       <td><p>Overloading <code>/=</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-is_equal%7E3'>is_equal</a></strong>  </td>
+       <td><p>Check if qreal is equal with another one.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-is_not_equal%7E3'>is_not_equal</a></strong>  </td>
+       <td><p>Check if qreal is not equal with another one.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-assign_qreal%7E3'>assign_qreal</a></strong>  </td>
+       <td><p><code>qreal = qreal</code> assignment.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-add%7E3'>add</a></strong>  </td>
+       <td><p><code>qreal + qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-positive%7E3'>positive</a></strong>  </td>
+       <td><p><code>+ qreal</code> unary operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div%7E3'>div</a></strong>  </td>
+       <td><p><code>qreal / qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_r16p%7E3'>div_R16P</a></strong>  </td>
+       <td><p><code>qreal / real(R16P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_r8p%7E3'>div_R8P</a></strong>  </td>
+       <td><p><code>qreal / real(R8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_r4p%7E3'>div_R4P</a></strong>  </td>
+       <td><p><code>qreal / real(R4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_i8p%7E3'>div_I8P</a></strong>  </td>
+       <td><p><code>qreal / integer(I8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_i4p%7E3'>div_I4P</a></strong>  </td>
+       <td><p><code>qreal / integer(I4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_i2p%7E3'>div_I2P</a></strong>  </td>
+       <td><p><code>qreal / integer(I2P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-div_i1p%7E3'>div_I1P</a></strong>  </td>
+       <td><p><code>qreal / integer(I1P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul%7E3'>mul</a></strong>  </td>
+       <td><p><code>qreal * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_r16p%7E3'>mul_R16P</a></strong>  </td>
+       <td><p><code>qreal * real(R16P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_r8p%7E3'>mul_R8P</a></strong>  </td>
+       <td><p><code>qreal * real(R8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_r4p%7E3'>mul_R4P</a></strong>  </td>
+       <td><p><code>qreal * real(R4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_i8p%7E3'>mul_I8P</a></strong>  </td>
+       <td><p><code>qreal * integer(I8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_i4p%7E3'>mul_I4P</a></strong>  </td>
+       <td><p><code>qreal * integer(I4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_i2p%7E3'>mul_I2P</a></strong>  </td>
+       <td><p><code>qreal * integer(I2P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-mul_i1p%7E3'>mul_I1P</a></strong>  </td>
+       <td><p><code>qreal * integer(I1P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-r16p_mul%7E3'>R16P_mul</a></strong>  </td>
+       <td><p><code>real(R16P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-r8p_mul%7E3'>R8P_mul</a></strong>  </td>
+       <td><p><code>real(R8P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-r4p_mul%7E3'>R4P_mul</a></strong>  </td>
+       <td><p><code>real(R4P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-i8p_mul%7E3'>I8P_mul</a></strong>  </td>
+       <td><p><code>integer(I8P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-i4p_mul%7E3'>I4P_mul</a></strong>  </td>
+       <td><p><code>integer(I4P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-i2p_mul%7E3'>I2P_mul</a></strong>  </td>
+       <td><p><code>integer(I2P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(rhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-i1p_mul%7E3'>I1P_mul</a></strong>  </td>
+       <td><p><code>integer(I1P) * qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-sub%7E3'>sub</a></strong>  </td>
+       <td><p><code>qreal - qreal</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-negative%7E3'>negative</a></strong>  </td>
+       <td><p><code>- qreal</code> unary operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_r16p%7E3'>pow_R16P</a></strong>  </td>
+       <td><p><code>qreal ** real(R16P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_r8p%7E3'>pow_R8P</a></strong>  </td>
+       <td><p><code>qreal ** real(R8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_r4p%7E3'>pow_R4P</a></strong>  </td>
+       <td><p><code>qreal ** real(R4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_i8p%7E3'>pow_I8P</a></strong>  </td>
+       <td><p><code>qreal ** integer(I8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_i4p%7E3'>pow_I4P</a></strong>  </td>
+       <td><p><code>qreal ** integer(I4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_i2p%7E3'>pow_I2P</a></strong>  </td>
+       <td><p><code>qreal ** integer(I2P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/qreal%7E3.html#boundprocedure-pow_i1p%7E3'>pow_I1P</a></strong>  </td>
+       <td><p><code>qreal ** integer(I1P)</code> operator.</p></td></tr>
+      
+       </tbody>
+       </table>
+     
+  </div>
+</div>
+
+     
+    </section>
+	<br>
+    
+    
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-creator%7E3"></span><h3>
+private function <a href='../proc/creator%7E3.html'>creator</a>(magnitude, unit, name) result(quantity)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Create an instance of qreal quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>The quantity.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r16p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/r16p_mul_uom%7E3.html'>R16P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R16P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r8p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/r8p_mul_uom%7E3.html'>R8P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R8P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r4p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/r4p_mul_uom%7E3.html'>R4P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R4P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i8p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/i8p_mul_uom%7E3.html'>I8P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I8P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i4p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/i4p_mul_uom%7E3.html'>I4P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I4P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i2p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/i2p_mul_uom%7E3.html'>I2P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I2P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i1p_mul_uom%7E3"></span><h3>
+private function <a href='../proc/i1p_mul_uom%7E3.html'>I1P_mul_uom</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I1P) * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-has_name%7E3"></span><h3>
+private elemental function <a href='../proc/has_name%7E3.html'>has_name</a>(self)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if the quantity has defined name.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_unit_defined%7E3"></span><h3>
+private elemental function <a href='../proc/is_unit_defined%7E3.html'>is_unit_defined</a>(self) result(is_defined)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if the unit has been defined.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Unit definition status.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-stringify%7E3"></span><h3>
+private function <a href='../proc/stringify%7E3.html'>stringify</a>(self, format, with_dimensions, with_aliases, with_name, compact_reals) result(raw)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return a string representation of the quantity with unit symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>format</strong></td><td><p>Format to string magnitude.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_dimensions</strong></td><td><p>Flag to activate dimensions printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_aliases</strong></td><td><p>Flag to activate aliases printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_name</strong></td><td><p>Flag to activate name printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>compact_reals</strong></td><td><p>Flag to activate real numbers compacting.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  <p>Raw characters data.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-to%7E3"></span><h3>
+private function <a href='../proc/to%7E3.html'>to</a>(self, unit) result(converted)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Convert quantity with respect another unit if its unit has a conversion alias.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of conversion.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Quantity converted.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_equal%7E3"></span><h3>
+private elemental function <a href='../proc/is_equal%7E3.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if qreal is equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_not_equal%7E3"></span><h3>
+private elemental function <a href='../proc/is_not_equal%7E3.html'>is_not_equal</a>(self, other)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if qreal is not equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-add%7E3"></span><h3>
+private function <a href='../proc/add%7E3.html'>add</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal + qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-positive%7E3"></span><h3>
+private function <a href='../proc/positive%7E3.html'>positive</a>(self) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>+ qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div%7E3"></span><h3>
+private function <a href='../proc/div%7E3.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_r16p%7E3"></span><h3>
+private function <a href='../proc/div_r16p%7E3.html'>div_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_r8p%7E3"></span><h3>
+private function <a href='../proc/div_r8p%7E3.html'>div_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_r4p%7E3"></span><h3>
+private function <a href='../proc/div_r4p%7E3.html'>div_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_i8p%7E3"></span><h3>
+private function <a href='../proc/div_i8p%7E3.html'>div_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_i4p%7E3"></span><h3>
+private function <a href='../proc/div_i4p%7E3.html'>div_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_i2p%7E3"></span><h3>
+private function <a href='../proc/div_i2p%7E3.html'>div_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div_i1p%7E3"></span><h3>
+private function <a href='../proc/div_i1p%7E3.html'>div_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal / integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul%7E3"></span><h3>
+private function <a href='../proc/mul%7E3.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_r16p%7E3"></span><h3>
+private function <a href='../proc/mul_r16p%7E3.html'>mul_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_r8p%7E3"></span><h3>
+private function <a href='../proc/mul_r8p%7E3.html'>mul_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_r4p%7E3"></span><h3>
+private function <a href='../proc/mul_r4p%7E3.html'>mul_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_i8p%7E3"></span><h3>
+private function <a href='../proc/mul_i8p%7E3.html'>mul_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_i4p%7E3"></span><h3>
+private function <a href='../proc/mul_i4p%7E3.html'>mul_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_i2p%7E3"></span><h3>
+private function <a href='../proc/mul_i2p%7E3.html'>mul_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul_i1p%7E3"></span><h3>
+private function <a href='../proc/mul_i1p%7E3.html'>mul_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal * integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r16p_mul%7E3"></span><h3>
+private function <a href='../proc/r16p_mul%7E3.html'>R16P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R16P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r8p_mul%7E3"></span><h3>
+private function <a href='../proc/r8p_mul%7E3.html'>R8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-r4p_mul%7E3"></span><h3>
+private function <a href='../proc/r4p_mul%7E3.html'>R4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>real(R4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i8p_mul%7E3"></span><h3>
+private function <a href='../proc/i8p_mul%7E3.html'>I8P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I8P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i4p_mul%7E3"></span><h3>
+private function <a href='../proc/i4p_mul%7E3.html'>I4P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I4P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i2p_mul%7E3"></span><h3>
+private function <a href='../proc/i2p_mul%7E3.html'>I2P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I2P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-i1p_mul%7E3"></span><h3>
+private function <a href='../proc/i1p_mul%7E3.html'>I1P_mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>integer(I1P) * qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-sub%7E3"></span><h3>
+private function <a href='../proc/sub%7E3.html'>sub</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal - qreal</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-negative%7E3"></span><h3>
+private function <a href='../proc/negative%7E3.html'>negative</a>(self) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>- qreal</code> unary operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r16p%7E3"></span><h3>
+private function <a href='../proc/pow_r16p%7E3.html'>pow_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r8p%7E3"></span><h3>
+private function <a href='../proc/pow_r8p%7E3.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r4p%7E3"></span><h3>
+private function <a href='../proc/pow_r4p%7E3.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i8p%7E3"></span><h3>
+private function <a href='../proc/pow_i8p%7E3.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i4p%7E3"></span><h3>
+private function <a href='../proc/pow_i4p%7E3.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i2p%7E3"></span><h3>
+private function <a href='../proc/pow_i2p%7E3.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i1p%7E3"></span><h3>
+private function <a href='../proc/pow_i1p%7E3.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/qreal%7E3.html'>qreal</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+    
+    <section>
+    <h2>Subroutines</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-allocate_unit%7E3"></span><h3>
+private elemental subroutine <a href='../proc/allocate_unit%7E3.html'>allocate_unit</a>(self)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>allocate_unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-set%7E3"></span><h3>
+private subroutine <a href='../proc/set%7E3.html'>set</a>(self, magnitude, unit, name)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Set quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom%7E3.html'>uom</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>unit</strong></td><td><p>Unit of measure of the quantity.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Quantity name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-unset%7E3"></span><h3>
+private elemental subroutine <a href='../proc/unset%7E3.html'>unset</a>(self)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Unset quantity.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The quantity.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-assign_qreal%7E3"></span><h3>
+private subroutine <a href='../proc/assign_qreal%7E3.html'>assign_qreal</a>(lhs, rhs)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>qreal = qreal</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/qreal%7E3.html'>qreal</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    </section>    
+    <br>
+    
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allmods-1">All Modules</a></h3></div>
+  <div id="allmods-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/befor64.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64%7E2.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m%7E2.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/dbm_to_mw_converter.html">dBm_to_mW_converter</a>
+      
+      <a class="list-group-item" href="../module/fury.html">fury</a>
+      
+      <a class="list-group-item" href="../module/fury_mixed_kinds.html">fury_mixed_kinds</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal128.html">fury_qreal128</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html">fury_qreal64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract128.html">fury_system_abstract128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract32.html">fury_system_abstract32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract64.html">fury_system_abstract64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si128.html">fury_system_si128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si32.html">fury_system_si32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si64.html">fury_system_si64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom128.html">fury_uom128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom32.html">fury_uom32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom64.html">fury_uom64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_converter.html">fury_uom_converter</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference128.html">fury_uom_reference128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference32.html">fury_uom_reference32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference64.html">fury_uom_reference64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol128.html">fury_uom_symbol128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html">fury_uom_symbol32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol64.html">fury_uom_symbol64</a>
+      
+      <a class="list-group-item" href="../module/penf%7E2.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E4.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E3.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E5.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E2.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E5.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E3.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E4.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E4.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E2.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E5.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E3.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E5.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E3.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E4.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E2.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/stringifor.html">stringifor</a>
+      
+      <a class="list-group-item" href="../module/stringifor_string_t.html">stringifor_string_t</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

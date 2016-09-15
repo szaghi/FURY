@@ -1,0 +1,3882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>fury_uom_symbol32 &ndash; FURY</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>fury_uom_symbol32 
+    <small>Module</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title=" 1.8% of total for modules and submodules.">322 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_uom_symbol32.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/fury_uom_symbol32.f90.html'>fury_uom_symbol32.F90</a></li>
+  
+     <li class="active">fury_uom_symbol32</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#types-0">Derived Types</a></h3></div>
+  <div id="types-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#type-uom_symbol%7E2">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-convert%7E2">convert</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_exponent%7E2">get_exponent</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_factor%7E2">get_factor</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_offset%7E2">get_offset</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_symbol%7E2">get_symbol</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_defined%7E8">is_defined</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-prefixed%7E8">prefixed</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-stringify%7E11">stringify</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_compatible%7E5">is_compatible</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_convertible%7E2">is_convertible</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_equal%7E11">is_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-div%7E11">div</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-mul%7E11">mul</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r16p%7E11">pow_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r8p%7E11">pow_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r4p%7E11">pow_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i8p%7E11">pow_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i4p%7E11">pow_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i2p%7E11">pow_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i1p%7E11">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-0">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-0" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_convert%7E2">get_convert</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-parse%7E8">parse</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-set%7E11">set</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-unset%7E11">unset</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-assign_uom_symbol%7E2">assign_uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allmods-0">All Modules</a></h3></div>
+  <div id="allmods-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/befor64.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64%7E2.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m%7E2.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/dbm_to_mw_converter.html">dBm_to_mW_converter</a>
+      
+      <a class="list-group-item" href="../module/fury.html">fury</a>
+      
+      <a class="list-group-item" href="../module/fury_mixed_kinds.html">fury_mixed_kinds</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal128.html">fury_qreal128</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html">fury_qreal64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract128.html">fury_system_abstract128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract32.html">fury_system_abstract32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract64.html">fury_system_abstract64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si128.html">fury_system_si128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si32.html">fury_system_si32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si64.html">fury_system_si64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom128.html">fury_uom128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom32.html">fury_uom32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom64.html">fury_uom64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_converter.html">fury_uom_converter</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference128.html">fury_uom_reference128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference32.html">fury_uom_reference32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference64.html">fury_uom_reference64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol128.html">fury_uom_symbol128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html">fury_uom_symbol32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol64.html">fury_uom_symbol64</a>
+      
+      <a class="list-group-item" href="../module/penf%7E2.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E4.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E3.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E5.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E2.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E5.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E3.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E4.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E4.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E2.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E5.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E3.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E5.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E3.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E4.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E2.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/stringifor.html">stringifor</a>
+      
+      <a class="list-group-item" href="../module/stringifor_string_t.html">stringifor_string_t</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+      
+    
+  
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html">iso_fortran_env</a></li>
+      
+      <li><a href='../module/fury_uom_converter.html'>fury_uom_converter</a></li>
+      
+      <li><a href='../module/penf%7E2.html'>penf</a></li>
+      
+      <li><a href='../module/stringifor.html'>stringifor</a></li>
+      
+    </ul>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: module~~fury_uom_symbol32~~UsesGraph Pages: 1 -->
+<svg id="modulefury_uom_symbol32UsesGraph" width="641pt" height="102pt"
+ viewBox="0.00 0.00 641.00 101.62" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~fury_uom_symbol32~~UsesGraph" class="graph" transform="scale(0.542301 0.542301) rotate(0) translate(4 183.394)">
+<title>module~~fury_uom_symbol32~~UsesGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-183.394 1179,-183.394 1179,5 -4,5"/>
+<!-- module~fury_uom_symbol32 -->
+<g id="node1" class="node"><title>module~fury_uom_symbol32</title>
+<polygon fill="none" stroke="black" points="1173,-87 1065,-87 1065,-61 1173,-61 1173,-87"/>
+<text text-anchor="middle" x="1119" y="-71.55" font-family="Helvetica,sans-Serif" font-size="10.50">fury_uom_symbol32</text>
+</g>
+<!-- module~fury_uom_converter -->
+<g id="node2" class="node"><title>module~fury_uom_converter</title>
+<a xlink:href="../module/fury_uom_converter.html" xlink:title="fury_uom_converter">
+<polygon fill="#337ab7" stroke="#337ab7" points="805,-149 697,-149 697,-123 805,-123 805,-149"/>
+<text text-anchor="middle" x="751" y="-133.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_converter</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge32" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M781.482,-149.096C809.182,-159.997 851.483,-174.175 890,-177"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M890,-177C971.243,-182.959 1055.9,-125.337 1095.69,-93.7812"/>
+<polygon fill="#000000" stroke="#000000" points="1098.36,-96.1215 1103.93,-87.1075 1093.96,-90.6821 1098.36,-96.1215"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node3" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-26 215,-26 215,-1.24345e-14 301,-3.55271e-15 301,-26"/>
+<text text-anchor="middle" x="258" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge34" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.629,-13C345.828,-13 416.167,-13 477,-13 477,-13 477,-13 890,-13 958.804,-13 1035.44,-39.0301 1080.31,-57.0825"/>
+<polygon fill="#000000" stroke="#000000" points="1079.08,-60.3603 1089.66,-60.914 1081.73,-53.8832 1079.08,-60.3603"/>
+</g>
+<!-- module~penf_stringify~5 -->
+<g id="node19" class="node"><title>module~penf_stringify~5</title>
+<a xlink:href="../module/penf_stringify%7E5.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-87 338,-87 338,-61 414,-61 414,-87"/>
+<text text-anchor="middle" x="376" y="-71.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify~5 -->
+<g id="edge22" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M283.314,-26.086C300.346,-34.8907 323.01,-46.607 341.663,-56.2498"/>
+<polygon fill="#000000" stroke="#000000" points="340.237,-59.4525 350.728,-60.9356 343.452,-53.2342 340.237,-59.4525"/>
+</g>
+<!-- module~stringifor -->
+<g id="node4" class="node"><title>module~stringifor</title>
+<a xlink:href="../module/stringifor.html" xlink:title="stringifor">
+<polygon fill="#337ab7" stroke="#337ab7" points="1028,-87 974,-87 974,-61 1028,-61 1028,-87"/>
+<text text-anchor="middle" x="1001" y="-71.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor</text>
+</a>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge36" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1028.07,-74C1035.88,-74 1044.76,-74 1053.84,-74"/>
+<polygon fill="#000000" stroke="#000000" points="1054.12,-77.5001 1064.12,-74 1054.12,-70.5001 1054.12,-77.5001"/>
+</g>
+<!-- module~penf~2 -->
+<g id="node5" class="node"><title>module~penf~2</title>
+<a xlink:href="../module/penf%7E2.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-102 450,-102 450,-76 504,-76 504,-102"/>
+<text text-anchor="middle" x="477" y="-86.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge38" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-105C648.497,-109.836 649.455,-143.549 696,-158 778.739,-183.688 803.426,-180.252 890,-177"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_converter -->
+<g id="edge2" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_converter</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-105C630.24,-108.015 663.363,-114.455 690.861,-120.688"/>
+<polygon fill="#000000" stroke="#000000" points="690.19,-124.125 700.722,-122.968 691.768,-117.305 690.19,-124.125"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor -->
+<g id="edge16" class="edge"><title>module~penf~2&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M751,-95C826.453,-86.9507 914.991,-80.1314 963.86,-76.5958"/>
+<polygon fill="#000000" stroke="#000000" points="964.232,-80.0782 973.956,-75.8714 963.731,-73.0962 964.232,-80.0782"/>
+</g>
+<!-- module~stringifor_string_t -->
+<g id="node7" class="node"><title>module~stringifor_string_t</title>
+<a xlink:href="../module/stringifor_string_t.html" xlink:title="stringifor_string_t">
+<polygon fill="#337ab7" stroke="#337ab7" points="937,-67 843,-67 843,-41 937,-41 937,-67"/>
+<text text-anchor="middle" x="890" y="-51.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor_string_t</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor_string_t -->
+<g id="edge12" class="edge"><title>module~penf~2&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-105C666.926,-111.674 684.121,-102.135 751,-95"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M751,-95C784.645,-91.4108 821.301,-80.2778 848.519,-70.5175"/>
+<polygon fill="#000000" stroke="#000000" points="849.916,-73.733 858.096,-67.0002 847.503,-67.1621 849.916,-73.733"/>
+</g>
+<!-- module~befor64 -->
+<g id="node8" class="node"><title>module~befor64</title>
+<a xlink:href="../module/befor64.html" xlink:title="befor64">
+<polygon fill="#337ab7" stroke="#337ab7" points="778,-67 724,-67 724,-41 778,-41 778,-67"/>
+<text text-anchor="middle" x="751" y="-51.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64 -->
+<g id="edge8" class="edge"><title>module~penf~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.304,-93.0289C529.193,-96.5878 567.001,-101.709 600,-105"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-105C622.368,-107.231 677.17,-86.0853 714.225,-70.3385"/>
+<polygon fill="#000000" stroke="#000000" points="715.892,-73.4314 723.697,-66.2669 713.128,-67.0003 715.892,-73.4314"/>
+</g>
+<!-- module~befor64_pack_data_m~2 -->
+<g id="node9" class="node"><title>module~befor64_pack_data_m~2</title>
+<a xlink:href="../module/befor64_pack_data_m%7E2.html" xlink:title="befor64_pack_data_m">
+<polygon fill="#337ab7" stroke="#337ab7" points="660,-77 540,-77 540,-51 660,-51 660,-77"/>
+<text text-anchor="middle" x="600" y="-61.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64_pack_data_m</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64_pack_data_m~2 -->
+<g id="edge4" class="edge"><title>module~penf~2&#45;&gt;module~befor64_pack_data_m~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.298,-83.4517C512.042,-81.8776 520.847,-80.0879 529.906,-78.2467"/>
+<polygon fill="#000000" stroke="#000000" points="530.695,-81.658 539.798,-76.2362 529.301,-74.7982 530.695,-81.658"/>
+</g>
+<!-- module~stringifor_string_t&#45;&gt;module~stringifor -->
+<g id="edge14" class="edge"><title>module~stringifor_string_t&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M937.718,-62.5979C946.491,-64.1785 955.528,-65.8068 963.93,-67.3206"/>
+<polygon fill="#000000" stroke="#000000" points="963.34,-70.7707 973.802,-69.0994 964.581,-63.8816 963.34,-70.7707"/>
+</g>
+<!-- module~befor64&#45;&gt;module~stringifor_string_t -->
+<g id="edge10" class="edge"><title>module~befor64&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M778.131,-54C793.53,-54 813.416,-54 832.142,-54"/>
+<polygon fill="#000000" stroke="#000000" points="832.39,-57.5001 842.39,-54 832.39,-50.5001 832.39,-57.5001"/>
+</g>
+<!-- module~befor64_pack_data_m~2&#45;&gt;module~befor64 -->
+<g id="edge6" class="edge"><title>module~befor64_pack_data_m~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M660.113,-60.019C678.194,-58.8216 697.504,-57.5428 713.655,-56.4732"/>
+<polygon fill="#000000" stroke="#000000" points="714.02,-59.9568 723.767,-55.8035 713.558,-52.9721 714.02,-59.9568"/>
+</g>
+<!-- module~penf_global_parameters_variables~4 -->
+<g id="node17" class="node"><title>module~penf_global_parameters_variables~4</title>
+<a xlink:href="../module/penf_global_parameters_variables%7E4.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-108 8.52651e-14,-108 0,-82 178,-82 178,-108"/>
+<text text-anchor="middle" x="89" y="-92.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf~2 -->
+<g id="edge26" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M130.313,-108.055C186.046,-124.03 288.433,-147.606 376,-136"/>
+</g>
+<!-- module~penf_b_size~2 -->
+<g id="node18" class="node"><title>module~penf_b_size~2</title>
+<a xlink:href="../module/penf_b_size%7E2.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-108 223,-108 223,-82 293,-82 293,-108"/>
+<text text-anchor="middle" x="258" y="-92.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2 -->
+<g id="edge18" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-95C190.206,-95 201.835,-95 212.422,-95"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-98.5001 222.627,-95 212.627,-91.5001 212.627,-98.5001"/>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5 -->
+<g id="edge20" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M150.709,-81.9431C170.794,-78.2835 193.256,-74.8116 214,-73 252.963,-69.5974 262.89,-72.7358 302,-73 310.312,-73.0562 319.149,-73.1478 327.715,-73.2534"/>
+<polygon fill="#000000" stroke="#000000" points="327.93,-76.7564 337.975,-73.3877 328.022,-69.757 327.93,-76.7564"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf~2 -->
+<g id="edge28" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M277.851,-108.146C300.82,-121.861 340.096,-140.758 376,-136"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-136C402.482,-132.49 429.79,-119.085 449.323,-107.485"/>
+<polygon fill="#000000" stroke="#000000" points="451.302,-110.377 457.985,-102.156 447.633,-104.415 451.302,-110.377"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf_stringify~5 -->
+<g id="edge24" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-88.7562C304.014,-86.8111 316.261,-84.6316 327.919,-82.5569"/>
+<polygon fill="#000000" stroke="#000000" points="328.732,-85.9672 337.964,-80.7692 327.505,-79.0755 328.732,-85.9672"/>
+</g>
+<!-- module~penf_stringify~5&#45;&gt;module~penf~2 -->
+<g id="edge30" class="edge"><title>module~penf_stringify~5&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.184,-79.6709C422.511,-80.9075 431.313,-82.2149 439.609,-83.4469"/>
+<polygon fill="#000000" stroke="#000000" points="439.366,-86.9491 449.772,-84.9562 440.395,-80.0251 439.366,-86.9491"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var panmodulefury_uom_symbol32UsesGraph = svgPanZoom('#modulefury_uom_symbol32UsesGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    
+    <p>FURY class definition of unit symbol with float32 kind.</p>
+<p>FURY class implementation of unit symbol with generic kind.</p>
+    
+    
+    <h3>Used By</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: module~~fury_uom_symbol32~~UsedByGraph Pages: 1 -->
+<svg id="modulefury_uom_symbol32UsedByGraph" width="641pt" height="799pt"
+ viewBox="0.00 0.00 641.00 799.32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~fury_uom_symbol32~~UsedByGraph" class="graph" transform="scale(0.482681 0.482681) rotate(0) translate(4 1652)">
+<title>module~~fury_uom_symbol32~~UsedByGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-1652 1325,-1652 1325,5 -4,5"/>
+<!-- module~fury_uom_symbol32 -->
+<g id="node1" class="node"><title>module~fury_uom_symbol32</title>
+<polygon fill="none" stroke="black" points="109,-939 1,-939 1,-913 109,-913 109,-939"/>
+<text text-anchor="middle" x="55" y="-923.55" font-family="Helvetica,sans-Serif" font-size="10.50">fury_uom_symbol32</text>
+</g>
+<!-- module~fury_uom_reference32 -->
+<g id="node2" class="node"><title>module~fury_uom_reference32</title>
+<a xlink:href="../module/fury_uom_reference32.html" xlink:title="fury_uom_reference32">
+<polygon fill="#337ab7" stroke="#337ab7" points="267,-898 147,-898 147,-872 267,-872 267,-898"/>
+<text text-anchor="middle" x="207" y="-882.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference32</text>
+</a>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge114" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M103.512,-912.915C117.98,-909.012 133.984,-904.695 148.994,-900.646"/>
+<polygon fill="#000000" stroke="#000000" points="149.945,-904.015 158.688,-898.031 148.122,-897.257 149.945,-904.015"/>
+</g>
+<!-- module~fury -->
+<g id="node3" class="node"><title>module~fury</title>
+<a xlink:href="../module/fury.html" xlink:title="fury">
+<polygon fill="#337ab7" stroke="#337ab7" points="870,-840 816,-840 816,-814 870,-814 870,-840"/>
+<text text-anchor="middle" x="843" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury</text>
+</a>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury -->
+<g id="edge116" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-947C574.573,-936.914 610.101,-944.95 732,-906"/>
+</g>
+<!-- module~fury_uom32 -->
+<g id="node4" class="node"><title>module~fury_uom32</title>
+<a xlink:href="../module/fury_uom32.html" xlink:title="fury_uom32">
+<polygon fill="#337ab7" stroke="#337ab7" points="374,-878 304,-878 304,-852 374,-852 374,-878"/>
+<text text-anchor="middle" x="339" y="-862.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom32</text>
+</a>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_uom32 -->
+<g id="edge118" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M107.6,-939.01C136.795,-944.782 173.812,-949.725 207,-947"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M207,-947C252.657,-943.251 295.821,-908.398 319.712,-885.353"/>
+<polygon fill="#000000" stroke="#000000" points="322.429,-887.587 327.051,-878.053 317.493,-882.624 322.429,-887.587"/>
+</g>
+<!-- module~fury_mixed_kinds -->
+<g id="node5" class="node"><title>module~fury_mixed_kinds</title>
+<a xlink:href="../module/fury_mixed_kinds.html" xlink:title="fury_mixed_kinds">
+<polygon fill="#337ab7" stroke="#337ab7" points="632,-919 536,-919 536,-893 632,-893 632,-919"/>
+<text text-anchor="middle" x="584" y="-903.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_mixed_kinds</text>
+</a>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge120" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M207,-947C313.309,-938.27 340.627,-954.914 447,-947"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-947C480.836,-944.325 517.603,-932.814 544.522,-922.668"/>
+<polygon fill="#000000" stroke="#000000" points="545.908,-925.885 553.97,-919.011 543.381,-919.357 545.908,-925.885"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury -->
+<g id="edge10" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M218.411,-871.945C250.753,-836.52 347.169,-741.65 447,-748"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-748C507.746,-743.622 523.289,-749.844 584,-745"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M584,-745C649.569,-739.769 668.256,-728.77 732,-745"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M732,-745C769.882,-754.645 804.564,-785.303 824.738,-806.273"/>
+<polygon fill="#000000" stroke="#000000" points="822.354,-808.848 831.736,-813.771 827.472,-804.072 822.354,-808.848"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_uom32 -->
+<g id="edge12" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M267.591,-875.819C276.457,-874.476 285.454,-873.113 293.936,-871.828"/>
+<polygon fill="#000000" stroke="#000000" points="294.621,-875.264 303.984,-870.305 293.572,-868.343 294.621,-875.264"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge8" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M267.681,-890.09C316.215,-894.214 385.994,-900.261 447,-906"/>
+</g>
+<!-- module~fury_system_abstract32 -->
+<g id="node6" class="node"><title>module~fury_system_abstract32</title>
+<a xlink:href="../module/fury_system_abstract32.html" xlink:title="fury_system_abstract32">
+<polygon fill="#337ab7" stroke="#337ab7" points="647,-799 521,-799 521,-773 647,-773 647,-799"/>
+<text text-anchor="middle" x="584" y="-783.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract32</text>
+</a>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge14" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-748C479.798,-750.086 515.54,-760.282 542.29,-769.587"/>
+<polygon fill="#000000" stroke="#000000" points="541.122,-772.886 551.717,-772.958 543.48,-766.295 541.122,-772.886"/>
+</g>
+<!-- program~fury_test_qreal_assign -->
+<g id="node15" class="node"><title>program~fury_test_qreal_assign</title>
+<a xlink:href="../program/fury_test_qreal_assign.html" xlink:title="fury_test_qreal_assign">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1058,-1648 938,-1648 938,-1622 1058,-1622 1058,-1648"/>
+<text text-anchor="middle" x="998" y="-1632.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_assign</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_assign -->
+<g id="edge18" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_assign</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.139,-840.136C844.291,-938.037 853.584,-1551.77 906,-1613 911.82,-1619.8 919.331,-1624.7 927.549,-1628.2"/>
+<polygon fill="#000000" stroke="#000000" points="926.48,-1631.54 937.075,-1631.59 928.826,-1624.94 926.48,-1631.54"/>
+</g>
+<!-- program~fury_test_uom_pow -->
+<g id="node16" class="node"><title>program~fury_test_uom_pow</title>
+<a xlink:href="../program/fury_test_uom_pow.html" xlink:title="fury_test_uom_pow">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1051,-1604 945,-1604 945,-1578 1051,-1578 1051,-1604"/>
+<text text-anchor="middle" x="998" y="-1588.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_pow</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_pow -->
+<g id="edge20" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_pow</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.244,-840.185C845.106,-934.588 858.301,-1505.65 906,-1564 913.415,-1573.07 923.707,-1579.19 934.733,-1583.31"/>
+<polygon fill="#000000" stroke="#000000" points="933.968,-1586.74 944.558,-1586.43 936.086,-1580.06 933.968,-1586.74"/>
+</g>
+<!-- program~fury_test_qreal_conversions_complex -->
+<g id="node17" class="node"><title>program~fury_test_qreal_conversions_complex</title>
+<a xlink:href="../program/fury_test_qreal_conversions_complex.html" xlink:title="fury_test_qreal_conversions_complex">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1319,-1542 1127,-1542 1127,-1516 1319,-1516 1319,-1542"/>
+<text text-anchor="middle" x="1223" y="-1526.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_complex</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_complex -->
+<g id="edge22" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_complex</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.135,-840.035C844.221,-932.13 852.913,-1482.45 906,-1531 937.304,-1559.63 1045.86,-1553.05 1127.27,-1543.29"/>
+<polygon fill="#000000" stroke="#000000" points="1128.06,-1546.72 1137.56,-1542.02 1127.21,-1539.77 1128.06,-1546.72"/>
+</g>
+<!-- program~fury_test_qreal_conversions_si -->
+<g id="node18" class="node"><title>program~fury_test_qreal_conversions_si</title>
+<a xlink:href="../program/fury_test_qreal_conversions_si.html" xlink:title="fury_test_qreal_conversions_si">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1078,-1478 918,-1478 918,-1452 1078,-1452 1078,-1478"/>
+<text text-anchor="middle" x="998" y="-1462.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_si</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_si -->
+<g id="edge24" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.445,-840.155C846.44,-925.26 864.801,-1395.93 906,-1443 907.19,-1444.36 908.447,-1445.64 909.764,-1446.85"/>
+<polygon fill="#000000" stroke="#000000" points="907.821,-1449.77 917.903,-1453.03 912.052,-1444.2 907.821,-1449.77"/>
+</g>
+<!-- program~fury_test_qreal_conversions_simple -->
+<g id="node19" class="node"><title>program~fury_test_qreal_conversions_simple</title>
+<a xlink:href="../program/fury_test_qreal_conversions_simple.html" xlink:title="fury_test_qreal_conversions_simple">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1090,-1434 906,-1434 906,-1408 1090,-1408 1090,-1434"/>
+<text text-anchor="middle" x="998" y="-1418.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_conversions_simple</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_conversions_simple -->
+<g id="edge26" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_conversions_simple</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.558,-840.257C847.116,-922.011 867.707,-1355.59 906,-1399 906.761,-1399.86 907.548,-1400.69 908.361,-1401.5"/>
+<polygon fill="#000000" stroke="#000000" points="906.33,-1404.35 916.3,-1407.94 910.74,-1398.92 906.33,-1404.35"/>
+</g>
+<!-- program~fury_test_qreal_div -->
+<g id="node20" class="node"><title>program~fury_test_qreal_div</title>
+<a xlink:href="../program/fury_test_qreal_div.html" xlink:title="fury_test_qreal_div">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1049,-1390 947,-1390 947,-1364 1049,-1364 1049,-1390"/>
+<text text-anchor="middle" x="998" y="-1374.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_div -->
+<g id="edge28" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_div</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.684,-840.236C847.829,-918.173 870.588,-1315.22 906,-1355 914.019,-1364.01 925.009,-1369.66 936.604,-1373.14"/>
+<polygon fill="#000000" stroke="#000000" points="935.886,-1376.56 946.435,-1375.57 937.57,-1369.77 935.886,-1376.56"/>
+</g>
+<!-- program~fury_test_uom_assign -->
+<g id="node21" class="node"><title>program~fury_test_uom_assign</title>
+<a xlink:href="../program/fury_test_uom_assign.html" xlink:title="fury_test_uom_assign">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1057,-1346 939,-1346 939,-1320 1057,-1320 1057,-1346"/>
+<text text-anchor="middle" x="998" y="-1330.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_assign -->
+<g id="edge30" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_assign</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.84,-840.323C848.635,-914.535 873.479,-1274.86 906,-1311 912.293,-1317.99 920.375,-1322.96 929.132,-1326.45"/>
+<polygon fill="#000000" stroke="#000000" points="928.252,-1329.85 938.845,-1329.69 930.467,-1323.21 928.252,-1329.85"/>
+</g>
+<!-- program~fury_test_uom_aliases -->
+<g id="node22" class="node"><title>program~fury_test_uom_aliases</title>
+<a xlink:href="../program/fury_test_uom_aliases.html" xlink:title="fury_test_uom_aliases">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1058,-1302 938,-1302 938,-1276 1058,-1276 1058,-1302"/>
+<text text-anchor="middle" x="998" y="-1286.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_aliases</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_aliases -->
+<g id="edge32" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_aliases</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.997,-840.013C849.428,-909.455 876.304,-1234.42 906,-1267 912.109,-1273.7 919.863,-1278.54 928.268,-1282"/>
+<polygon fill="#000000" stroke="#000000" points="927.386,-1285.39 937.981,-1285.35 929.669,-1278.78 927.386,-1285.39"/>
+</g>
+<!-- program~fury_test_qreal_div_mixed -->
+<g id="node23" class="node"><title>program~fury_test_qreal_div_mixed</title>
+<a xlink:href="../program/fury_test_qreal_div_mixed.html" xlink:title="fury_test_qreal_div_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1067,-1258 929,-1258 929,-1232 1067,-1232 1067,-1258"/>
+<text text-anchor="middle" x="998" y="-1242.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_div_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_div_mixed -->
+<g id="edge34" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_div_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.199,-840.071C844.411,-902.015 852.675,-1165.4 906,-1223 909.905,-1227.22 914.462,-1230.69 919.419,-1233.55"/>
+<polygon fill="#000000" stroke="#000000" points="918.196,-1236.85 928.721,-1238.05 921.246,-1230.55 918.196,-1236.85"/>
+</g>
+<!-- program~fury_test_uom_sub_failure -->
+<g id="node24" class="node"><title>program~fury_test_uom_sub_failure</title>
+<a xlink:href="../program/fury_test_uom_sub_failure.html" xlink:title="fury_test_uom_sub_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1067,-1214 929,-1214 929,-1188 1067,-1188 1067,-1214"/>
+<text text-anchor="middle" x="998" y="-1198.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_sub_failure -->
+<g id="edge36" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_sub_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.486,-840.14C845.889,-897.892 858.377,-1128.55 906,-1179 909.875,-1183.11 914.368,-1186.5 919.244,-1189.31"/>
+<polygon fill="#000000" stroke="#000000" points="917.858,-1192.53 928.382,-1193.76 920.919,-1186.24 917.858,-1192.53"/>
+</g>
+<!-- program~fury_test_qreal_eq -->
+<g id="node25" class="node"><title>program~fury_test_qreal_eq</title>
+<a xlink:href="../program/fury_test_qreal_eq.html" xlink:title="fury_test_qreal_eq">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1049,-1170 947,-1170 947,-1144 1049,-1144 1049,-1170"/>
+<text text-anchor="middle" x="998" y="-1154.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_eq -->
+<g id="edge38" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_eq</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.859,-840.267C847.582,-893.61 864.063,-1091.66 906,-1135 914.386,-1143.67 925.532,-1149.17 937.164,-1152.62"/>
+<polygon fill="#000000" stroke="#000000" points="936.451,-1156.05 946.999,-1155.05 938.131,-1149.25 936.451,-1156.05"/>
+</g>
+<!-- program~fury_test_uom_div -->
+<g id="node26" class="node"><title>program~fury_test_uom_div</title>
+<a xlink:href="../program/fury_test_uom_div.html" xlink:title="fury_test_uom_div">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1048,-1126 948,-1126 948,-1100 1048,-1100 1048,-1126"/>
+<text text-anchor="middle" x="998" y="-1110.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_div</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_div -->
+<g id="edge40" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_div</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M844.352,-840.323C849.536,-888.774 869.691,-1054.67 906,-1091 914.617,-1099.62 925.97,-1105.09 937.749,-1108.52"/>
+<polygon fill="#000000" stroke="#000000" points="937.148,-1111.97 947.692,-1110.93 938.802,-1105.17 937.148,-1111.97"/>
+</g>
+<!-- program~fury_test_qreal_eq_mixed -->
+<g id="node27" class="node"><title>program~fury_test_qreal_eq_mixed</title>
+<a xlink:href="../program/fury_test_qreal_eq_mixed.html" xlink:title="fury_test_qreal_eq_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1066,-1082 930,-1082 930,-1056 1066,-1056 1066,-1082"/>
+<text text-anchor="middle" x="998" y="-1066.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_eq_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_eq_mixed -->
+<g id="edge42" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_eq_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M845.003,-840.148C851.788,-882.996 875.212,-1017.54 906,-1047 910.333,-1051.15 915.302,-1054.56 920.637,-1057.36"/>
+<polygon fill="#000000" stroke="#000000" points="919.356,-1060.62 929.913,-1061.52 922.221,-1054.23 919.356,-1060.62"/>
+</g>
+<!-- program~fury_test_uom_mul -->
+<g id="node28" class="node"><title>program~fury_test_uom_mul</title>
+<a xlink:href="../program/fury_test_uom_mul.html" xlink:title="fury_test_uom_mul">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1050,-1038 946,-1038 946,-1012 1050,-1012 1050,-1038"/>
+<text text-anchor="middle" x="998" y="-1022.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_mul</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_mul -->
+<g id="edge44" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_mul</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.64,-840.365C845.968,-873.284 856.704,-958.805 906,-1003 914.512,-1010.63 925.197,-1015.74 936.244,-1019.13"/>
+<polygon fill="#000000" stroke="#000000" points="935.439,-1022.54 945.999,-1021.69 937.215,-1015.77 935.439,-1022.54"/>
+</g>
+<!-- program~fury_test_qreal_mul -->
+<g id="node29" class="node"><title>program~fury_test_qreal_mul</title>
+<a xlink:href="../program/fury_test_qreal_mul.html" xlink:title="fury_test_qreal_mul">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1051,-994 945,-994 945,-968 1051,-968 1051,-994"/>
+<text text-anchor="middle" x="998" y="-978.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_mul -->
+<g id="edge46" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_mul</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M845.383,-840.196C850.932,-866.952 867.303,-927.701 906,-959 914.225,-965.653 924.135,-970.35 934.362,-973.655"/>
+<polygon fill="#000000" stroke="#000000" points="933.647,-977.09 944.22,-976.416 935.534,-970.349 933.647,-977.09"/>
+</g>
+<!-- program~fury_test_uom_add_failure -->
+<g id="node30" class="node"><title>program~fury_test_uom_add_failure</title>
+<a xlink:href="../program/fury_test_uom_add_failure.html" xlink:title="fury_test_uom_add_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1068,-950 928,-950 928,-924 1068,-924 1068,-950"/>
+<text text-anchor="middle" x="998" y="-934.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_add_failure -->
+<g id="edge48" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_add_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M848.636,-840.024C857.753,-859.488 877.625,-895.915 906,-915 909.965,-917.667 914.216,-920.011 918.639,-922.073"/>
+<polygon fill="#000000" stroke="#000000" points="917.34,-925.323 927.919,-925.919 920.021,-918.857 917.34,-925.323"/>
+</g>
+<!-- program~fury_test_bolt32 -->
+<g id="node31" class="node"><title>program~fury_test_bolt32</title>
+<a xlink:href="../program/fury_test_bolt32.html" xlink:title="fury_test_bolt32">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1042,-906 954,-906 954,-880 1042,-880 1042,-906"/>
+<text text-anchor="middle" x="998" y="-890.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt32</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_bolt32 -->
+<g id="edge50" class="edge"><title>module~fury&#45;&gt;program~fury_test_bolt32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M858.562,-840.376C870.733,-850.19 888.476,-863.128 906,-871 917.702,-876.257 930.829,-880.354 943.422,-883.51"/>
+<polygon fill="#000000" stroke="#000000" points="942.834,-886.967 953.369,-885.843 944.432,-880.151 942.834,-886.967"/>
+</g>
+<!-- program~fury_test_qreal_mul_mixed -->
+<g id="node32" class="node"><title>program~fury_test_qreal_mul_mixed</title>
+<a xlink:href="../program/fury_test_qreal_mul_mixed.html" xlink:title="fury_test_qreal_mul_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1069,-862 927,-862 927,-836 1069,-836 1069,-862"/>
+<text text-anchor="middle" x="998" y="-846.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_mul_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_mul_mixed -->
+<g id="edge52" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_mul_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M870.354,-830.883C883.576,-832.759 900.212,-835.12 917.064,-837.512"/>
+<polygon fill="#000000" stroke="#000000" points="916.595,-840.981 926.987,-838.921 917.578,-834.05 916.595,-840.981"/>
+</g>
+<!-- program~fury_test_system_si -->
+<g id="node33" class="node"><title>program~fury_test_system_si</title>
+<a xlink:href="../program/fury_test_system_si.html" xlink:title="fury_test_system_si">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1051,-818 945,-818 945,-792 1051,-792 1051,-818"/>
+<text text-anchor="middle" x="998" y="-802.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_system_si</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_system_si -->
+<g id="edge54" class="edge"><title>module~fury&#45;&gt;program~fury_test_system_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M870.354,-823.117C888.065,-820.604 911.9,-817.221 934.177,-814.059"/>
+<polygon fill="#000000" stroke="#000000" points="934.866,-817.496 944.275,-812.625 933.883,-810.566 934.866,-817.496"/>
+</g>
+<!-- program~fury_test_bolt64 -->
+<g id="node34" class="node"><title>program~fury_test_bolt64</title>
+<a xlink:href="../program/fury_test_bolt64.html" xlink:title="fury_test_bolt64">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1042,-774 954,-774 954,-748 1042,-748 1042,-774"/>
+<text text-anchor="middle" x="998" y="-758.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_bolt64</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_bolt64 -->
+<g id="edge56" class="edge"><title>module~fury&#45;&gt;program~fury_test_bolt64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M858.562,-813.624C870.733,-803.81 888.476,-790.872 906,-783 917.702,-777.743 930.829,-773.646 943.422,-770.49"/>
+<polygon fill="#000000" stroke="#000000" points="944.432,-773.849 953.369,-768.157 942.834,-767.033 944.432,-773.849"/>
+</g>
+<!-- program~fury_test_qreal_not_eq -->
+<g id="node35" class="node"><title>program~fury_test_qreal_not_eq</title>
+<a xlink:href="../program/fury_test_qreal_not_eq.html" xlink:title="fury_test_qreal_not_eq">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1059,-730 937,-730 937,-704 1059,-704 1059,-730"/>
+<text text-anchor="middle" x="998" y="-714.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_not_eq -->
+<g id="edge58" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_not_eq</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M848.636,-813.976C857.753,-794.512 877.625,-758.085 906,-739 912.183,-734.841 919.065,-731.465 926.203,-728.726"/>
+<polygon fill="#000000" stroke="#000000" points="927.717,-731.908 936.054,-725.371 925.46,-725.282 927.717,-731.908"/>
+</g>
+<!-- program~fury_test_qreal_sub_failure -->
+<g id="node36" class="node"><title>program~fury_test_qreal_sub_failure</title>
+<a xlink:href="../program/fury_test_qreal_sub_failure.html" xlink:title="fury_test_qreal_sub_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1069,-686 927,-686 927,-660 1069,-660 1069,-686"/>
+<text text-anchor="middle" x="998" y="-670.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_failure -->
+<g id="edge60" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M845.383,-813.804C850.932,-787.048 867.303,-726.299 906,-695 909.543,-692.134 913.399,-689.631 917.459,-687.446"/>
+<polygon fill="#000000" stroke="#000000" points="919.056,-690.562 926.628,-683.152 916.088,-684.223 919.056,-690.562"/>
+</g>
+<!-- program~fury_test_uom_sub -->
+<g id="node37" class="node"><title>program~fury_test_uom_sub</title>
+<a xlink:href="../program/fury_test_uom_sub.html" xlink:title="fury_test_uom_sub">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1050,-642 946,-642 946,-616 1050,-616 1050,-642"/>
+<text text-anchor="middle" x="998" y="-626.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_sub</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_sub -->
+<g id="edge62" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_sub</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.64,-813.635C845.968,-780.716 856.704,-695.195 906,-651 914.512,-643.369 925.197,-638.261 936.244,-634.869"/>
+<polygon fill="#000000" stroke="#000000" points="937.215,-638.233 945.999,-632.309 935.439,-631.462 937.215,-638.233"/>
+</g>
+<!-- program~fury_test_qreal_not_eq_mixed -->
+<g id="node38" class="node"><title>program~fury_test_qreal_not_eq_mixed</title>
+<a xlink:href="../program/fury_test_qreal_not_eq_mixed.html" xlink:title="fury_test_qreal_not_eq_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1076,-598 920,-598 920,-572 1076,-572 1076,-598"/>
+<text text-anchor="middle" x="998" y="-582.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_not_eq_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_not_eq_mixed -->
+<g id="edge64" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_not_eq_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M845.003,-813.852C851.788,-771.004 875.212,-636.457 906,-607 907.468,-605.595 909.01,-604.275 910.614,-603.034"/>
+<polygon fill="#000000" stroke="#000000" points="912.66,-605.877 919.106,-597.469 908.824,-600.022 912.66,-605.877"/>
+</g>
+<!-- program~fury_test_qreal_pow -->
+<g id="node39" class="node"><title>program~fury_test_qreal_pow</title>
+<a xlink:href="../program/fury_test_qreal_pow.html" xlink:title="fury_test_qreal_pow">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1052,-554 944,-554 944,-528 1052,-528 1052,-554"/>
+<text text-anchor="middle" x="998" y="-538.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_pow</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_pow -->
+<g id="edge66" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_pow</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M844.352,-813.677C849.536,-765.226 869.691,-599.326 906,-563 913.566,-555.43 923.243,-550.289 933.464,-546.83"/>
+<polygon fill="#000000" stroke="#000000" points="934.722,-550.111 943.381,-544.005 932.804,-543.379 934.722,-550.111"/>
+</g>
+<!-- program~fury_test_uom_parse_failure -->
+<g id="node40" class="node"><title>program~fury_test_uom_parse_failure</title>
+<a xlink:href="../program/fury_test_uom_parse_failure.html" xlink:title="fury_test_uom_parse_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1072,-510 924,-510 924,-484 1072,-484 1072,-510"/>
+<text text-anchor="middle" x="998" y="-494.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_parse_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_parse_failure -->
+<g id="edge68" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_parse_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.859,-813.733C847.582,-760.39 864.063,-562.343 906,-519 908.532,-516.383 911.315,-514.055 914.288,-511.984"/>
+<polygon fill="#000000" stroke="#000000" points="916.259,-514.886 923.113,-506.807 912.717,-508.848 916.259,-514.886"/>
+</g>
+<!-- program~fury_test_qreal_sub -->
+<g id="node41" class="node"><title>program~fury_test_qreal_sub</title>
+<a xlink:href="../program/fury_test_qreal_sub.html" xlink:title="fury_test_qreal_sub">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1051,-466 945,-466 945,-440 1051,-440 1051,-466"/>
+<text text-anchor="middle" x="998" y="-450.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub -->
+<g id="edge70" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.486,-813.86C845.889,-756.108 858.377,-525.45 906,-475 913.682,-466.863 923.792,-461.498 934.494,-458.008"/>
+<polygon fill="#000000" stroke="#000000" points="935.706,-461.305 944.436,-455.303 933.868,-454.551 935.706,-461.305"/>
+</g>
+<!-- module~dbm_to_mw_converter -->
+<g id="node42" class="node"><title>module~dbm_to_mw_converter</title>
+<a xlink:href="../module/dbm_to_mw_converter.html" xlink:title="dBm_to_mW_converter">
+<polygon fill="#337ab7" stroke="#337ab7" points="1060,-1522 936,-1522 936,-1496 1060,-1496 1060,-1522"/>
+<text text-anchor="middle" x="998" y="-1506.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">dBm_to_mW_converter</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;module~dbm_to_mw_converter -->
+<g id="edge72" class="edge"><title>module~fury&#45;&gt;module~dbm_to_mw_converter</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.353,-840.224C845.838,-929.004 861.916,-1436.29 906,-1487 911.379,-1493.19 918.158,-1497.8 925.588,-1501.21"/>
+<polygon fill="#000000" stroke="#000000" points="924.699,-1504.62 935.29,-1504.92 927.201,-1498.08 924.699,-1504.62"/>
+</g>
+<!-- program~fury_test_qreal_add_aliases_failure -->
+<g id="node43" class="node"><title>program~fury_test_qreal_add_aliases_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_aliases_failure.html" xlink:title="fury_test_qreal_add_aliases_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1089,-422 907,-422 907,-396 1089,-396 1089,-422"/>
+<text text-anchor="middle" x="998" y="-406.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_aliases_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_aliases_failure -->
+<g id="edge74" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_aliases_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.199,-813.929C844.411,-751.985 852.675,-488.595 906,-431 906.781,-430.156 907.588,-429.343 908.419,-428.557"/>
+<polygon fill="#000000" stroke="#000000" points="910.776,-431.157 916.495,-422.239 906.462,-425.644 910.776,-431.157"/>
+</g>
+<!-- program~fury_test_qreal_add_failure -->
+<g id="node44" class="node"><title>program~fury_test_qreal_add_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_failure.html" xlink:title="fury_test_qreal_add_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1069,-378 927,-378 927,-352 1069,-352 1069,-378"/>
+<text text-anchor="middle" x="998" y="-362.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_failure -->
+<g id="edge76" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.997,-813.987C849.428,-744.545 876.304,-419.579 906,-387 909.35,-383.325 913.195,-380.211 917.37,-377.578"/>
+<polygon fill="#000000" stroke="#000000" points="919.154,-380.594 926.353,-372.821 915.878,-374.408 919.154,-380.594"/>
+</g>
+<!-- program~fury_test_qreal_add -->
+<g id="node45" class="node"><title>program~fury_test_qreal_add</title>
+<a xlink:href="../program/fury_test_qreal_add.html" xlink:title="fury_test_qreal_add">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1052,-334 944,-334 944,-308 1052,-308 1052,-334"/>
+<text text-anchor="middle" x="998" y="-318.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add -->
+<g id="edge78" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.84,-813.677C848.635,-739.465 873.479,-379.139 906,-343 913.401,-334.775 923.279,-329.356 933.818,-325.835"/>
+<polygon fill="#000000" stroke="#000000" points="934.931,-329.158 943.629,-323.109 933.057,-322.414 934.931,-329.158"/>
+</g>
+<!-- program~fury_test_qreal_sub_mixed -->
+<g id="node46" class="node"><title>program~fury_test_qreal_sub_mixed</title>
+<a xlink:href="../program/fury_test_qreal_sub_mixed.html" xlink:title="fury_test_qreal_sub_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1069,-290 927,-290 927,-264 1069,-264 1069,-290"/>
+<text text-anchor="middle" x="998" y="-274.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_mixed -->
+<g id="edge80" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.684,-813.764C847.829,-735.827 870.588,-338.776 906,-299 909.372,-295.213 913.268,-292.019 917.514,-289.331"/>
+<polygon fill="#000000" stroke="#000000" points="919.458,-292.262 926.663,-284.495 916.187,-286.074 919.458,-292.262"/>
+</g>
+<!-- program~fury_test_qreal_add_mixed -->
+<g id="node47" class="node"><title>program~fury_test_qreal_add_mixed</title>
+<a xlink:href="../program/fury_test_qreal_add_mixed.html" xlink:title="fury_test_qreal_add_mixed">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1069,-246 927,-246 927,-220 1069,-220 1069,-246"/>
+<text text-anchor="middle" x="998" y="-230.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_mixed -->
+<g id="edge82" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_mixed</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.558,-813.743C847.116,-731.989 867.707,-298.407 906,-255 909.354,-251.198 913.238,-247.992 917.474,-245.296"/>
+<polygon fill="#000000" stroke="#000000" points="919.417,-248.227 926.608,-240.446 916.134,-242.044 919.417,-248.227"/>
+</g>
+<!-- program~fury_test_qreal_sub_mixed_failure -->
+<g id="node48" class="node"><title>program~fury_test_qreal_sub_mixed_failure</title>
+<a xlink:href="../program/fury_test_qreal_sub_mixed_failure.html" xlink:title="fury_test_qreal_sub_mixed_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1086,-202 910,-202 910,-176 1086,-176 1086,-202"/>
+<text text-anchor="middle" x="998" y="-186.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_sub_mixed_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_sub_mixed_failure -->
+<g id="edge84" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_sub_mixed_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.445,-813.845C846.44,-728.74 864.801,-258.069 906,-211 906.757,-210.135 907.542,-209.301 908.352,-208.496"/>
+<polygon fill="#000000" stroke="#000000" points="910.735,-211.069 916.268,-202.034 906.308,-205.647 910.735,-211.069"/>
+</g>
+<!-- program~fury_test_qreal_add_mixed_failure -->
+<g id="node49" class="node"><title>program~fury_test_qreal_add_mixed_failure</title>
+<a xlink:href="../program/fury_test_qreal_add_mixed_failure.html" xlink:title="fury_test_qreal_add_mixed_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1087,-158 909,-158 909,-132 1087,-132 1087,-158"/>
+<text text-anchor="middle" x="998" y="-142.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_add_mixed_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_add_mixed_failure -->
+<g id="edge86" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_add_mixed_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.353,-813.776C845.838,-724.996 861.916,-217.709 906,-167 906.754,-166.132 907.536,-165.296 908.343,-164.489"/>
+<polygon fill="#000000" stroke="#000000" points="910.729,-167.059 916.24,-158.01 906.289,-161.647 910.729,-167.059"/>
+</g>
+<!-- program~fury_test_qreal_aliases -->
+<g id="node50" class="node"><title>program~fury_test_qreal_aliases</title>
+<a xlink:href="../program/fury_test_qreal_aliases.html" xlink:title="fury_test_qreal_aliases">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1059,-114 937,-114 937,-88 1059,-88 1059,-114"/>
+<text text-anchor="middle" x="998" y="-98.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_qreal_aliases</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_qreal_aliases -->
+<g id="edge88" class="edge"><title>module~fury&#45;&gt;program~fury_test_qreal_aliases</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.269,-813.796C845.266,-721.696 859.013,-177.373 906,-123 911.634,-116.48 918.823,-111.709 926.694,-108.243"/>
+<polygon fill="#000000" stroke="#000000" points="928.017,-111.486 936.193,-104.748 925.599,-104.917 928.017,-111.486"/>
+</g>
+<!-- program~fury_test_uom_assign_failure -->
+<g id="node51" class="node"><title>program~fury_test_uom_assign_failure</title>
+<a xlink:href="../program/fury_test_uom_assign_failure.html" xlink:title="fury_test_uom_assign_failure">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1074,-70 922,-70 922,-44 1074,-44 1074,-70"/>
+<text text-anchor="middle" x="998" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_assign_failure</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_assign_failure -->
+<g id="edge90" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_assign_failure</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.195,-813.898C844.724,-718.84 856.09,-137.06 906,-79 908.007,-76.6649 910.214,-74.5539 912.58,-72.6466"/>
+<polygon fill="#000000" stroke="#000000" points="914.799,-75.3739 921.182,-66.9174 910.919,-69.5479 914.799,-75.3739"/>
+</g>
+<!-- program~fury_test_uom_add -->
+<g id="node52" class="node"><title>program~fury_test_uom_add</title>
+<a xlink:href="../program/fury_test_uom_add.html" xlink:title="fury_test_uom_add">
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="1050,-26 946,-26 946,-1.24345e-14 1050,-3.55271e-15 1050,-26"/>
+<text text-anchor="middle" x="998" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_test_uom_add</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_add -->
+<g id="edge92" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_add</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M843.132,-813.764C844.23,-715.118 853.206,-96.7059 906,-35 913.597,-26.1207 924.078,-20.4778 935.254,-16.9582"/>
+<polygon fill="#000000" stroke="#000000" points="936.395,-20.2783 945.199,-14.3838 934.641,-13.5017 936.395,-20.2783"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury -->
+<g id="edge106" class="edge"><title>module~fury_uom32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M351.441,-851.82C370.111,-833.082 407.429,-799.516 447,-786"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-786C507.145,-765.456 520.644,-750.055 584,-745"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge104" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M362.544,-878.175C383.84,-889.043 416.45,-903.126 447,-906"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-906C472.693,-908.417 501.217,-908.785 525.556,-908.407"/>
+<polygon fill="#000000" stroke="#000000" points="525.783,-911.903 535.711,-908.203 525.642,-904.905 525.783,-911.903"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge110" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-786C466.915,-779.494 489.345,-777.465 510.202,-777.602"/>
+<polygon fill="#000000" stroke="#000000" points="510.219,-781.104 520.296,-777.834 510.379,-774.106 510.219,-781.104"/>
+</g>
+<!-- module~fury_system_si32 -->
+<g id="node7" class="node"><title>module~fury_system_si32</title>
+<a xlink:href="../module/fury_system_si32.html" xlink:title="fury_system_si32">
+<polygon fill="#337ab7" stroke="#337ab7" points="780,-840 684,-840 684,-814 780,-814 780,-840"/>
+<text text-anchor="middle" x="732" y="-824.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si32</text>
+</a>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_system_si32 -->
+<g id="edge102" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-786C479.21,-775.477 486.731,-801.565 520,-808 571.281,-817.918 630.563,-822.676 673.377,-824.949"/>
+<polygon fill="#000000" stroke="#000000" points="673.455,-828.457 683.618,-825.462 673.805,-821.466 673.455,-828.457"/>
+</g>
+<!-- module~fury_qreal32 -->
+<g id="node92" class="node"><title>module~fury_qreal32</title>
+<a xlink:href="../module/fury_qreal32.html" xlink:title="fury_qreal32">
+<polygon fill="#337ab7" stroke="#337ab7" points="483,-878 411,-878 411,-852 483,-852 483,-878"/>
+<text text-anchor="middle" x="447" y="-862.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_qreal32</text>
+</a>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_qreal32 -->
+<g id="edge108" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_qreal32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M374.065,-865C382.387,-865 391.397,-865 400.151,-865"/>
+<polygon fill="#000000" stroke="#000000" points="400.255,-868.5 410.255,-865 400.255,-861.5 400.255,-868.5"/>
+</g>
+<!-- module~fury_mixed_kinds&#45;&gt;module~fury -->
+<g id="edge112" class="edge"><title>module~fury_mixed_kinds&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M632.129,-913.297C661.644,-916.003 699.815,-916.284 732,-906"/>
+</g>
+<!-- module~fury_system_abstract32&#45;&gt;module~fury -->
+<g id="edge4" class="edge"><title>module~fury_system_abstract32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M616.422,-772.962C653.001,-758.974 710.232,-739.458 732,-745"/>
+</g>
+<!-- module~fury_system_abstract32&#45;&gt;module~fury_system_si32 -->
+<g id="edge6" class="edge"><title>module~fury_system_abstract32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M631.235,-799.085C645.188,-802.951 660.608,-807.223 675.103,-811.238"/>
+<polygon fill="#000000" stroke="#000000" points="674.388,-814.672 684.96,-813.969 676.257,-807.926 674.388,-814.672"/>
+</g>
+<!-- module~fury_system_si32&#45;&gt;module~fury -->
+<g id="edge2" class="edge"><title>module~fury_system_si32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M780.041,-827C788.692,-827 797.59,-827 805.872,-827"/>
+<polygon fill="#000000" stroke="#000000" points="805.969,-830.5 815.969,-827 805.969,-823.5 805.969,-830.5"/>
+</g>
+<!-- module~dbm_to_mw_converter&#45;&gt;program~fury_test_qreal_conversions_complex -->
+<g id="edge16" class="edge"><title>module~dbm_to_mw_converter&#45;&gt;program~fury_test_qreal_conversions_complex</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1060.68,-1514.57C1077.87,-1516.1 1097.01,-1517.8 1115.94,-1519.48"/>
+<polygon fill="#000000" stroke="#000000" points="1115.85,-1522.99 1126.12,-1520.39 1116.47,-1516.02 1115.85,-1522.99"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury -->
+<g id="edge100" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M584,-865C592.532,-865.043 723.873,-908.597 732,-906"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M732,-906C768.161,-894.446 802.61,-866.328 823.279,-846.957"/>
+<polygon fill="#000000" stroke="#000000" points="825.718,-849.467 830.502,-840.014 820.867,-844.421 825.718,-849.467"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge94" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M483.713,-875.987C498.154,-880.309 515.015,-885.355 530.747,-890.063"/>
+<polygon fill="#000000" stroke="#000000" points="529.78,-893.427 540.364,-892.941 531.787,-886.721 529.78,-893.427"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge96" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M469.623,-851.955C492.23,-838.918 527.177,-818.767 552.493,-804.168"/>
+<polygon fill="#000000" stroke="#000000" points="554.429,-807.092 561.344,-799.065 550.932,-801.028 554.429,-807.092"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_system_si32 -->
+<g id="edge98" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M483.634,-864.899C511.226,-864.848 549.988,-864.828 584,-865"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M584,-865C621.061,-865.188 661.749,-853.853 691.068,-843.517"/>
+<polygon fill="#000000" stroke="#000000" points="692.351,-846.774 700.553,-840.068 689.959,-840.196 692.351,-846.774"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var panmodulefury_uom_symbol32UsedByGraph = svgPanZoom('#modulefury_uom_symbol32UsedByGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    <br>
+    
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#types-1">Derived Types</a></h3></div>
+  <div id="types-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#type-uom_symbol%7E2">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-convert%7E2">convert</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_exponent%7E2">get_exponent</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_factor%7E2">get_factor</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_offset%7E2">get_offset</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_symbol%7E2">get_symbol</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_defined%7E8">is_defined</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-prefixed%7E8">prefixed</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-stringify%7E11">stringify</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_compatible%7E5">is_compatible</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_convertible%7E2">is_convertible</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-is_equal%7E11">is_equal</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-div%7E11">div</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-mul%7E11">mul</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r16p%7E11">pow_R16P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r8p%7E11">pow_R8P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_r4p%7E11">pow_R4P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i8p%7E11">pow_I8P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i4p%7E11">pow_I4P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i2p%7E11">pow_I2P</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-pow_i1p%7E11">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#subs-1">Subroutines</a></h3></div>
+  <div class="list-group">
+    <div id="subs-1" class="panel-collapse collapse">
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-get_convert%7E2">get_convert</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-parse%7E8">parse</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-set%7E11">set</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-unset%7E11">unset</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html#proc-assign_uom_symbol%7E2">assign_uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    <section>
+     <h2>Derived Types</h2>
+	 
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="type-uom_symbol%7E2"></span><h3>type, public :: <a href='../type/uom_symbol%7E2.html'>uom_symbol</a>
+    
+  </h3></div>
+  <div class="panel-body">
+    
+    
+    <p>Unit of measure (UOM) symbol.</p>
+    
+     
+     <h4>Components</h4>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-convert_%7E2"></span>class(<a href='../type/uom_converter.html'>uom_converter</a>),</td>
+  
+  <td>private,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>convert_</strong></td><td></td><td></td><td><p>Generic conversion alias formula user-supplied.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-exponent_%7E2"></span>integer(kind=IKP),</td>
+  
+  <td>private</td>
+  <td></td><td>::</td>
+  <td><strong>exponent_</strong></td><td> =</td><td>1_IKP</td><td><p>Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-factor_%7E2"></span>real(kind=RKP),</td>
+  
+  <td>private</td>
+  <td></td><td>::</td>
+  <td><strong>factor_</strong></td><td> =</td><td>1._RKP</td><td><p>Symbol multiplicative scale factor (used only for converters).</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-offset_%7E2"></span>real(kind=RKP),</td>
+  
+  <td>private</td>
+  <td></td><td>::</td>
+  <td><strong>offset_</strong></td><td> =</td><td>0._RKP</td><td><p>Symbol additive offset (used only for converters).</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-symbol_%7E2"></span>type(<a href='../type/string.html'>string</a>),</td>
+  
+  <td>private</td>
+  <td></td><td>::</td>
+  <td><strong>symbol_</strong></td><td></td><td></td><td><p>literal symbol, e.g. "m" for metres.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+     
+     
+          
+     
+     <h4>Type-Bound Procedures</h4>
+      <table class="table table-striped varlist">
+      <tbody>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-convert%7E3'>convert</a></strong>  </td>
+       <td><p>Convert a magnitude with respect symbol definition.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-get_convert%7E2'>get_convert</a></strong>  </td>
+       <td><p>Return the symbol generic conversion alias.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-get_exponent%7E2'>get_exponent</a></strong>  </td>
+       <td><p>Return the symbol exponent.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-get_factor%7E2'>get_factor</a></strong>  </td>
+       <td><p>Return the symbol factor.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-get_offset%7E2'>get_offset</a></strong>  </td>
+       <td><p>Return the symbol offset.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-get_symbol%7E2'>get_symbol</a></strong>  </td>
+       <td><p>Return the literal symbol.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-is_defined%7E8'>is_defined</a></strong>  </td>
+       <td><p>Check if the symbol is defined.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-parse%7E8'>parse</a></strong>  </td>
+       <td><p>Parse symbol from string.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-prefixed%7E8'>prefixed</a></strong>  </td>
+       <td><p>Return a prefixed symbol.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-set%7E11'>set</a></strong>  </td>
+       <td><p>Set symbol.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-stringify%7E11'>stringify</a></strong>  </td>
+       <td><p>Return a string representaion of the symbol.</p></td></tr>
+      
+       <tr><td>procedure, public, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-unset%7E11'>unset</a></strong>  </td>
+       <td><p>Unset symbol.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-assignment%28%3D%29%7E12'>assignment(=)</a></strong>  => assign_uom_symbol </td>
+       <td><p>Overloading <code>=</code> assignment.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28SLASH%29%7E11'>operator(/)</a></strong>  => div </td>
+       <td><p>Overloading <code>/</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28%2A%29%7E11'>operator(*)</a></strong>  => mul </td>
+       <td><p>Overloading <code>*</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28%2A%2A%29%7E11'>operator(**)</a></strong>  => pow_R8P, pow_R4P, pow_I8P, pow_I4P, pow_I2P, pow_I1P </td>
+       <td><p>Overloading <code>**</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28%3D%3D%29%7E11'>operator(==)</a></strong>  => is_equal </td>
+       <td><p>Overloading <code>==</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28.compatible.%29%7E5'>operator(.compatible.)</a></strong>  => is_compatible </td>
+       <td><p>Definition of <code>.compatible.</code> operator.</p></td></tr>
+      
+       <tr><td>generic, public :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-operator%28.convertible.%29%7E2'>operator(.convertible.)</a></strong>  => is_convertible </td>
+       <td><p>Definition of <code>.convertible.</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-is_compatible%7E5'>is_compatible</a></strong>  </td>
+       <td><p>Check if the symbol is compatible with another one.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-is_convertible%7E2'>is_convertible</a></strong>  </td>
+       <td><p>Check if the symbol is convertible with another one.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(self) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-is_equal%7E11'>is_equal</a></strong>  </td>
+       <td><p>Check if the symbol is equal with another one.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-assign_uom_symbol%7E2'>assign_uom_symbol</a></strong>  </td>
+       <td><p><code>uom_symbol = uom_symbol</code> assignment.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-div%7E11'>div</a></strong>  </td>
+       <td><p><code>uom_symbol / uom_symbol</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-mul%7E11'>mul</a></strong>  </td>
+       <td><p><code>uom_symbol * uom_symbol</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_r16p%7E11'>pow_R16P</a></strong>  </td>
+       <td><p><code>uom_symbol ** real(R16P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_r8p%7E11'>pow_R8P</a></strong>  </td>
+       <td><p><code>uom_symbol ** real(R8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_r4p%7E11'>pow_R4P</a></strong>  </td>
+       <td><p><code>uom_symbol ** real(R4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_i8p%7E11'>pow_I8P</a></strong>  </td>
+       <td><p><code>uom_symbol ** integer(I8P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_i4p%7E11'>pow_I4P</a></strong>  </td>
+       <td><p><code>uom_symbol ** integer(I4P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_i2p%7E11'>pow_I2P</a></strong>  </td>
+       <td><p><code>uom_symbol ** integer(I2P)</code> operator.</p></td></tr>
+      
+       <tr><td>procedure, private, pass(lhs) :: <strong><a href='../type/uom_symbol%7E2.html#boundprocedure-pow_i1p%7E11'>pow_I1P</a></strong>  </td>
+       <td><p><code>uom_symbol ** integer(I1P)</code> operator.</p></td></tr>
+      
+       </tbody>
+       </table>
+     
+  </div>
+</div>
+
+     
+    </section>
+	<br>
+    
+    
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-convert%7E2"></span><h3>
+private elemental function <a href='../proc/convert%7E2.html'>convert</a>(self, magnitude, inverse) result(converted)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Convert a magnitude with respect symbol definition.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude to be converted.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>inverse</strong></td><td><p>Activate inverse conversion.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=RKP)
+  </small></h4>
+  <p>Converted magnitude.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-get_exponent%7E2"></span><h3>
+private elemental function <a href='../proc/get_exponent%7E2.html'>get_exponent</a>(self) result(exponent_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return the symbol exponent.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>integer(kind=IKP)
+  </small></h4>
+  <p>The symbol exponent.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-get_factor%7E2"></span><h3>
+private elemental function <a href='../proc/get_factor%7E2.html'>get_factor</a>(self) result(factor_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return the symbol factor.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=RKP)
+  </small></h4>
+  <p>The symbol factor.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-get_offset%7E2"></span><h3>
+private elemental function <a href='../proc/get_offset%7E2.html'>get_offset</a>(self) result(offset_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return the symbol offset.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=RKP)
+  </small></h4>
+  <p>The symbol offset.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-get_symbol%7E2"></span><h3>
+private elemental function <a href='../proc/get_symbol%7E2.html'>get_symbol</a>(self) result(symbol_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return the literal symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/string.html'>string</a>)
+  </small></h4>
+  <p>The literal symbol.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_defined%7E8"></span><h3>
+private elemental function <a href='../proc/is_defined%7E8.html'>is_defined</a>(self)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if <a href="../type/uom_symbol.html">uom_symbol</a> is defined.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-prefixed%7E8"></span><h3>
+private elemental function <a href='../proc/prefixed%7E8.html'>prefixed</a>(self, prefix)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return a prefixed symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>prefix</strong></td><td><p>Other symbol used for prefixing.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>The prefixed symbol.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-stringify%7E11"></span><h3>
+private pure function <a href='../proc/stringify%7E11.html'>stringify</a>(self, compact_reals) result(raw)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return a string representation of <a href="../type/uom_symbol.html">uom_symbol</a>.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>compact_reals</strong></td><td><p>Flag to activate real numbers compacting.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  <p>Raw characters data.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_compatible%7E5"></span><h3>
+private elemental function <a href='../proc/is_compatible%7E5.html'>is_compatible</a>(self, other)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if <a href="../type/uom_symbol.html">uom_symbol</a> is compatible with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_convertible%7E2"></span><h3>
+private elemental function <a href='../proc/is_convertible%7E2.html'>is_convertible</a>(self, other)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if <a href="../type/uom_symbol.html">uom_symbol</a> is convertible with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-is_equal%7E11"></span><h3>
+private elemental function <a href='../proc/is_equal%7E11.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Check if <a href="../type/uom_symbol.html">uom_symbol</a> is equal with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-div%7E11"></span><h3>
+private pure function <a href='../proc/div%7E11.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol / uom_symbol</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-mul%7E11"></span><h3>
+private pure function <a href='../proc/mul%7E11.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol * uom_symbol</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r16p%7E11"></span><h3>
+private pure function <a href='../proc/pow_r16p%7E11.html'>pow_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r8p%7E11"></span><h3>
+private pure function <a href='../proc/pow_r8p%7E11.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_r4p%7E11"></span><h3>
+private pure function <a href='../proc/pow_r4p%7E11.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i8p%7E11"></span><h3>
+private pure function <a href='../proc/pow_i8p%7E11.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i4p%7E11"></span><h3>
+private pure function <a href='../proc/pow_i4p%7E11.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i2p%7E11"></span><h3>
+private pure function <a href='../proc/pow_i2p%7E11.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-pow_i1p%7E11"></span><h3>
+private pure function <a href='../proc/pow_i1p%7E11.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+    
+    <section>
+    <h2>Subroutines</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-get_convert%7E2"></span><h3>
+private subroutine <a href='../proc/get_convert%7E2.html'>get_convert</a>(self, convert_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Return the symbol generic conversion alias.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_converter.html'>uom_converter</a>),</td>
+  <td>intent(out),</td>
+  <td></td>
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>convert_</strong></td><td><p>The symbol generic conversion alias.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-parse%7E8"></span><h3>
+private subroutine <a href='../proc/parse%7E8.html'>parse</a>(self, source)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Parse symbol definition from string.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Source input string definition of symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-set%7E11"></span><h3>
+private elemental subroutine <a href='../proc/set%7E11.html'>set</a>(self, symbol_, exponent_, factor_, offset_, convert_)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Set symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>symbol_</strong></td><td><p>literal symbol of the unit, e.g. "m" for metres.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=IKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>exponent_</strong></td><td><p>Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>factor_</strong></td><td><p>Symbol multiplicative scale factor (used only for converters).</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>offset_</strong></td><td><p>Symbol additive offset (used only for converters).</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_converter.html'>uom_converter</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>convert_</strong></td><td><p>Generic conversion alias formula user-supplied.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-unset%7E11"></span><h3>
+private elemental subroutine <a href='../proc/unset%7E11.html'>unset</a>(self)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Unset symbol.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom symbol.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-assign_uom_symbol%7E2"></span><h3>
+private pure subroutine <a href='../proc/assign_uom_symbol%7E2.html'>assign_uom_symbol</a>(lhs, rhs)
+    
+    
+	 
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p><code>uom_symbol = uom_symbol</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_symbol%7E2.html'>uom_symbol</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  </div>
+  </div>
+
+    
+    </section>    
+    <br>
+    
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allmods-1">All Modules</a></h3></div>
+  <div id="allmods-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../module/befor64.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64%7E2.html">befor64</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m%7E2.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/befor64_pack_data_m.html">befor64_pack_data_m</a>
+      
+      <a class="list-group-item" href="../module/dbm_to_mw_converter.html">dBm_to_mW_converter</a>
+      
+      <a class="list-group-item" href="../module/fury.html">fury</a>
+      
+      <a class="list-group-item" href="../module/fury_mixed_kinds.html">fury_mixed_kinds</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal128.html">fury_qreal128</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal32.html">fury_qreal32</a>
+      
+      <a class="list-group-item" href="../module/fury_qreal64.html">fury_qreal64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract128.html">fury_system_abstract128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract32.html">fury_system_abstract32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_abstract64.html">fury_system_abstract64</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si128.html">fury_system_si128</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si32.html">fury_system_si32</a>
+      
+      <a class="list-group-item" href="../module/fury_system_si64.html">fury_system_si64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom128.html">fury_uom128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom32.html">fury_uom32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom64.html">fury_uom64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_converter.html">fury_uom_converter</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference128.html">fury_uom_reference128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference32.html">fury_uom_reference32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_reference64.html">fury_uom_reference64</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol128.html">fury_uom_symbol128</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol32.html">fury_uom_symbol32</a>
+      
+      <a class="list-group-item" href="../module/fury_uom_symbol64.html">fury_uom_symbol64</a>
+      
+      <a class="list-group-item" href="../module/penf%7E2.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E4.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E3.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf%7E5.html">penf</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E2.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E5.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E3.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_b_size%7E4.html">penf_b_size</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E4.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E2.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E5.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_global_parameters_variables%7E3.html">penf_global_parameters_variables</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E5.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E3.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E4.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/penf_stringify%7E2.html">penf_stringify</a>
+      
+      <a class="list-group-item" href="../module/stringifor.html">stringifor</a>
+      
+      <a class="list-group-item" href="../module/stringifor_string_t.html">stringifor_string_t</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

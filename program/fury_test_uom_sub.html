@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>fury_test_uom_sub &ndash; FURY</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>fury_test_uom_sub
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title=" 0.5% of total for programs.">14 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_test_uom_sub.f90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/fury_test_uom_sub.f90.html'>fury_test_uom_sub.f90</a></li>
+  
+     <li class="active">fury_test_uom_sub</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-si_mass%7E4">si_mass</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-a_unit%7E9">a_unit</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-test_passed%7E36">test_passed</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/fury_test_uom_sub.html#src">fury_test_uom_sub</a>
+  </div>
+</div>
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-0">All Programs</a></h3></div>
+  <div id="allprogs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/assignments.html">assignments</a>
+      
+      <a class="list-group-item" href="../program/basename_dir.html">basename_dir</a>
+      
+      <a class="list-group-item" href="../program/camelcase.html">camelcase</a>
+      
+      <a class="list-group-item" href="../program/capitalize.html">capitalize</a>
+      
+      <a class="list-group-item" href="../program/compact_real.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/compact_real%7E2.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/compact_real%7E3.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/concatenation.html">concatenation</a>
+      
+      <a class="list-group-item" href="../program/count_string.html">count_string</a>
+      
+      <a class="list-group-item" href="../program/csv_naive_parser.html">csv_naive_parser</a>
+      
+      <a class="list-group-item" href="../program/decode.html">decode</a>
+      
+      <a class="list-group-item" href="../program/encode.html">encode</a>
+      
+      <a class="list-group-item" href="../program/equal.html">equal</a>
+      
+      <a class="list-group-item" href="../program/escape.html">escape</a>
+      
+      <a class="list-group-item" href="../program/extension.html">extension</a>
+      
+      <a class="list-group-item" href="../program/fill.html">fill</a>
+      
+      <a class="list-group-item" href="../program/free.html">free</a>
+      
+      <a class="list-group-item" href="../program/fury_test_bolt32.html">fury_test_bolt32</a>
+      
+      <a class="list-group-item" href="../program/fury_test_bolt64.html">fury_test_bolt64</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add.html">fury_test_qreal_add</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_aliases_failure.html">fury_test_qreal_add_aliases_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_failure.html">fury_test_qreal_add_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_mixed.html">fury_test_qreal_add_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_mixed_failure.html">fury_test_qreal_add_mixed_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_aliases.html">fury_test_qreal_aliases</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_assign.html">fury_test_qreal_assign</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_complex.html">fury_test_qreal_conversions_complex</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_si.html">fury_test_qreal_conversions_si</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_simple.html">fury_test_qreal_conversions_simple</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_div.html">fury_test_qreal_div</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_div_mixed.html">fury_test_qreal_div_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_eq.html">fury_test_qreal_eq</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_eq_mixed.html">fury_test_qreal_eq_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_mul.html">fury_test_qreal_mul</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_mul_mixed.html">fury_test_qreal_mul_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_not_eq.html">fury_test_qreal_not_eq</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_not_eq_mixed.html">fury_test_qreal_not_eq_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_pow.html">fury_test_qreal_pow</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub.html">fury_test_qreal_sub</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_failure.html">fury_test_qreal_sub_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_mixed.html">fury_test_qreal_sub_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_mixed_failure.html">fury_test_qreal_sub_mixed_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_system_si.html">fury_test_system_si</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_add.html">fury_test_uom_add</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_add_failure.html">fury_test_uom_add_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_aliases.html">fury_test_uom_aliases</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_assign.html">fury_test_uom_assign</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_assign_failure.html">fury_test_uom_assign_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_div.html">fury_test_uom_div</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_mul.html">fury_test_uom_mul</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_parse_failure.html">fury_test_uom_parse_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_pow.html">fury_test_uom_pow</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html">fury_test_uom_sub</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub_failure.html">fury_test_uom_sub_failure</a>
+      
+      <a class="list-group-item" href="../program/greater_equal_than.html">greater_equal_than</a>
+      
+      <a class="list-group-item" href="../program/greater_than.html">greater_than</a>
+      
+      <a class="list-group-item" href="../program/insert.html">insert</a>
+      
+      <a class="list-group-item" href="../program/io_basic.html">io_basic</a>
+      
+      <a class="list-group-item" href="../program/io_formatted.html">io_formatted</a>
+      
+      <a class="list-group-item" href="../program/is_digit.html">is_digit</a>
+      
+      <a class="list-group-item" href="../program/is_integer.html">is_integer</a>
+      
+      <a class="list-group-item" href="../program/is_number.html">is_number</a>
+      
+      <a class="list-group-item" href="../program/is_real.html">is_real</a>
+      
+      <a class="list-group-item" href="../program/join.html">join</a>
+      
+      <a class="list-group-item" href="../program/lower_equal_than.html">lower_equal_than</a>
+      
+      <a class="list-group-item" href="../program/lower_than.html">lower_than</a>
+      
+      <a class="list-group-item" href="../program/not_equal.html">not_equal</a>
+      
+      <a class="list-group-item" href="../program/partition.html">partition</a>
+      
+      <a class="list-group-item" href="../program/read_file.html">read_file</a>
+      
+      <a class="list-group-item" href="../program/read_line.html">read_line</a>
+      
+      <a class="list-group-item" href="../program/read_lines.html">read_lines</a>
+      
+      <a class="list-group-item" href="../program/replace.html">replace</a>
+      
+      <a class="list-group-item" href="../program/reverse.html">reverse</a>
+      
+      <a class="list-group-item" href="../program/sadjustlr.html">sadjustlr</a>
+      
+      <a class="list-group-item" href="../program/search.html">search</a>
+      
+      <a class="list-group-item" href="../program/sindex.html">sindex</a>
+      
+      <a class="list-group-item" href="../program/slen.html">slen</a>
+      
+      <a class="list-group-item" href="../program/slice.html">slice</a>
+      
+      <a class="list-group-item" href="../program/snakecase.html">snakecase</a>
+      
+      <a class="list-group-item" href="../program/split.html">split</a>
+      
+      <a class="list-group-item" href="../program/srepeat.html">srepeat</a>
+      
+      <a class="list-group-item" href="../program/sscan.html">sscan</a>
+      
+      <a class="list-group-item" href="../program/start_end.html">start_end</a>
+      
+      <a class="list-group-item" href="../program/startcase.html">startcase</a>
+      
+      <a class="list-group-item" href="../program/strim.html">strim</a>
+      
+      <a class="list-group-item" href="../program/strip.html">strip</a>
+      
+      <a class="list-group-item" href="../program/sverify.html">sverify</a>
+      
+      <a class="list-group-item" href="../program/swapcase.html">swapcase</a>
+      
+      <a class="list-group-item" href="../program/test_all.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_all%7E2.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_all%7E3.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_driver.html">Test_Driver</a>
+      
+      <a class="list-group-item" href="../program/to_number.html">to_number</a>
+      
+      <a class="list-group-item" href="../program/unescape.html">unescape</a>
+      
+      <a class="list-group-item" href="../program/unique.html">unique</a>
+      
+      <a class="list-group-item" href="../program/upper_lower.html">upper_lower</a>
+      
+      <a class="list-group-item" href="../program/write_file.html">write_file</a>
+      
+      <a class="list-group-item" href="../program/write_lines.html">write_lines</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <ul class="list-inline">
+      <li><h4>Uses:</h4></li>
+      
+      <li><a href='../module/fury.html'>fury</a></li>
+      
+    </ul>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~fury_test_uom_sub~~UsesGraph Pages: 1 -->
+<svg id="programfury_test_uom_subUsesGraph" width="641pt" height="489pt"
+ viewBox="0.00 0.00 641.00 488.80" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~fury_test_uom_sub~~UsesGraph" class="graph" transform="scale(0.302644 0.302644) rotate(0) translate(4 1611.1)">
+<title>program~~fury_test_uom_sub~~UsesGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-1611.1 2115,-1611.1 2115,5 -4,5"/>
+<!-- program~fury_test_uom_sub -->
+<g id="node1" class="node"><title>program~fury_test_uom_sub</title>
+<polygon fill="none" stroke="black" points="2110,-793.189 2006,-793.189 2006,-767.189 2110,-767.189 2110,-793.189"/>
+<text text-anchor="middle" x="2058" y="-777.739" font-family="Helvetica,sans-Serif" font-size="10.50">fury_test_uom_sub</text>
+</g>
+<!-- module~fury -->
+<g id="node2" class="node"><title>module~fury</title>
+<a xlink:href="../module/fury.html" xlink:title="fury">
+<polygon fill="#337ab7" stroke="#337ab7" points="1970,-793.189 1916,-793.189 1916,-767.189 1970,-767.189 1970,-793.189"/>
+<text text-anchor="middle" x="1943" y="-777.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury</text>
+</a>
+</g>
+<!-- module~fury&#45;&gt;program~fury_test_uom_sub -->
+<g id="edge284" class="edge"><title>module~fury&#45;&gt;program~fury_test_uom_sub</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1970.25,-780.189C1977.97,-780.189 1986.71,-780.189 1995.61,-780.189"/>
+<polygon fill="#000000" stroke="#000000" points="1995.67,-783.689 2005.67,-780.189 1995.67,-776.689 1995.67,-783.689"/>
+</g>
+<!-- module~fury_uom128 -->
+<g id="node3" class="node"><title>module~fury_uom128</title>
+<a xlink:href="../module/fury_uom128.html" xlink:title="fury_uom128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1456,-1328.19 1380,-1328.19 1380,-1302.19 1456,-1302.19 1456,-1328.19"/>
+<text text-anchor="middle" x="1418" y="-1312.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom128</text>
+</a>
+</g>
+<!-- module~fury_uom128&#45;&gt;module~fury -->
+<g id="edge238" class="edge"><title>module~fury_uom128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1451.31,-1328.26C1473.73,-1336.35 1504.16,-1345.96 1532,-1350.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-1350.19C1595.45,-1359.82 1611.84,-1341.56 1675,-1330.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-1330.19C1748.64,-1316.93 1762.47,-1296.42 1829,-1262.19"/>
+</g>
+<!-- module~fury_system_abstract128 -->
+<g id="node4" class="node"><title>module~fury_system_abstract128</title>
+<a xlink:href="../module/fury_system_abstract128.html" xlink:title="fury_system_abstract128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1741,-1384.19 1609,-1384.19 1609,-1358.19 1741,-1358.19 1741,-1384.19"/>
+<text text-anchor="middle" x="1675" y="-1368.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract128</text>
+</a>
+</g>
+<!-- module~fury_uom128&#45;&gt;module~fury_system_abstract128 -->
+<g id="edge22" class="edge"><title>module~fury_uom128&#45;&gt;module~fury_system_abstract128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-1350.19C1553.52,-1353.46 1576.88,-1356.92 1598.36,-1360.08"/>
+<polygon fill="#000000" stroke="#000000" points="1598.01,-1363.56 1608.41,-1361.55 1599.02,-1356.63 1598.01,-1363.56"/>
+</g>
+<!-- module~fury_system_si128 -->
+<g id="node12" class="node"><title>module~fury_system_si128</title>
+<a xlink:href="../module/fury_system_si128.html" xlink:title="fury_system_si128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1880,-1343.19 1778,-1343.19 1778,-1317.19 1880,-1317.19 1880,-1343.19"/>
+<text text-anchor="middle" x="1829" y="-1327.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si128</text>
+</a>
+</g>
+<!-- module~fury_uom128&#45;&gt;module~fury_system_si128 -->
+<g id="edge90" class="edge"><title>module~fury_uom128&#45;&gt;module~fury_system_si128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-1330.19C1705.23,-1324.75 1739.35,-1324.19 1767.77,-1325.23"/>
+<polygon fill="#000000" stroke="#000000" points="1767.82,-1328.73 1777.96,-1325.68 1768.13,-1321.74 1767.82,-1328.73"/>
+</g>
+<!-- module~fury_qreal128 -->
+<g id="node13" class="node"><title>module~fury_qreal128</title>
+<a xlink:href="../module/fury_qreal128.html" xlink:title="fury_qreal128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1571,-1442.19 1493,-1442.19 1493,-1416.19 1571,-1416.19 1571,-1442.19"/>
+<text text-anchor="middle" x="1532" y="-1426.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_qreal128</text>
+</a>
+</g>
+<!-- module~fury_uom128&#45;&gt;module~fury_qreal128 -->
+<g id="edge106" class="edge"><title>module~fury_uom128&#45;&gt;module~fury_qreal128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1431.08,-1328.27C1450.73,-1347.92 1488.05,-1385.24 1511.39,-1408.58"/>
+<polygon fill="#000000" stroke="#000000" points="1509.18,-1411.32 1518.72,-1415.91 1514.13,-1406.37 1509.18,-1411.32"/>
+</g>
+<!-- module~fury_mixed_kinds -->
+<g id="node18" class="node"><title>module~fury_mixed_kinds</title>
+<a xlink:href="../module/fury_mixed_kinds.html" xlink:title="fury_mixed_kinds">
+<polygon fill="#337ab7" stroke="#337ab7" points="1723,-711.189 1627,-711.189 1627,-685.189 1723,-685.189 1723,-711.189"/>
+<text text-anchor="middle" x="1675" y="-695.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_mixed_kinds</text>
+</a>
+</g>
+<!-- module~fury_uom128&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge152" class="edge"><title>module~fury_uom128&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1434.72,-1302.07C1467.69,-1275.09 1540.62,-1209.71 1572,-1136.19 1637.37,-983.006 1535.8,-913.274 1608,-763.189 1616.75,-744.999 1632.85,-729.122 1647.07,-717.614"/>
+<polygon fill="#000000" stroke="#000000" points="1649.39,-720.245 1655.16,-711.358 1645.11,-714.708 1649.39,-720.245"/>
+</g>
+<!-- module~fury_system_abstract128&#45;&gt;module~fury -->
+<g id="edge240" class="edge"><title>module~fury_system_abstract128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1714.94,-1358.15C1724.19,-1354.32 1733.74,-1349.65 1742,-1344.19 1760.87,-1331.71 1761.59,-1323.77 1778,-1308.19 1800.13,-1287.17 1801.86,-1276.15 1829,-1262.19"/>
+</g>
+<!-- module~fury_system_abstract128&#45;&gt;module~fury_system_si128 -->
+<g id="edge98" class="edge"><title>module~fury_system_abstract128&#45;&gt;module~fury_system_si128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1724.15,-1358.1C1738.81,-1354.2 1755.02,-1349.88 1770.23,-1345.84"/>
+<polygon fill="#000000" stroke="#000000" points="1771.29,-1349.18 1780.05,-1343.22 1769.49,-1342.41 1771.29,-1349.18"/>
+</g>
+<!-- module~fury_uom_converter -->
+<g id="node5" class="node"><title>module~fury_uom_converter</title>
+<a xlink:href="../module/fury_uom_converter.html" xlink:title="fury_uom_converter">
+<polygon fill="#337ab7" stroke="#337ab7" points="1027,-562.189 919,-562.189 919,-536.189 1027,-536.189 1027,-562.189"/>
+<text text-anchor="middle" x="973" y="-546.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_converter</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury -->
+<g id="edge242" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1027.62,-548.334C1089.01,-547.447 1191.65,-546.189 1280,-546.189 1280,-546.189 1280,-546.189 1418,-546.189 1533.46,-546.189 1577.01,-523.122 1675,-584.189"/>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom128 -->
+<g id="edge6" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M974.849,-562.372C983.2,-620.343 1018.95,-852.215 1064,-908.189 1111.36,-967.028 1146.77,-953.999 1216,-984.189 1271.69,-1008.48 1303.31,-987.073 1344,-1032.19 1379.14,-1071.15 1405.77,-1231.6 1414.73,-1292.03"/>
+<polygon fill="#000000" stroke="#000000" points="1411.29,-1292.7 1416.19,-1302.09 1418.22,-1291.69 1411.29,-1292.7"/>
+</g>
+<!-- module~fury_uom_symbol128 -->
+<g id="node7" class="node"><title>module~fury_uom_symbol128</title>
+<a xlink:href="../module/fury_uom_symbol128.html" xlink:title="fury_uom_symbol128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1179,-1214.19 1065,-1214.19 1065,-1188.19 1179,-1188.19 1179,-1214.19"/>
+<text text-anchor="middle" x="1122" y="-1198.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_symbol128</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_symbol128 -->
+<g id="edge36" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_symbol128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M974.726,-562.241C986.468,-650.877 1054.44,-1161.34 1064,-1174.19 1066.25,-1177.22 1068.93,-1179.92 1071.88,-1182.33"/>
+<polygon fill="#000000" stroke="#000000" points="1069.99,-1185.27 1080.22,-1188.03 1073.95,-1179.5 1069.99,-1185.27"/>
+</g>
+<!-- module~fury_uom_reference32 -->
+<g id="node8" class="node"><title>module~fury_uom_reference32</title>
+<a xlink:href="../module/fury_uom_reference32.html" xlink:title="fury_uom_reference32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1340,-752.189 1220,-752.189 1220,-726.189 1340,-726.189 1340,-752.189"/>
+<text text-anchor="middle" x="1280" y="-736.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference32</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge44" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-704.189C1149.06,-717.205 1181.06,-725.453 1209.17,-730.646"/>
+<polygon fill="#000000" stroke="#000000" points="1208.87,-734.148 1219.33,-732.424 1210.08,-727.253 1208.87,-734.148"/>
+</g>
+<!-- module~fury_uom32 -->
+<g id="node10" class="node"><title>module~fury_uom32</title>
+<a xlink:href="../module/fury_uom32.html" xlink:title="fury_uom32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1453,-793.189 1383,-793.189 1383,-767.189 1453,-767.189 1453,-793.189"/>
+<text text-anchor="middle" x="1418" y="-777.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom32</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom32 -->
+<g id="edge72" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M978.342,-562.555C989.861,-589.697 1019.63,-651.543 1064,-685.189 1085.61,-701.58 1097.56,-692.432 1122,-704.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-704.189C1211.07,-747.03 1252.28,-680.356 1344,-717.189 1366.33,-726.155 1386.74,-744.679 1400.44,-759.332"/>
+<polygon fill="#000000" stroke="#000000" points="1398.05,-761.898 1407.34,-766.988 1403.25,-757.215 1398.05,-761.898"/>
+</g>
+<!-- module~fury_uom_symbol32 -->
+<g id="node14" class="node"><title>module~fury_uom_symbol32</title>
+<a xlink:href="../module/fury_uom_symbol32.html" xlink:title="fury_uom_symbol32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1176,-676.189 1068,-676.189 1068,-650.189 1176,-650.189 1176,-676.189"/>
+<text text-anchor="middle" x="1122" y="-660.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_symbol32</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge108" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M984.249,-562.386C1000.43,-580.755 1031.87,-614.244 1064,-636.189 1068.94,-639.561 1074.36,-642.708 1079.85,-645.576"/>
+<polygon fill="#000000" stroke="#000000" points="1078.55,-648.84 1089.07,-650.13 1081.65,-642.564 1078.55,-648.84"/>
+</g>
+<!-- module~fury_uom64 -->
+<g id="node15" class="node"><title>module~fury_uom64</title>
+<a xlink:href="../module/fury_uom64.html" xlink:title="fury_uom64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1453,-138.189 1383,-138.189 1383,-112.189 1453,-112.189 1453,-138.189"/>
+<text text-anchor="middle" x="1418" y="-122.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom64</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom64 -->
+<g id="edge120" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M978.114,-535.803C989.403,-507.954 1019.07,-443.367 1064,-407.189 1106.83,-372.704 1133.75,-393.918 1180,-364.189 1277.88,-301.282 1367.19,-192.05 1402.28,-146.299"/>
+<polygon fill="#000000" stroke="#000000" points="1405.11,-148.354 1408.37,-138.274 1399.53,-144.12 1405.11,-148.354"/>
+</g>
+<!-- module~fury_uom_reference128 -->
+<g id="node17" class="node"><title>module~fury_uom_reference128</title>
+<a xlink:href="../module/fury_uom_reference128.html" xlink:title="fury_uom_reference128">
+<polygon fill="#337ab7" stroke="#337ab7" points="1343,-1138.19 1217,-1138.19 1217,-1112.19 1343,-1112.19 1343,-1138.19"/>
+<text text-anchor="middle" x="1280" y="-1122.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference128</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_reference128 -->
+<g id="edge142" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_reference128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M977.12,-562.564C987.99,-596.685 1019.69,-689.012 1064,-756.189 1105.55,-819.185 1145.5,-813.068 1180,-880.189 1217.29,-952.751 1177.78,-988.11 1216,-1060.19 1225.28,-1077.69 1240.76,-1093.6 1254.17,-1105.3"/>
+<polygon fill="#000000" stroke="#000000" points="1252.27,-1108.27 1262.19,-1112.02 1256.77,-1102.91 1252.27,-1108.27"/>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge170" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1027.73,-559.652C1089.66,-572.075 1193.19,-594.625 1280,-622.189"/>
+</g>
+<!-- module~fury_uom_reference64 -->
+<g id="node19" class="node"><title>module~fury_uom_reference64</title>
+<a xlink:href="../module/fury_uom_reference64.html" xlink:title="fury_uom_reference64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1340,-176.189 1220,-176.189 1220,-150.189 1340,-150.189 1340,-176.189"/>
+<text text-anchor="middle" x="1280" y="-160.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_reference64</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge184" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M979.804,-536.068C1000.86,-495.467 1063.58,-374.574 1064,-374.189 1084.57,-355.341 1108.2,-374.433 1122,-350.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-350.189C1162.8,-278.516 1153.96,-244.536 1216,-190.189 1219.92,-186.751 1224.35,-183.704 1229,-181.014"/>
+<polygon fill="#000000" stroke="#000000" points="1230.87,-183.987 1238.13,-176.271 1227.64,-177.774 1230.87,-183.987"/>
+</g>
+<!-- module~fury_uom_symbol64 -->
+<g id="node24" class="node"><title>module~fury_uom_symbol64</title>
+<a xlink:href="../module/fury_uom_symbol64.html" xlink:title="fury_uom_symbol64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1176,-442.189 1068,-442.189 1068,-416.189 1176,-416.189 1176,-442.189"/>
+<text text-anchor="middle" x="1122" y="-426.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_uom_symbol64</text>
+</a>
+</g>
+<!-- module~fury_uom_converter&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge230" class="edge"><title>module~fury_uom_converter&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M983.262,-536.002C998.956,-516.521 1030.63,-479.812 1064,-456.189 1068.82,-452.777 1074.14,-449.618 1079.54,-446.753"/>
+<polygon fill="#000000" stroke="#000000" points="1081.26,-449.811 1088.65,-442.218 1078.13,-443.545 1081.26,-449.811"/>
+</g>
+<!-- module~fury_system_si32 -->
+<g id="node6" class="node"><title>module~fury_system_si32</title>
+<a xlink:href="../module/fury_system_si32.html" xlink:title="fury_system_si32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1877,-793.189 1781,-793.189 1781,-767.189 1877,-767.189 1877,-793.189"/>
+<text text-anchor="middle" x="1829" y="-777.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si32</text>
+</a>
+</g>
+<!-- module~fury_system_si32&#45;&gt;module~fury -->
+<g id="edge244" class="edge"><title>module~fury_system_si32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1877.02,-780.189C1886.55,-780.189 1896.43,-780.189 1905.55,-780.189"/>
+<polygon fill="#000000" stroke="#000000" points="1905.84,-783.689 1915.84,-780.189 1905.84,-776.689 1905.84,-783.689"/>
+</g>
+<!-- module~fury_uom_symbol128&#45;&gt;module~fury -->
+<g id="edge246" class="edge"><title>module~fury_uom_symbol128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1166.19C1391.93,-1171.02 1425.9,-1124.22 1532,-1160.19"/>
+</g>
+<!-- module~fury_uom_symbol128&#45;&gt;module~fury_uom128 -->
+<g id="edge10" class="edge"><title>module~fury_uom_symbol128&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1166.19C1347.68,-1169.63 1391.53,-1251.9 1409.17,-1292.69"/>
+<polygon fill="#000000" stroke="#000000" points="1406.01,-1294.21 1413.09,-1302.09 1412.47,-1291.51 1406.01,-1294.21"/>
+</g>
+<!-- module~fury_uom_symbol128&#45;&gt;module~fury_uom_reference128 -->
+<g id="edge150" class="edge"><title>module~fury_uom_symbol128&#45;&gt;module~fury_uom_reference128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1151.82,-1188.09C1160.97,-1183.86 1170.99,-1179.02 1180,-1174.19 1196.53,-1165.33 1199.32,-1160.75 1216,-1152.19 1222.64,-1148.78 1229.81,-1145.45 1236.86,-1142.35"/>
+<polygon fill="#000000" stroke="#000000" points="1238.54,-1145.43 1246.35,-1138.28 1235.78,-1139 1238.54,-1145.43"/>
+</g>
+<!-- module~fury_uom_symbol128&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge176" class="edge"><title>module~fury_uom_symbol128&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1156.07,-1188.11C1187.76,-1177.28 1236.51,-1163.98 1280,-1166.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1166.19C1320.22,-1168.23 1454.54,-1099.41 1456,-1098.19 1527.03,-1038.82 1535.55,-1010.29 1572,-925.189 1601.04,-857.39 1572.02,-827.574 1608,-763.189 1617.98,-745.332 1634.41,-729.282 1648.5,-717.598"/>
+<polygon fill="#000000" stroke="#000000" points="1650.83,-720.217 1656.46,-711.243 1646.46,-714.747 1650.83,-720.217"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury -->
+<g id="edge248" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1340.86,-735.769C1463.81,-729.421 1737.85,-718.262 1829,-739.189"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_uom32 -->
+<g id="edge76" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1324.04,-752.275C1339.57,-756.889 1357.05,-762.082 1372.68,-766.726"/>
+<polygon fill="#000000" stroke="#000000" points="1372.07,-770.194 1382.65,-769.687 1374.06,-763.484 1372.07,-770.194"/>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge178" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1294.73,-726.032C1318.56,-705.919 1367.96,-668.933 1418,-660.189"/>
+</g>
+<!-- module~fury_system_abstract32 -->
+<g id="node21" class="node"><title>module~fury_system_abstract32</title>
+<a xlink:href="../module/fury_system_abstract32.html" xlink:title="fury_system_abstract32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1738,-872.189 1612,-872.189 1612,-846.189 1738,-846.189 1738,-872.189"/>
+<text text-anchor="middle" x="1675" y="-856.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract32</text>
+</a>
+</g>
+<!-- module~fury_uom_reference32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge202" class="edge"><title>module~fury_uom_reference32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1288.03,-752.299C1322.92,-808.481 1462.73,-1025.3 1532,-1008.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-1008.19C1597.57,-992.272 1644.01,-919.242 1664.01,-881.667"/>
+<polygon fill="#000000" stroke="#000000" points="1667.27,-883.001 1668.74,-872.509 1661.04,-879.792 1667.27,-883.001"/>
+</g>
+<!-- module~penf~2 -->
+<g id="node9" class="node"><title>module~penf~2</title>
+<a xlink:href="../module/penf%7E2.html" xlink:title="penf">
+<polygon fill="#337ab7" stroke="#337ab7" points="504,-1043.19 450,-1043.19 450,-1017.19 504,-1017.19 504,-1043.19"/>
+<text text-anchor="middle" x="477" y="-1027.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury -->
+<g id="edge250" class="edge"><title>module~penf~2&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-1584.19C1050,-1603.32 1811.49,-1550.79 1829,-1534.19"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom128 -->
+<g id="edge12" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-1166.19C802.91,-1190.92 754.09,-1293.45 834,-1318.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-1318.19C981.254,-1363.77 1026.69,-1310.22 1180,-1294.19 1224.63,-1289.52 1235.47,-1274.63 1280,-1280.19"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_abstract128 -->
+<g id="edge16" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_abstract128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M479.639,-1043.25C485.843,-1071.2 503.653,-1137.69 540,-1180.19 542.61,-1183.24 782.195,-1330.9 786,-1332.19 1053.41,-1422.48 1138.33,-1356.2 1418,-1394.19"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_converter -->
+<g id="edge24" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_converter</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-549.189C858.084,-552.266 884.707,-552.924 908.153,-552.59"/>
+<polygon fill="#000000" stroke="#000000" points="908.409,-556.085 918.335,-552.381 908.265,-549.087 908.409,-556.085"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_si32 -->
+<g id="edge28" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-1166.19C943.55,-1159.26 956.134,-1235.84 1064,-1256.19 1153.41,-1273.06 1426.75,-1251.06 1456,-1238.19 1617.12,-1167.29 1639.11,-1107.02 1742,-964.189 1779.97,-911.477 1808.27,-839.576 1821.21,-803.235"/>
+<polygon fill="#000000" stroke="#000000" points="1824.6,-804.16 1824.59,-793.566 1817.99,-801.853 1824.6,-804.16"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_symbol128 -->
+<g id="edge42" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_symbol128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-1160.19C1011.8,-1159.48 1054.33,-1172.66 1083.98,-1184.27"/>
+<polygon fill="#000000" stroke="#000000" points="1082.93,-1187.62 1093.51,-1188.12 1085.55,-1181.13 1082.93,-1187.62"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge46" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-894.189C645.767,-864.292 668.408,-897.05 723,-894.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-894.189C817.753,-889.224 1027.97,-754.898 1122,-742.189"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom32 -->
+<g id="edge78" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-894.189C794.165,-894.937 814.887,-889.505 882,-913.189 927.003,-929.071 925.385,-966.971 973,-970.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-970.189C1029.83,-972.572 1014.85,-908.828 1064,-880.189 1117.04,-849.286 1290.03,-808.407 1372.92,-789.96"/>
+<polygon fill="#000000" stroke="#000000" points="1373.8,-793.35 1382.81,-787.771 1372.29,-786.516 1373.8,-793.35"/>
+</g>
+<!-- module~fury_system_si64 -->
+<g id="node11" class="node"><title>module~fury_system_si64</title>
+<a xlink:href="../module/fury_system_si64.html" xlink:title="fury_system_si64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1877,-293.189 1781,-293.189 1781,-267.189 1877,-267.189 1877,-293.189"/>
+<text text-anchor="middle" x="1829" y="-277.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_si64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_si64 -->
+<g id="edge82" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-464.189C832.193,-438.412 864.31,-457.012 973,-429.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-429.189C1276.97,-332.578 1357.98,-245.152 1675,-280.189"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_si128 -->
+<g id="edge92" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_si128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M478.574,-1043.39C484.699,-1093.07 508.186,-1268.18 540,-1313.19 542.048,-1316.09 969.47,-1583.84 973,-1584.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-1584.19C1013.45,-1590.39 1023.53,-1576.23 1064,-1570.19 1214.57,-1547.73 1614.86,-1555.91 1742,-1472.19 1785.36,-1443.64 1810.7,-1385.27 1821.96,-1352.97"/>
+<polygon fill="#000000" stroke="#000000" points="1825.29,-1354.06 1825.13,-1343.47 1818.65,-1351.85 1825.29,-1354.06"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_qreal128 -->
+<g id="edge100" class="edge"><title>module~penf~2&#45;&gt;module~fury_qreal128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M479.239,-1043.42C486.76,-1086.6 512.209,-1222.48 540,-1256.19 617.763,-1350.5 668.651,-1344.96 786,-1379.19 1056.6,-1458.11 1136.96,-1453.82 1418,-1432.19"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge114" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M486.809,-1017.09C506.406,-991.471 552.603,-933.786 600,-894.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-894.189C741.828,-775.701 954.023,-707.26 1058.81,-678.828"/>
+<polygon fill="#000000" stroke="#000000" points="1059.85,-682.171 1068.6,-676.201 1058.04,-675.409 1059.85,-682.171"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom64 -->
+<g id="edge126" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477.518,-1017.14C480.458,-947.245 496.48,-617.051 540,-526.189 556.565,-491.606 576.025,-494.116 600,-464.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-464.189C617.957,-441.774 637.493,-458.031 660,-440.189 736.525,-379.526 711.675,-323.528 786,-260.189 835.624,-217.901 856.247,-217.103 918,-196.189 956.885,-183.02 1239,-124.199 1280,-122.189"/>
+</g>
+<!-- module~stringifor -->
+<g id="node16" class="node"><title>module~stringifor</title>
+<a xlink:href="../module/stringifor.html" xlink:title="stringifor">
+<polygon fill="#337ab7" stroke="#337ab7" points="1000,-1024.19 946,-1024.19 946,-998.189 1000,-998.189 1000,-1024.19"/>
+<text text-anchor="middle" x="973" y="-1008.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor -->
+<g id="edge140" class="edge"><title>module~penf~2&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-1166.19C653.922,-1175.18 670.778,-1150.02 723,-1166.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-1166.19C770.127,-1180.78 784.765,-1169.31 834,-1166.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-1166.19C903.817,-1161.77 947.516,-1075.44 964.683,-1033.58"/>
+<polygon fill="#000000" stroke="#000000" points="967.968,-1034.79 968.388,-1024.2 961.458,-1032.21 967.968,-1034.79"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_reference128 -->
+<g id="edge144" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_reference128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-1160.19C1039.21,-1158.98 1055.78,-1159.35 1122,-1160.19"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge162" class="edge"><title>module~penf~2&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M479.622,-1016.98C496.353,-936.689 595.194,-518.684 834,-549.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-549.189C872.058,-542.786 879.724,-532.119 918,-527.189 966.488,-520.945 979.459,-521.366 1028,-527.189 1097.03,-535.47 1115.49,-538.259 1180,-564.189 1227.67,-583.351 1231.98,-603.915 1280,-622.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-622.189C1310.28,-631.943 1386.59,-665.182 1418,-660.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-660.189C1468.04,-652.237 1484.21,-643.371 1532,-660.189"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge186" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477.64,-1017.14C481.874,-932.694 506.695,-465.376 540,-412.189 639.792,-252.827 734.541,-263.394 918,-222.189 1018.28,-199.666 1136.01,-182.091 1209.33,-172.177"/>
+<polygon fill="#000000" stroke="#000000" points="1209.92,-175.628 1219.37,-170.829 1208.99,-168.691 1209.92,-175.628"/>
+</g>
+<!-- module~fury_qreal64 -->
+<g id="node20" class="node"><title>module~fury_qreal64</title>
+<a xlink:href="../module/fury_qreal64.html" xlink:title="fury_qreal64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1568,-214.189 1496,-214.189 1496,-188.189 1568,-188.189 1568,-214.189"/>
+<text text-anchor="middle" x="1532" y="-198.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_qreal64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_qreal64 -->
+<g id="edge200" class="edge"><title>module~penf~2&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-464.189C634.25,-421.582 672.495,-485.109 723,-464.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-464.189C755.03,-450.922 756.882,-437.007 786,-418.189 905.36,-341.05 929.148,-305.045 1064,-260.189 1212.26,-210.875 1399.48,-202.295 1485.23,-201.124"/>
+<polygon fill="#000000" stroke="#000000" points="1485.46,-204.622 1495.42,-201.014 1485.39,-197.623 1485.46,-204.622"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge204" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-1166.19C895.712,-1162.28 911.175,-1161.32 973,-1160.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-1160.19C1015.69,-1159.41 1305.34,-1078.29 1344,-1060.19 1380.4,-1043.14 1378.57,-1016.01 1418,-1008.19"/>
+</g>
+<!-- module~fury_qreal32 -->
+<g id="node22" class="node"><title>module~fury_qreal32</title>
+<a xlink:href="../module/fury_qreal32.html" xlink:title="fury_qreal32">
+<polygon fill="#337ab7" stroke="#337ab7" points="1568,-831.189 1496,-831.189 1496,-805.189 1568,-805.189 1568,-831.189"/>
+<text text-anchor="middle" x="1532" y="-815.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_qreal32</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_qreal32 -->
+<g id="edge212" class="edge"><title>module~penf~2&#45;&gt;module~fury_qreal32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-970.189C1109.3,-976.504 1145.59,-993.692 1280,-970.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-970.189C1361.51,-954.885 1393.81,-963.057 1456,-908.189 1480.52,-886.554 1468.73,-865.015 1490.92,-838.798"/>
+<polygon fill="#000000" stroke="#000000" points="1493.74,-840.914 1498.14,-831.276 1488.69,-836.067 1493.74,-840.914"/>
+</g>
+<!-- module~fury_system_abstract64 -->
+<g id="node23" class="node"><title>module~fury_system_abstract64</title>
+<a xlink:href="../module/fury_system_abstract64.html" xlink:title="fury_system_abstract64">
+<polygon fill="#337ab7" stroke="#337ab7" points="1738,-97.1893 1612,-97.1893 1612,-71.1893 1738,-71.1893 1738,-97.1893"/>
+<text text-anchor="middle" x="1675" y="-81.7393" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">fury_system_abstract64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge222" class="edge"><title>module~penf~2&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477.712,-1016.91C482.991,-919.335 516.511,-316.212 540,-286.189 615.779,-189.332 943.473,-132.629 1064,-108.189 1202.01,-80.2051 1239.29,-90.7667 1380,-85.1893 1396.88,-84.5204 1515.21,-85.9736 1532,-84.1893"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-84.1893C1554.17,-79.266 1578.76,-77.8616 1601.21,-78.0899"/>
+<polygon fill="#000000" stroke="#000000" points="1601.28,-81.5921 1611.35,-78.3028 1601.43,-74.5936 1601.28,-81.5921"/>
+</g>
+<!-- module~penf~2&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge236" class="edge"><title>module~penf~2&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M973,-429.189C999.99,-422.28 1030.64,-421.185 1057.1,-422.234"/>
+<polygon fill="#000000" stroke="#000000" points="1057.23,-425.745 1067.4,-422.756 1057.59,-418.754 1057.23,-425.745"/>
+</g>
+<!-- module~stringifor_string_t -->
+<g id="node92" class="node"><title>module~stringifor_string_t</title>
+<a xlink:href="../module/stringifor_string_t.html" xlink:title="stringifor_string_t">
+<polygon fill="#337ab7" stroke="#337ab7" points="881,-948.189 787,-948.189 787,-922.189 881,-922.189 881,-948.189"/>
+<text text-anchor="middle" x="834" y="-932.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">stringifor_string_t</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~stringifor_string_t -->
+<g id="edge136" class="edge"><title>module~penf~2&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M723,-894.189C737.708,-893.418 770.764,-906.374 797,-917.921"/>
+<polygon fill="#000000" stroke="#000000" points="795.752,-921.198 806.31,-922.084 798.609,-914.807 795.752,-921.198"/>
+</g>
+<!-- module~befor64 -->
+<g id="node93" class="node"><title>module~befor64</title>
+<a xlink:href="../module/befor64.html" xlink:title="befor64">
+<polygon fill="#337ab7" stroke="#337ab7" points="750,-1043.19 696,-1043.19 696,-1017.19 750,-1017.19 750,-1043.19"/>
+<text text-anchor="middle" x="723" y="-1027.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64 -->
+<g id="edge132" class="edge"><title>module~penf~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M482.234,-1043.42C495.87,-1075.49 535.941,-1155.51 600,-1166.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-1166.19C660.502,-1176.28 699.606,-1094.15 715.25,-1052.89"/>
+<polygon fill="#000000" stroke="#000000" points="718.586,-1053.96 718.721,-1043.37 712.009,-1051.56 718.586,-1053.96"/>
+</g>
+<!-- module~befor64_pack_data_m~2 -->
+<g id="node94" class="node"><title>module~befor64_pack_data_m~2</title>
+<a xlink:href="../module/befor64_pack_data_m%7E2.html" xlink:title="befor64_pack_data_m">
+<polygon fill="#337ab7" stroke="#337ab7" points="660,-1043.19 540,-1043.19 540,-1017.19 660,-1017.19 660,-1043.19"/>
+<text text-anchor="middle" x="600" y="-1027.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">befor64_pack_data_m</text>
+</a>
+</g>
+<!-- module~penf~2&#45;&gt;module~befor64_pack_data_m~2 -->
+<g id="edge128" class="edge"><title>module~penf~2&#45;&gt;module~befor64_pack_data_m~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M504.298,-1030.19C511.96,-1030.19 520.66,-1030.19 529.617,-1030.19"/>
+<polygon fill="#000000" stroke="#000000" points="529.798,-1033.69 539.798,-1030.19 529.798,-1026.69 529.798,-1033.69"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury -->
+<g id="edge252" class="edge"><title>module~fury_uom32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-777.189C1594.86,-767.823 1611.55,-780.783 1675,-777.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-777.189C1745.38,-773.203 1760.29,-723.415 1829,-739.189"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_system_si32 -->
+<g id="edge34" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-777.189C1706.51,-775.405 1741.69,-775.903 1770.46,-776.959"/>
+<polygon fill="#000000" stroke="#000000" points="1770.63,-780.468 1780.76,-777.37 1770.91,-773.473 1770.63,-780.468"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge156" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1453.12,-781.459C1475.76,-781.738 1505.76,-781.099 1532,-777.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-777.189C1578.83,-770.212 1625.39,-738.742 1652.12,-717.689"/>
+<polygon fill="#000000" stroke="#000000" points="1654.5,-720.27 1660.08,-711.264 1650.1,-714.824 1654.5,-720.27"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge210" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1429.6,-793.33C1443.05,-807.579 1466.63,-829.691 1492,-840.189 1526.1,-854.302 1566.7,-859.546 1600.98,-861.052"/>
+<polygon fill="#000000" stroke="#000000" points="1601.29,-864.564 1611.41,-861.405 1601.53,-857.568 1601.29,-864.564"/>
+</g>
+<!-- module~fury_uom32&#45;&gt;module~fury_qreal32 -->
+<g id="edge218" class="edge"><title>module~fury_uom32&#45;&gt;module~fury_qreal32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1453.13,-791.901C1463.35,-795.307 1474.68,-799.081 1485.48,-802.682"/>
+<polygon fill="#000000" stroke="#000000" points="1484.61,-806.083 1495.21,-805.925 1486.83,-799.442 1484.61,-806.083"/>
+</g>
+<!-- module~fury_system_si64&#45;&gt;module~fury -->
+<g id="edge254" class="edge"><title>module~fury_system_si64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1831.99,-293.306C1847.39,-360.833 1917.76,-669.489 1937.71,-757"/>
+<polygon fill="#000000" stroke="#000000" points="1934.35,-758.007 1939.99,-766.979 1941.18,-756.451 1934.35,-758.007"/>
+</g>
+<!-- module~fury_system_si128&#45;&gt;module~fury -->
+<g id="edge256" class="edge"><title>module~fury_system_si128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1846.17,-1317.03C1857.76,-1307.13 1872.28,-1292.51 1880,-1276.19 1920.52,-1190.48 1937.76,-889.945 1941.95,-803.569"/>
+<polygon fill="#000000" stroke="#000000" points="1945.45,-803.635 1942.42,-793.481 1938.45,-803.305 1945.45,-803.635"/>
+</g>
+<!-- module~fury_qreal128&#45;&gt;module~fury -->
+<g id="edge258" class="edge"><title>module~fury_qreal128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1545.55,-1442.31C1590.96,-1484.69 1739.86,-1610.87 1829,-1534.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1829,-1534.19C1889.95,-1476.38 1864.01,-1434.66 1880,-1352.19 1920.86,-1141.38 1937.52,-881.361 1941.81,-803.355"/>
+<polygon fill="#000000" stroke="#000000" points="1945.32,-803.367 1942.36,-793.194 1938.33,-802.992 1945.32,-803.367"/>
+</g>
+<!-- module~fury_qreal128&#45;&gt;module~fury_system_abstract128 -->
+<g id="edge18" class="edge"><title>module~fury_qreal128&#45;&gt;module~fury_system_abstract128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1564.09,-1416.17C1584.46,-1407.91 1611.04,-1397.13 1633.07,-1388.19"/>
+<polygon fill="#000000" stroke="#000000" points="1634.57,-1391.36 1642.52,-1384.36 1631.94,-1384.88 1634.57,-1391.36"/>
+</g>
+<!-- module~fury_qreal128&#45;&gt;module~fury_system_si128 -->
+<g id="edge94" class="edge"><title>module~fury_qreal128&#45;&gt;module~fury_system_si128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1557.78,-1442.28C1586.78,-1455.21 1635.05,-1471.3 1675,-1458.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-1458.19C1735.09,-1438.47 1787.53,-1382.15 1812.86,-1351.2"/>
+<polygon fill="#000000" stroke="#000000" points="1815.76,-1353.19 1819.27,-1343.19 1810.29,-1348.81 1815.76,-1353.19"/>
+</g>
+<!-- module~fury_qreal128&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge168" class="edge"><title>module~fury_qreal128&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1543.06,-1415.72C1552.63,-1403.22 1565.86,-1383.65 1572,-1364.19 1612.27,-1236.6 1552.2,-884.794 1608,-763.189 1616.42,-744.843 1632.51,-728.962 1646.81,-717.49"/>
+<polygon fill="#000000" stroke="#000000" points="1649.13,-720.117 1654.95,-711.261 1644.88,-714.558 1649.13,-720.117"/>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury -->
+<g id="edge260" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1138.51,-650.186C1156.44,-636.908 1186.47,-617.026 1216,-608.189 1264.93,-593.546 1631.86,-556.864 1675,-584.189"/>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge52" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1150.37,-676.26C1159.82,-680.647 1170.38,-685.593 1180,-690.189 1201.49,-700.455 1225.45,-712.187 1244.53,-721.597"/>
+<polygon fill="#000000" stroke="#000000" points="1243.24,-724.86 1253.75,-726.15 1246.33,-718.583 1243.24,-724.86"/>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_uom32 -->
+<g id="edge68" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-660.189C1309.8,-666.093 1319.57,-666.134 1344,-684.189 1371.13,-704.235 1393.29,-736.812 1406.08,-758.37"/>
+<polygon fill="#000000" stroke="#000000" points="1403.1,-760.217 1411.12,-767.141 1409.17,-756.727 1403.1,-760.217"/>
+</g>
+<!-- module~fury_uom_symbol32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge154" class="edge"><title>module~fury_uom_symbol32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1176.62,-656.457C1207.29,-654.093 1246.09,-653.472 1280,-660.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-660.189C1340.16,-672.108 1357.58,-670.747 1418,-660.189"/>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury -->
+<g id="edge262" class="edge"><title>module~fury_uom64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1423.43,-111.745C1436.85,-80.9645 1474.71,-8.02026 1532,-8.18932"/>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury_system_si64 -->
+<g id="edge88" class="edge"><title>module~fury_uom64&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1453.27,-132.864C1485.81,-140.996 1534.59,-155.921 1572,-179.189 1626.44,-213.051 1610.91,-281.813 1675,-280.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-280.189C1706.54,-279.363 1741.73,-279.298 1770.49,-279.469"/>
+<polygon fill="#000000" stroke="#000000" points="1770.76,-282.971 1780.78,-279.541 1770.81,-275.971 1770.76,-282.971"/>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge160" class="edge"><title>module~fury_uom64&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1426.33,-138.378C1434.36,-151.332 1446.64,-171.777 1456,-190.189 1514.43,-305.172 1530.24,-334.164 1572,-456.189 1593.08,-517.789 1581.49,-538.722 1608,-598.189 1621.12,-627.619 1642.74,-657.873 1657.86,-677.283"/>
+<polygon fill="#000000" stroke="#000000" points="1655.14,-679.489 1664.1,-685.15 1660.63,-675.14 1655.14,-679.489"/>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury_qreal64 -->
+<g id="edge194" class="edge"><title>module~fury_uom64&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1437.6,-138.254C1455.87,-150.435 1483.32,-168.735 1503.92,-182.466"/>
+<polygon fill="#000000" stroke="#000000" points="1502.01,-185.406 1512.28,-188.041 1505.9,-179.581 1502.01,-185.406"/>
+</g>
+<!-- module~fury_uom64&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge220" class="edge"><title>module~fury_uom64&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1445.83,-112.06C1468.46,-102.155 1501.53,-89.4111 1532,-84.1893"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury -->
+<g id="edge264" class="edge"><title>module~stringifor&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M978.26,-1024.25C996.448,-1069.31 1056,-1215.87 1064,-1223.19 1084.01,-1241.5 1099.24,-1227.43 1122,-1242.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1242.19C1157.44,-1265.17 1173.88,-1231.31 1216,-1228.19 1325.34,-1220.09 1633.93,-1227.28 1675,-1236.19"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom128 -->
+<g id="edge4" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1242.19C1182.47,-1281.68 1208.33,-1271.24 1280,-1280.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1280.19C1310.45,-1283.99 1343.82,-1292.34 1370.11,-1299.92"/>
+<polygon fill="#000000" stroke="#000000" points="1369.24,-1303.32 1379.83,-1302.78 1371.22,-1296.6 1369.24,-1303.32"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_abstract128 -->
+<g id="edge20" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_abstract128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1242.19C1144.2,-1256.69 1157.05,-1242.91 1180,-1256.19 1200.14,-1267.84 1196.39,-1281.67 1216,-1294.19 1266.58,-1326.49 1291.05,-1308.93 1344,-1337.19 1380.63,-1356.74 1376.73,-1389.71 1418,-1394.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-1394.19C1479.34,-1401.16 1549.12,-1393.96 1600.47,-1385.82"/>
+<polygon fill="#000000" stroke="#000000" points="1601.18,-1389.25 1610.49,-1384.19 1600.05,-1382.35 1601.18,-1389.25"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_si32 -->
+<g id="edge32" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1046.19C1407.96,-1022.05 1451.43,-1071.36 1572,-1022.19 1686.59,-975.458 1780.31,-851.878 1814.79,-801.761"/>
+<polygon fill="#000000" stroke="#000000" points="1817.81,-803.534 1820.52,-793.293 1812.02,-799.607 1817.81,-803.534"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_symbol128 -->
+<g id="edge40" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_symbol128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M977.188,-1024.39C987.394,-1054.65 1016.27,-1129.85 1064,-1174.19 1067.58,-1177.51 1071.63,-1180.49 1075.9,-1183.14"/>
+<polygon fill="#000000" stroke="#000000" points="1074.43,-1186.33 1084.87,-1188.14 1077.83,-1180.21 1074.43,-1186.33"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge50" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.23,-999.855C1009.39,-995.518 1019.46,-990.161 1028,-984.189 1075.41,-951.055 1075.9,-929.122 1122,-894.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-894.189C1136.93,-882.876 1220.79,-798.864 1259.91,-759.47"/>
+<polygon fill="#000000" stroke="#000000" points="1262.54,-761.785 1267.1,-752.221 1257.57,-756.854 1262.54,-761.785"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom32 -->
+<g id="edge70" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.47,-1005.85C1065.32,-992.236 1230.96,-951.393 1344,-870.189 1369.79,-851.666 1391.77,-822.023 1404.92,-801.86"/>
+<polygon fill="#000000" stroke="#000000" points="1407.93,-803.657 1410.32,-793.337 1402.01,-799.91 1407.93,-803.657"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_si64 -->
+<g id="edge86" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-508.189C1325.31,-485.497 1624.34,-281.517 1675,-280.189"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_si128 -->
+<g id="edge96" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_si128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M979.186,-1024.34C990.215,-1048.19 1013.48,-1100.35 1028,-1146.19 1049.49,-1214.02 1025.71,-1242.22 1064,-1302.19 1129.45,-1404.69 1158.38,-1470.19 1280,-1470.19 1280,-1470.19 1280,-1470.19 1418,-1470.19 1532.35,-1470.19 1566.35,-1493.84 1675,-1458.19"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_qreal128 -->
+<g id="edge104" class="edge"><title>module~stringifor&#45;&gt;module~fury_qreal128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M978.78,-1024.48C989.165,-1048.55 1011.44,-1101.05 1028,-1146.19 1045.72,-1194.48 1030.4,-1217.24 1064,-1256.19 1082.54,-1277.69 1391.97,-1433.72 1418,-1432.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-1432.19C1439.01,-1430.57 1462.26,-1429.78 1482.25,-1429.41"/>
+<polygon fill="#000000" stroke="#000000" points="1482.44,-1432.91 1492.38,-1429.25 1482.33,-1425.91 1482.44,-1432.91"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge112" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.22,-1003.94C1010.51,-999.82 1021.34,-993.552 1028,-984.189 1104.29,-876.907 986.605,-796.678 1064,-690.189 1066.22,-687.135 1068.87,-684.415 1071.81,-681.995"/>
+<polygon fill="#000000" stroke="#000000" points="1073.87,-684.825 1080.11,-676.267 1069.9,-679.062 1073.87,-684.825"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom64 -->
+<g id="edge116" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.1,-1004.17C1010.5,-1000.07 1021.45,-993.755 1028,-984.189 1080.19,-908.003 1020.79,-651.804 1064,-570.189 1121.94,-460.748 1183.11,-471.301 1280,-394.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-394.189C1301.79,-373.024 1323.23,-392.362 1344,-370.189 1374.76,-337.347 1403.17,-203.107 1413.69,-148.478"/>
+<polygon fill="#000000" stroke="#000000" points="1417.18,-148.858 1415.61,-138.381 1410.3,-147.553 1417.18,-148.858"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_reference128 -->
+<g id="edge148" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_reference128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M978.492,-1024.31C994.616,-1060.52 1045.55,-1159.22 1122,-1160.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1160.19C1160.4,-1160.68 1202.85,-1150.66 1234.07,-1141.22"/>
+<polygon fill="#000000" stroke="#000000" points="1235.28,-1144.51 1243.79,-1138.19 1233.2,-1137.83 1235.28,-1144.51"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge166" class="edge"><title>module~stringifor&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-894.189C1213.67,-824.723 1258.99,-838.67 1344,-761.189 1385.13,-723.703 1363.18,-669.769 1418,-660.189"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge190" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.21,-1004.25C1010.64,-1000.16 1021.56,-993.834 1028,-984.189 1099.3,-877.321 1010.65,-524.062 1064,-407.189 1079.01,-374.31 1104.12,-381.598 1122,-350.189"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_qreal64 -->
+<g id="edge198" class="edge"><title>module~stringifor&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.01,-1004.11C1010.41,-1000 1021.36,-993.696 1028,-984.189 1115.75,-858.509 982.355,-770.917 1064,-641.189 1124.05,-545.774 1179.79,-559.837 1280,-508.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-508.189C1404.76,-439.486 1492.25,-281.794 1521.39,-223.438"/>
+<polygon fill="#000000" stroke="#000000" points="1524.59,-224.862 1525.86,-214.343 1518.31,-221.775 1524.59,-224.862"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge208" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1084.19C1194.22,-1084.45 1209.03,-1059.58 1280,-1046.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-1046.19C1342.51,-1034.4 1355.6,-1020.57 1418,-1008.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-1008.19C1467.7,-998.33 1482.76,-1020.14 1532,-1008.19"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_qreal32 -->
+<g id="edge216" class="edge"><title>module~stringifor&#45;&gt;module~fury_qreal32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M987.898,-1024.2C1013.46,-1045.13 1068.13,-1083.99 1122,-1084.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-1084.19C1208.59,-1084.5 1194.7,-985.105 1280,-970.189"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge226" class="edge"><title>module~stringifor&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-394.189C1301.79,-373.024 1320.26,-389.15 1344,-370.189 1403.42,-322.719 1457.19,-97.9035 1532,-84.1893"/>
+</g>
+<!-- module~stringifor&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge234" class="edge"><title>module~stringifor&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1000.19,-1004.23C1010.61,-1000.14 1021.54,-993.815 1028,-984.189 1093.55,-886.549 997.44,-553.147 1064,-456.189 1066.04,-453.215 1068.5,-450.56 1071.23,-448.193"/>
+<polygon fill="#000000" stroke="#000000" points="1073.45,-450.909 1079.56,-442.252 1069.39,-445.21 1073.45,-450.909"/>
+</g>
+<!-- module~fury_uom_reference128&#45;&gt;module~fury -->
+<g id="edge266" class="edge"><title>module~fury_uom_reference128&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-1084.19C1475.29,-1063.57 1474.33,-1140.64 1532,-1160.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-1160.19C1600.16,-1183.3 1604.66,-1220.94 1675,-1236.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-1236.19C1742.84,-1250.9 1767.28,-1293.94 1829,-1262.19"/>
+</g>
+<!-- module~fury_uom_reference128&#45;&gt;module~fury_uom128 -->
+<g id="edge2" class="edge"><title>module~fury_uom_reference128&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1323.34,-1138.23C1330.85,-1141.88 1338.12,-1146.47 1344,-1152.19 1384.39,-1191.51 1404.69,-1256.93 1413.1,-1291.73"/>
+<polygon fill="#000000" stroke="#000000" points="1409.78,-1292.92 1415.42,-1301.88 1416.6,-1291.36 1409.78,-1292.92"/>
+</g>
+<!-- module~fury_uom_reference128&#45;&gt;module~fury_system_abstract128 -->
+<g id="edge14" class="edge"><title>module~fury_uom_reference128&#45;&gt;module~fury_system_abstract128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1314.9,-1138.21C1324.55,-1142.26 1334.86,-1147.03 1344,-1152.19 1470.33,-1223.52 1481.09,-1273.88 1608,-1344.19 1614.41,-1347.74 1621.39,-1351.08 1628.33,-1354.11"/>
+<polygon fill="#000000" stroke="#000000" points="1627.16,-1357.42 1637.74,-1358.06 1629.87,-1350.96 1627.16,-1357.42"/>
+</g>
+<!-- module~fury_uom_reference128&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge158" class="edge"><title>module~fury_uom_reference128&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1319.21,-1112.13C1346.65,-1103.34 1384.27,-1091.98 1418,-1084.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1418,-1084.19C1449.24,-1076.98 1556.63,-868.321 1572,-840.189 1590.12,-807.039 1586.08,-793.959 1608,-763.189 1620.1,-746.196 1636.98,-729.857 1650.76,-717.811"/>
+<polygon fill="#000000" stroke="#000000" points="1653.13,-720.395 1658.46,-711.242 1648.58,-715.069 1653.13,-720.395"/>
+</g>
+<!-- module~fury_mixed_kinds&#45;&gt;module~fury -->
+<g id="edge268" class="edge"><title>module~fury_mixed_kinds&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1720.62,-711.22C1751.16,-719.725 1792.33,-730.77 1829,-739.189"/>
+</g>
+<!-- module~fury_uom_reference64&#45;&gt;module~fury -->
+<g id="edge270" class="edge"><title>module~fury_uom_reference64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1291.04,-149.943C1323.66,-112.376 1424.14,-7.87102 1532,-8.18932"/>
+</g>
+<!-- module~fury_uom_reference64&#45;&gt;module~fury_uom64 -->
+<g id="edge124" class="edge"><title>module~fury_uom_reference64&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1327.49,-150.112C1342.19,-146.065 1358.33,-141.62 1372.86,-137.618"/>
+<polygon fill="#000000" stroke="#000000" points="1373.92,-140.958 1382.63,-134.929 1372.06,-134.209 1373.92,-140.958"/>
+</g>
+<!-- module~fury_uom_reference64&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge164" class="edge"><title>module~fury_uom_reference64&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1291.5,-176.604C1320.16,-210.202 1396.72,-300.953 1456,-380.189 1498.11,-436.478 1618.21,-613.979 1660.25,-676.299"/>
+<polygon fill="#000000" stroke="#000000" points="1657.6,-678.619 1666.09,-684.954 1663.4,-674.706 1657.6,-678.619"/>
+</g>
+<!-- module~fury_uom_reference64&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge228" class="edge"><title>module~fury_uom_reference64&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1296.95,-149.967C1316.01,-135.864 1348.42,-114.09 1380,-103.189 1444.35,-80.9744 1464.9,-95.6876 1532,-84.1893"/>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury -->
+<g id="edge272" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1562.16,-188.156C1633.78,-157.662 1809.57,-85.6789 1829,-105.189"/>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_system_si64 -->
+<g id="edge84" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1552.93,-214.303C1589.29,-236.849 1661.53,-280.531 1675,-280.189"/>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge180" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1558.69,-214.349C1563.89,-218.116 1568.74,-222.718 1572,-228.189 1656.52,-370.153 1552.33,-442.629 1608,-598.189 1618.79,-628.355 1640.69,-658.255 1656.52,-677.388"/>
+<polygon fill="#000000" stroke="#000000" points="1653.95,-679.777 1663.09,-685.141 1659.29,-675.25 1653.95,-679.777"/>
+</g>
+<!-- module~fury_qreal64&#45;&gt;module~fury_system_abstract64 -->
+<g id="edge224" class="edge"><title>module~fury_qreal64&#45;&gt;module~fury_system_abstract64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1540.03,-188.128C1552.44,-168.893 1578.01,-132.886 1608,-111.189 1612.88,-107.657 1618.29,-104.5 1623.86,-101.701"/>
+<polygon fill="#000000" stroke="#000000" points="1625.71,-104.703 1633.31,-97.3269 1622.77,-98.3506 1625.71,-104.703"/>
+</g>
+<!-- module~fury_system_abstract32&#45;&gt;module~fury -->
+<g id="edge274" class="edge"><title>module~fury_system_abstract32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1677.15,-872.514C1689.41,-946.444 1752.57,-1301.51 1829,-1262.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1829,-1262.19C1913.05,-1218.95 1936.81,-894.55 1941.85,-803.746"/>
+<polygon fill="#000000" stroke="#000000" points="1945.35,-803.811 1942.38,-793.64 1938.36,-803.441 1945.35,-803.811"/>
+</g>
+<!-- module~fury_system_abstract32&#45;&gt;module~fury_system_si32 -->
+<g id="edge26" class="edge"><title>module~fury_system_abstract32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1705.63,-846.183C1717.14,-841.109 1730.28,-835.099 1742,-829.189 1761.07,-819.576 1781.93,-807.868 1798.44,-798.308"/>
+<polygon fill="#000000" stroke="#000000" points="1800.26,-801.304 1807.13,-793.245 1796.73,-795.256 1800.26,-801.304"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury -->
+<g id="edge276" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1568.77,-820.667C1597.85,-821.848 1639.35,-821.803 1675,-815.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-815.189C1706.1,-809.42 1714.92,-807.532 1742,-791.189 1760.58,-779.975 1759.49,-769.521 1778,-758.189 1798.63,-745.561 1805.42,-733.777 1829,-739.189"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_system_si32 -->
+<g id="edge30" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_system_si32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-815.189C1706.95,-809.261 1742.33,-801.32 1771.11,-794.5"/>
+<polygon fill="#000000" stroke="#000000" points="1772.08,-797.866 1781,-792.14 1770.46,-791.057 1772.08,-797.866"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge182" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1552.74,-804.993C1559.06,-800.763 1565.93,-795.94 1572,-791.189 1601.81,-767.855 1633.84,-738.126 1654.12,-718.645"/>
+<polygon fill="#000000" stroke="#000000" points="1656.79,-720.934 1661.55,-711.468 1651.92,-715.901 1656.79,-720.934"/>
+</g>
+<!-- module~fury_qreal32&#45;&gt;module~fury_system_abstract32 -->
+<g id="edge206" class="edge"><title>module~fury_qreal32&#45;&gt;module~fury_system_abstract32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1568.83,-828.748C1584.32,-833.191 1602.68,-838.455 1619.74,-843.347"/>
+<polygon fill="#000000" stroke="#000000" points="1619.03,-846.783 1629.61,-846.174 1620.96,-840.054 1619.03,-846.783"/>
+</g>
+<!-- module~fury_system_abstract64&#45;&gt;module~fury -->
+<g id="edge278" class="edge"><title>module~fury_system_abstract64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1738.7,-76.2511C1770,-76.0488 1805.87,-81.9588 1829,-105.189"/>
+</g>
+<!-- module~fury_system_abstract64&#45;&gt;module~fury_system_si64 -->
+<g id="edge80" class="edge"><title>module~fury_system_abstract64&#45;&gt;module~fury_system_si64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1685.34,-97.3538C1711.54,-130.689 1780.65,-218.653 1812.5,-259.189"/>
+<polygon fill="#000000" stroke="#000000" points="1809.77,-261.381 1818.7,-267.082 1815.28,-257.057 1809.77,-261.381"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury -->
+<g id="edge280" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-356.189C1310.38,-340.672 1378.49,-376.299 1675,-584.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1675,-584.189C1757.42,-635.549 1734.51,-716.793 1829,-739.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1829,-739.189C1855.56,-745.485 1884.5,-755.936 1906.57,-764.711"/>
+<polygon fill="#000000" stroke="#000000" points="1905.3,-767.974 1915.88,-768.477 1907.92,-761.484 1905.3,-767.974"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury_uom64 -->
+<g id="edge118" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1151.82,-416.089C1160.97,-411.862 1170.99,-407.017 1180,-402.189 1196.53,-393.33 1199.15,-388.407 1216,-380.189 1243.31,-366.876 1252.95,-370.008 1280,-356.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-356.189C1362.75,-313.921 1400.22,-197.883 1412.82,-148.227"/>
+<polygon fill="#000000" stroke="#000000" points="1416.24,-148.967 1415.2,-138.424 1409.44,-147.316 1416.24,-148.967"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge174" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1176.61,-438.242C1223.21,-447.548 1290.9,-464.899 1344,-494.189 1441.6,-548.028 1432.99,-608.99 1532,-660.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-660.189C1559.5,-669.868 1590.73,-678.433 1616.97,-684.971"/>
+<polygon fill="#000000" stroke="#000000" points="1616.22,-688.39 1626.76,-687.375 1617.88,-681.592 1616.22,-688.39"/>
+</g>
+<!-- module~fury_uom_symbol64&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge192" class="edge"><title>module~fury_uom_symbol64&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1135.58,-416.127C1148.13,-403.59 1166.77,-383.727 1180,-364.189 1220.74,-304.005 1255.19,-224.855 1270.89,-186.299"/>
+<polygon fill="#000000" stroke="#000000" points="1274.33,-187.134 1274.82,-176.55 1267.84,-184.521 1274.33,-187.134"/>
+</g>
+<!-- iso_fortran_env -->
+<g id="node25" class="node"><title>iso_fortran_env</title>
+<a xlink:href="https://gcc.gnu.org/onlinedocs/gfortran/ISO_005fFORTRAN_005fENV.html" xlink:title="iso_fortran_env">
+<polygon fill="#337ab7" stroke="#337ab7" points="301,-1002.19 215,-1002.19 215,-976.189 301,-976.189 301,-1002.19"/>
+<text text-anchor="middle" x="258" y="-986.739" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">iso_fortran_env</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury -->
+<g id="edge282" class="edge"><title>iso_fortran_env&#45;&gt;module~fury</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M301.546,-996.855C324.496,-999.026 352.648,-998.656 376,-989.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-989.189C596.204,-899.916 340.254,-658.509 477,-464.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-464.189C544.433,-368.366 458.959,-292.816 540,-208.189 634.162,-109.862 698.315,-111.039 834,-122.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-122.189C859.009,-124.699 1255.12,-49.7647 1280,-46.1893"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-46.1893C1390.19,-19.9821 1418.88,-13.9519 1532,-8.18932"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1532,-8.18932C1669.01,14.3908 1729.16,-8.67802 1829,-105.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1829,-105.189C1924.35,-198.943 1940.16,-649.458 1942.59,-757.068"/>
+<polygon fill="#000000" stroke="#000000" points="1939.09,-757.248 1942.8,-767.173 1946.09,-757.103 1939.09,-757.248"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom128 -->
+<g id="edge8" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-1318.19C592.33,-1427.16 684.589,-1264.79 834,-1318.19"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_symbol128 -->
+<g id="edge38" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_symbol128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-1318.19C524.138,-1353.03 913.125,-1256.02 1063.23,-1216.81"/>
+<polygon fill="#000000" stroke="#000000" points="1064.4,-1220.12 1073.19,-1214.2 1062.63,-1213.35 1064.4,-1220.12"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_reference32 -->
+<g id="edge48" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_reference32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-426.189C628.639,-428.354 635.602,-435.036 660,-450.189 691.95,-470.033 755.386,-541.341 786,-563.189 901.146,-645.366 936.65,-656.597 1064,-718.189 1089.11,-730.336 1094.24,-744.995 1122,-742.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-742.189C1150.46,-742.587 1181.8,-742.17 1209.02,-741.533"/>
+<polygon fill="#000000" stroke="#000000" points="1209.32,-745.026 1219.23,-741.279 1209.15,-738.029 1209.32,-745.026"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom32 -->
+<g id="edge74" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-464.189C493.101,-441.952 893.337,-675.128 918,-687.189 982.474,-718.719 994.543,-738.114 1064,-756.189 1171.94,-784.279 1304.28,-784.64 1372.51,-782.445"/>
+<polygon fill="#000000" stroke="#000000" points="1373.02,-785.928 1382.89,-782.074 1372.77,-778.933 1373.02,-785.928"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_qreal128 -->
+<g id="edge102" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_qreal128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-1318.19C597.59,-1429.73 750.571,-1550.56 918,-1598.19 965.023,-1611.57 980.097,-1607.96 1028,-1598.19 1074.15,-1588.78 1371.08,-1436.3 1418,-1432.19"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_symbol32 -->
+<g id="edge110" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_symbol32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-464.189C510.554,-417.845 542.913,-422.35 600,-426.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M600,-426.189C795.006,-439.305 868.716,-413.929 1028,-527.189 1069.4,-556.628 1098.49,-610.368 1112.5,-640.736"/>
+<polygon fill="#000000" stroke="#000000" points="1109.39,-642.366 1116.67,-650.069 1115.78,-639.511 1109.39,-642.366"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom64 -->
+<g id="edge122" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-122.189C961.57,-132.672 994.266,-113.937 1122,-122.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-122.189C1192.08,-126.716 1209.81,-124.419 1280,-122.189"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-122.189C1310.87,-121.209 1345.64,-121.976 1372.55,-122.98"/>
+<polygon fill="#000000" stroke="#000000" points="1372.7,-126.488 1382.83,-123.388 1372.98,-119.494 1372.7,-126.488"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_reference128 -->
+<g id="edge146" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_reference128</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-989.189C393.499,-982.095 402.515,-993.201 414,-1008.19 499.513,-1119.79 367.061,-1230.55 477,-1318.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-1318.19C480.606,-1321.06 1117.39,-1160.13 1122,-1160.19"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_mixed_kinds -->
+<g id="edge172" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_mixed_kinds</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-464.189C575.737,-322.804 661.55,-312.189 834,-312.189 834,-312.189 834,-312.189 973,-312.189 1138.43,-312.189 1195.13,-270.051 1344,-342.189 1344.65,-342.503 1585.4,-601.711 1655.85,-677.569"/>
+<polygon fill="#000000" stroke="#000000" points="1653.48,-680.164 1662.85,-685.11 1658.61,-675.401 1653.48,-680.164"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_reference64 -->
+<g id="edge188" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_reference64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1122,-122.189C1161.17,-124.72 1204.21,-136.514 1235.46,-146.807"/>
+<polygon fill="#000000" stroke="#000000" points="1234.58,-150.204 1245.17,-150.083 1236.82,-143.571 1234.58,-150.204"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_qreal64 -->
+<g id="edge196" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_qreal64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M1280,-46.1893C1360.65,-30.1888 1388.71,-55.9397 1456,-103.189 1484.52,-123.218 1507.36,-157.101 1520.3,-179.309"/>
+<polygon fill="#000000" stroke="#000000" points="1517.26,-181.05 1525.23,-188.038 1523.36,-177.609 1517.26,-181.05"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_qreal32 -->
+<g id="edge214" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_qreal32</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M477,-464.189C499.685,-430.17 1025.24,-895.18 1064,-908.189 1142.38,-934.493 1383.59,-864.882 1485.64,-833.078"/>
+<polygon fill="#000000" stroke="#000000" points="1486.86,-836.362 1495.36,-830.031 1484.77,-829.682 1486.86,-836.362"/>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~fury_uom_symbol64 -->
+<g id="edge232" class="edge"><title>iso_fortran_env&#45;&gt;module~fury_uom_symbol64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M834,-122.189C843.792,-123.074 1040.73,-339.514 1103.18,-408.397"/>
+<polygon fill="#000000" stroke="#000000" points="1100.79,-410.981 1110.1,-416.041 1105.98,-406.281 1100.79,-410.981"/>
+</g>
+<!-- module~penf_stringify~5 -->
+<g id="node54" class="node"><title>module~penf_stringify~5</title>
+<a xlink:href="../module/penf_stringify%7E5.html" xlink:title="penf_stringify">
+<polygon fill="#337ab7" stroke="#337ab7" points="414,-1043.19 338,-1043.19 338,-1017.19 414,-1017.19 414,-1043.19"/>
+<text text-anchor="middle" x="376" y="-1027.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_stringify</text>
+</a>
+</g>
+<!-- iso_fortran_env&#45;&gt;module~penf_stringify~5 -->
+<g id="edge58" class="edge"><title>iso_fortran_env&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M295.66,-1002.27C306.198,-1005.94 317.785,-1009.96 328.801,-1013.79"/>
+<polygon fill="#000000" stroke="#000000" points="327.698,-1017.11 338.293,-1017.09 329.995,-1010.5 327.698,-1017.11"/>
+</g>
+<!-- module~penf_global_parameters_variables~4 -->
+<g id="node52" class="node"><title>module~penf_global_parameters_variables~4</title>
+<a xlink:href="../module/penf_global_parameters_variables%7E4.html" xlink:title="penf_global_parameters_variables">
+<polygon fill="#337ab7" stroke="#337ab7" points="178,-1084.19 8.52651e-14,-1084.19 0,-1058.19 178,-1058.19 178,-1084.19"/>
+<text text-anchor="middle" x="89" y="-1068.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_global_parameters_variables</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf~2 -->
+<g id="edge62" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M122.19,-1084.32C176.14,-1103.8 285.896,-1135.67 376,-1112.19"/>
+</g>
+<!-- module~penf_b_size~2 -->
+<g id="node53" class="node"><title>module~penf_b_size~2</title>
+<a xlink:href="../module/penf_b_size%7E2.html" xlink:title="penf_b_size">
+<polygon fill="#337ab7" stroke="#337ab7" points="293,-1084.19 223,-1084.19 223,-1058.19 293,-1058.19 293,-1084.19"/>
+<text text-anchor="middle" x="258" y="-1068.74" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">penf_b_size</text>
+</a>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2 -->
+<g id="edge54" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_b_size~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M178.449,-1071.19C190.206,-1071.19 201.835,-1071.19 212.422,-1071.19"/>
+<polygon fill="#000000" stroke="#000000" points="212.627,-1074.69 222.627,-1071.19 212.627,-1067.69 212.627,-1074.69"/>
+</g>
+<!-- module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5 -->
+<g id="edge56" class="edge"><title>module~penf_global_parameters_variables~4&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M158.964,-1058.15C176.872,-1055.01 196.122,-1051.81 214,-1049.19 252.176,-1043.6 295.606,-1038.57 327.883,-1035.1"/>
+<polygon fill="#000000" stroke="#000000" points="328.376,-1038.57 337.949,-1034.03 327.635,-1031.61 328.376,-1038.57"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf~2 -->
+<g id="edge64" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M284.516,-1084.27C313.6,-1097.92 358.476,-1116.76 376,-1112.19"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M376,-1112.19C411.502,-1102.94 442.615,-1072.41 460.615,-1051.33"/>
+<polygon fill="#000000" stroke="#000000" points="463.404,-1053.45 467.069,-1043.51 458.005,-1049 463.404,-1053.45"/>
+</g>
+<!-- module~penf_b_size~2&#45;&gt;module~penf_stringify~5 -->
+<g id="edge60" class="edge"><title>module~penf_b_size~2&#45;&gt;module~penf_stringify~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M293.084,-1059C304.23,-1055.13 316.747,-1050.78 328.611,-1046.66"/>
+<polygon fill="#000000" stroke="#000000" points="330.082,-1049.85 338.379,-1043.26 327.784,-1043.24 330.082,-1049.85"/>
+</g>
+<!-- module~penf_stringify~5&#45;&gt;module~penf~2 -->
+<g id="edge66" class="edge"><title>module~penf_stringify~5&#45;&gt;module~penf~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.184,-1030.19C422.511,-1030.19 431.313,-1030.19 439.609,-1030.19"/>
+<polygon fill="#000000" stroke="#000000" points="439.772,-1033.69 449.772,-1030.19 439.772,-1026.69 439.772,-1033.69"/>
+</g>
+<!-- module~stringifor_string_t&#45;&gt;module~stringifor -->
+<g id="edge138" class="edge"><title>module~stringifor_string_t&#45;&gt;module~stringifor</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M855.514,-948.312C872.342,-958.437 896.425,-972.62 918,-984.189 924.046,-987.432 930.538,-990.754 936.865,-993.911"/>
+<polygon fill="#000000" stroke="#000000" points="935.432,-997.106 945.949,-998.387 938.526,-990.827 935.432,-997.106"/>
+</g>
+<!-- module~befor64&#45;&gt;module~stringifor_string_t -->
+<g id="edge134" class="edge"><title>module~befor64&#45;&gt;module~stringifor_string_t</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M738.434,-1016.98C757.239,-1000.89 789.183,-973.546 810.916,-954.946"/>
+<polygon fill="#000000" stroke="#000000" points="813.375,-957.448 818.697,-948.286 808.824,-952.13 813.375,-957.448"/>
+</g>
+<!-- module~befor64_pack_data_m~2&#45;&gt;module~befor64 -->
+<g id="edge130" class="edge"><title>module~befor64_pack_data_m~2&#45;&gt;module~befor64</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M660.059,-1030.19C668.793,-1030.19 677.567,-1030.19 685.674,-1030.19"/>
+<polygon fill="#000000" stroke="#000000" points="685.888,-1033.69 695.888,-1030.19 685.888,-1026.69 685.888,-1033.69"/>
+</g>
+</g>
+</svg>
+</div>
+                <script>var panprogramfury_test_uom_subUsesGraph = svgPanZoom('#programfury_test_uom_subUsesGraph', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,});
+                    </script>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="486pt" height="34pt"
+ viewBox="0.00 0.00 486.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 483,-30 483,5 -4,5"/>
+<!-- Module -->
+<g id="node1" class="node"><title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node"><title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="138,-26 72,-26 72,-1.24345e-14 138,-3.55271e-15 138,-26"/>
+<text text-anchor="middle" x="105" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="220,-26 156,-26 156,-1.24345e-14 220,-3.55271e-15 220,-26"/>
+<text text-anchor="middle" x="188" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="292,-26 238,-26 238,-1.24345e-14 292,-3.55271e-15 292,-26"/>
+<text text-anchor="middle" x="265" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="364,-26 310,-26 310,-1.24345e-14 364,-3.55271e-15 364,-26"/>
+<text text-anchor="middle" x="337" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="478,-26 382,-26 382,-1.24345e-14 478,-3.55271e-15 478,-26"/>
+<text text-anchor="middle" x="430" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a parent (sub)module to the submodule which is
+    descended from it. Dashed arrows point from a module being used to the
+    module or program unit using it.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    <br><br>
+    <p>FURY test of <a href="../interface/uom.html">uom</a>.</p>
+    
+     <h3>Calls</h3>
+     
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: program~~fury_test_uom_sub~~CallsGraph Pages: 1 -->
+<svg id="programfury_test_uom_subCallsGraph" width="202pt" height="34pt"
+ viewBox="0.00 0.00 202.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="program~~fury_test_uom_sub~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>program~~fury_test_uom_sub~~CallsGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 199,-30 199,5 -4,5"/>
+<!-- program~fury_test_uom_sub -->
+<g id="node1" class="node"><title>program~fury_test_uom_sub</title>
+<polygon fill="none" stroke="black" points="104,-26 3.55271e-14,-26 0,-1.24345e-14 104,-3.55271e-15 104,-26"/>
+<text text-anchor="middle" x="52" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">fury_test_uom_sub</text>
+</g>
+<!-- uom64 -->
+<g id="node2" class="node"><title>uom64</title>
+<polygon fill="#777777" stroke="#777777" points="194,-26 140,-26 140,-1.24345e-14 194,-3.55271e-15 194,-26"/>
+<text text-anchor="middle" x="167" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom64</text>
+</g>
+<!-- program~fury_test_uom_sub&#45;&gt;uom64 -->
+<g id="edge2" class="edge"><title>program~fury_test_uom_sub&#45;&gt;uom64</title>
+<path fill="none" stroke="#000000" d="M104.116,-13C112.808,-13 121.665,-13 129.884,-13"/>
+<polygon fill="#000000" stroke="#000000" points="129.892,-16.5001 139.892,-13 129.892,-9.5001 129.892,-16.5001"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="556pt" height="34pt"
+ viewBox="0.00 0.00 556.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 553,-30 553,5 -4,5"/>
+<!-- Subroutine -->
+<g id="node1" class="node"><title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="64,-26 3.19744e-14,-26 0,-1.24345e-14 64,-3.55271e-15 64,-26"/>
+<text text-anchor="middle" x="32" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node"><title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="136,-26 82,-26 82,-1.24345e-14 136,-3.55271e-15 136,-26"/>
+<text text-anchor="middle" x="109" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node"><title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="208,-26 154,-26 154,-1.24345e-14 208,-3.55271e-15 208,-26"/>
+<text text-anchor="middle" x="181" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node4" class="node"><title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="362,-26 226,-26 226,-1.24345e-14 362,-3.55271e-15 362,-26"/>
+<text text-anchor="middle" x="294" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node"><title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="434,-26 380,-26 380,-1.24345e-14 434,-3.55271e-15 434,-26"/>
+<text text-anchor="middle" x="407" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="548,-26 452,-26 452,-1.24345e-14 548,-3.55271e-15 548,-26"/>
+<text text-anchor="middle" x="500" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from a procedure to one which it calls. Dashed 
+    arrows point from an interface to procedures which implement that interface.
+    This could include the module procedures in a generic interface or the
+    implementation in a submodule of an interface in a parent module.
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+     
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-si_mass%7E4">si_mass</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-a_unit%7E9">a_unit</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html#variable-test_passed%7E36">test_passed</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/fury_test_uom_sub.html#src">fury_test_uom_sub</a>
+  </div>
+</div>
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-si_mass%7E4"></span>type(uom64)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>si_mass</strong></td><td></td><td></td><td><p>SI mass unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-a_unit%7E9"></span>type(uom64)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>a_unit</strong></td><td></td><td></td><td><p>A unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-test_passed%7E36"></span>logical</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>test_passed</strong>(1)</td><td></td><td></td><td><p>List of passed tests.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span><span class="k">program </span><span class="n">fury_test_uom_sub</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="c">!&lt; FURY test of [[uom]].</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">use </span><span class="n">fury</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="k">type</span><span class="p">(</span><span class="n">uom64</span><span class="p">)</span> <span class="kd">::</span> <span class="n">si_mass</span>        <span class="c">!&lt; SI mass unit.</span>
+<span class="k">type</span><span class="p">(</span><span class="n">uom64</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a_unit</span>         <span class="c">!&lt; A unit.</span>
+<span class="kt">logical</span>     <span class="kd">::</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c">!&lt; List of passed tests.</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">test_passed</span> <span class="o">=</span> <span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="n">si_mass</span> <span class="o">=</span> <span class="n">uom64</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;kg [mass]&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;kilogram&#39;</span><span class="p">)</span>
+<span class="n">a_unit</span> <span class="o">=</span> <span class="n">si_mass</span> <span class="o">-</span> <span class="n">si_mass</span>
+<span class="n">test_passed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">a_unit</span> <span class="o">==</span> <span class="n">si_mass</span>
+<span class="k">print</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">,</span> <span class="s1">&#39;si_mass - si_mass = &#39;</span><span class="o">//</span><span class="n">a_unit</span><span class="p">%</span><span class="n">stringify</span><span class="p">(</span><span class="n">with_dimensions</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span><span class="o">//</span><span class="s1">&#39;, is correct? &#39;</span><span class="p">,</span> <span class="n">test_passed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;(A)&quot;</span><span class="p">,</span> <span class="s1">&#39;si_mass - si_mass name is: &#39;</span><span class="o">//</span><span class="n">a_unit</span><span class="p">%</span><span class="n">name</span>
+
+<span class="k">print</span> <span class="s2">&quot;(A,L1)&quot;</span><span class="p">,</span> <span class="nb">new_line</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">//</span><span class="s1">&#39;Are all tests passed? &#39;</span><span class="p">,</span> <span class="k">all</span><span class="p">(</span><span class="n">test_passed</span><span class="p">)</span>
+<span class="k">stop</span>
+<span class="c">!-----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">endprogram</span> <span class="n">fury_test_uom_sub</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#allprogs-1">All Programs</a></h3></div>
+  <div id="allprogs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/assignments.html">assignments</a>
+      
+      <a class="list-group-item" href="../program/basename_dir.html">basename_dir</a>
+      
+      <a class="list-group-item" href="../program/camelcase.html">camelcase</a>
+      
+      <a class="list-group-item" href="../program/capitalize.html">capitalize</a>
+      
+      <a class="list-group-item" href="../program/compact_real.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/compact_real%7E2.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/compact_real%7E3.html">compact_real</a>
+      
+      <a class="list-group-item" href="../program/concatenation.html">concatenation</a>
+      
+      <a class="list-group-item" href="../program/count_string.html">count_string</a>
+      
+      <a class="list-group-item" href="../program/csv_naive_parser.html">csv_naive_parser</a>
+      
+      <a class="list-group-item" href="../program/decode.html">decode</a>
+      
+      <a class="list-group-item" href="../program/encode.html">encode</a>
+      
+      <a class="list-group-item" href="../program/equal.html">equal</a>
+      
+      <a class="list-group-item" href="../program/escape.html">escape</a>
+      
+      <a class="list-group-item" href="../program/extension.html">extension</a>
+      
+      <a class="list-group-item" href="../program/fill.html">fill</a>
+      
+      <a class="list-group-item" href="../program/free.html">free</a>
+      
+      <a class="list-group-item" href="../program/fury_test_bolt32.html">fury_test_bolt32</a>
+      
+      <a class="list-group-item" href="../program/fury_test_bolt64.html">fury_test_bolt64</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add.html">fury_test_qreal_add</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_aliases_failure.html">fury_test_qreal_add_aliases_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_failure.html">fury_test_qreal_add_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_mixed.html">fury_test_qreal_add_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_add_mixed_failure.html">fury_test_qreal_add_mixed_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_aliases.html">fury_test_qreal_aliases</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_assign.html">fury_test_qreal_assign</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_complex.html">fury_test_qreal_conversions_complex</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_si.html">fury_test_qreal_conversions_si</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_conversions_simple.html">fury_test_qreal_conversions_simple</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_div.html">fury_test_qreal_div</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_div_mixed.html">fury_test_qreal_div_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_eq.html">fury_test_qreal_eq</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_eq_mixed.html">fury_test_qreal_eq_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_mul.html">fury_test_qreal_mul</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_mul_mixed.html">fury_test_qreal_mul_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_not_eq.html">fury_test_qreal_not_eq</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_not_eq_mixed.html">fury_test_qreal_not_eq_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_pow.html">fury_test_qreal_pow</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub.html">fury_test_qreal_sub</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_failure.html">fury_test_qreal_sub_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_mixed.html">fury_test_qreal_sub_mixed</a>
+      
+      <a class="list-group-item" href="../program/fury_test_qreal_sub_mixed_failure.html">fury_test_qreal_sub_mixed_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_system_si.html">fury_test_system_si</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_add.html">fury_test_uom_add</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_add_failure.html">fury_test_uom_add_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_aliases.html">fury_test_uom_aliases</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_assign.html">fury_test_uom_assign</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_assign_failure.html">fury_test_uom_assign_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_div.html">fury_test_uom_div</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_mul.html">fury_test_uom_mul</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_parse_failure.html">fury_test_uom_parse_failure</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_pow.html">fury_test_uom_pow</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub.html">fury_test_uom_sub</a>
+      
+      <a class="list-group-item" href="../program/fury_test_uom_sub_failure.html">fury_test_uom_sub_failure</a>
+      
+      <a class="list-group-item" href="../program/greater_equal_than.html">greater_equal_than</a>
+      
+      <a class="list-group-item" href="../program/greater_than.html">greater_than</a>
+      
+      <a class="list-group-item" href="../program/insert.html">insert</a>
+      
+      <a class="list-group-item" href="../program/io_basic.html">io_basic</a>
+      
+      <a class="list-group-item" href="../program/io_formatted.html">io_formatted</a>
+      
+      <a class="list-group-item" href="../program/is_digit.html">is_digit</a>
+      
+      <a class="list-group-item" href="../program/is_integer.html">is_integer</a>
+      
+      <a class="list-group-item" href="../program/is_number.html">is_number</a>
+      
+      <a class="list-group-item" href="../program/is_real.html">is_real</a>
+      
+      <a class="list-group-item" href="../program/join.html">join</a>
+      
+      <a class="list-group-item" href="../program/lower_equal_than.html">lower_equal_than</a>
+      
+      <a class="list-group-item" href="../program/lower_than.html">lower_than</a>
+      
+      <a class="list-group-item" href="../program/not_equal.html">not_equal</a>
+      
+      <a class="list-group-item" href="../program/partition.html">partition</a>
+      
+      <a class="list-group-item" href="../program/read_file.html">read_file</a>
+      
+      <a class="list-group-item" href="../program/read_line.html">read_line</a>
+      
+      <a class="list-group-item" href="../program/read_lines.html">read_lines</a>
+      
+      <a class="list-group-item" href="../program/replace.html">replace</a>
+      
+      <a class="list-group-item" href="../program/reverse.html">reverse</a>
+      
+      <a class="list-group-item" href="../program/sadjustlr.html">sadjustlr</a>
+      
+      <a class="list-group-item" href="../program/search.html">search</a>
+      
+      <a class="list-group-item" href="../program/sindex.html">sindex</a>
+      
+      <a class="list-group-item" href="../program/slen.html">slen</a>
+      
+      <a class="list-group-item" href="../program/slice.html">slice</a>
+      
+      <a class="list-group-item" href="../program/snakecase.html">snakecase</a>
+      
+      <a class="list-group-item" href="../program/split.html">split</a>
+      
+      <a class="list-group-item" href="../program/srepeat.html">srepeat</a>
+      
+      <a class="list-group-item" href="../program/sscan.html">sscan</a>
+      
+      <a class="list-group-item" href="../program/start_end.html">start_end</a>
+      
+      <a class="list-group-item" href="../program/startcase.html">startcase</a>
+      
+      <a class="list-group-item" href="../program/strim.html">strim</a>
+      
+      <a class="list-group-item" href="../program/strip.html">strip</a>
+      
+      <a class="list-group-item" href="../program/sverify.html">sverify</a>
+      
+      <a class="list-group-item" href="../program/swapcase.html">swapcase</a>
+      
+      <a class="list-group-item" href="../program/test_all.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_all%7E2.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_all%7E3.html">test_all</a>
+      
+      <a class="list-group-item" href="../program/test_driver.html">Test_Driver</a>
+      
+      <a class="list-group-item" href="../program/to_number.html">to_number</a>
+      
+      <a class="list-group-item" href="../program/unescape.html">unescape</a>
+      
+      <a class="list-group-item" href="../program/unique.html">unique</a>
+      
+      <a class="list-group-item" href="../program/upper_lower.html">upper_lower</a>
+      
+      <a class="list-group-item" href="../program/write_file.html">write_file</a>
+      
+      <a class="list-group-item" href="../program/write_lines.html">write_lines</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>

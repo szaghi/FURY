@@ -1,0 +1,5476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	 <meta name="description" content="Fortran Units (environment) for Reliable phYsical math">
+    
+    <meta name="author" content="Stefano Zaghi" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>uom &ndash; FURY </title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+    
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FURY </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+				
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+		 aria-expanded="false">Contents <span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+				
+				
+            <li><a href="../lists/modules.html">Modules</a></li>
+				
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+				
+				
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+								
+            <li><a href="../lists/types.html">Derived Types</a></li>
+				
+				
+            <li><a href="../lists/programs.html">Programs</a></li>
+				
+            </ul>
+            </li>
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>uom
+    <small>Derived Type</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+	  data-placement="bottom" data-html="true"
+	  title="<p> 6.2% of total for derived types.</p>Including implementation: 900 statements,  7.4% of total for derived types.">47 statements</a>
+     </li> 
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/fury_uom128.F90"> Source File</a></li>
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+     <li><a href='../sourcefile/fury_uom128.f90.html'>fury_uom128.F90</a></li>
+  
+     <li><a href='../module/fury_uom128.html'>fury_uom128</a></li>
+  
+     <li class="active">uom</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/uom.html#variable-name%7E4">name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-alias">alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-references">references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-references_number">references_number</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#cons-0">Constructor</a></h3></div>
+  <div id="cons-0" class="panel-collapse collapse">
+    <div class="list-group">
+      <a class="list-group-item" href="../type/uom.html#interface-uom">uom</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#boundprocs-0">Type-Bound Procedures</a></h3></div>
+  <div id="boundprocs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_alias">get_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_main_reference">get_main_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_main_symbol">get_main_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_references">get_references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_alias">has_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_name%7E4">has_name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_reference">has_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-is_defined">is_defined</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-prefixed">prefixed</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-set%7E4">set</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-set_alias_conversion">set_alias_conversion</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-stringify%7E4">stringify</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-to%7E4">to</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-unset%7E4">unset</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-assignment%28%3D%29%7E4">assignment(=)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2B%29%7E4">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28SLASH%29%7E4">operator(/)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2A%29%7E4">operator(*)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28-%29%7E4">operator(-)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2A%2A%29%7E4">operator(**)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%3D%3D%29%7E4">operator(==)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-add_reference">add_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-is_equal%7E4">is_equal</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse">parse</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_alias">parse_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_name">parse_name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_references">parse_references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-update_references_number">update_references_number</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-assign_uom">assign_uom</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-add%7E4">add</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-div%7E4">div</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-mul%7E4">mul</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-sub%7E4">sub</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r16p%7E4">pow_R16P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r8p%7E4">pow_R8P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r4p%7E4">pow_R4P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i8p%7E4">pow_I8P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i4p%7E4">pow_I4P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i2p%7E4">pow_I2P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i1p%7E4">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+  <hr>
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#alltypes-0">All Derived Types</a></h3></div>
+  <div id="alltypes-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/dbm_to_mw.html">dBm_to_mW</a>
+      
+      <a class="list-group-item" href="../type/qreal.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E2.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E3.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/string.html">string</a>
+      
+      <a class="list-group-item" href="../type/system_abstract.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E2.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E3.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_si.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E2.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E3.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/uom.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E2.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E3.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom_converter.html">uom_converter</a>
+      
+      <a class="list-group-item" href="../type/uom_reference.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E2.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E3.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E2.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E3.html">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+</div>  
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+      <h2>type, public :: uom</h2>
+    
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: type~~uom~~InheritsGraph Pages: 1 -->
+<svg id="typeuomInheritsGraph" width="608pt" height="78pt"
+ viewBox="0.00 0.00 608.00 78.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="type~~uom~~InheritsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 74)">
+<title>type~~uom~~InheritsGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-74 605,-74 605,5 -4,5"/>
+<!-- type~uom -->
+<g id="node1" class="node"><title>type~uom</title>
+<polygon fill="none" stroke="black" points="600,-48 546,-48 546,-22 600,-22 600,-48"/>
+<text text-anchor="middle" x="573" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50">uom</text>
+</g>
+<!-- type~uom_reference -->
+<g id="node2" class="node"><title>type~uom_reference</title>
+<a xlink:href="../type/uom_reference.html" xlink:title="uom_reference">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="439,-48 355,-48 355,-22 439,-22 439,-48"/>
+<text text-anchor="middle" x="397" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_reference</text>
+</a>
+</g>
+<!-- type~uom_reference&#45;&gt;type~uom -->
+<g id="edge8" class="edge"><title>type~uom_reference&#45;&gt;type~uom</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M439.605,-35C468.923,-35 507.498,-35 535.621,-35"/>
+<polygon fill="#000000" stroke="#000000" points="535.847,-38.5001 545.847,-35 535.847,-31.5001 535.847,-38.5001"/>
+<text text-anchor="middle" x="493" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">alias, references</text>
+</g>
+<!-- type~uom_symbol -->
+<g id="node3" class="node"><title>type~uom_symbol</title>
+<a xlink:href="../type/uom_symbol.html" xlink:title="uom_symbol">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="233,-48 161,-48 161,-22 233,-22 233,-48"/>
+<text text-anchor="middle" x="197" y="-32.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_symbol</text>
+</a>
+</g>
+<!-- type~uom_symbol&#45;&gt;type~uom_reference -->
+<g id="edge6" class="edge"><title>type~uom_symbol&#45;&gt;type~uom_reference</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M233.683,-35C264.68,-35 309.465,-35 344.3,-35"/>
+<polygon fill="#000000" stroke="#000000" points="344.302,-38.5001 354.302,-35 344.302,-31.5001 344.302,-38.5001"/>
+<text text-anchor="middle" x="294" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">aliases, dimensions</text>
+</g>
+<!-- type~uom_converter -->
+<g id="node4" class="node"><title>type~uom_converter</title>
+<a xlink:href="../type/uom_converter.html" xlink:title="uom_converter">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="85,-70 1,-70 1,-44 85,-44 85,-70"/>
+<text text-anchor="middle" x="43" y="-54.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">uom_converter</text>
+</a>
+</g>
+<!-- type~uom_converter&#45;&gt;type~uom_symbol -->
+<g id="edge2" class="edge"><title>type~uom_converter&#45;&gt;type~uom_symbol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M85.8976,-50.8718C105.921,-48.0112 129.801,-44.5999 150.281,-41.6742"/>
+<polygon fill="#000000" stroke="#000000" points="150.93,-45.117 160.335,-40.2379 149.94,-38.1874 150.93,-45.117"/>
+<text text-anchor="middle" x="123" y="-51.45" font-family="Helvetica,sans-Serif" font-size="9.50">convert_</text>
+</g>
+<!-- type~string -->
+<g id="node5" class="node"><title>type~string</title>
+<a xlink:href="../type/string.html" xlink:title="string">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="70,-26 16,-26 16,-1.24345e-14 70,-3.55271e-15 70,-26"/>
+<text text-anchor="middle" x="43" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">string</text>
+</a>
+</g>
+<!-- type~string&#45;&gt;type~uom_symbol -->
+<g id="edge4" class="edge"><title>type~string&#45;&gt;type~uom_symbol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M70.3459,-16.3548C90.2422,-18.8532 117.819,-22.4348 142,-26 144.689,-26.3965 147.45,-26.8143 150.236,-27.2441"/>
+<polygon fill="#000000" stroke="#000000" points="149.917,-30.737 160.34,-28.8355 151.006,-23.8222 149.917,-30.737"/>
+<text text-anchor="middle" x="123" y="-30.45" font-family="Helvetica,sans-Serif" font-size="9.50">symbol_</text>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="176pt" height="34pt"
+ viewBox="0.00 0.00 176.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 173,-30 173,5 -4,5"/>
+<!-- Type -->
+<g id="node1" class="node"><title>Type</title>
+<polygon fill="#5cb85c" stroke="#5cb85c" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="168,-26 72,-26 72,-1.24345e-14 168,-3.55271e-15 168,-26"/>
+<text text-anchor="middle" x="120" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from one derived type to another which extends
+    (inherits from) it. Dashed arrows point from a derived type to another
+    type containing it as a components, with a label listing the name(s) of
+    said component(s).
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    <br><br>
+    
+    <p>Unit of measure (UOM) class.</p>
+<p>The string format definition of a valid FURY unit is as following:</p>
+<p><code>uom_referenceA.uom_referenceB.... (uom_referenceALIAS[dimensions_alias]) {name}</code></p>
+<p>where</p>
+<ul>
+<li><code>uom_referenceA, uom_referenceB, ...</code> are the defined uom references that must follow <a href="../interface/uom_reference.html">uom_reference</a> syntax.</li>
+<li>the term <code>(uom_referenceALIAS[dimensions_alias])</code> defines a unit <em>alias</em> that is optional and must come always
+  after unit reference definition;</li>
+<li>the term <code>{name}</code> defines the unit name that is optional and must be always the last term.</li>
+</ul>
+<p>For example, valid definition are:</p>
+<ul>
+<li><code>kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2] (Pa[pressure]) {pascal}</code></li>
+<li><code>km = 1000 * m [length].h-1 = 3600 s-1 [time-1] (km_h[speed]) {km/h}</code></li>
+</ul>
+<p>The aliases definition for <a href="../interface/uom_reference.html">uom_reference</a> term can be protected by means of <code>&lt;</code> and <code>&gt;</code> that are optional, but highly
+ recommended, e.g.:</p>
+<ul>
+<li><code>km&lt; = 1000.0 * m&gt; [length].h-1&lt; = 3600.0 s-1&gt; [time-1] (km_h[speed]) {km/h}</code></li>
+</ul>
+<p>This protection allows disambiguation of <code>.</code> symbols that are used for <a href="../interface/uom_reference.html">uom_reference</a> separation and for real
+ offset/factor of aliases definition. Other valid definitions are:</p>
+<ul>
+<li><code>kg.m-1.s-2</code> a unit without specified dimensions, alias and name;</li>
+<li><code>kg.m-1.s-2(Pa)</code> a unit without specified dimensions and name, but with an alias without alias dimension;</li>
+<li><code>kg.m-1.s-2(Pa[pressure])</code> a unit without specified dimensions and name, but with an alias with alias dimension;</li>
+<li><code>kg.m-1.s-2{pascal}</code> a unit without specified dimensions and alias, but with a name;
+è <code>kg.m-1.s-2(Pa){pascal}</code> a unit without specified dimensions, but with an alias without alias dimension and a name;</li>
+</ul>
+<p></p><div class="alert alert-info" role="alert"><h4>Note</h4><p>It is better to avoid to incomplete list of dimensions for references: define all dimensions for all references
+ or avoid to define dimensions at all.</p></div>
+    
+    
+    <h3>Inherited By</h3>
+    
+                <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: type~~uom~~InheritedByGraph Pages: 1 -->
+<svg id="typeuomInheritedByGraph" width="436pt" height="113pt"
+ viewBox="0.00 0.00 436.00 113.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="type~~uom~~InheritedByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 109)">
+<title>type~~uom~~InheritedByGraph</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-109 433,-109 433,5 -4,5"/>
+<!-- type~uom -->
+<g id="node1" class="node"><title>type~uom</title>
+<polygon fill="none" stroke="black" points="54,-66 2.13163e-14,-66 0,-40 54,-40 54,-66"/>
+<text text-anchor="middle" x="27" y="-50.55" font-family="Helvetica,sans-Serif" font-size="10.50">uom</text>
+</g>
+<!-- type~qreal -->
+<g id="node2" class="node"><title>type~qreal</title>
+<a xlink:href="../type/qreal.html" xlink:title="qreal">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="160,-66 106,-66 106,-40 160,-40 160,-66"/>
+<text text-anchor="middle" x="133" y="-50.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">qreal</text>
+</a>
+</g>
+<!-- type~uom&#45;&gt;type~qreal -->
+<g id="edge8" class="edge"><title>type~uom&#45;&gt;type~qreal</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M54.0225,-53C66.6333,-53 81.8509,-53 95.5484,-53"/>
+<polygon fill="#000000" stroke="#000000" points="95.6583,-56.5001 105.658,-53 95.6582,-49.5001 95.6583,-56.5001"/>
+<text text-anchor="middle" x="80" y="-57.45" font-family="Helvetica,sans-Serif" font-size="9.50">unit</text>
+</g>
+<!-- type~system_si -->
+<g id="node3" class="node"><title>type~system_si</title>
+<a xlink:href="../type/system_si.html" xlink:title="system_si">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="428,-75 368,-75 368,-49 428,-49 428,-75"/>
+<text text-anchor="middle" x="398" y="-59.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">system_si</text>
+</a>
+</g>
+<!-- type~uom&#45;&gt;type~system_si -->
+<g id="edge10" class="edge"><title>type~uom&#45;&gt;type~system_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M54.3026,-64.3841C60.0732,-66.4866 66.1793,-68.4913 72,-70 86.7851,-73.8321 90.7807,-73.7129 106,-75 205.21,-83.3901 236.47,-112.135 330,-78 340.371,-74.215 337.963,-61.7454 349,-62"/>
+<text text-anchor="middle" x="199" y="-96.45" font-family="Helvetica,sans-Serif" font-size="9.50">units</text>
+</g>
+<!-- type~system_abstract -->
+<g id="node4" class="node"><title>type~system_abstract</title>
+<a xlink:href="../type/system_abstract.html" xlink:title="system_abstract">
+<polygon fill="#5cb85c" stroke="#5cb85c" points="329,-26 239,-26 239,-1.24345e-14 329,-3.55271e-15 329,-26"/>
+<text text-anchor="middle" x="284" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">system_abstract</text>
+</a>
+</g>
+<!-- type~uom&#45;&gt;type~system_abstract -->
+<g id="edge12" class="edge"><title>type~uom&#45;&gt;type~system_abstract</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M50.025,-39.9301C65.3591,-31.9589 86.2481,-22.4702 106,-18 146.205,-8.90109 192.817,-7.9241 228.255,-9.07682"/>
+<polygon fill="#000000" stroke="#000000" points="228.277,-12.5803 238.406,-9.47468 228.551,-5.58563 228.277,-12.5803"/>
+<text text-anchor="middle" x="133" y="-22.45" font-family="Helvetica,sans-Serif" font-size="9.50">units</text>
+</g>
+<!-- type~qreal&#45;&gt;type~system_si -->
+<g id="edge4" class="edge"><title>type~qreal&#45;&gt;type~system_si</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M160.267,-54.5062C201.226,-56.685 281.08,-60.6074 349,-62"/>
+<text text-anchor="middle" x="284" y="-65.45" font-family="Helvetica,sans-Serif" font-size="9.50">constants</text>
+</g>
+<!-- type~qreal&#45;&gt;type~system_abstract -->
+<g id="edge2" class="edge"><title>type~qreal&#45;&gt;type~system_abstract</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M160.333,-41.1786C166.102,-38.9356 172.199,-36.7473 178,-35 194.17,-30.1293 212.047,-25.9675 228.441,-22.617"/>
+<polygon fill="#000000" stroke="#000000" points="229.3,-26.0149 238.429,-20.6366 227.939,-19.1486 229.3,-26.0149"/>
+<text text-anchor="middle" x="199" y="-39.45" font-family="Helvetica,sans-Serif" font-size="9.50">constants</text>
+</g>
+<!-- type~system_abstract&#45;&gt;type~system_si -->
+<g id="edge6" class="edge"><title>type~system_abstract&#45;&gt;type~system_si</title>
+<path fill="none" stroke="#000000" d="M309.82,-26.1625C316.682,-30.1829 323.881,-34.9025 330,-40 339.926,-48.2696 336.083,-61.7352 349,-62"/>
+<path fill="none" stroke="#000000" d="M349,-62C351.87,-62.0589 354.836,-62.1022 357.821,-62.1331"/>
+<polygon fill="#000000" stroke="#000000" points="357.917,-65.6336 367.938,-62.1946 357.96,-58.6338 357.917,-65.6336"/>
+</g>
+</g>
+</svg>
+</div>
+                <div><a type="button" class="graph-help" data-toggle="modal" href="#graph-help-text">Help</a></div>
+                <div class="modal fade" id="graph-help-text" tabindex="-1" role="dialog">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                      </div>
+                      <div class="modal-body">
+                        
+    <p>Nodes of different colours represent the following: </p>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.26.3 (20100126.1600)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="176pt" height="34pt"
+ viewBox="0.00 0.00 176.00 34.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 30)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="white" points="-4,5 -4,-30 173,-30 173,5 -4,5"/>
+<!-- Type -->
+<g id="node1" class="node"><title>Type</title>
+<polygon fill="#5cb85c" stroke="#5cb85c" points="54,-26 2.13163e-14,-26 0,-1.24345e-14 54,-3.55271e-15 54,-26"/>
+<text text-anchor="middle" x="27" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node2" class="node"><title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="168,-26 72,-26 72,-1.24345e-14 168,-3.55271e-15 168,-26"/>
+<text text-anchor="middle" x="120" y="-10.55" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+    
+    <p>Solid arrows point from one derived type to another which extends
+    (inherits from) it. Dashed arrows point from a derived type to another
+    type containing it as a components, with a label listing the name(s) of
+    said component(s).
+    </p>
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+    
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/uom.html#variable-name%7E4">name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-alias">alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-references">references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#variable-references_number">references_number</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#cons-1">Constructor</a></h3></div>
+  <div id="cons-1" class="panel-collapse collapse">
+    <div class="list-group">
+      <a class="list-group-item" href="../type/uom.html#interface-uom">uom</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#boundprocs-1">Type-Bound Procedures</a></h3></div>
+  <div id="boundprocs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_alias">get_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_main_reference">get_main_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_main_symbol">get_main_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-get_references">get_references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_alias">has_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_name%7E4">has_name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-has_reference">has_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-is_defined">is_defined</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-prefixed">prefixed</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-set%7E4">set</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-set_alias_conversion">set_alias_conversion</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-stringify%7E4">stringify</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-to%7E4">to</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-unset%7E4">unset</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-assignment%28%3D%29%7E4">assignment(=)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2B%29%7E4">operator(+)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28SLASH%29%7E4">operator(/)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2A%29%7E4">operator(*)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28-%29%7E4">operator(-)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%2A%2A%29%7E4">operator(**)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-operator%28%3D%3D%29%7E4">operator(==)</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-add_reference">add_reference</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-is_equal%7E4">is_equal</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse">parse</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_alias">parse_alias</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_name">parse_name</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-parse_references">parse_references</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-update_references_number">update_references_number</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-assign_uom">assign_uom</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-add%7E4">add</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-div%7E4">div</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-mul%7E4">mul</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-sub%7E4">sub</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r16p%7E4">pow_R16P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r8p%7E4">pow_R8P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_r4p%7E4">pow_R4P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i8p%7E4">pow_I8P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i4p%7E4">pow_I4P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i2p%7E4">pow_I2P</a>
+      
+      <a class="list-group-item" href="../type/uom.html#boundprocedure-pow_i1p%7E4">pow_I1P</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    
+    <section>
+    <h2>Components</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Visibility</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-name%7E4"></span>character(len=:),</td>
+  
+  <td>public,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>name</strong></td><td></td><td></td><td><p>Unit name.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-alias"></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  
+  <td>private,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>alias</strong></td><td></td><td></td><td><p>Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-references"></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  
+  <td>private,</td>
+  <td>allocatable</td><td>::</td>
+  <td><strong>references</strong>(:)</td><td></td><td></td><td><p>Reference units of the unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-references_number"></span>integer(kind=I_P),</td>
+  
+  <td>private</td>
+  <td></td><td>::</td>
+  <td><strong>references_number</strong></td><td> =</td><td>0_I_P</td><td><p>References number.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+	 <section>
+	 <h2>Constructor</h2>
+	   
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-uom"></span><h3>public interface <a href='../interface/uom.html'>uom</a>
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+    <p>Ovearloading <a href="../interface/uom.html">uom</a> name with a set of creator functions.</p>
+  </div>
+  
+  <ul class="list-group">
+  
+  
+  
+    <li class="list-group-item">
+    
+    
+    <h3>
+private function <a href='../proc/creator_from_string.html'>creator_from_string</a>(source, alias, name) result(unit)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Create an instance of <a href="../interface/uom.html">uom</a> from an input source string.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Source input string definition of the unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>alias</strong></td><td><p>Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Unit name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>The unit.</p>
+    
+
+    </li>
+  
+  
+  </ul>
+</div>
+
+	   
+	 </section>
+	 <br>
+    
+    
+    
+    
+     
+    <section>
+    <h2>Type-Bound Procedures</h2>
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-get_alias"></span><h3>procedure, public, pass(self) :: <strong>get_alias</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the alias.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure subroutine <a href='../proc/get_alias.html'>get_alias</a>(self, alias)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return the alias.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(out)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>alias</strong></td><td><p>Uom main alias.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-get_main_reference"></span><h3>procedure, public, pass(self) :: <strong>get_main_reference</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the main reference.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure function <a href='../proc/get_main_reference.html'>get_main_reference</a>(self) result(reference)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return the main reference, i.e. <code>self%alias</code> if <code>self%alias</code> is defined or <code>self%references(1)</code> if <code>self</code> has only 1
+ <a href="../interface/uom_reference.html">uom_reference</a>.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom_reference.html'>uom_reference</a>)
+  </small></h4>
+  <p>Main uom reference.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-get_main_symbol"></span><h3>procedure, public, pass(self) :: <strong>get_main_symbol</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the main symbol.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/get_main_symbol.html'>get_main_symbol</a>(self) result(symbol)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return the main symbol, i.e. <code>self%alias%aliases(1)%symbol_</code> if <code>self%alias</code> is defined or
+ <code>self%references(1)%aliases(1)%symbol_</code> if <code>self</code> has only 1 <a href="../interface/uom_reference.html">uom_reference</a>.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/string.html'>string</a>)
+  </small></h4>
+  <p>Main alias symbol.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-get_references"></span><h3>procedure, public, pass(self) :: <strong>get_references</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return the references.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure subroutine <a href='../proc/get_references.html'>get_references</a>(self, references)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return the references.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(out),</td>
+  <td></td>
+  
+  <td>allocatable</td><td>::</td>
+  <td><strong>references</strong>(:)</td><td><p>Uom references.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-has_alias"></span><h3>procedure, public, pass(self) :: <strong>has_alias</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the unit has an alias.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/has_alias.html'>has_alias</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the unit has an alias.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-has_name%7E4"></span><h3>procedure, public, pass(self) :: <strong>has_name</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the unit has a name.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/has_name%7E4.html'>has_name</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the unit has a name.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Name presence status.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-has_reference"></span><h3>procedure, public, pass(self) :: <strong>has_reference</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the unit has a queried reference unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/has_reference.html'>has_reference</a>(self, reference)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the unit has a queried reference unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>reference</strong></td><td><p>Reference unit to check the presence of.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>reference unit presence status.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-is_defined"></span><h3>procedure, public, pass(self) :: <strong>is_defined</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if the unit is defined.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/is_defined.html'>is_defined</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if the unit has been defined, namely it has defined references.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Definition status.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-prefixed"></span><h3>procedure, public, pass(self) :: <strong>prefixed</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return prefixed unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/prefixed.html'>prefixed</a>(self, prefixes)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return prefixed unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>prefixes</strong></td><td><p>Prefixes data.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Prefixed unit.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set%7E4"></span><h3>procedure, public, pass(self) :: <strong>set</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Set the unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure subroutine <a href='../proc/set%7E4.html'>set</a>(self, references, alias, name)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Set the unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>references</strong>(1:)</td><td><p>Unit references of the unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>alias</strong></td><td><p>Alias of the unit, e.g Pa (kg.m-1.s-2) for Pascal [pressure].</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>name</strong></td><td><p>Unit name.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-set_alias_conversion"></span><h3>procedure, public, pass(self) :: <strong>set_alias_conversion</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Set alias conversion formula.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure subroutine <a href='../proc/set_alias_conversion.html'>set_alias_conversion</a>(self, reference_index, alias_index, convert)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Set alias conversion formula.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom reference.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I_P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>reference_index</strong></td><td><p>Index of the reference to which set the conversion formula.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I_P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>alias_index</strong></td><td><p>Index of the alias to which set the conversion formula.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom_converter.html'>uom_converter</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>convert</strong></td><td><p>Generic conversion alias formula user-supplied.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-stringify%7E4"></span><h3>procedure, public, pass(self) :: <strong>stringify</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Return a string representation of the unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private pure function <a href='../proc/stringify%7E4.html'>stringify</a>(self, with_dimensions, with_aliases, protect_aliases, with_name, compact_reals) result(raw)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Return a string representation of the unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_dimensions</strong></td><td><p>Flag to activate dimensions printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_aliases</strong></td><td><p>Flag to activate aliases printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>protect_aliases</strong></td><td><p>Flag to activate aliases printing in protected mode.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>with_name</strong></td><td><p>Flag to activate name printing.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>logical,</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>compact_reals</strong></td><td><p>Flag to activate real numbers compacting.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  <p>Raw characters data.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-to%7E4"></span><h3>procedure, public, pass(self) :: <strong>to</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Convert magnitude with respect another unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/to%7E4.html'>to</a>(self, other, magnitude) result(converted)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Convert magnitude with respect another unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The uom.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>Other unit used for conversion.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=RKP),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>magnitude</strong></td><td><p>Magnitude to be converted.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=RKP)
+  </small></h4>
+  <p>Converted magnitude.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-unset%7E4"></span><h3>procedure, public, pass(self) :: <strong>unset</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>unset the unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental subroutine <a href='../proc/unset%7E4.html'>unset</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Unset the unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-assignment%28%3D%29%7E4"></span><h3>generic, public :: <strong>assignment(=)</strong>  => <a href='../type/uom.html#boundprocedure-assign_uom'>assign_uom</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>=</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private subroutine <a href='../proc/assign_uom.html'>assign_uom</a>(lhs, rhs)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom = uom</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2B%29%7E4"></span><h3>generic, public :: <strong>operator(+)</strong>  => <a href='../type/uom.html#boundprocedure-add%7E4'>add</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>+</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/add%7E4.html'>add</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom + uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28SLASH%29%7E4"></span><h3>generic, public :: <strong>operator(/)</strong>  => <a href='../type/uom.html#boundprocedure-div%7E4'>div</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>/</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/div%7E4.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom / uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%29%7E4"></span><h3>generic, public :: <strong>operator(*)</strong>  => <a href='../type/uom.html#boundprocedure-mul%7E4'>mul</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>*</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/mul%7E4.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28-%29%7E4"></span><h3>generic, public :: <strong>operator(-)</strong>  => <a href='../type/uom.html#boundprocedure-sub%7E4'>sub</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>-</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/sub%7E4.html'>sub</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom - uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%2A%2A%29%7E4"></span><h3>generic, public :: <strong>operator(**)</strong>  => <a href='../type/uom.html#boundprocedure-pow_r8p%7E4'>pow_R8P</a>, <a href='../type/uom.html#boundprocedure-pow_r4p%7E4'>pow_R4P</a>, <a href='../type/uom.html#boundprocedure-pow_i8p%7E4'>pow_I8P</a>, <a href='../type/uom.html#boundprocedure-pow_i4p%7E4'>pow_I4P</a>, <a href='../type/uom.html#boundprocedure-pow_i2p%7E4'>pow_I2P</a>, <a href='../type/uom.html#boundprocedure-pow_i1p%7E4'>pow_I1P</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>**</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_r8p%7E4.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_r4p%7E4.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i8p%7E4.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i4p%7E4.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i2p%7E4.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private function <a href='../proc/pow_i1p%7E4.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-operator%28%3D%3D%29%7E4"></span><h3>generic, public :: <strong>operator(==)</strong>  => <a href='../type/uom.html#boundprocedure-is_equal%7E4'>is_equal</a> 
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Overloading <code>==</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+            
+    
+    <h3>
+private elemental function <a href='../proc/is_equal%7E4.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if unit is equal (has the same references units) with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+         
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-add_reference"></span><h3>procedure, private, pass(self) :: <strong>add_reference</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Add a reference unit to unit.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental subroutine <a href='../proc/add_reference.html'>add_reference</a>(self, reference)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Add reference unit to unit.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/uom_reference.html'>uom_reference</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>reference</strong></td><td><p>Unit reference to be added.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-is_equal%7E4"></span><h3>procedure, private, pass(self) :: <strong>is_equal</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Check if unit is equal with another one.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental function <a href='../proc/is_equal%7E4.html'>is_equal</a>(self, other)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Check if unit is equal (has the same references units) with another one.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>other</strong></td><td><p>The other unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>logical
+  </small></h4>
+  <p>Check result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-parse"></span><h3>procedure, private, pass(self) :: <strong>parse</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Parse unit definition from an input string.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/parse.html'>parse</a>(self, source)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Parse unit definition form an input string.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Input source string.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-parse_alias"></span><h3>procedure, private, pass(self) :: <strong>parse_alias</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Parse unit alias from an input string.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/parse_alias.html'>parse_alias</a>(self, source)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Parse unit alias form an input string and return also the source string without the alias data.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/string.html'>string</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Input source string.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-parse_name"></span><h3>procedure, private, pass(self) :: <strong>parse_name</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Parse unit name from an input string.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/parse_name.html'>parse_name</a>(self, source)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Parse unit name form an input string and return also the source string without the name data.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/string.html'>string</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Input source string.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-parse_references"></span><h3>procedure, private, pass(self) :: <strong>parse_references</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Parse reference units from an input string.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/parse_references.html'>parse_references</a>(self, source)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Parse references units form an input string.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>type(<a href='../type/string.html'>string</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>source</strong></td><td><p>Input source string.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-update_references_number"></span><h3>procedure, private, pass(self) :: <strong>update_references_number</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p>Update reference units number counter.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private elemental subroutine <a href='../proc/update_references_number.html'>update_references_number</a>(self)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p>Update references number counter.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>self</strong></td><td><p>The unit.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-assign_uom"></span><h3>procedure, private, pass(lhs) :: <strong>assign_uom</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom = uom</code> assignment.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private subroutine <a href='../proc/assign_uom.html'>assign_uom</a>(lhs, rhs)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom = uom</code> assignment.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(inout)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-add%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>add</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom + uom</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/add%7E4.html'>add</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom + uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-div%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>div</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom / uom</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/div%7E4.html'>div</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom / uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-mul%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>mul</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom * uom</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/mul%7E4.html'>mul</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom * uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-sub%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>sub</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom - uom</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/sub%7E4.html'>sub</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom - uom</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r16p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R16P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** real(R16P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r16p%7E4.html'>pow_R16P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** real(R16P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R16P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r8p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** real(R8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r8p%7E4.html'>pow_R8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** real(R8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_r4p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_R4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** real(R4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_r4p%7E4.html'>pow_R4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** real(R4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=R4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i8p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I8P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** integer(I8P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i8p%7E4.html'>pow_I8P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I8P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I8P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i4p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I4P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** integer(I4P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i4p%7E4.html'>pow_I4P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I4P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I4P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i2p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I2P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** integer(I2P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i2p%7E4.html'>pow_I2P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I2P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I2P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+	   
+<div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="boundprocedure-pow_i1p%7E4"></span><h3>procedure, private, pass(lhs) :: <strong>pow_I1P</strong>  
+    
+  </h3></div>
+  
+  <div class="panel-body">
+    
+
+
+    <p><code>uom ** integer(I1P)</code> operator.</p>
+  </div>
+  
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+      
+         
+    
+    <h3>
+private function <a href='../proc/pow_i1p%7E4.html'>pow_I1P</a>(lhs, rhs) result(opr)
+    
+    
+	 
+</h3>
+    
+
+
+
+
+
+
+
+<p><code>uom ** integer(I1P)</code> operator.</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(<a href='../type/uom.html'>uom</a>),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>lhs</strong></td><td><p>Left hand side.</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>integer(kind=I1P),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>rhs</strong></td><td><p>Right hand side.</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>type(<a href='../type/uom.html'>uom</a>)
+  </small></h4>
+  <p>Operator result.</p>
+    
+
+      
+      </li>
+    
+  </ul>
+</div>
+
+    
+    </section>
+    
+    
+    
+    
+    </div>
+  </div>
+
+  <section class="visible-xs visible-sm hidden-md">
+    <hr>
+    
+
+<div class="panel panel-default">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#alltypes-1">All Derived Types</a></h3></div>
+  <div id="alltypes-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../type/dbm_to_mw.html">dBm_to_mW</a>
+      
+      <a class="list-group-item" href="../type/qreal.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E2.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/qreal%7E3.html">qreal</a>
+      
+      <a class="list-group-item" href="../type/string.html">string</a>
+      
+      <a class="list-group-item" href="../type/system_abstract.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E2.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_abstract%7E3.html">system_abstract</a>
+      
+      <a class="list-group-item" href="../type/system_si.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E2.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/system_si%7E3.html">system_si</a>
+      
+      <a class="list-group-item" href="../type/uom.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E2.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom%7E3.html">uom</a>
+      
+      <a class="list-group-item" href="../type/uom_converter.html">uom_converter</a>
+      
+      <a class="list-group-item" href="../type/uom_reference.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E2.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_reference%7E3.html">uom_reference</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E2.html">uom_symbol</a>
+      
+      <a class="list-group-item" href="../type/uom_symbol%7E3.html">uom_symbol</a>
+      
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2016 </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> FURY was developed by Stefano Zaghi</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js'],
+        'HTML-CSS': { 
+           styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: '#000000 ! important'} }
+        }
+      });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </body>
+</html>
