@@ -153,7 +153,8 @@ rule_2 = FoBiS.py build -mode tests-gnu -coverage
 rule_3 = ./run_tests.sh
 rule_4 = rm -f exe/obj/penf* exe/obj/stringifor*
 rule_5 = gcov -o exe/obj/ src/lib/fury*
-rule_6 = rm -f *.gcov
+rule_6 = gcovr -r . --xml-pretty -o shippable-coverage.xml
+rule_7 = rm -f *.gcov
 
 [rule-coverage-analysis]
 help   = Rule for performing coverage analysis and saving reports in markdown
