@@ -11,6 +11,7 @@
 
 [![Status](https://img.shields.io/badge/status-stable-green.svg)]()
 [![Build Status](https://travis-ci.org/szaghi/FURY.svg?branch=master)](https://travis-ci.org/szaghi/FURY)
+[![Build Status](https://api.shippable.com/projects/57dabe9156a1350f001d8ffc/badge?branch=master)]()
 [![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/FURY.svg)](http://codecov.io/github/szaghi/FURY?branch=master)
 
 ### FURY, Fortran Units (environment) for Reliable phYsical math
