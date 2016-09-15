@@ -9,6 +9,7 @@ install:
     - sudo pip install --upgrade FoBiS.py
     - sudo pip install --upgrade markdown-checklist 
     - sudo pip install --upgrade ford
+    - sudo pip install --upgrade gcovr
 
 before_script:
     - lscpu
@@ -20,3 +21,4 @@ before_script:
     
 script:
     - FoBiS.py rule -ex makecoverage
+    - mv shippable-coverage.xml shippable/codecoverage/coverage.xml
