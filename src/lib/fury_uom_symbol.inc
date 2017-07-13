@@ -69,7 +69,7 @@ type :: uom_symbol
     generic :: operator(/) => div                        !< Overloading `/` operator.
     generic :: operator(*) => mul                        !< Overloading `*` operator.
     generic :: operator(**) =>                   &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                                pow_R16P,         &
 #endif
                                pow_R8P, pow_R4P, &

@@ -17,7 +17,7 @@ type, abstract :: uom_converter
   !< A generic user-supplied [[uom_symbol]] converter.
   contains
     ! deferred methods
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
     procedure(conversion_float128),  deferred, nopass    :: convert_float128 !< The conversion formulas for float128 magnitudes.
 #endif
     procedure(conversion_float64),   deferred, nopass    :: convert_float64  !< The conversion formulas for float64 magnitudes.
@@ -25,7 +25,7 @@ type, abstract :: uom_converter
     procedure(assignment_converter), deferred, pass(lhs) :: assign_converter !< `converter = converter` assignment.
     ! generic methods
     generic :: convert =>        &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                convert_float128, &
 #endif
                convert_float64, convert_float32 !< The conversion formulas.

@@ -29,20 +29,20 @@ type :: qreal
     generic :: assignment(=) => assign_qreal       !< Overloading `=` assignment.
     generic :: operator(+) => add, positive        !< Overloading `+` operator.
     generic :: operator(/) => div,              &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                               div_R16P,         &
 #endif
                               div_R8P, div_R4P, &
                               div_I8P, div_I4P, &
                               div_I2P, div_I1P     !< Overloading `/` operator.
     generic :: operator(*) => mul,              &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                               mul_R16P,         &
 #endif
                               mul_R8P, mul_R4P, &
                               mul_I8P, mul_I4P, &
                               mul_I2P, mul_I1P, &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                               R16P_mul,         &
 #endif
                               R8P_mul, R4P_mul, &
@@ -50,7 +50,7 @@ type :: qreal
                               I2P_mul, I1P_mul     !< Overloading `*` operator.
     generic :: operator(-) => sub, negative        !< Overloading `-` operator.
     generic :: operator(**) =>                   &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
                                pow_R16P,         &
 #endif
                                pow_R8P, pow_R4P, &
@@ -106,7 +106,7 @@ endinterface
 interface operator(*)
   !< Ovearloading operator `*`: `number *` [[uom]] generates [[qreal]].
   module procedure              &
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
       R16P_mul_uom,             &
 #endif
       R8P_mul_uom, R4P_mul_uom, &

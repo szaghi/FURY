@@ -12,8 +12,8 @@ implicit none
 real(real64)      :: converted_value   !< Value to be converted.
 character(99)     :: input_uom_string  !< Input unit of measure as string.
 character(99)     :: output_uom_string !< Output unit of measure as string.
-type(uom)         :: input_uom         !< Input unit of measure.
-type(uom)         :: output_uom        !< Output unit of measure.
+type(uom64)       :: input_uom         !< Input unit of measure.
+type(uom64)       :: output_uom        !< Output unit of measure.
 type(qreal64)     :: input_quantity    !< Input quantity, value with uom.
 type(qreal64)     :: output_quantity   !< Output quantity, value with uom.
 type(system_si64) :: si                !< SI system.
@@ -44,7 +44,7 @@ contains
                 examples    = ["fury_converter -iu 'km.h-1' -ou 'm.s-1' -v 3.9"])
   call cli%add(switch='--input_uom', switch_ab='-iu', help='input unit of measure', required=.true., act='store')
   call cli%add(switch='--output_uom', switch_ab='-ou', help='output unit of measure', required=.true., act='store')
-  call cli%add(switch='--value', switch_ab='-v', help='value to be converted', required=.true., act='store')
+  call cli%add(switch='--value', switch_ab='-val', help='value to be converted', required=.true., act='store')
   call cli%parse(error=error)
   call cli%get(switch='-iu', val=input_uom_string, error=error) ; if (error/=0) stop
   call cli%get(switch='-ou', val=output_uom_string, error=error) ; if (error/=0) stop

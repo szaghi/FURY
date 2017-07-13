@@ -37,25 +37,25 @@ public :: operator(/=)
 interface assignment(=)
   ! qreal
   module procedure qreal32_assign_qreal64, qreal64_assign_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_assign_qreal128, qreal128_assign_qreal32
   module procedure qreal64_assign_qreal128, qreal128_assign_qreal64
 #endif
   ! uom
   module procedure uom32_assign_uom64, uom64_assign_uom32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure uom32_assign_uom128, uom128_assign_uom32
   module procedure uom64_assign_uom128, uom128_assign_uom64
 #endif
   ! uom_reference
   module procedure uom_reference32_assign_uom_reference64, uom_reference64_assign_uom_reference32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure uom_reference32_assign_uom_reference128, uom_reference128_assign_uom_reference32
   module procedure uom_reference64_assign_uom_reference128, uom_reference128_assign_uom_reference64
 #endif
   ! uom_symbol
   module procedure uom_symbol32_assign_uom_symbol64, uom_symbol64_assign_uom_symbol32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure uom_symbol32_assign_uom_symbol128, uom_symbol128_assign_uom_symbol32
   module procedure uom_symbol64_assign_uom_symbol128, uom_symbol128_assign_uom_symbol64
 #endif
@@ -63,7 +63,7 @@ endinterface
 
 interface operator(+)
   module procedure qreal32_add_qreal64, qreal64_add_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_add_qreal128, qreal128_add_qreal32
   module procedure qreal64_add_qreal128, qreal128_add_qreal64
 #endif
@@ -71,7 +71,7 @@ endinterface
 
 interface operator(/)
   module procedure qreal32_div_qreal64, qreal64_div_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_div_qreal128, qreal128_div_qreal32
   module procedure qreal64_div_qreal128, qreal128_div_qreal64
 #endif
@@ -79,7 +79,7 @@ endinterface
 
 interface operator(*)
   module procedure qreal32_mul_qreal64, qreal64_mul_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_mul_qreal128, qreal128_mul_qreal32
   module procedure qreal64_mul_qreal128, qreal128_mul_qreal64
 #endif
@@ -87,7 +87,7 @@ endinterface
 
 interface operator(-)
   module procedure qreal32_sub_qreal64, qreal64_sub_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_sub_qreal128, qreal128_sub_qreal32
   module procedure qreal64_sub_qreal128, qreal128_sub_qreal64
 #endif
@@ -95,7 +95,7 @@ endinterface
 
 interface operator(==)
   module procedure qreal32_eq_qreal64, qreal64_eq_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_eq_qreal128, qreal128_eq_qreal32
   module procedure qreal64_eq_qreal128, qreal128_eq_qreal64
 #endif
@@ -103,7 +103,7 @@ endinterface
 
 interface operator(/=)
   module procedure qreal32_not_eq_qreal64, qreal64_not_eq_qreal32
-#ifdef r16p
+#ifdef _R16P_SUPPORTED
   module procedure qreal32_not_eq_qreal128, qreal128_not_eq_qreal32
   module procedure qreal64_not_eq_qreal128, qreal128_not_eq_qreal64
 #endif
