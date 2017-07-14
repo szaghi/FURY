@@ -1,28 +1,20 @@
-!-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY implementation of *International System of Units* with generic kind.
-!-----------------------------------------------------------------------------------------------------------------------------------
 
-!-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
 public :: system_si
-!-----------------------------------------------------------------------------------------------------------------------------------
 
-!-----------------------------------------------------------------------------------------------------------------------------------
 type, extends(system_abstract) :: system_si
   !< International System of Units.
   contains
     ! public deferred methods
     procedure, pass(self) :: initialize !< Initialize the units system.
 endtype system_si
-!-----------------------------------------------------------------------------------------------------------------------------------
 contains
   subroutine initialize(self, acronym)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Initialize the units system.
   !<
   !< @todo Load from file.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_si), intent(inout)         :: self      !< The units system.
   character(*),     intent(in),  optional :: acronym   !< Units system acronym, e.g. "SI" for the International System.
   type(qreal)                             :: c         !< Speed of light.
@@ -30,9 +22,7 @@ contains
   type(qreal)                             :: mu_0      !< Vacuum permeability.
   type(qreal)                             :: pi        !< Pi greek.
   type(qreal)                             :: Z_0       !< Vacuum impedance.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   call self%free
   self%acronym = 'SI' ; if (present(acronym)) self%acronym = acronym
   ! base units
@@ -148,5 +138,4 @@ contains
   Z_0 = mu_0 * c
   call Z_0%set(name='vacuum_impedance')
   call self%add_constant(Z_0)
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize

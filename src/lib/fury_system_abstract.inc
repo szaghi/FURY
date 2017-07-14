@@ -1,14 +1,9 @@
-!-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY implementation of abstract units system with generic kind.
-!-----------------------------------------------------------------------------------------------------------------------------------
 
-!-----------------------------------------------------------------------------------------------------------------------------------
 implicit none
 private
 public :: system_abstract
-!-----------------------------------------------------------------------------------------------------------------------------------
 
-!-----------------------------------------------------------------------------------------------------------------------------------
 type, abstract :: system_abstract
   !< Abstract units system class.
   character(len=:),    allocatable :: acronym                 !< Units system acronym, e.g. "SI" for the International System.
@@ -49,30 +44,23 @@ endtype system_abstract
 abstract interface
   !< Initialize the units system.
   subroutine initialize_interface(self, acronym)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Initialize the units system.
-  !---------------------------------------------------------------------------------------------------------------------------------
   import system_abstract
   class(system_abstract), intent(inout)         :: self    !< The units system.
   character(*),           intent(in),  optional :: acronym !< Units system acronym, e.g. "SI" for the International System.
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine initialize_interface
 endinterface
-!-----------------------------------------------------------------------------------------------------------------------------------
+
 contains
   ! public methods
   function const(self, c) result(const_)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return an instance of the queried constant (if defined).
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in) :: self       !< The system.
   character(*),           intent(in) :: c          !< Constant name.
   type(qreal)                        :: const_     !< The queried constant.
   logical                            :: is_found   !< Flag to check if queried constant has been found.
   integer(I_P)                       :: co         !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   is_found = .false.
   if (self%constants_number>0) then
     do co=1, self%constants_number
@@ -88,17 +76,12 @@ contains
   if (.not.is_found) then
     ! raise an error
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction const
 
   elemental subroutine free(self)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Free the units system.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self !< The system.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   if (allocated(self%acronym)) deallocate(self%acronym)
   if (allocated(self%constants)) deallocate(self%constants)
   self%constants_number = 0_I_P
@@ -106,13 +89,10 @@ contains
   self%units_number = 0_I_P
   if (allocated(self%prefixes)) deallocate(self%prefixes)
   self%prefixes_number = 0_I_P
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine free
 
   function list_constants(self, with_dimensions, with_aliases, with_name, compact_reals, prefix_string) result(raw)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the list defined constants.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in)           :: self            !< The system.
   logical,                intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
   logical,                intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
@@ -122,9 +102,7 @@ contains
   character(len=:), allocatable                :: raw             !< Raw characters data.
   character(len=:), allocatable                :: prefix_string_  !< Prefix string, local variable.
   integer(I_P)                                 :: c               !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%constants_number>0) then
     prefix_string_ = '' ; if (present(prefix_string)) prefix_string_ = prefix_string
@@ -137,13 +115,10 @@ contains
     enddo
     raw = raw(2:)
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction list_constants
 
   function list_prefixes(self, with_aliases, compact_reals, prefix_string) result(raw)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the list defined prefixes.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in)           :: self           !< The system.
   logical,                intent(in), optional :: with_aliases   !< Flag to activate alias printing.
   logical,                intent(in), optional :: compact_reals  !< Flag to activate real numbers compacting.
@@ -151,9 +126,7 @@ contains
   character(len=:), allocatable                :: raw            !< Raw characters data.
   character(len=:), allocatable                :: prefix_string_ !< Prefix string, local variable.
   integer(I_P)                                 :: p              !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%prefixes_number>0) then
     prefix_string_ = '' ; if (present(prefix_string)) prefix_string_ = prefix_string
@@ -163,13 +136,10 @@ contains
             self%prefixes(p)%stringify(with_aliases=with_aliases, compact_reals=compact_reals)
     enddo
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction list_prefixes
 
   function list_units(self, with_dimensions, with_aliases, protect_aliases, with_name, compact_reals, prefix_string) result(raw)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return the list defined units.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in)           :: self            !< The system.
   logical,                intent(in), optional :: with_dimensions !< Flag to activate dimensions printing.
   logical,                intent(in), optional :: with_aliases    !< Flag to activate aliases printing.
@@ -180,9 +150,7 @@ contains
   character(len=:), allocatable                :: raw             !< Raw characters data.
   character(len=:), allocatable                :: prefix_string_  !< Prefix string, local variable.
   integer(I_P)                                 :: u               !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   raw = ''
   if (self%units_number>0) then
     prefix_string_ = '' ; if (present(prefix_string)) prefix_string_ = prefix_string
@@ -196,24 +164,19 @@ contains
     enddo
     raw = raw(2:)
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction list_units
 
   function unit(self, u) result(unit_)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return an instance of the queried unit (if defined).
-  !---------------------------------------------------------------------------------------------------------------------------------
-  class(system_abstract), intent(in) :: self       !< The system.
-  character(*),           intent(in) :: u          !< Unit name or main symbol alias.
-  type(uom)                          :: unit_      !< The queried unit.
-  type(uom)                          :: punit_     !< Prefixed unit.
-  type(string)                       :: symbol     !< Unit symbol.
-  logical                            :: is_found   !< Flag to check if queried unit has been found.
-  integer(I_P)                       :: un         !< Counter.
-  integer(I_P)                       :: p          !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
+  class(system_abstract), intent(in) :: self     !< The system.
+  character(*),           intent(in) :: u        !< Unit name or main symbol alias.
+  type(uom)                          :: unit_    !< The queried unit.
+  type(uom)                          :: punit_   !< Prefixed unit.
+  type(string)                       :: symbol   !< Unit symbol.
+  logical                            :: is_found !< Flag to check if queried unit has been found.
+  integer(I_P)                       :: un       !< Counter.
+  integer(I_P)                       :: p        !< Counter.
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   is_found = .false.
   if (self%units_number>0) then
     do un=1, self%units_number
@@ -259,20 +222,15 @@ contains
   if (.not.is_found) then
     ! raise an error
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction unit
 
   ! private methods
   subroutine add_constant_qreal(self, source)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Add a new constant from [[qreal]] input.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self         !< The system.
   type(qreal),            intent(in)    :: source       !< Constant source.
   type(qreal), allocatable              :: constants(:) !< Defined constants.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   if (.not.self%has_constant(const=source)) then
     if (self%constants_number>0) then
       allocate(constants(1:self%constants_number+1_I_P))
@@ -286,33 +244,23 @@ contains
       self%constants(1) = source
     endif
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_constant_qreal
 
   subroutine add_prefix_string(self, source)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Add a new prefix from string input.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self   !< The system.
   character(*),           intent(in)    :: source !< Prefix source.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   call self%add_prefix_uom_reference(source=uom_reference(source))
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_prefix_string
 
   subroutine add_prefix_uom_reference(self, source)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Add a new prefix from [[uom_reference]] input.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self        !< The system.
   type(uom_reference),    intent(in)    :: source      !< Prefix source.
   type(uom_reference), allocatable      :: prefixes(:) !< Defined prefixes.
   integer(I_P)                          :: p           !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   if (.not.self%has_prefix(prefix=source)) then
     if (self%prefixes_number>0) then
       allocate(prefixes(1:self%prefixes_number+1_I_P))
@@ -328,32 +276,22 @@ contains
       self%prefixes(1) = source
     endif
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_prefix_uom_reference
 
   subroutine add_unit_string(self, source)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Add a new unit from string input.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self   !< The system.
   character(*),           intent(in)    :: source !< Unit source.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   call self%add_unit_uom(source=uom(source))
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_unit_string
 
   subroutine add_unit_uom(self, source)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Add a new unit from [[uom]] input.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(inout) :: self     !< The system.
   type(uom),              intent(in)    :: source   !< Unit source.
   type(uom), allocatable                :: units(:) !< Defined units.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   if (.not.self%has_unit(unit=source)) then
     if (self%units_number>0) then
       allocate(units(1:self%units_number+1_I_P))
@@ -367,20 +305,15 @@ contains
       self%units(1) = source
     endif
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endsubroutine add_unit_uom
 
   function has_constant(self, const) result(is_found)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return an instance of the queried unit (if defined).
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in) :: self     !< The system.
   type(qreal),            intent(in) :: const    !< Constant queried.
   logical                            :: is_found !< Flag to check if queried constant has been found.
   integer(I_P)                       :: c        !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   is_found = .false.
   if (self%constants_number>0) then
     do c=1, self%constants_number
@@ -388,20 +321,15 @@ contains
       if (is_found) exit
     enddo
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_constant
 
   function has_prefix(self, prefix) result(is_found)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if a prefix is present into the system.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in) :: self     !< The system.
   type(uom_reference),    intent(in) :: prefix   !< prefix queried.
   logical                            :: is_found !< Flag to check if queried prefix has been found.
   integer(I_P)                       :: u        !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   is_found = .false.
   if (self%prefixes_number>0) then
     do u=1, self%prefixes_number
@@ -409,20 +337,15 @@ contains
       if (is_found) exit
     enddo
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_prefix
 
   function has_unit(self, unit) result(is_found)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Check if a unit is present into the system.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in) :: self     !< The system.
   type(uom),              intent(in) :: unit     !< Unit queried.
   logical                            :: is_found !< Flag to check if queried unit has been found.
   integer(I_P)                       :: u        !< Counter.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   is_found = .false.
   if (self%units_number>0) then
     do u=1, self%units_number
@@ -430,27 +353,21 @@ contains
       if (is_found) exit
     enddo
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction has_unit
 
   function qunit_qreal(self, u) result(qunit_)
-  !---------------------------------------------------------------------------------------------------------------------------------
   !< Return an instance of quantity (qreal) with the queried unit (if defined).
   !<
   !< This is useful to build quantity by algebric expressions, e.g. `q1 = 2.0 * system%qunit('metre')`.
-  !---------------------------------------------------------------------------------------------------------------------------------
   class(system_abstract), intent(in) :: self   !< The system.
   character(*),           intent(in) :: u      !< Unit name or main symbol alias.
   type(qreal)                        :: qunit_ !< The queried quantity.
   type(uom)                          :: unit   !< Unit queried.
-  !---------------------------------------------------------------------------------------------------------------------------------
 
-  !---------------------------------------------------------------------------------------------------------------------------------
   unit = self%unit(u)
   if (unit%is_defined()) then
     qunit_ = qreal(magnitude=1._RKP, unit=unit)
   else
     ! raise an error
   endif
-  !---------------------------------------------------------------------------------------------------------------------------------
   endfunction qunit_qreal
