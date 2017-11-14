@@ -44,7 +44,7 @@ output    = libfury.a
 mklib     = static
 
 [fury-shared-gnu]
-template  = template-static-gnu
+template  = template-shared-gnu
 build_dir = lib
 target    = fury.f90
 output    = libfury.so
@@ -58,7 +58,7 @@ output    = libfury.a
 mklib     = static
 
 [fury-shared-intel]
-template  = template-static-intel
+template  = template-shared-intel
 build_dir = lib
 target    = fury.f90
 output    = libfury.so
