@@ -425,7 +425,7 @@ type(uom) :: pascal_complex
 type(uom) :: pascal_simple
 type(uom) :: newton
 
-meter = uom(m [length] (meter[length]) {meter}')
+meter = uom('m [length] (meter[length]) {meter}')
 pascal_complex = uom('kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}')
 pascal_simple = uom('Pa[pressure] {pascal}')
 
@@ -496,7 +496,7 @@ use fury
 
 ```fortran
 type(qreal)    :: q1 ! A real physical quantity.
-type(qinteger) :: q2 ! A integer physical quantity.
+type(qinteger) :: q2 ! An integer physical quantity.
 ```
 
 ##### 3. (optional) define new FURY units
