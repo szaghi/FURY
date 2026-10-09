@@ -42,5 +42,5 @@ runs:
         gfortran --version
         gcov --version
         python --version
-        fobis --version
+        FoBiS.py --version
         ford --version
