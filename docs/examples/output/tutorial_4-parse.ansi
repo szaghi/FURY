@@ -1,0 +1,3 @@
+$ tutorial_4 parse
+error: cannot parse "Hz = s-1 [time-2]": the exponent of the dimensions "time-2" differs from the one of the symbol "Hz"
+[exit status 1]

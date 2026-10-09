@@ -1,0 +1,2 @@
+total = length
+total = time

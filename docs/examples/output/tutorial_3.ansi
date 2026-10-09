@@ -1,0 +1,6 @@
+$ tutorial_3
+speed     : m.s-1 [length.time-1]
+area      : m2 [length2]
+frequency : s-1 [time-1]
+pressure times area, from the references: kg.m.s-2 [mass.length.time-2]
+pressure times area, from the symbol    : Pa.m2 [pressure.length2]

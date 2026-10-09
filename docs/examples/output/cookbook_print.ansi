@@ -1,0 +1,7 @@
+$ cookbook_print
++0.98066499999999994E+001 m.s-2
+9.80665 m.s-2
++9.80665 m.s-2
++9.80665 m.s-2 [length.time-2]
++9.80665 m = metre.s-2 (acc)
+gravity: +9.80665 m.s-2 {metre/second2}

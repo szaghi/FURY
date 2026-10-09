@@ -1,0 +1,6 @@
+print '(A)', g%stringify()
+print '(A)', g%stringify(format='(F7.5)')
+print '(A)', g%stringify(compact_reals=.true.)
+print '(A)', g%stringify(compact_reals=.true., with_dimensions=.true.)
+print '(A)', g%stringify(compact_reals=.true., with_aliases=.true.)
+print '(A)', g%stringify(compact_reals=.true., with_name=.true.)

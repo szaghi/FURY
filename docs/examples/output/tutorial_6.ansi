@@ -1,0 +1,13 @@
+$ tutorial_6
+m = metre = meter [length] {metre}
+kg.m.s-2 [mass.length.time-2] (N [force]) {newton}
+m                -> m {metre}
+meter            -> m {metre}
+second           -> s {second}
+sec              -> s {second}
+km               -> km {kilometre}
+kilometre        -> km {kilometre}
+42.195 km = 42195.0 m
+64.0 Kibyte = 65536.0 byte
+speed_of_light: +299792458.0 m.s-1 {metre.second-1}
+weight: 735.5 kg.m.s-2 [mass.length.time-2]

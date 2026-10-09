@@ -1,0 +1,6 @@
+print '(A)', symbol_only%stringify(with_dimensions=.true.)
+print '(A)', with_dimensions%stringify(with_dimensions=.true.)
+print '(A)', with_aliases%stringify(with_dimensions=.true., with_aliases=.true.)
+print '(A)', with_name%stringify(with_dimensions=.true., with_aliases=.true., with_name=.true.)
+print '(A)', compound%stringify(with_dimensions=.true.)
+print '(A)', with_main_alias%stringify(with_dimensions=.true., with_aliases=.true., with_name=.true.)

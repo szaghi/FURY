@@ -1,0 +1,3 @@
+$ tutorial_4 add
+error: cannot add "+3.0 m [length]" and "+2.0 s [time]"
+[exit status 1]

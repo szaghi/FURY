@@ -198,11 +198,9 @@ contains
   enddo
   if (self%dimensions%is_defined().and.self%dimensions%get_exponent()/=0.and.&
       self%dimensions%get_exponent()/=self%aliases(1)%get_exponent()) then
-    write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
-    ' the exponent of the uom and the one of the dimensions (if passed) must be the same!'
-    write(stderr, '(A)')'  dimensions: '//self%dimensions%stringify()
-    write(stderr, '(A)')'  uom symbol: '//self%aliases(1)%stringify()
-    error stop 1
+    write(stderr, '(A)')'error: cannot parse "'//trim(adjustl(source))//'": the exponent of the dimensions "'//&
+                        self%dimensions%stringify()//'" differs from the one of the symbol "'//self%aliases(1)%stringify()//'"'
+    error stop 1, quiet=.true.
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
     call self%dimensions%set(factor_ = 1._RKP)
@@ -218,6 +216,7 @@ contains
   integer(I_P)                     :: a          !< Counter.
   integer(I_P)                     :: p          !< Counter.
   integer(I_P)                     :: s          !< Counter.
+  real(RKP)                        :: prefix_factor !< Prefix factor raised to the exponent of the main symbol.
 
   if (self%is_defined().and.(prefixes%is_defined())) then
     prefixed = self
@@ -226,14 +225,18 @@ contains
     do p=1, prefixes%aliases_number
       do s=1, self%aliases_number
         a = a + 1
+        ! a prefixed symbol keeps the factor of its alias, e.g. "kbyte = 8 * kbit" from "byte = 8 * bit"
         aliases(a) = self%aliases(s)%prefixed(prefix=prefixes%aliases(p))
-        call aliases(a)%set(factor_=1._RKP)
+        call aliases(a)%set(factor_=self%aliases(s)%get_factor())
       enddo
     enddo
+    ! the conversion aliases scale by the prefix factor raised to the exponent of the main symbol, times the alias factor,
+    ! e.g. "kbyte = 1000 * byte = 8000 * bit", "km2 = 1.e6 * m2"
+    prefix_factor = prefixes%aliases(1)%get_factor() ** self%aliases(1)%get_exponent()
     do s=1, self%aliases_number
       a = s + self%aliases_number*prefixes%aliases_number
       aliases(a) = self%aliases(s)
-      call aliases(a)%set(factor_=prefixes%aliases(1)%get_factor())
+      call aliases(a)%set(factor_=prefix_factor * self%aliases(s)%get_factor())
     enddo
     call prefixed%set(aliases=aliases)
   endif
@@ -308,6 +311,7 @@ contains
   real(RKP),            intent(out) :: converted !< Converted magnitude.
   logical,              intent(out) :: is_found  !< Flag to check if a conversion alias has been found.
   integer(I_P)                      :: a         !< Counter.
+  integer(I_P)                      :: o         !< Counter.
 
   converted = magnitude
   is_found = .false.
@@ -327,6 +331,18 @@ contains
           exit inverse_conversion
         endif
       enddo inverse_conversion
+    endif
+    if (.not.is_found) then
+      ! through a common alias, e.g. "ft = 0.3048 * m" to "km = 1000 * m" through "m"
+      common_conversion: do a=2, self%aliases_number
+        do o=2, other%aliases_number
+          if (other%aliases(o).convertible.self%aliases(a)) then
+            converted = other%aliases(o)%convert(magnitude=self%aliases(a)%convert(magnitude=magnitude), inverse=.true.)
+            is_found = .true.
+            exit common_conversion
+          endif
+        enddo
+      enddo common_conversion
     endif
   endif
   endsubroutine to

@@ -51,6 +51,10 @@ public :: qreal32, qreal64
 #ifdef PENF_R16P
 public :: qreal128
 #endif
+public :: system_abstract32, system_abstract64
+#ifdef PENF_R16P
+public :: system_abstract128
+#endif
 public :: system_si32, system_si64
 #ifdef PENF_R16P
 public :: system_si128

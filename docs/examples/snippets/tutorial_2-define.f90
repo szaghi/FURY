@@ -1,0 +1,6 @@
+symbol_only     = uom64('m')
+with_dimensions = uom64('m [length]')
+with_aliases    = uom64('m = metre = meter [length]')
+with_name       = uom64('m = metre = meter [length] {metre}')
+compound        = uom64('kg [mass].m [length].s-2 [time-2]')
+with_main_alias = uom64('kg [mass].m [length].s-2 [time-2] (N[force]) {newton}')

@@ -20,9 +20,12 @@ is welcome. The project follows a KISS (Keep It Simple and Stupid) philosophy.
    ```bash
    git checkout -b fix/my_contribution
    ```
-3. Test your changes with `fobis build && bash scripts/run_tests.sh`
-4. Check for unnecessary whitespace: `git diff --check`
-5. Submit a pull request with a clear commit message
+3. Test your changes with `fobis build --mode tests-gnu && bash scripts/run_tests.sh` (and `tests-gnu-noquad`, without
+   quadruple precision)
+4. If a change alters an output shown by the documentation, regenerate the examples with
+   `bash scripts/docs_examples.sh` and commit `docs/examples`: CI fails when they are out of date
+5. Check for unnecessary whitespace: `git diff --check`
+6. Submit a pull request with a clear commit message
 
 ## Fortran Coding Style
 

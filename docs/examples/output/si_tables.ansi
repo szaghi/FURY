@@ -1,0 +1,87 @@
+$ si_tables
+  001. : A = ampere [current] {ampere}
+  002. : cd = candela [luminosity] {candela}
+  003. : K = kelvin [temperature] {kelvin}
+  004. : kg = kilogram [mass] {kilogram}
+  005. : m = metre = meter [length] {metre}
+  006. : mol = mole [substance] {mole}
+  007. : s = sec = second [time] {second}
+  008. : celsius = +273.15 + K [temperature] (celsius [temperature]) {celsius}
+  009. : s.A [time.current] (C [electric_charge]) {coulomb}
+  010. : kg-1.m-2.s4.A2 [mass-1.length-2.time4.current2] (F [electric_capacitance]) {farad}
+  011. : kg.m2.s-2.A-2 [mass.length2.time-2.current-2] (H [inductance]) {henry}
+  012. : Hz = s-1 [frequency] {hertz}
+  013. : kg.m2.s-2 [mass.length2.time-2] (J [energy]) {joule}
+  014. : cd.m2.m-2 [luminosity.length2.length-2] (lm [luminous_flux]) {lumen}
+  015. : m-2.cd [length-2.luminosity] (lx [illuminance]) {lux}
+  016. : m.s-1 [length.time-1] {metre.second-1}
+  017. : m.s-2 [length.time-2] {metre.second-2}
+  018. : m2 [length2] {metre2}
+  019. : kg.m.s-2 [mass.length.time-2] (N [force]) {newton}
+  020. : kg.m2.s-3.A-2 [mass.length2.time-3.current-2] {ohm}
+  021. : kg.m-1.s-2 [mass.length-1.time-2] (Pa [pressure]) {pascal}
+  022. : m.m-1 [length.length-1] {radian}
+  023. : kg-1.m-2.s3.A2 [mass-1.length-2.time3.current2] (S [electric_conductance]) {siemens}
+  024. : m2.m-2 [length2.length-2] {steradian}
+  025. : kg.s-2.A-1 [mass.time-2.current-1] (T [magnetic_flux_density]) {tesla}
+  026. : kg.m2.s-3.A-1 [mass.length2.time-3.current-1] (V [voltage]) {volt}
+  027. : kg.m2.s-3 [mass.length2.time-3] (W [power]) {watt}
+  028. : kg.m2.s-2.A-1 [mass.length2.time-2.current-1] (Wb [magnetic_flux]) {weber}
+  029. : bit [bit] {bit}
+  030. : byte = +8.0 * bit = B = octet [bit] {byte}
+  031. : bit.s-1 [bit.time-1] (baud []) {baud}
+  032. : minute = +60.0 * s = min [time] (minute [time]) {minute}
+  033. : hour = +3600.0 * s = +60.0 * minute = hr [time] (hour [time]) {hour}
+  034. : day = +86400.0 * s = +1440.0 * minute = +24.0 * hour [time] (day [time]) {day}
+  035. : week = +604800.0 * s = +10080.0 * minute = +168.0 * hour = +7.0 * day [time] (week [time]) {week}
+  036. : in = +0.0254 * m = inch [length] {inch}
+  037. : yd = +0.9144 * m = yard [length] {yard}
+  038. : ft = +0.3048 * m = foot [length] {foot}
+  039. : mi = +1609.344 * m = mile [length] {mile}
+  040. : lb = +0.45359237 * kg = pound [mass] {pound}
+  041. : oz = +0.028349523125 * kg = ounce [mass] {ounce}
+  042. : gram.cm.s-2 [mass.length.time-2] (dyne [force]) {dyne}
+Prefixes
+  001. +1.0E-24 * y = +1.0E-24 * yocto
+  002. +1.0E-21 * z = +1.0E-21 * zepto
+  003. +1.0E-18 * a = +1.0E-18 * atto
+  004. +1.0E-15 * f = +1.0E-15 * femto
+  005. +1.0E-12 * p = +1.0E-12 * pico
+  006. +1.0E-9 * n = +1.0E-9 * nano
+  007. +1.0E-6 * u = +1.0E-6 * micro
+  008. +0.001 * m = +0.001 * milli
+  009. +0.01 * c = +0.01 * centi
+  010. +0.1 * d = +0.1 * deci
+  011. +10.0 * da = +10.0 * deka = +10.0 * deca
+  012. +100.0 * h = +100.0 * hecto
+  013. +1000.0 * k = +1000.0 * kilo
+  014. +1000000.0 * M = +1000000.0 * mega
+  015. +1000000000.0 * G = +1000000000.0 * giga
+  016. +1000000000000.0 * T = +1000000000000.0 * tera
+  017. +1000000000000000.0 * P = +1000000000000000.0 * peta
+  018. +1.0E+18 * E = +1.0E+18 * exa
+  019. +1.0E+21 * Z = +1.0E+21 * zetta
+  020. +1.0E+24 * Y = +1.0E+24 * yotta
+  021. +1024.0 * Ki = +1024.0 * kibi
+  022. +1048576.0 * Mi = +1048576.0 * mebi
+  023. +1073741824.0 * Gi = +1073741824.0 * gibi
+  024. +1099511627776.0 * Ti = +1099511627776.0 * tebi
+  025. +1125899906842624.0 * Pi = +1125899906842624.0 * pebi
+  026. +1.152921504606847E+18 * Ei = +1.152921504606847E+18 * exbi
+  027. +1.1805916207174113E+21 * Zi = +1.1805916207174113E+21 * zebi
+  028. +1.2089258196146292E+24 * Yi = +1.2089258196146292E+24 * yobi
+  001. : pi: +3.141592653589793
+  002. : speed_of_light: +299792458.0 m.s-1 [length.time-1] {metre.second-1}
+  003. : gravity: +9.80665 m.s-2 [length.time-2] {metre.second-2}
+  004. : elementary_charge: +1.602176634E-19 s.A [time.current] {coulomb}
+  005. : electron_mass: +9.1093837015E-31 kg [mass] {kilogram}
+  006. : neutron_mass: +1.67492749804E-27 kg [mass] {kilogram}
+  007. : proton_mass: +1.67262192369E-27 kg [mass] {kilogram}
+  008. : planck_constant: +6.62607015E-34 kg.m2.s-1 [mass.length2.time-1]
+  009. : newton_gravitation_constant: +6.6743E-11 m3.kg-1.s-2 [length3.mass-1.time-2]
+  010. : molar_gas_constant: +8.31446261815324 kg.m2.s-2.mol-1.K-1 [mass.length2.time-2.substance-1.temperature-1]
+  011. : avogadro_number: +6.02214076E+23 mol-1 [substance-1]
+  012. : boltzmann_constant: +1.380649E-23 kg.m2.s-2.K-1 [mass.length2.time-2.temperature-1]
+  013. : vacuum_permeability: +1.25663706212E-6 kg.m.s-2.A-2 [mass.length.time-2.current-2]
+  014. : vacuum_permittivity: +8.854187812800385E-12 kg-1.m-3.s4.A2 [mass-1.length-3.time4.current2]
+  015. : vacuum_impedance: +376.7303136668535 kg.m2.s-3.A-2 [mass.length2.time-3.current-2]

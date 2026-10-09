@@ -293,10 +293,16 @@ contains
   !< Convert quantity with respect another unit if its unit has a conversion alias.
   class(qreal), intent(in) :: self      !< The quantity.
   type(uom),    intent(in) :: unit      !< Unit of conversion.
-  type(qreal)              :: converted !< Quantity converted.
+  type(qreal)              :: converted    !< Quantity converted.
+  logical                  :: is_converted !< True if the conversion has been found.
 
   if (self%is_unit_defined().and.unit%is_defined()) then
-    converted%magnitude = self%unit%to(other=unit, magnitude=self%magnitude)
+    call self%unit%convert(other=unit, magnitude=self%magnitude, converted=converted%magnitude, is_converted=is_converted)
+    if (.not.is_converted) then
+      write(stderr, "(A)") 'error: cannot convert "'//self%unit%stringify(with_dimensions=.true.)//'" to "'//&
+                           unit%stringify(with_dimensions=.true.)//'"'
+      error stop 1, quiet=.true.
+    endif
     allocate(converted%unit, source=unit)
   else
     converted = self
@@ -358,10 +364,9 @@ contains
         call lhs%set(magnitude=rhs%magnitude)
       endif
     else
-      write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
-        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
-        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      error stop 1
+      write(stderr, "(A)") 'error: cannot assign "'//rhs%stringify(with_dimensions=.true., compact_reals=.true.)//'" to "'//&
+                           lhs%stringify(with_dimensions=.true., compact_reals=.true.)//'"'
+      error stop 1, quiet=.true.
     endif
   else
     if (.not.lhs%is_unit_defined())  then
@@ -371,10 +376,9 @@ contains
         call lhs%set(magnitude=rhs%magnitude)
       endif
     else
-      write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
-        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
-        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      error stop 1
+      write(stderr, "(A)") 'error: cannot assign "'//rhs%stringify(with_dimensions=.true., compact_reals=.true.)//'" to "'//&
+                           lhs%stringify(with_dimensions=.true., compact_reals=.true.)//'"'
+      error stop 1, quiet=.true.
     endif
   endif
   endsubroutine assign_qreal
@@ -390,10 +394,9 @@ contains
       opr = lhs
       opr%magnitude = lhs%magnitude + rhs%magnitude
     else
-      write(stderr, "(A)") 'error: cannot add'//new_line('a')//&
-        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
-        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      error stop 1
+      write(stderr, "(A)") 'error: cannot add "'//lhs%stringify(with_dimensions=.true., compact_reals=.true.)//'" and "'//&
+                           rhs%stringify(with_dimensions=.true., compact_reals=.true.)//'"'
+      error stop 1, quiet=.true.
     endif
   else
     ! dimensionless quantities assumed
@@ -659,10 +662,9 @@ contains
       opr = lhs
       opr%magnitude = lhs%magnitude - rhs%magnitude
     else
-      write(stderr, "(A)") 'error: cannot subtract'//new_line('a')//&
-        lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
-        rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      error stop 1
+      write(stderr, "(A)") 'error: cannot subtract "'//rhs%stringify(with_dimensions=.true., compact_reals=.true.)//'" from "'//&
+                           lhs%stringify(with_dimensions=.true., compact_reals=.true.)//'"'
+      error stop 1, quiet=.true.
     endif
   else
     ! dimensionless quantities assumed

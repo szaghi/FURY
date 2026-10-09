@@ -205,8 +205,8 @@ contains
       call buffer%split(sep='*', tokens=tokens)
       self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
       if (self%factor_==0._RKP) then
-        write(stderr, "(A)") 'error: symbol cannot have "'//trim(str(n=self%factor_, compact=.true.))//'" multiplicative factor'
-        error stop 1
+        write(stderr, "(A)") 'error: cannot parse "'//trim(adjustl(source))//'": a symbol cannot have a null multiplicative factor'
+        error stop 1, quiet=.true.
       endif
       buffer = tokens(2)
     endif
@@ -386,9 +386,17 @@ contains
   class(uom_symbol), intent(in) :: lhs !< Left hand side.
   real(R16P),        intent(in) :: rhs !< Right hand side.
   type(uom_symbol)              :: opr !< Operator result.
+  character(len=:), allocatable :: message !< Error message.
 
   if (lhs%is_defined()) then
-    opr%exponent_ = lhs%exponent_ * rhs
+    ! the exponent of a symbol is an integer: a real power must give an integer exponent, e.g. m2 ** 0.5 is m
+    if (abs(lhs%exponent_ * rhs - nint(lhs%exponent_ * rhs)) > &
+        epsilon(rhs) * max(real(1, kind=kind(rhs)), abs(lhs%exponent_ * rhs))) then
+      message = 'error: cannot raise "'//lhs%stringify()//'" to '//trim(str(n=rhs, compact=.true.))//&
+                ': the exponent would not be an integer'
+      error stop message
+    endif
+    opr%exponent_ = int(nint(lhs%exponent_ * rhs), IKP)
     opr%factor_ = lhs%factor_ ** rhs
     if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
     opr%symbol_ = lhs%symbol_
@@ -400,9 +408,17 @@ contains
   class(uom_symbol), intent(in) :: lhs !< Left hand side.
   real(R8P),         intent(in) :: rhs !< Right hand side.
   type(uom_symbol)              :: opr !< Operator result.
+  character(len=:), allocatable :: message !< Error message.
 
   if (lhs%is_defined()) then
-    opr%exponent_ = lhs%exponent_ * rhs
+    ! the exponent of a symbol is an integer: a real power must give an integer exponent, e.g. m2 ** 0.5 is m
+    if (abs(lhs%exponent_ * rhs - nint(lhs%exponent_ * rhs)) > &
+        epsilon(rhs) * max(real(1, kind=kind(rhs)), abs(lhs%exponent_ * rhs))) then
+      message = 'error: cannot raise "'//lhs%stringify()//'" to '//trim(str(n=rhs, compact=.true.))//&
+                ': the exponent would not be an integer'
+      error stop message
+    endif
+    opr%exponent_ = int(nint(lhs%exponent_ * rhs), IKP)
     opr%factor_ = lhs%factor_ ** rhs
     if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
     opr%symbol_ = lhs%symbol_
@@ -414,9 +430,17 @@ contains
   class(uom_symbol), intent(in) :: lhs !< Left hand side.
   real(R4P),         intent(in) :: rhs !< Right hand side.
   type(uom_symbol)              :: opr !< Operator result.
+  character(len=:), allocatable :: message !< Error message.
 
   if (lhs%is_defined()) then
-    opr%exponent_ = lhs%exponent_ * rhs
+    ! the exponent of a symbol is an integer: a real power must give an integer exponent, e.g. m2 ** 0.5 is m
+    if (abs(lhs%exponent_ * rhs - nint(lhs%exponent_ * rhs)) > &
+        epsilon(rhs) * max(real(1, kind=kind(rhs)), abs(lhs%exponent_ * rhs))) then
+      message = 'error: cannot raise "'//lhs%stringify()//'" to '//trim(str(n=rhs, compact=.true.))//&
+                ': the exponent would not be an integer'
+      error stop message
+    endif
+    opr%exponent_ = int(nint(lhs%exponent_ * rhs), IKP)
     opr%factor_ = lhs%factor_ ** rhs
     if (lhs%offset_/=0._RKP) opr%offset_ = lhs%offset_ ** rhs
     opr%symbol_ = lhs%symbol_

@@ -1,534 +1,128 @@
-<a name="top"></a>
+<div align="center">
 
-# FURY [![GitHub tag](https://img.shields.io/github/tag/szaghi/FURY.svg)]() [![Join the chat at https://gitter.im/szaghi/FURY](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/szaghi/FURY?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# FURY
+#### Fortran Units (environment) for Reliable phYsical math
 
-> dedicated to [**W. Van Snyder**](https://science.jpl.nasa.gov/people/Snyder/)[[<sup>rg</sup>]](https://www.researchgate.net/profile/W_Snyder)
-
-[![License](https://img.shields.io/badge/license-GNU%20GeneraL%20Public%20License%20v3,%20GPLv3-blue.svg)]()
-[![License](https://img.shields.io/badge/license-BSD2-red.svg)]()
-[![License](https://img.shields.io/badge/license-BSD3-red.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-red.svg)]()
-
-[![Status](https://img.shields.io/badge/status-stable-green.svg)]()
+[![GitHub tag](https://img.shields.io/github/v/tag/szaghi/FURY)](https://github.com/szaghi/FURY/tags)
+[![GitHub issues](https://img.shields.io/github/issues/szaghi/FURY)](https://github.com/szaghi/FURY/issues)
 [![CI](https://github.com/szaghi/FURY/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/FURY/actions/workflows/ci.yml)
 [![coverage](https://img.shields.io/endpoint?url=https://szaghi.github.io/FURY/coverage.json)](https://github.com/szaghi/FURY/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-GPLv3%20%7C%20BSD%20%7C%20MIT-blue.svg)](#copyrights)
 
-### FURY, Fortran Units (environment) for Reliable phYsical math
+> Numbers that know their units, in pure Fortran 2018: FURY checks every sum, assignment and conversion of your physical
+> quantities, derives the units of products and powers, and stops the program at the first inconsistency, instead of
+> letting a wrong number through.
 
-A KISS pure Fortran Library for improving reliability of physical math computations by taking into account units of measure:
+<img src="docs/examples/images/mco.svg" alt="a FURY program stopping at the sum of an impulse in newton seconds and one in pound-force seconds" width="760">
 
-- FURY is a pure Fortran (KISS) library for improving reliability of physical math computations;
-- FURY is a pure Fortran (KISS) library for symbolic algebra on units symbols;
-- FURY is Fortran 2003+ standard compliant;
-- FURY is OOP designed;
-- FURY is a Free, Open Source Project.
+<sub>The bug that lost the Mars Climate Orbiter, written with FURY: the program stops at the sum of newton seconds and
+pound-force seconds (<a href="docs/examples/src/mco.f90">source</a>).</sub>
 
-#### A taste of FURY
+<div>
+<table>
+<tr>
+<td width="50%"><b>📏 Quantities with units</b><br><sub>A magnitude and its unit of measure in one object; the arithmetic operators, powers and comparisons work on quantities as on numbers, and the units follow. <a href="https://szaghi.github.io/FURY/manual/tutorial/01-first-quantity">A first quantity</a></sub></td>
+<td width="50%"><b>🛑 Inconsistencies stop the program</b><br><sub>Metres plus seconds, a length assigned to a time, a conversion between unrelated units: FURY prints what is wrong and stops with exit status 1. <a href="https://szaghi.github.io/FURY/manual/tutorial/04-consistency">What FURY refuses</a></sub></td>
+</tr>
+<tr>
+<td width="50%"><b>🧮 Symbolic algebra on units</b><br><sub><code>Pa</code> times <code>m2</code> is <code>kg.m.s-2</code>, <code>m.s-1</code> times <code>s</code> is <code>m</code>: products, quotients and powers of units are derived symbolically, dimensions included. <a href="https://szaghi.github.io/FURY/manual/tutorial/03-unit-algebra">The algebra of units</a></sub></td>
+<td width="50%"><b>✍️ Units from a string</b><br><sub><code>'kg [mass].m [length].s-2 [time-2] (N[force]) {newton}'</code>: symbols, synonyms, conversion factors and offsets, dimensions, a main alias and a name, in one readable definition. <a href="https://szaghi.github.io/FURY/guide/grammar">Unit grammar</a></sub></td>
+</tr>
+<tr>
+<td width="50%"><b>🔁 Conversions</b><br><sub>Factors (<code>km = 1000 * m</code>), offsets (<code>degC = 273.15 + K</code>), conversions through a common unit (<code>ft</code> to <code>km</code> through <code>m</code>) or a main alias (<code>lbf</code> to <code>N</code>), and non-linear formulas of your own (dBm to mW). <a href="https://szaghi.github.io/FURY/guide/conversions">Conversions</a></sub></td>
+<td width="50%"><b>🌍 The SI system, ready to use</b><br><sub>42 units, 28 decimal and binary prefixes, 15 constants of the 2019 SI and CODATA 2018, queried by name, symbol or synonym, prefixed or not (<code>km</code>, <code>kilometre</code>, <code>KiB</code>); systems of your own. <a href="https://szaghi.github.io/FURY/guide/systems">Units systems</a></sub></td>
+</tr>
+<tr>
+<td width="50%"><b>🎯 Three precisions</b><br><sub>Every type in 32, 64 and 128 bits, with mixed-kind arithmetic; quadruple precision is optional, for compilers and builds without it. <a href="https://szaghi.github.io/FURY/guide/precision">Precision</a></sub></td>
+<td width="50%"><b>🔓 Standard Fortran, multi-licensed</b><br><sub>Fortran 2018, tested with gfortran 14 and 16, built with FoBiS or fpm; GPL v3 for FOSS projects, BSD 2-Clause, BSD 3-Clause or MIT for the others. <a href="#copyrights">Copyrights</a></sub></td>
+</tr>
+</table>
+</div>
 
-```fortran
-use, intrinsic :: iso_fortran_env, only : real64
-use fury
-type(uom)   :: meter
-type(uom)   :: second
-type(qreal) :: distance_to_arrival
-type(qreal) :: time_to_arrival
-type(qreal) :: mean_velocity
+**[Full documentation](https://szaghi.github.io/FURY/)** · [Tutorial](https://szaghi.github.io/FURY/manual/tutorial/01-first-quantity) · [Cookbook](https://szaghi.github.io/FURY/manual/cookbook) · [API reference](https://szaghi.github.io/FURY/api/)
 
-meter = uom('m = meter = metre [length] {meter}')
-second = uom('s = sec = second [time] {second}')
+</div>
 
-distance_to_arrival = qreal(100._real64, meter)
-time_to_arrival = qreal(9.58_real64, second)
+## Quick start
 
-mean_velocity = distance_to_arrival / time_to_arrival
-
-print "(A)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimensions=.true.)
-! print
-! Bolt's record speed: +0.104384133611691E+002 m.s-1 [length.time-1]
-```
-
-#### Issues
-
-[![GitHub issues](https://img.shields.io/github/issues/szaghi/FURY.svg)]()
-[![Ready in backlog](https://badge.waffle.io/szaghi/FURY.png?label=ready&title=Ready)](https://waffle.io/szaghi/FURY)
-[![In Progress](https://badge.waffle.io/szaghi/FURY.png?label=in%20progress&title=In%20Progress)](https://waffle.io/szaghi/FURY)
-[![Open bugs](https://badge.waffle.io/szaghi/FURY.png?label=bug&title=Open%20Bugs)](https://waffle.io/szaghi/FURY)
-
-#### Compiler Support
-
-[![Compiler](https://img.shields.io/badge/GNU-v6.1.1+-brightgreen.svg)]()
-[![Compiler](https://img.shields.io/badge/Intel-v16.1+-brightgreen.svg)]()
-[![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
-[![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
-[![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
-[![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
-
----
-
-[What is FURY?](#what-is-fury) | [Main features](#main-features) | [Copyrights](#copyrights) | [Download](#download) | [Compilation](#compilation) | [Documentation](#documentation) | [References](#references)
-
----
-
-## What is FURY?
-
-FURY is a *poor-by-blow* of *reliability* concept
-
->+ reliability is expression of the *consistency-of-a-set-of-measures*
->+ reliability measures successful probability, i.e. *1 - probability-of-failure*
->+ reliability (absence) played a role on the *Mars Climate Orbiter disaster*<sup>[mco](#mco-disaster)</sup>
->
-> ergo **reliability counts**
-
-FURY project started to respond to two questions:
-
-1. is a *units-consistency-check* facility (UCCF) a desirable feature for a programming language?
-    + is useful? or
-    + is dangerous?
-1. how it can be implemented in Fortran?
-    + is feasible?
-
-These questions are generated by an inspiring [Fortran Language Google Group discussion](https://groups.google.com/forum/#!topic/comp.lang.fortran/1TbfQlAmKx8) started by [**W. Van Snyder**](https://science.jpl.nasa.gov/people/Snyder/)[[<sup>rg</sup>]](https://www.researchgate.net/profile/W_Snyder). They are really *controversial*: someone want UCCF to be a built-in feature in Fortran, others claim that such a feature is not useful at all or even dangerous just because it could add more space for errors than it could reduce (thus reducing the reliability).
-
-> Starting from an *agnostic* point of view, the FURY case study conveys us to think that a UCCF is a desirable feature for the next Fortran standards.
-
-Moreover, the large experience borrowed from other programming languages, see [references](#references), proves that UCCF like features can be feasible in modern programming languages and they are of proved usefulness. As a consequence, FURY started to begin a fully featured, self-contained project that is presently usable for production-applications, even if the first comprehensive testing phase (of pre v1.0.0 bug-fix one) is still not completed.
-
-FURY is the result of the tentative to respond the above questions:
-
-> FURY is a pure Fortran library providing a new set of types (the **quantities**) having a built-in units-consistency-check facility that is able to improve the reliability of physical computations.
-> Moreover, FURY can perform symbolic math on units symbols.
-
-FURY can do reliable math computations, preserving quantities dimensionality, checking consistency and propagating multiplicative scaling factors. For example, if you want to know how fast is Bolt you can do it with FURY, in a reliable way :smile:
+Define the units, attach them to numbers, compute: how fast is Bolt?
 
 ```fortran
-use, intrinsic :: iso_fortran_env, only : real64
+program bolt
 use fury
-type(uom)   :: meter
-type(uom)   :: second
-type(qreal) :: distance_to_arrival
-type(qreal) :: time_to_arrival
-type(qreal) :: mean_velocity
+implicit none
+type(uom64)   :: metre, second
+type(qreal64) :: distance, time, speed
 
-meter = uom('m = meter = metre [length] {meter}')
-second = uom('s = sec = second [time] {second}')
+metre  = uom64('m = metre = meter [length] {metre}')
+second = uom64('s = sec = second [time] {second}')
 
-distance_to_arrival = qreal(100._real64, meter)
-time_to_arrival = qreal(9.58_real64, second)
+distance = 100._R8P * metre
+time     = 9.58_R8P * second
+speed    = distance / time
 
-mean_velocity = distance_to_arrival / time_to_arrival
-
-print "(A)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimensions=.true.)
-! print
-! Bolt's record speed: +0.104384133611691E+002 m.s-1 [length.time-1]
+print '(A)', 'speed    : '//speed%stringify(format='(F6.3)', with_dimensions=.true.)
+endprogram bolt
 ```
 
-FURY is based on a powerful parser of *unit-of-measure* (UOM) definitions: once a (set of) UOM is defined its scaling factor, symbol and dimensions are consistently checked, preserved and propagated in all computations. For set of UOMs with defined conversion-formulas FURY can check the consistency of all conversions. Eventually, if a quantity has a defined UOM, any tentative to assign it to another quantity with a different UOM will raise an error as well as for all inconsistent computations.
+```console
+$ bolt
+speed    : 10.438 m.s-1 [length.time-1]
+```
 
-Go to [Top](#top)
+The unit of the speed and its dimensions are derived by FURY. Add a length to that speed, assign it to a time, convert it
+to kilograms, and the program stops with an error that says what is wrong.
 
-## Main features
+New to FURY? The [tutorial](https://szaghi.github.io/FURY/manual/tutorial/01-first-quantity) goes from a first quantity
+to a units system of your own in nine short chapters; the [cookbook](https://szaghi.github.io/FURY/manual/cookbook) has
+short recipes. Every code sample of the documentation is a compiled, runnable program in
+[`docs/examples/src`](docs/examples/src), shown with its real output.
 
-FURY is inspired by the python great module [pint](https://github.com/hgrecco/pint), thus many features are taken from it. Here the main features are listed.
+## Install
 
-* [x] User-friendly classes to add *units of measure* to numbers;
-* [x] errors trapping for invalid computations/assignments;
-* [x] unit parsing: prefixed forms of units are recognized without explicitly defining them, i.e. as the prefix kilo and the unit meter are defined, FURY understands kilometer;
-* [x] effortless conversion even for complex derived UOM;
-* [ ] standalone unit definitions: units definitions are loaded from simple and easy to edit text file;
-* [ ] advanced string parsing:
-    * [x] symbolic algebra on units symbols;
-    * [ ] Buckingham Pi Theorem;
-* [ ] replicate all the useful features of [pint](https://github.com/hgrecco/pint);
-* [x] Test Driven Developed (TDD);
-* [x] collaborative developed;
-* [x] well documented;
-* [x] free!
+### FoBiS
 
-Any feature request is welcome.
+**Standalone**: clone, fetch the dependencies, build.
 
-Go to [Top](#top)
+```bash
+git clone https://github.com/szaghi/FURY && cd FURY
+fobis fetch                            # PENF, StringiFor, BeFoR64, FACE, FLAP
+fobis build --mode fury-static-gnu     # lib/libfury.a and lib/mod/
+```
+
+**As a project dependency**: declare FURY in your `fobos` and fetch it.
+
+```ini
+[dependencies]
+deps_dir = src/third_party
+FURY     = https://github.com/szaghi/FURY
+```
+
+### fpm
+
+```toml
+[dependencies]
+FURY = { git = "https://github.com/szaghi/FURY" }
+```
+
+fpm cannot pass the quadruple precision macro to the dependencies: FURY built by fpm has the 32 and 64 bits types only
+(see [Precision](https://szaghi.github.io/FURY/guide/precision)).
+
+A Fortran 2018 compiler is required: tested with gfortran 14 and 16 (see
+[Installation](https://szaghi.github.io/FURY/guide/install)).
+
+## Authors
+
+- Stefano Zaghi — [@szaghi](https://github.com/szaghi)
+
+FURY is dedicated to W. Van Snyder. Contributions are welcome — see the
+[Contributing](https://szaghi.github.io/FURY/guide/contributing) page.
 
 ## Copyrights
 
-FURY is an open source project, it is distributed under a multi-licensing system:
+This project is distributed under a multi-licensing system:
 
-+ for FOSS projects:
-  - [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html);
-+ for closed source/commercial projects:
-  - [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause);
-  - [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause);
-  - [MIT](http://opensource.org/licenses/MIT).
+- **FOSS projects**: [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+- **Closed source / commercial**: [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause), [BSD 3-Clause](http://opensource.org/licenses/BSD-3-Clause), or [MIT](http://opensource.org/licenses/MIT)
 
-Anyone is interest to use, to develop or to contribute to FURY is welcome, feel free to select the license that best matches your soul!
-
-More details can be found on [wiki](https://github.com/szaghi/FURY/wiki/Copyrights).
-
-Go to [Top](#top)
-
-## Download
-
-FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY):
-
-```shell
-git clone https://github.com/szaghi/FURY
-cd FURY
-fobis fetch   # fetch the dependencies (default branches) into src/third_party/
-```
-
-Release archives are at [https://github.com/szaghi/FURY/releases](https://github.com/szaghi/FURY/releases).
-
-Go to [Top](#top)
-
-## Compilation
-
-FURY is built by means of [FoBiS](https://github.com/szaghi/FoBiS) (`pip install FoBiS.py`):
-
-```shell
-fobis build --mode tests-gnu          # all the tests, into exe/
-bash scripts/run_tests.sh             # run them
-fobis build --mode fury-static-gnu    # lib/libfury.a
-fobis build --lmodes                  # list all modes (shared library, Intel Fortran, debug, converter app)
-```
-
-See the [installation guide](https://szaghi.github.io/FURY/guide/installation) for the details.
-
-Go to [Top](#top)
-
----
-
-## Documentation
-
-Besides this README file the FURY documentation is contained into its own [wiki](https://github.com/szaghi/FURY/wiki). Detailed documentation of the API is contained into the [GitHub Pages](http://szaghi.github.io/FURY/index.html) that can also be created locally by means of [ford tool](https://github.com/cmacmackin/ford).
-
-### The design
-
-FURY is designed upon a simple, yet powerful UOM grammar, for example the definition of the Pascal unit could be one the followings:
-
-+ `'Pa'`
-+ `'Pa [pressure]'`
-+ `'Pa [pressure] {pascal}'`
-+ `'kg.m-1.s-2'`
-+ `'kg.m-1.s-2 = Pa'`
-+ ...
-+ `'kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}'`
-
-where the first is the most basic definition defining only the main symbol while the others are definitions with increasing complexity where we are defining dimensions, symbol aliases, name, definition with respect other units... The flexibility left to the end user is really high. More in details, the UOM grammar is composed as following:
-
-+ `'kg [mass].m-1 = metre-1 = meter-1 [length-1].s-2 = seconds-2 = sec-2 [time-2] (Pa[pressure]) {pascal}'`
-
-where
-
-+ the terms `[...]` define the *dimensions* of each unit and are optional (the white spaces are ignored); moreover the exponents of dimensions can be omitted: in this case they are inferred from the symbol reference exponents; in the case they are explicitly written they must match the corresponding symbol ones or an error is raised;
-+ the term `(...)` defines a *main* unit *alias* that is optional and must come always after unit reference definition;
-+ the term `{...}` defines the unit name that is optional and must be always the last term.
-
-Reference units used for the definition of another one are separated by the `.` symbol, thus the Pascal definition is `kg/(m * s^2)` is defined as `kg.m-1.s-2` to mimic the rules of [The Unified Code for Units of Measure](http://unitsofmeasure.org/trac): each *reference* unit is intended multiplied the subsequent with the proper exponent with sign. The FURY parser is designed on this grammar, thus each reference unit is tokenized with the `.` separator.
-
-Symbol aliases are used also for defining units conversion formulas, e.g.
-
-`'km = 1000 * m [length].h-1 = 3600 s-1 [time-1] (km/h[speed]) {km/h}'`
-
-This is the base, more concise conversion formula grammar, but it could be unsafe if the conversion implies real-valued scaling factor, as it often happens. In this case, a more verbose but more safe grammar should be used, e.g.
-
-`'km< = 1000._real64 * m > [length].h-1< = 3600._real64 s-1> [time-1] (km/h[speed]) {km/h}'`
-
-where the conversion formulas are *protected* by the `<>` symbols. Defining a UOM with fury is simple as
-
-```fortran
-use fury
-type(uom) :: pascal
-pascal = uom('kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}')
-```
-
-Having a unit so defined, it is allowed to perform your reliable computations, namely all the symbolic computations necessary when dealing with units, e.g. computing the force from a pressure on a surface
-
-```fortran
-use fury
-type(uom) :: meter
-type(uom) :: pascal
-type(uom) :: newton
-
-meter = uom(m [length] (meter[length]) {meter}')
-pascal = uom('kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}')
-
-newton = pascal * meter**2
-print "(A)", ' newton: '//newton%stringify(with_dimensions=.true.)
-! output
-! newton: kg.m.s-2 [mass.length.time-2]
-```
-
-For make easier the life of *snappy coders* a far complete SI system of predefined units is provided, as well an abstract class for defining new units systems.
-
-#### UOM grammar for reference unit
-
-We indicate a UOM to be a *reference* unit when it is defined by only main symbol having exponent 1 and multiplicative factor 1. With this categorization the *base* units of SI are all reference units for us. Moreover, the user can define his/her own reference units, e.g. `apple [fruit] {not a pc}` is a valid UOM reference definition that can be used to define other (complex) units like `GNU< = 1.e20 * apple> [salad_of_fruits] {HPC}`. To define a reference UOM you need to specify just the main symbol, but other data can be optionally provided to cover more complex purposes. For example, defining a reference unit you can provide aliases defining conversion formulas to other UOM, you can provide the dimensions or UOM name useful to query systems of units.
-
-<table>
-  <tr>
-    <td>                                                   </td>
-    <td>             <sub>required                  </sub> </td>
-    <td colspan="6"> <sub>alias formula(s), optional</sub> </td>
-    <td>             <sub>optional                  </sub> </td>
-    <td>             <sub>optional                  </sub> </td>
-    <td>             <sub>optional                  </sub> </td>
-  </tr>
-  <tr>
-    <td colspan="2">                             </td>
-    <td>             <sub>optional        </sub> </td>
-    <td>             <sub>=               </sub> </td>
-    <td>             <sub>optional if == 1</sub> </td>
-    <td>             <sub>Hz              </sub> </td>
-    <td>             <sub>optional if == 1</sub> </td>
-    <td>             <sub>optional        </sub> </td>
-    <td colspan="3">                             </td>
-  </tr>
-  <tr>
-    <td> <sub>grammar_element      </sub> </td>
-    <td> <sub>main_symbol          </sub> </td>
-    <td> <sub>&#60;                </sub> </td>
-    <td> <sub>=                    </sub> </td>
-    <td> <sub>multiplicative_factor</sub> </td>
-    <td> <sub>symbol               </sub> </td>
-    <td> <sub>symbol_exponent      </sub> </td>
-    <td> <sub>&#62;                </sub> </td>
-    <td> <sub>[dimensions]         </sub> </td>
-    <td> <sub>(alias[dimensions])  </sub> </td>
-    <td> <sub>{unit_name}          </sub> </td>
-  </tr>
-  <tr>
-    <td> <sub>example               </sub> </td>
-    <td> <sub>kHz                   </sub> </td>
-    <td> <sub>&#60;                 </sub> </td>
-    <td> <sub>=                     </sub> </td>
-    <td> <sub>1000. *               </sub> </td>
-    <td> <sub>Hz                    </sub> </td>
-    <td> <sub>1                     </sub> </td>
-    <td> <sub>&#62;                 </sub> </td>
-    <td> <sub>[time-1]              </sub> </td>
-    <td> <sub>(kilohertz[frequency])</sub> </td>
-    <td> <sub>{kilohertz}           </sub> </td>
-  </tr>
-</table>
-
-Examples
-
-+ `kHz`, only the main symbol is strictly required;
-+ `kHz = 1000 * Hz`, one alias (for conversion formula);
-+ `kHz = 1000 * Hz = 1000 * s-1`, two aliases (for conversion formulas);
-+ `kHz< = 1000. * Hz>`, one alias protected (due to real factor);
-+ `kHz< = 1000. * Hz = 1000. * s-1 >`, two aliases protected;
-+ `kHz [time-1]`, dimensions specification;
-+ `kHz [time-1] (kilohertz[frequency])`, a main alias specification, useful for units like pressure:
-    + `kg.m-1.s-2 (Pa[pressure]) {pascal}`
-+ `kHz [time-1] (kilohertz[frequency]) {my kilohertz}`, unit name specification, useful for queries in units systems usage;
-+ `kHz< = 1000. * Hz = 1000. * s-1 > [frequency] (kilohertz[frequency]) {kilohertz}`
-
-#### UOM grammar for general complex unit
-
-In the case you want to define a UOM with a respect a set of reference UOM, you can do using the `.` operator that mimics the definition of [The Unified Code for Units of Measure](http://unitsofmeasure.org/trac) group.
-
-<table>
-  <tr>
-    <td>                                                            </td>
-    <td colspan="3"> <sub>required at least 2 UOM definitions</sub> </td>
-    <td>             <sub>optional                           </sub> </td>
-    <td>             <sub>optional                           </sub> </td>
-  </tr>
-  <tr>
-    <td> <sub>grammar_element     </sub> </td>
-    <td> <sub>UOMreference        </sub> </td>
-    <td> <sub>.                   </sub> </td>
-    <td> <sub>otherUOMreference   </sub> </td>
-    <td> <sub>(alias[dimensions]) </sub> </td>
-    <td> <sub>{unit_name}         </sub> </td>
-  </tr>
-  <tr>
-    <td> <sub>example      </sub> </td>
-    <td> <sub>m [length]   </sub> </td>
-    <td> <sub>.            </sub> </td>
-    <td> <sub>s-1 [time-1] </sub> </td>
-    <td> <sub>(m/s [speed])</sub> </td>
-    <td> <sub>{speed SI}   </sub> </td>
-  </tr>
-</table>
-
-Examples
-
-+ `kg [mass].m [length].s-2 [time-2] (N[force]) {newton}`
-+ `kg [mass].m2 [length2].s-3 [time-3].A-2 [current-2]{ohm}`
-+ `kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}`
-
-It worth to note that the user can always define a complex unit as a reference one, let us consider for example two possible definitions of the pressure:
-
-1. `kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal_complex}`
-2. `Pa [pressure] {pascal_simple}`
-
-Both are valid, but the first one provides much more *informations* thus resulting into a more powerful symbolic math. For example consider the following example where the above 2 definitions are used to define the Newton unit:
-
-```fortran
-use fury
-type(uom) :: meter
-type(uom) :: pascal_complex
-type(uom) :: pascal_simple
-type(uom) :: newton
-
-meter = uom('m [length] (meter[length]) {meter}')
-pascal_complex = uom('kg [mass].m-1 [length-1].s-2 [time-2] (Pa[pressure]) {pascal}')
-pascal_simple = uom('Pa[pressure] {pascal}')
-
-newton = pascal_complex * meter**2
-print "(A)", ' newton: '//newton%stringify(with_dimensions=.true.)
-! output
-! newton: kg.m.s-2 [mass.length.time-2]
-
-call newton%unset
-newton = pascal_simple * meter**2
-print "(A)", ' newton: '//newton%stringify(with_dimensions=.true.)
-! output
-! newton: Pa.m2 [pressure.length2]
-```
-
-Both results are correct, but the first is more *informative* if a consistent set of reference units has been defined, as it happens for the SI system.
-
-#### Physical Quantities
-
-FURY's quantities are built up upon the above UOM: a quantity is essentially a number (real or integer of any kind) with attached a UOM. When a quantity has a defined UOM all UOM's check are pushed to the quantity's magnitude computations, thus improving the math computations reliability.
-
-Unfortunately, we have not find a simple way *to attach* UOM to standard Fortran types, thus the end user must do reliable computations on a new set of types, namely `qreal` and `qinteger` (or their *kinded* version).
-
-Let us assume to consider the summation of 2 length, the first expressed in meters and the second in kilometers. With FURY this can be implemented as:
-
-```fortran
-use fury
-type(system_si) :: SI        ! SI system.
-type(qreal)     :: q         ! A physical quantity.
-type(qreal)     :: q1        ! A physical quantity.
-type(qreal)     :: q2        ! A physical quantity.
-type(uom)       :: kilometre ! The kilometre unit based on the metre unit.
-
-! initialize SI units system
-call SI%initialize
-
-! define a new unit, i.e. the kilometre, that must
-! be compatible with SI's metre
-kilometre = uom('km = 1000 * m')
-
-! define 2 quantities
-q1 = qreal(magnitude=1._R_P, unit=SI%unit('metre'))
-q2 = qreal(magnitude=1._R_P, unit=kilometre)
-
-! try to blindly to sum them
-q = q1 + q2
-! error: cannot convert from "metre [length]" to "km"
-
-! a more conscious sum
-q = q1 + q2%to(SI%unit('metre'))
-! no error is raised
-print "(A)", '1 m + 1 km = '//q%stringify(format='(F6.1)')
-! output "1 m + 1 km = 1001.0 m"
-
-```
-
-#### The minimal tutorial
-
-To use FURY the minimal steps necessary are:
-
-##### 1. use FURY module
-
-```fortran
-use fury
-```
-
-##### 2. define FURY quantities
-
-```fortran
-type(qreal)    :: q1 ! A real physical quantity.
-type(qinteger) :: q2 ! An integer physical quantity.
-```
-
-##### 3. (optional) define new FURY units
-
-```fortran
-type(uom) :: centimetre ! The centimetre unit based on the metre unit.
-type(uom) :: kilometre  ! The kilometre unit based on the metre unit.
-type(uom) :: hour       ! The hour unit based on the second unit.
-
-centimetre = uom('cm = 0.01 * m')
-kilometre = uom('km = 1000.0 * m')
-hour = uom('h = 3600.0 * s')
-```
-
-##### 4. (optional) initialize FURY units system(s)
-
-```fortran
-type(system_si) :: SI ! SI system
-
-call SI%initialize
-```
-
-Note that currently on the SI system is provided.
-
-##### 5. assign unit (and optionally magnitude) to FURY quantities
-
-```fortran
-q1 = qreal(magnitude=1._R_P, unit=kilometre)
-q2 = qinteger(magnitude=3, unit=hour)
-```
-
-##### 6. do your physical maths
-
-Now you can do your reliable physical computations :party:
-
-Go to [Top](#top)
-
-### References
-
-A non comprehensive references list of UCCF related contents.
-
-+ [The Unified Code for Units of Measure](http://unitsofmeasure.org/trac)
-+ [Meyers, Dimensional analysis. C++ Report](http://se.ethz.ch/~meyer/publications/OTHERS/scott_meyers/dimensions.pdf)
-+ [Petty, Automated computation and consistency checking of physical dimensions and units in scientific programs](http://onlinelibrary.wiley.com/doi/10.1002/spe.401/abstract)
-+ [Brown, Introduction to the SI Library of Unit-Based Computation](http://lss.fnal.gov/archive/1998/conf/Conf-98-328.pdf)
-+ [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units)
-
-##### Built-in in language
-
-+ [F#](https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure)
-
-##### Libraries
-
-+ .NET
-    + [UnitsNet](https://github.com/anjdreas/UnitsNet)
-+ Ada
-    + [Units](http://www.dmitry-kazakov.de/ada/units.htm)
-+ C#
-    + [QuantityTypes](https://github.com/objorke/QuantityTypes)
-+ C++
-    + [Boost.Units](http://www.boost.org/doc/libs/1_37_0/doc/html/boost_units.html)
-    + [PhysUnits C++11](https://github.com/martinmoene/PhysUnits-CT-Cpp11)
-+ Haskell
-    + [dimensional](http://hackage.haskell.org/package/dimensional)
-+ JavaScript
-    + [UCUM](https://github.com/jmandel/ucum.js)
-+ Julia
-    + [SIUnits](https://github.com/Keno/SIUnits.jl)
-    + [Unitful](https://github.com/ajkeller34/Unitful.jl)
-+ Python
-    + [quantities](https://github.com/python-quantities/python-quantities)
-    + [magnitude](https://github.com/juanre/magnitude)
-    + [buckingham](https://github.com/mdipierro/buckingham)
-    + [pint](https://github.com/hgrecco/pint)
-+ Ruby
-    + [unitwise](https://github.com/joshwlewis/unitwise)
-
-#### MCO disaster
-
-The Mars Climate Orbiter (MCO) Mishap Investigation Board (MIB) has determined that the root cause for the loss of the MCO spacecraft was the failure to use **metric units** in the coding of a ground software file, “Small Forces” used in trajectory models, specifically:
-
-> thruster performance data in **English units** instead of **metric units** was used in the software application code titled `SM_FORCES` (small forces).
-
-The units mismatching generates an erroneous trajectory that was underestimated by a factor of 4.45, which is the required conversion factor from force in **pounds** to **Newtons**.
-
-> if the software application `SM_FORCES` had been developed with a *units-consistency-check facility*, $300 million of spacecraft could be saved.
-
-Go to [Top](#top)
+> Anyone interested in using, developing, or contributing to this project is welcome — pick the license that best fits your needs.

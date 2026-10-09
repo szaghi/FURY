@@ -1,0 +1,3 @@
+$ tutorial_5 impossible
+error: cannot convert "m [length]" to "s [time]"
+[exit status 1]

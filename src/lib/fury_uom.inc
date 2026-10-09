@@ -45,6 +45,7 @@ type :: uom
   integer(I_P),                     private :: references_number=0_I_P !< References number.
   contains
     ! public methods
+    procedure, pass(self) :: convert              !< Convert magnitude with respect another unit, reporting the success.
     procedure, pass(self) :: get_alias            !< Return the alias.
     procedure, pass(self) :: get_main_reference   !< Return the main reference.
     procedure, pass(self) :: get_main_symbol      !< Return the main symbol.
@@ -73,14 +74,14 @@ type :: uom
                                pow_I8P, pow_I4P, &
                                pow_I2P, pow_I1P        !< Overloading `**` operator.
     generic :: operator(==) => is_equal                !< Overloading `==` operator.
-    ! generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
+    generic :: operator(/=) => is_not_equal            !< Overloading `/=` operator.
     ! generic :: operator(.compatible.) => is_compatible !< Definition of `.compatible.` operator.
     ! private methods
     procedure, pass(self), private :: add_reference            !< Add a reference unit to unit.
     ! procedure, pass(self), private :: has_reference_compatible !< Check if the unit has a compatible reference unit.
     ! procedure, pass(self), private :: is_compatible            !< Check if unit is compatible with another one.
     procedure, pass(self), private :: is_equal                 !< Check if unit is equal with another one.
-    ! procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
+    procedure, pass(self), private :: is_not_equal             !< Check if unit is not equal with another one.
     procedure, pass(self), private :: parse                    !< Parse unit definition from an input string.
     procedure, pass(self), private :: parse_alias              !< Parse unit alias from an input string.
     procedure, pass(self), private :: parse_name               !< Parse unit name from an input string.
@@ -130,7 +131,7 @@ contains
 ! call unit%set(alias=alias, name=name)
 ! endfunction creator_from_other_unit
 
-  subroutine remove_reference(references, id)
+  pure subroutine remove_reference(references, id)
   !< Remove a reference from the list of references.
   type(uom_reference), intent(inout), allocatable :: references(:)     !< References list.
   integer(I_P),        intent(in)                 :: id                !< Index of reference to remove.
@@ -265,7 +266,7 @@ contains
   type(uom)                       :: prefixed        !< Prefixed unit.
   type(uom_reference)             :: main_reference  !< Prefixed unit reference.
   type(string)                    :: symbol          !< Main prefixes symbol.
-  type(uom_symbol)                :: prefixes_symbol !< Main prefixes uom symbol.
+  type(uom_symbol), allocatable   :: prefixes_aliases(:) !< Prefixes aliases.
 
   if (self%is_defined().and.prefixes%is_defined()) then
     prefixed = self
@@ -276,8 +277,9 @@ contains
       prefixed%alias = prefixed%alias%prefixed(prefixes=prefixes)
     endif
     if (prefixed%has_name()) then
-      prefixes_symbol = prefixes%get_main_symbol()
-      symbol = prefixes_symbol%get_symbol()
+      ! the prefix name is its last alias, e.g. "kilo" of "k = kilo"
+      call prefixes%get_aliases(aliases=prefixes_aliases)
+      symbol = prefixes_aliases(size(prefixes_aliases))%get_symbol()
       call prefixed%set(name=symbol//prefixed%name)
     endif
   endif
@@ -335,13 +337,13 @@ contains
     raw = raw(2:)
     if (present(with_dimensions)) then
       if (with_dimensions) then
+        ! the references without dimensions are skipped, a unit without dimensions has no brackets
         dimensions = ''
         do s=1, self%references_number
-          dimensions = dimensions//self%references(s)%dimensionality()//'.'
+          if (len(self%references(s)%dimensionality())>0) &
+            dimensions = dimensions//'.'//self%references(s)%dimensionality()
         enddo
-        if (dimensions(1:1)=='.'.and.len(dimensions)>1) dimensions = dimensions(2:)
-        if (dimensions(len(dimensions):len(dimensions))=='.') dimensions = dimensions(:len(dimensions)-1)
-        raw = raw//' ['//dimensions//']'
+        if (len(dimensions)>0) raw = raw//' ['//dimensions(2:)//']'
       endif
     endif
     if (present(with_aliases)) then
@@ -357,30 +359,58 @@ contains
   endif
   endfunction stringify
 
-  elemental function to(self, other, magnitude) result(converted)
-  !< Convert magnitude with respect another unit.
-  class(uom), intent(in) :: self              !< The uom.
-  type(uom),  intent(in) :: other             !< Other unit used for conversion.
-  real(RKP),  intent(in) :: magnitude         !< Magnitude to be converted.
-  real(RKP)              :: converted         !< Converted magnitude.
-  real(RKP)              :: converted_partial !< Partial conversion storage.
-  logical                :: is_found          !< Flag to check if a conversion has been found.
-  integer(I_P)           :: ro                !< Counter.
-  integer(I_P)           :: rs                !< Counter.
+  pure subroutine convert(self, other, magnitude, converted, is_converted)
+  !< Convert magnitude with respect another unit, reporting if the conversion has been found.
+  !<
+  !< The references of the unit are matched with the ones of the other unit; the main alias of a unit is matched with the
+  !< references of the other one too, e.g. "lbf = 4.4482216152605 * N" with "kg.m.s-2 (N[force])". The conversion is
+  !< found only if every reference is converted: otherwise the magnitude is returned unchanged and `is_converted` is false.
+  class(uom), intent(in)           :: self                !< The uom.
+  type(uom),  intent(in)           :: other               !< Other unit used for conversion.
+  real(RKP),  intent(in)           :: magnitude           !< Magnitude to be converted.
+  real(RKP),  intent(out)          :: converted           !< Converted magnitude.
+  logical,    intent(out)          :: is_converted        !< True if the conversion has been found.
+  type(uom_reference), allocatable :: self_references(:)  !< References (or main alias) of the unit.
+  type(uom_reference), allocatable :: other_references(:) !< References (or main alias) of the other unit.
+  integer(I_P)                     :: s                   !< Counter.
+  integer(I_P)                     :: o                   !< Counter.
 
   converted = magnitude
-  converted_partial = converted
-  if (self%is_defined().and.other%is_defined().and.self%references_number==other%references_number) then
-    do rs=1, self%references_number
-      search_other: do ro=1, other%references_number
-        call self%references(rs)%to(other=other%references(ro), magnitude=converted, converted=converted_partial, is_found=is_found)
-        if (is_found) then
-          converted = converted_partial
-          exit search_other
+  is_converted = .false.
+  if (self%is_defined().and.other%is_defined()) then
+    ! candidates: 1 the references, 2 the main alias
+    candidates: do s=1, 2
+      if (s==1) then
+        self_references = self%references(1:self%references_number)
+      else
+        if (.not.self%has_alias()) exit candidates
+        self_references = [self%alias]
+      endif
+      do o=1, 2
+        if (o==1) then
+          other_references = other%references(1:other%references_number)
+        else
+          if (.not.other%has_alias()) exit
+          other_references = [other%alias]
         endif
-      enddo search_other
-    enddo
+        call convert_references(self_references=self_references, other_references=other_references, &
+                                magnitude=magnitude, converted=converted, is_converted=is_converted)
+        if (is_converted) exit candidates
+      enddo
+    enddo candidates
   endif
+  endsubroutine convert
+
+  elemental function to(self, other, magnitude) result(converted)
+  !< Convert magnitude with respect another unit, see [[uom:convert]]: the magnitude is returned unchanged if the conversion
+  !< has not been found.
+  class(uom), intent(in) :: self         !< The uom.
+  type(uom),  intent(in) :: other        !< Other unit used for conversion.
+  real(RKP),  intent(in) :: magnitude    !< Magnitude to be converted.
+  real(RKP)              :: converted    !< Converted magnitude.
+  logical                :: is_converted !< True if the conversion has been found.
+
+  call self%convert(other=other, magnitude=magnitude, converted=converted, is_converted=is_converted)
   endfunction to
 
   elemental subroutine unset(self)
@@ -487,14 +517,14 @@ contains
   endif
   endfunction is_equal
 
-! elemental function is_not_equal(self, other)
-! !< Check if unit is not equal (has not the same references units) with another one.
-! class(uom), intent(in) :: self         !< The unit.
-! class(uom), intent(in) :: other        !< The other unit.
-! logical                :: is_not_equal !< Check result.
-!
-! is_not_equal = .not.self%is_equal(other=other)
-! endfunction is_not_equal
+  elemental function is_not_equal(self, other)
+  !< Check if unit is not equal (has not the same references units) with another one.
+  class(uom), intent(in) :: self         !< The unit.
+  class(uom), intent(in) :: other        !< The other unit.
+  logical                :: is_not_equal !< Check result.
+
+  is_not_equal = .not.self%is_equal(other=other)
+  endfunction is_not_equal
 
   subroutine parse(self, source)
   !< Parse unit definition form an input string.
@@ -528,8 +558,8 @@ contains
     if (.not.allocated(self%alias)) allocate(self%alias)
     call self%alias%parse(source=tokens(2)%chars())
   elseif (n1>1.or.n2>1) then
-    write(stderr, '(A)')'error: input source string "'//source//'" has bad alias specifier for the unit!'
-    error stop 1
+    write(stderr, '(A)')'error: cannot parse "'//source//'": the main alias must be one "(...)"'
+    error stop 1, quiet=.true.
   endif
   endsubroutine parse_alias
 
@@ -549,8 +579,8 @@ contains
     tokens(2) = tokens(2)%replace(old='}', new='')
     self%name = tokens(2)%chars()
   elseif (n1>1.or.n2>1) then
-    write(stderr, '(A)')'error: input source string "'//source//'" has bad name specifier for the unit!'
-    error stop 1
+    write(stderr, '(A)')'error: cannot parse "'//source//'": the name must be one "{...}"'
+    error stop 1, quiet=.true.
   endif
   endsubroutine parse_name
 
@@ -637,9 +667,9 @@ contains
       if (allocated(rhs%name)) lhs%name = rhs%name
     else
       if (.not.lhs==rhs) then
-        write(stderr, "(A)") 'error: cannot assign between "'//lhs%stringify(with_dimensions=.true.)//'" and "'//&
-                             rhs%stringify(with_dimensions=.true.)//'"'
-        error stop 1
+        write(stderr, "(A)") 'error: cannot assign "'//rhs%stringify(with_dimensions=.true.)//'" to "'//&
+                             lhs%stringify(with_dimensions=.true.)//'"'
+        error stop 1, quiet=.true.
       endif
     endif
   endif
@@ -655,121 +685,53 @@ contains
     opr = lhs
   else
     write(stderr, "(A)") &
-      'error: cannot add "'//lhs%stringify(with_dimensions=.true.)//'" to "'//rhs%stringify(with_dimensions=.true.)//'"'
-    error stop 1
+      'error: cannot add "'//lhs%stringify(with_dimensions=.true.)//'" and "'//rhs%stringify(with_dimensions=.true.)//'"'
+    error stop 1, quiet=.true.
   endif
   endfunction add
 
   function div(lhs, rhs) result(opr)
   !< `uom / uom` operator.
-  class(uom), intent(in)           :: lhs               !< Left hand side.
-  class(uom), intent(in)           :: rhs               !< Right hand side.
-  type(uom)                        :: opr               !< Operator result.
-  type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
-  type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
-  integer(I_P)                     :: ls                !< Counter.
-  integer(I_P)                     :: rs                !< Counter.
+  class(uom), intent(in)           :: lhs           !< Left hand side.
+  class(uom), intent(in)           :: rhs           !< Right hand side.
+  type(uom)                        :: opr           !< Operator result.
+  type(uom_reference), allocatable :: references(:) !< References of the result.
+  integer(I_P)                     :: r             !< Counter.
 
-  opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    allocate(lhs_references, source=lhs%references)
-    allocate(rhs_references, source=rhs%references)
-    do ls=1, size(lhs_references, dim=1)
-      rs = 1
-      remaining_rhs_references: do
-        if (allocated(rhs_references)) then
-          if (lhs_references(ls).compatible.rhs_references(rs)) then
-            lhs_references(ls) = lhs_references(ls) / rhs_references(rs)
-            ! pop up current reference from rhs references
-            if (size(rhs_references, dim=1)>1) then
-              call remove_reference(references=rhs_references, id=rs)
-              rs = 1
-            else
-              deallocate(rhs_references)
-            endif
-          else
-            ! check the next rhs references
-            rs = rs + 1
-          endif
-          ! exit strategy
-          if (allocated(rhs_references)) then
-            if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
-          else
-            exit remaining_rhs_references
-          endif
-        else
-          exit remaining_rhs_references
-        endif
-      enddo remaining_rhs_references
+    ! the quotient has the references of the operands, not their main alias
+    references = lhs%references(1:lhs%references_number)
+    do r=1, rhs%references_number
+      call merge_reference(references=references, reference=rhs%references(r)**(-1))
     enddo
-    opr%references = lhs_references
-    if (allocated(rhs_references)) then
-      ! there are still rhs references not compatible with lhs ones that must be added
-      do rs=1, size(rhs_references, dim=1)
-        call opr%add_reference(reference=rhs_references(rs)**(-1))
-      enddo
-    endif
-    if (lhs%has_name().and.rhs%has_name()) then
-      opr%name = lhs%name//'/'//rhs%name
-    endif
+    call remove_null_references(references=references)
+    call opr%set(references=references)
+    if (lhs%has_name().and.rhs%has_name()) opr%name = lhs%name//'/'//rhs%name
+  else
+    opr = lhs
   endif
-  call opr%update_references_number()
   endfunction div
 
   function mul(lhs, rhs) result(opr)
   !< `uom * uom` operator.
-  class(uom), intent(in)           :: lhs               !< Left hand side.
-  class(uom), intent(in)           :: rhs               !< Right hand side.
-  type(uom)                        :: opr               !< Operator result.
-  type(uom_reference), allocatable :: lhs_references(:) !< Left hand side references.
-  type(uom_reference), allocatable :: rhs_references(:) !< Right hand side references.
-  integer(I_P)                     :: ls                !< Counter.
-  integer(I_P)                     :: rs                !< Counter.
+  class(uom), intent(in)           :: lhs           !< Left hand side.
+  class(uom), intent(in)           :: rhs           !< Right hand side.
+  type(uom)                        :: opr           !< Operator result.
+  type(uom_reference), allocatable :: references(:) !< References of the result.
+  integer(I_P)                     :: r             !< Counter.
 
-  opr = lhs
   if (lhs%is_defined().and.rhs%is_defined()) then
-    allocate(lhs_references, source=lhs%references)
-    allocate(rhs_references, source=rhs%references)
-    do ls=1, size(lhs_references, dim=1)
-      rs = 1
-      remaining_rhs_references: do
-        if (allocated(rhs_references)) then
-          if (lhs_references(ls).compatible.rhs_references(rs)) then
-            lhs_references(ls) = lhs_references(ls) * rhs_references(rs)
-            ! pop up current reference from rhs references
-            if (size(rhs_references, dim=1)>1) then
-              call remove_reference(references=rhs_references, id=rs)
-              rs = 1
-            else
-              deallocate(rhs_references)
-            endif
-          else
-            ! check the next rhs references
-            rs = rs + 1
-          endif
-          ! exit strategy
-          if (allocated(rhs_references)) then
-            if (rs>=size(rhs_references, dim=1)) exit remaining_rhs_references
-          else
-            exit remaining_rhs_references
-          endif
-        else
-          exit remaining_rhs_references
-        endif
-      enddo remaining_rhs_references
+    ! the product has the references of the operands, not their main alias: N.s is not N
+    references = lhs%references(1:lhs%references_number)
+    do r=1, rhs%references_number
+      call merge_reference(references=references, reference=rhs%references(r))
     enddo
-    opr%references = lhs_references
-    if (allocated(rhs_references)) then
-      ! there are still rhs references not compatible with lhs ones that must be added
-      do rs=1, size(rhs_references, dim=1)
-        call opr%add_reference(reference=rhs_references(rs))
-      enddo
-    endif
-    if (lhs%has_name().and.rhs%has_name()) then
-      opr%name = lhs%name//'*'//rhs%name
-    endif
+    call remove_null_references(references=references)
+    call opr%set(references=references)
+    if (lhs%has_name().and.rhs%has_name()) opr%name = lhs%name//'*'//rhs%name
+  else
+    opr = lhs
   endif
-  call opr%update_references_number()
   endfunction mul
 
   function sub(lhs, rhs) result(opr)
@@ -782,8 +744,8 @@ contains
     opr = lhs
   else
     write(stderr, "(A)") &
-      'error: cannot subtract "'//lhs%stringify(with_dimensions=.true.)//'" by "'//rhs%stringify(with_dimensions=.true.)//'"'
-    error stop 1
+      'error: cannot subtract "'//rhs%stringify(with_dimensions=.true.)//'" from "'//lhs%stringify(with_dimensions=.true.)//'"'
+    error stop 1, quiet=.true.
   endif
   endfunction sub
 
@@ -919,3 +881,72 @@ contains
     if (opr%has_name()) opr%name = opr%name//'**'//trim(str(rhs))
   endif
   endfunction pow_I1P
+
+  ! non type-bound procedures
+  pure subroutine convert_references(self_references, other_references, magnitude, converted, is_converted)
+  !< Convert a magnitude from a set of references to another one: each reference must be converted into a different
+  !< reference of the other set.
+  type(uom_reference), intent(in)  :: self_references(1:)  !< References converted.
+  type(uom_reference), intent(in)  :: other_references(1:) !< References of the conversion.
+  real(RKP),           intent(in)  :: magnitude            !< Magnitude to be converted.
+  real(RKP),           intent(out) :: converted            !< Converted magnitude, unchanged if not converted.
+  logical,             intent(out) :: is_converted         !< True if all the references have been converted.
+  logical                          :: is_used(1:size(other_references, dim=1)) !< Other references already matched.
+  real(RKP)                        :: partial              !< Partial conversion.
+  real(RKP)                        :: step                 !< Conversion of one reference.
+  logical                          :: is_found             !< True if a reference has been converted.
+  integer(I_P)                     :: s                    !< Counter.
+  integer(I_P)                     :: o                    !< Counter.
+
+  converted = magnitude
+  is_converted = .false.
+  if (size(self_references, dim=1)/=size(other_references, dim=1)) return
+  is_used = .false.
+  partial = magnitude
+  do s=1, size(self_references, dim=1)
+    is_found = .false.
+    do o=1, size(other_references, dim=1)
+      if (is_used(o)) cycle
+      call self_references(s)%to(other=other_references(o), magnitude=partial, converted=step, is_found=is_found)
+      if (is_found) then
+        partial = step
+        is_used(o) = .true.
+        exit
+      endif
+    enddo
+    if (.not.is_found) return
+  enddo
+  converted = partial
+  is_converted = .true.
+  endsubroutine convert_references
+
+  pure subroutine merge_reference(references, reference)
+  !< Multiply a set of references by a reference: the reference is multiplied into the compatible one (same symbol),
+  !< otherwise it is appended.
+  type(uom_reference), allocatable, intent(inout) :: references(:) !< References.
+  type(uom_reference),              intent(in)    :: reference     !< Reference multiplied.
+  integer(I_P)                                    :: r             !< Counter.
+
+  do r=1, size(references, dim=1)
+    if (references(r).compatible.reference) then
+      references(r) = references(r) * reference
+      return
+    endif
+  enddo
+  references = [references, reference]
+  endsubroutine merge_reference
+
+  pure subroutine remove_null_references(references)
+  !< Remove the references with exponent 0, e.g. "m.s0" is "m"; a dimensionless set, e.g. "kg0.m0.s0", is kept as it is.
+  type(uom_reference), allocatable, intent(inout) :: references(:) !< References.
+  type(uom_symbol)                                :: symbol        !< Main symbol of a reference.
+  logical,             allocatable                :: is_null(:)    !< True for a reference with exponent 0.
+  integer(I_P)                                    :: r             !< Counter.
+
+  allocate(is_null(size(references, dim=1)))
+  do r=1, size(references, dim=1)
+    symbol = references(r)%get_main_symbol()
+    is_null(r) = symbol%get_exponent()==0_I_P
+  enddo
+  if (.not.all(is_null)) references = pack(references, .not.is_null)
+  endsubroutine remove_null_references

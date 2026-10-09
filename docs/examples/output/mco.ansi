@@ -1,0 +1,5 @@
+$ mco
+spacecraft:  10.0 kg.m.s-1 [mass.length.time-1]
+ground    :  10.0 lbf.s [force.time]
+error: cannot add "+10.0 kg.m.s-1 [mass.length.time-1]" and "+10.0 lbf.s [force.time]"
+[exit status 1]

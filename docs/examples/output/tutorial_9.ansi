@@ -1,0 +1,7 @@
+$ tutorial_9
+  001. : m = metre [length]
+  002. : s = second [time]
+  003. : ft = +0.3048 * m = foot [length]
+  004. : NM = +1852.0 * m [length]
+  005. : h = +3600.0 * s = hour [time]
+35000.0 ft = 10.668 km

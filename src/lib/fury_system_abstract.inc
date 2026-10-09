@@ -168,60 +168,34 @@ contains
 
   function unit(self, u) result(unit_)
   !< Return an instance of the queried unit (if defined).
-  class(system_abstract), intent(in) :: self     !< The system.
-  character(*),           intent(in) :: u        !< Unit name or main symbol alias.
-  type(uom)                          :: unit_    !< The queried unit.
-  type(uom)                          :: punit_   !< Prefixed unit.
-  type(string)                       :: symbol   !< Unit symbol.
-  logical                            :: is_found !< Flag to check if queried unit has been found.
-  integer(I_P)                       :: un       !< Counter.
-  integer(I_P)                       :: p        !< Counter.
+  !<
+  !< The query matches the unit name or a synonym of its main symbol, that is an alias with the same exponent, without
+  !< multiplicative factor, additive offset or user-supplied converter (e.g. "meter" of "m = metre = meter"). The units
+  !< obtained prefixing the system units by the system prefixes are queried too (e.g. "km", "kilometre"). The unit
+  !< returned is undefined if the query matches no unit.
+  class(system_abstract), intent(in) :: self   !< The system.
+  character(*),           intent(in) :: u      !< Unit name or symbol.
+  type(uom)                          :: unit_  !< The queried unit.
+  type(uom)                          :: punit_ !< Prefixed unit.
+  integer(I_P)                       :: un     !< Counter.
+  integer(I_P)                       :: p      !< Counter.
 
-  is_found = .false.
-  if (self%units_number>0) then
+  do un=1, self%units_number
+    if (is_queried(unit=self%units(un), query=trim(adjustl(u)))) then
+      unit_ = self%units(un)
+      return
+    endif
+  enddo
+  do p=1, self%prefixes_number
     do un=1, self%units_number
-      if (self%units(un)%is_defined()) then
-        if (self%units(un)%name==trim(adjustl(u))) then
-          unit_ = self%units(un)
-          is_found = .true.
-          exit
-        else
-          symbol = self%units(un)%get_main_symbol()
-          if (symbol==trim(adjustl(u))) then
-            unit_ = self%units(un)
-            is_found = .true.
-            exit
-          endif
-        endif
+      call punit_%unset
+      punit_ = self%units(un)%prefixed(prefixes=self%prefixes(p))
+      if (is_queried(unit=punit_, query=trim(adjustl(u)))) then
+        unit_ = punit_
+        return
       endif
     enddo
-    if (.not.is_found.and.self%prefixes_number>0) then
-      prefix_loop: do p=1, self%prefixes_number
-        do un=1, self%units_number
-          call punit_%unset()
-          punit_ = self%units(un)%prefixed(prefixes=self%prefixes(p))
-          if (punit_%has_name()) then
-            if (punit_%name==trim(adjustl(u))) then
-              unit_ = punit_
-              is_found = .true.
-              exit prefix_loop
-            endif
-          endif
-          if (.not.is_found) then
-            symbol = punit_%get_main_symbol()
-            if (symbol==trim(adjustl(u))) then
-              unit_ = punit_
-              is_found = .true.
-              exit prefix_loop
-            endif
-          endif
-        enddo
-      enddo prefix_loop
-    endif
-  endif
-  if (.not.is_found) then
-    ! raise an error
-  endif
+  enddo
   endfunction unit
 
   ! private methods
@@ -371,3 +345,61 @@ contains
     ! raise an error
   endif
   endfunction qunit_qreal
+
+  ! non type-bound procedures
+  function is_queried(unit, query)
+  !< Check if a unit is the queried one: by its name or by a synonym of its main symbol.
+  !<
+  !< The synonyms are searched into the main alias of the unit (e.g. "N" of "kg.m.s-2 (N[force])") and into its reference
+  !< when it is the only one (e.g. "min" of "minute = 60 * s = min (minute[time])"): a unit made of more references (e.g.
+  !< "m [length].s-1 [time-1]") is matched by its alias or name only.
+  type(uom),    intent(in)              :: unit          !< The unit.
+  character(*), intent(in)              :: query         !< Unit name or symbol.
+  logical                               :: is_queried    !< Check result.
+  type(uom_reference)                   :: alias         !< Main alias of the unit.
+  type(uom_reference),      allocatable :: references(:) !< References of the unit.
+
+  is_queried = .false.
+  if (.not.unit%is_defined()) return
+  if (unit%has_name()) then
+    if (unit%name==query) then
+      is_queried = .true.
+      return
+    endif
+  endif
+  if (unit%has_alias()) then
+    call unit%get_alias(alias=alias)
+    is_queried = has_synonym(reference=alias, query=query)
+    if (is_queried) return
+  endif
+  call unit%get_references(references=references)
+  if (allocated(references)) then
+    if (size(references)==1) is_queried = has_synonym(reference=references(1), query=query)
+  endif
+  endfunction is_queried
+
+  function has_synonym(reference, query)
+  !< Check if a reference has a synonym of its main symbol equal to the query.
+  !<
+  !< A synonym is an alias with the same exponent of the main symbol, without multiplicative factor, additive offset or
+  !< user-supplied converter: "meter" is a synonym of "m = metre = meter", "s" is not a synonym of "Hz = s-1".
+  type(uom_reference), intent(in)   :: reference   !< The reference.
+  character(*),        intent(in)   :: query       !< Symbol queried.
+  logical                           :: has_synonym !< Check result.
+  type(uom_symbol),     allocatable :: aliases(:)  !< Symbols of the reference.
+  class(uom_converter), allocatable :: convert     !< User-supplied converter of a symbol.
+  integer(I_P)                      :: a           !< Counter.
+
+  has_synonym = .false.
+  call reference%get_aliases(aliases=aliases)
+  if (.not.allocated(aliases)) return
+  do a=1, size(aliases)
+    if (aliases(a)%get_symbol()/=query) cycle
+    if (aliases(a)%get_exponent()/=aliases(1)%get_exponent()) cycle
+    if (aliases(a)%get_factor()/=1._RKP.or.aliases(a)%get_offset()/=0._RKP) cycle
+    call aliases(a)%get_convert(convert_=convert)
+    if (allocated(convert)) cycle
+    has_synonym = .true.
+    return
+  enddo
+  endfunction has_synonym

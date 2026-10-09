@@ -20,7 +20,6 @@ contains
   type(qreal)                             :: c         !< Speed of light.
   type(qreal)                             :: epsilon_0 !< Vacuum permittivity.
   type(qreal)                             :: mu_0      !< Vacuum permeability.
-  type(qreal)                             :: pi        !< Pi greek.
   type(qreal)                             :: Z_0       !< Vacuum impedance.
 
   call self%free
@@ -40,7 +39,7 @@ contains
   call self%add_unit('kg [mass].m2 [length2].s-2 [time-2].A-2 [current-2] (H[inductance]) {henry}')
   call self%add_unit('Hz< = s-1 > [frequency] {hertz}')
   call self%add_unit('kg [mass].m2 [length2].s-2 [time-2] (J[energy]) {joule}')
-  call self%add_unit('cd [luminous_flux] (lm [luminous_flux]) {lumen}')
+  call self%add_unit('cd [luminosity].m2 [length2].m-2 [length-2] (lm [luminous_flux]) {lumen}')
   call self%add_unit('m-2 [length-2].cd [luminosity] (lx[illuminance]) {lux}')
   call self%add_unit('m [length].s-1 [time-1]{metre.second-1}')
   call self%add_unit('m [length].s-2 [time-2]{metre.second-2}')
@@ -65,69 +64,71 @@ contains
   call self%add_unit('day = 86400 * s = 1440 * minute = 24 * hour [time](day[time]){day}')
   call self%add_unit('week = 604800 * s = 10080 * minute = 168 * hour = 7 * day [time](week[time]){week}')
   ! USCS units for conversions
-  call self%add_unit('in< = 0.0254 * m = inch> [length] {internaltion_inch}')
-  call self%add_unit('yd< = 0.9144 * m = yard> [length] {internaltion_yard}')
-  call self%add_unit('ft< = 0.3048 * m = foot> [length] {internaltion_foot}')
-  call self%add_unit('mi< = 1609.34 * m = mile> [length] {internaltion_mile}')
-  call self%add_unit('lb< = 0.453592 * kg = pound> [mass] {internaltion_pound}')
-  call self%add_unit('oz< = 0.0283495 * kg = ounce> [mass] {internaltion_ounce}')
+  call self%add_unit('in< = 0.0254 * m = inch> [length] {inch}')
+  call self%add_unit('yd< = 0.9144 * m = yard> [length] {yard}')
+  call self%add_unit('ft< = 0.3048 * m = foot> [length] {foot}')
+  call self%add_unit('mi< = 1609.344 * m = mile> [length] {mile}')
+  call self%add_unit('lb< = 0.45359237 * kg = pound> [mass] {pound}')
+  call self%add_unit('oz< = 0.028349523125 * kg = ounce> [mass] {ounce}')
   call self%add_unit('gram[mass].cm[length].s-2[time-2] (dyne=dyn[force]) {dyne}')
   ! decimal prefixes
-  call self%add_prefix('1.e-24 * yocto  = 1.e-24 * y')
-  call self%add_prefix('1.e-21 * zepto  = 1.e-21 * z')
-  call self%add_prefix('1.e-18 * atto   = 1.e-18 * a')
-  call self%add_prefix('1.e-15 * femto  = 1.e-15 * f')
-  call self%add_prefix('1.e-12 * pico   = 1.e-12 * p')
-  call self%add_prefix('1.e-9  * nano   = 1.e-9  * n')
-  call self%add_prefix('1.e-6  * micro  = 1.e-6  * u')
-  call self%add_prefix('1.e-3  * milli  = 1.e-3  * m')
-  call self%add_prefix('1.e-2  * centi  = 1.e-2  * c')
-  call self%add_prefix('1.e-1  * deci   = 1.e-1  * d')
-  call self%add_prefix('1.e1   * deca   = 1.e1   * d = 1.e1 * deka')
-  call self%add_prefix('1.e2   * hecto  = 1.e2   * h')
-  call self%add_prefix('1.e3   * kilo   = 1.e3   * k')
-  call self%add_prefix('1.e6   * mega   = 1.e6   * M')
-  call self%add_prefix('1.e9   * giga   = 1.e9   * G')
-  call self%add_prefix('1.e12  * tera   = 1.e12  * T')
-  call self%add_prefix('1.e15  * peta   = 1.e15  * P')
-  call self%add_prefix('1.e18  * exa    = 1.e18  * E')
-  call self%add_prefix('1.e21  * zetta  = 1.e21  * Z')
-  call self%add_prefix('1.e24  * yotta  = 1.e24  * Y')
-  ! binary prefixes
-  call self%add_prefix('2.e10 * kibi = 2.e10 * Ki')
-  call self%add_prefix('2.e20 * mebi = 2.e20 * Mi')
-  call self%add_prefix('2.e30 * gibi = 2.e30 * Gi')
-  call self%add_prefix('2.e40 * tebi = 2.e40 * Ti')
-  call self%add_prefix('2.e50 * pebi = 2.e50 * Pi')
-  call self%add_prefix('2.e60 * exbi = 2.e60 * Ei')
-  call self%add_prefix('2.e70 * zebi = 2.e70 * Zi')
-  call self%add_prefix('2.e80 * yobi = 2.e80 * Yi')
+  ! prefixes: the symbol first, the name last (used to name the prefixed units, e.g. kilometre)
+  call self%add_prefix('1.e-24 * y = 1.e-24 * yocto')
+  call self%add_prefix('1.e-21 * z = 1.e-21 * zepto')
+  call self%add_prefix('1.e-18 * a = 1.e-18 * atto')
+  call self%add_prefix('1.e-15 * f = 1.e-15 * femto')
+  call self%add_prefix('1.e-12 * p = 1.e-12 * pico')
+  call self%add_prefix('1.e-9 * n = 1.e-9 * nano')
+  call self%add_prefix('1.e-6 * u = 1.e-6 * micro')
+  call self%add_prefix('1.e-3 * m = 1.e-3 * milli')
+  call self%add_prefix('1.e-2 * c = 1.e-2 * centi')
+  call self%add_prefix('1.e-1 * d = 1.e-1 * deci')
+  call self%add_prefix('1.e1 * da = 1.e1 * deka = 1.e1 * deca')
+  call self%add_prefix('1.e2 * h = 1.e2 * hecto')
+  call self%add_prefix('1.e3 * k = 1.e3 * kilo')
+  call self%add_prefix('1.e6 * M = 1.e6 * mega')
+  call self%add_prefix('1.e9 * G = 1.e9 * giga')
+  call self%add_prefix('1.e12 * T = 1.e12 * tera')
+  call self%add_prefix('1.e15 * P = 1.e15 * peta')
+  call self%add_prefix('1.e18 * E = 1.e18 * exa')
+  call self%add_prefix('1.e21 * Z = 1.e21 * zetta')
+  call self%add_prefix('1.e24 * Y = 1.e24 * yotta')
+  ! binary prefixes, 1024**n
+  call self%add_prefix('1024. * Ki = 1024. * kibi')
+  call self%add_prefix('1048576. * Mi = 1048576. * mebi')
+  call self%add_prefix('1073741824. * Gi = 1073741824. * gibi')
+  call self%add_prefix('1099511627776. * Ti = 1099511627776. * tebi')
+  call self%add_prefix('1125899906842624. * Pi = 1125899906842624. * pebi')
+  call self%add_prefix('1152921504606846976. * Ei = 1152921504606846976. * exbi')
+  call self%add_prefix('1180591620717411303424. * Zi = 1180591620717411303424. * zebi')
+  call self%add_prefix('1208925819614629174706176. * Yi = 1208925819614629174706176. * yobi')
   ! common constants
+  ! constants: exact by the definition of the 2019 SI (c, e, h, k, NA, and so R = NA k), CODATA 2018 the others
   call self%add_constant(qreal(magnitude=4._RKP * atan(1._RKP), name='pi'))
   call self%add_constant(qreal(magnitude=299792458._RKP, unit=self%unit('metre.second-1'), name='speed_of_light'))
   call self%add_constant(qreal(magnitude=9.806650_RKP, unit=self%unit('metre.second-2'), name='gravity'))
-  call self%add_constant(qreal(magnitude=1.602176565e-19_RKP, unit=self%unit('coulomb'), name='elementary_charge'))
-  call self%add_constant(qreal(magnitude=9.10938291e-31_RKP, unit=self%unit('kilogram'), name='electron_mass'))
-  call self%add_constant(qreal(magnitude=1.674927351e-27_RKP, unit=self%unit('kilogram'), name='neutron_mass'))
-  call self%add_constant(qreal(magnitude=1.672621777e-27_RKP, unit=self%unit('kilogram'), name='proton_mass'))
-  call self%add_constant(qreal(magnitude=6.62606957e-34_RKP,                    &
+  call self%add_constant(qreal(magnitude=1.602176634e-19_RKP, unit=self%unit('coulomb'), name='elementary_charge'))
+  call self%add_constant(qreal(magnitude=9.1093837015e-31_RKP, unit=self%unit('kilogram'), name='electron_mass'))
+  call self%add_constant(qreal(magnitude=1.67492749804e-27_RKP, unit=self%unit('kilogram'), name='neutron_mass'))
+  call self%add_constant(qreal(magnitude=1.67262192369e-27_RKP, unit=self%unit('kilogram'), name='proton_mass'))
+  call self%add_constant(qreal(magnitude=6.62607015e-34_RKP,                    &
                                unit=uom('kg [mass].m2 [length2].s-1 [time-1]'), &
                                name='planck_constant'))
-  call self%add_constant(qreal(magnitude=6.67384e-11_RKP,                           &
+  call self%add_constant(qreal(magnitude=6.67430e-11_RKP,                           &
                                unit=uom('m3 [length3].kg-1 [mass-1].s-2 [time-2]'), &
                                name='newton_gravitation_constant'))
-  call self%add_constant(qreal(magnitude=8.3144621_RKP,                                                                 &
+  call self%add_constant(qreal(magnitude=8.31446261815324_RKP,                                                                 &
                                unit=uom('kg [mass].m2 [length2].s-2 [time-2].mol-1 [substance-1].K-1 [temperature-1]'), &
                                name='molar_gas_constant'))
-  call self%add_constant(qreal(magnitude=6.02214129e23_RKP, unit=uom('mol-1 [substance-1]'), name='avogadro_number'))
-  call self%add_constant(qreal(magnitude=1.3806488e-23_RKP,                                         &
+  call self%add_constant(qreal(magnitude=6.02214076e23_RKP, unit=uom('mol-1 [substance-1]'), name='avogadro_number'))
+  call self%add_constant(qreal(magnitude=1.380649e-23_RKP,                                         &
                                unit=uom('kg [mass].m2 [length2].s-2 [time-2].K-1 [temperature-1]'), &
                                name='boltzmann_constant'))
   ! derived constants
-  pi = self%const('pi')
   c = self%const('speed_of_light')
 
-  mu_0 = 4._RKP * pi%magnitude * 1e-7_RKP * uom('kg [mass].m [length].s-2 [time-2].A-2 [current-2]')
+  ! since the 2019 SI the vacuum permeability is measured, no more 4 pi 1e-7 exactly
+  mu_0 = 1.25663706212e-6_RKP * uom('kg [mass].m [length].s-2 [time-2].A-2 [current-2]')
   call mu_0%set(name='vacuum_permeability')
   call self%add_constant(mu_0)
 

@@ -1,0 +1,3 @@
+$ tutorial_4 assign
+error: cannot assign "+2.0 s [time]" to "+3.0 m [length]"
+[exit status 1]
