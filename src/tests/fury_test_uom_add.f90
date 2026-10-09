@@ -22,6 +22,6 @@ print "(A,L1)", 'si_mass + si_mass = '//a_unit%stringify(with_dimensions=.true.)
 print "(A)", 'si_mass + si_mass name is: '//a_unit%name
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_uom_add

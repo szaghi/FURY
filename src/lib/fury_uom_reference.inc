@@ -57,7 +57,7 @@ type :: uom_reference
     generic :: operator(/) => div                      !< Overloading `/` operator.
     generic :: operator(*) => mul                      !< Overloading `*` operator.
     generic :: operator(**) =>                   &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
                                pow_R16P,         &
 #endif
                                pow_R8P, pow_R4P, &
@@ -196,12 +196,13 @@ contains
   do a=1, self%aliases_number
     call self%aliases(a)%parse(source=tokens(a)%chars())
   enddo
-  if (self%dimensions%get_exponent()/=0.and.self%dimensions%get_exponent()/=self%aliases(1)%get_exponent()) then
+  if (self%dimensions%is_defined().and.self%dimensions%get_exponent()/=0.and.&
+      self%dimensions%get_exponent()/=self%aliases(1)%get_exponent()) then
     write(stderr, '(A)')'error: parse string definition "'//trim(adjustl(source))//'" failed! '//&
     ' the exponent of the uom and the one of the dimensions (if passed) must be the same!'
     write(stderr, '(A)')'  dimensions: '//self%dimensions%stringify()
     write(stderr, '(A)')'  uom symbol: '//self%aliases(1)%stringify()
-    stop
+    error stop 1
   else
     call self%dimensions%set(exponent_ = self%aliases(1)%get_exponent())
     call self%dimensions%set(factor_ = 1._RKP)

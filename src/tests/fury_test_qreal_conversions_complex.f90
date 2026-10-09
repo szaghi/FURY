@@ -157,6 +157,6 @@ test_passed(4) = q3%stringify(format='(F6.2)')=='272.15 degC'
 print "(A,L1)", '1 celsius - 2 K = '//q3%stringify(format='(F6.2)')//', is correct? ', test_passed(4)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_conversions_complex

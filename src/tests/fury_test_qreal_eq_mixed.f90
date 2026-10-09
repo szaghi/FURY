@@ -53,6 +53,6 @@ test_passed(6) = force3 == force2
 print "(A,L1)", '1 * force(float128) == 1 * force(float64) => '//trim(str(test_passed(6)))//', is correct? ', test_passed(6)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_eq_mixed

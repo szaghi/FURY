@@ -37,6 +37,6 @@ test_passed(4) = a_unit == si_speed
 print "(A,L1)", 'assign to other unit = si_speed => '//si_speed%stringify(with_dimensions=.true.)//', is correct? ', test_passed(4)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_uom_assign

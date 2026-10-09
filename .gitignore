@@ -44,3 +44,16 @@ wiki/
 get_automatic_changelog.sh
 references
 papers
+
+# library builds
+lib/
+
+# VitePress and generated documentation
+docs/node_modules/
+docs/package-lock.json
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+docs/api/
+docs/public/coverage.json
+docs/guide/coverage-analysis.md
+docs/guide/*.gcov.md

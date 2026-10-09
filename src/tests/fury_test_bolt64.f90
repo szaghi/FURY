@@ -26,10 +26,10 @@ distance_to_arrival = qreal64(100._real64, meter)
 time_to_arrival = qreal64(9.58_real64, second)
 
 mean_velocity = distance_to_arrival / time_to_arrival
-test_passed(1) = mean_velocity%stringify()=='+0.104384133611691E+002 m.s-1'
+test_passed(1) = mean_velocity%stringify()=='+0.10438413361169102E+002 m.s-1'
 print "(A,L1)", 'Bolt''s record speed: '//mean_velocity%stringify(with_dimensions=.true.)//', is correct? ', test_passed(1)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_bolt64

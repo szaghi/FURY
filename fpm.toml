@@ -1,0 +1,28 @@
+name = "FURY"
+version = "0.8.3"
+license = "GPL-3.0"
+author = "Stefano Zaghi"
+maintainer = "stefano.zaghi@gmail.com"
+copyright = "Copyright 2026 Stefano Zaghi"
+description = "Fortran Units (environment) for Reliable phYsical math"
+
+# fpm cannot pass the PENF_R16P macro to PENF: FURY is built without quadruple precision (no 128 bits kinds)
+# BeFoR64 and FACE come with StringiFor; FLAP is needed only by the converter app, not built by fpm
+[dependencies]
+PENF = { git="https://github.com/szaghi/PENF.git" }
+StringiFor = { git="https://github.com/szaghi/StringiFor.git" }
+
+[library]
+source-dir = "src/lib"
+
+[build]
+auto-executables = false
+auto-tests = false
+
+[fortran]
+implicit-typing = false
+implicit-external = false
+source-form = "free"
+
+[install]
+library = true

@@ -1,68 +1,120 @@
+[project]
+name       = FURY
+version    = VERSION
+summary    = Fortran Units (environment) for Reliable phYsical math
+repository = https://github.com/szaghi/FURY
+website    = https://szaghi.github.io/FURY
+email      = stefano.zaghi@gmail.com
+authors    = Stefano Zaghi
+
+# no pins: every dependency follows its default branch
+[dependencies]
+deps_dir   = src/third_party
+BeFoR64    = https://github.com/szaghi/BeFoR64
+FACE       = https://github.com/szaghi/FACE
+FLAP       = https://github.com/szaghi/FLAP
+PENF       = https://github.com/szaghi/PENF
+StringiFor = https://github.com/szaghi/StringiFor
+
 [modes]
 modes = tests-gnu tests-gnu-debug
         tests-intel tests-intel-debug
         fury-static-gnu fury-shared-gnu
         fury-static-intel fury-shared-intel
+        converter-gnu converter-intel
+        tests-gnu-noquad fury-static-gnu-noquad
 
 [common-variables]
 $CSHARED_GNU = -c -fPIC -frealloc-lhs
 $CSHARED_INT = -c -fpic -assume realloc_lhs
 $LSHARED     = -shared
-$CSTATIC_GNU = -c -frealloc-lhs -std=f2008 -fall-intrinsics
-$CSTATIC_INT = -c -assume realloc_lhs -standard-semantics -std08
+$CSTATIC_GNU = -c -frealloc-lhs -std=f2018 -fall-intrinsics
+$CSTATIC_INT = -c -assume realloc_lhs -standard-semantics -std18
 $DEBUG_GNU   = -O0 -g3 -Warray-bounds -Wcharacter-truncation -Wline-truncation -Wimplicit-interface -Wimplicit-procedure -Wunderflow -fcheck=all -fmodule-private -ffree-line-length-132 -fimplicit-none -fbacktrace -fdump-core -finit-real=nan
 $DEBUG_INT   = -O0 -debug all -warn all -extend-source 132 -traceback
 $OPTIMIZE    = -O2
-$EXDIRS      = BeFoR64/src/tests BeFoR64/src/third_party
-               FACE/src/tests
-               FLAP/src/tests FLAP/src/third_party
-               PENF/src/tests
-               StringiFor/src/tests StringiFor/src/third_party
+$EXDIRS      = BeFoR64/docs BeFoR64/scripts BeFoR64/src/tests BeFoR64/src/third_party
+               FACE/docs FACE/scripts FACE/src/tests
+               FLAP/docs FLAP/scripts FLAP/src/tests FLAP/src/third_party
+               PENF/docs PENF/scripts PENF/src/tests
+               StringiFor/docs StringiFor/scripts StringiFor/src/tests StringiFor/src/third_party
 
 # main modes
 [tests-gnu]
-template  = template-static-gnu
-build_dir = exe
+template     = template-static-gnu
+build_dir    = exe
+exclude_dirs = $EXDIRS src/app
 
 [tests-gnu-debug]
-template  = template-static-gnu-debug
-build_dir = exe
+template     = template-static-gnu-debug
+build_dir    = exe
+exclude_dirs = $EXDIRS src/app
 
 [tests-intel]
-template  = template-static-intel
-build_dir = exe
+template     = template-static-intel
+build_dir    = exe
+exclude_dirs = $EXDIRS src/app
 
 [tests-intel-debug]
-template  = template-static-intel-debug
-build_dir = exe
+template     = template-static-intel-debug
+build_dir    = exe
+exclude_dirs = $EXDIRS src/app
 
 [fury-static-gnu]
 template  = template-static-gnu
 build_dir = lib
-target    = fury.f90
+target    = fury.F90
 output    = libfury.a
 mklib     = static
 
 [fury-shared-gnu]
 template  = template-shared-gnu
 build_dir = lib
-target    = fury.f90
+target    = fury.F90
 output    = libfury.so
 mklib     = shared
 
 [fury-static-intel]
 template  = template-static-intel
 build_dir = lib
-target    = fury.f90
+target    = fury.F90
 output    = libfury.a
 mklib     = static
 
 [fury-shared-intel]
 template  = template-shared-intel
 build_dir = lib
-target    = fury.f90
+target    = fury.F90
 output    = libfury.so
 mklib     = shared
+
+# without quadruple precision: the 128 bits kinds (qreal128, uom128, ...) are not provided
+[tests-gnu-noquad]
+template     = template-static-gnu-noquad
+build_dir    = exe
+exclude_dirs = $EXDIRS src/app
+exclude      = fury_test_qreal_add_mixed.f90 fury_test_qreal_assign.f90 fury_test_qreal_div_mixed.f90
+               fury_test_qreal_eq_mixed.f90 fury_test_qreal_mul_mixed.f90 fury_test_qreal_not_eq_mixed.f90
+               fury_test_qreal_sub_mixed.f90
+
+[fury-static-gnu-noquad]
+template  = template-static-gnu-noquad
+build_dir = lib
+target    = fury.F90
+output    = libfury.a
+mklib     = static
+
+[converter-gnu]
+template  = template-static-gnu
+build_dir = exe/app
+target    = fury_converter.f90
+output    = fury_converter
+
+[converter-intel]
+template  = template-static-intel
+build_dir = exe/app
+target    = fury_converter.f90
+output    = fury_converter
 
 # templates
 [template-static-gnu]
@@ -76,7 +128,19 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
+
+[template-static-gnu-noquad]
+compiler        = gnu
+exclude_dirs    = $EXDIRS
+src             = src/
+cflags          = $CSTATIC_GNU $OPTIMIZE
+lflags          = $OPTIMIZE
+cflags_heritage = True
+colors          = True
+quiet           = False
+log             = True
+jobs            = 10
 
 [template-static-gnu-debug]
 compiler        = gnu
@@ -89,7 +153,7 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
 
 [template-shared-gnu]
 compiler        = gnu
@@ -102,7 +166,7 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
 
 [template-static-intel]
 compiler        = intel
@@ -115,7 +179,7 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
 
 [template-static-intel-debug]
 compiler        = intel
@@ -128,7 +192,7 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
 
 [template-shared-intel]
 compiler        = intel
@@ -141,31 +205,40 @@ colors          = True
 quiet           = False
 log             = True
 jobs            = 10
-preproc         = -D_R16P_SUPPORTED
+preproc         = -DPENF_R16P
 
 # rules
 [rule-makedoc]
-help   = Rule for building documentation from source files
-rule_1 = rm -rf doc/html/*
-rule_2 = ford doc/main_page.md --debug
-rule_3 = cp -r doc/html/publish/* doc/html/
+help   = Build documentation with formal + VitePress
+rule_1 = formal generate --mirror-sources --diagrams --project docs/ford.md --output docs/api
+rule_2 = cd docs && npm install && npm run docs:build
+
+[rule-deldoc]
+help = Delete documentation build artifacts
+rule = rm -rf docs/.vitepress/dist/ docs/.vitepress/cache/ docs/api/
+
+[rule-delexe]
+help = Delete exes
+rule = rm -rf exe/
+
+[rule-clean]
+help   = Clean the project tree
+rule_1 = fobis rule --ex deldoc
+rule_2 = fobis rule --ex delexe
+rule_3 = rm -f *.gcov
 
 [rule-makecoverage]
-help   = Rule for performing coverage analysis
-rule_1 = FoBiS.py clean -mode tests-gnu
-rule_2 = FoBiS.py build -mode tests-gnu -coverage
-rule_3 = ./run_tests.sh
-rule_4 = rm -f exe/obj/penf* exe/obj/stringifor*
-rule_5 = gcov -o exe/obj/ src/lib/fury*
-rule_6 = gcovr -r . --xml-pretty -o shippable-coverage.xml
-rule_7 = rm -f *.gcov
+help   = Build the tests with coverage instrumentation and run them
+rule_1 = fobis clean --mode tests-gnu
+rule_2 = fobis build --mode tests-gnu --coverage
+rule_3 = bash scripts/run_tests.sh
 
-[rule-coverage-analysis]
-help   = Rule for performing coverage analysis and saving reports in markdown
-rule_1 = FoBiS.py clean -mode tests-gnu
-rule_2 = FoBiS.py build -mode tests-gnu -coverage
-rule_3 = ./run_tests.sh
-rule_4 = rm -f exe/obj/penf* exe/obj/stringifor*
-rule_5 = gcov -o exe/obj/ src/lib/fury*
-rule_6 = FoBiS.py rule -gcov_analyzer wiki/ Coverage-Analysis
+[rule-makecoverage-analysis]
+help   = Perform coverage analysis, save the markdown report into docs/guide/ and the percentage into docs/public/coverage.json
+rule_1 = fobis rule --ex makecoverage
+rule_2 = rm -f exe/obj/befor64* exe/obj/face* exe/obj/penf* exe/obj/stringifor* exe/obj/fury_test_*
+rule_3 = gcov -o exe/obj/ src/lib/fury*.F90 src/lib/fury.f90
+rule_4 = fobis rule --gcov-analyzer docs/guide/ --gcov-analyzer coverage-analysis
+rule_5 = rm -f *.gcov
+rule_6 = bash scripts/compute-coverage.sh
 rule_7 = rm -f *.gcov

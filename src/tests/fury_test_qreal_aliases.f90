@@ -42,6 +42,6 @@ test_passed(2) = speed3%stringify(format='(F4.1)')=='43.2 km.h-1'
 print "(A,L1)", '36.0 km.h-1 + 2.0 m.s-1 = '//speed3%stringify(format='(F4.1)')//', is correct? ', test_passed(2)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_aliases

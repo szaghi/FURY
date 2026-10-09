@@ -1,5 +1,6 @@
 !< FURY definition of abstract units system with float128 kind.
 
+#ifdef PENF_R16P
 module fury_system_abstract128
 !< FURY definition of abstract units system with float128 kind.
 use fury_qreal128
@@ -10,3 +11,4 @@ use stringifor
 
 #include "fury_system_abstract.inc"
 endmodule fury_system_abstract128
+#endif

@@ -73,6 +73,6 @@ test_passed(9) = force3%stringify(format='(F3.1)')=='1.0 kg.m.s-2'
 print "(A,L1)", 'qreal128 = qreal32 => '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(9)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_assign

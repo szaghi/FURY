@@ -25,20 +25,20 @@ type :: qreal
       generic :: assignment(=) => assign_qreal     !< Overloading `=` assignment.
       generic :: operator(+) => add, positive      !< Overloading `+` operator.
       generic :: operator(/) => div,               &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
                                 div_R16P,          &
 #endif                                             
                                 div_R8P, div_R4P,  &
                                 div_I8P, div_I4P,  &
                                 div_I2P, div_I1P     !< Overloading `/` operator.
       generic :: operator(*) => mul,               &
-#ifdef _R16P_SUPPORTED                           
+#ifdef PENF_R16P                           
                                 mul_R16P,          &
 #endif                                             
                                 mul_R8P, mul_R4P,  &
                                 mul_I8P, mul_I4P,  &
                                 mul_I2P, mul_I1P,  &
-#ifdef _R16P_SUPPORTED                           
+#ifdef PENF_R16P                           
                                 R16P_mul,          &
 #endif                                           
                                 R8P_mul, R4P_mul,  &
@@ -46,7 +46,7 @@ type :: qreal
                                 I2P_mul, I1P_mul     !< Overloading `*` operator.
       generic :: operator(-) => sub, negative        !< Overloading `-` operator.
       generic :: operator(**) =>                   &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
                                  pow_R16P,         &
 #endif     
                                  pow_R8P, pow_R4P, &
@@ -102,7 +102,7 @@ endinterface
 interface operator(*)
   !< Ovearloading operator `*`: `number *` [[uom]] generates [[qreal]].
   module procedure              &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
       R16P_mul_uom,             &
 #endif
       R8P_mul_uom, R4P_mul_uom, &
@@ -361,7 +361,7 @@ contains
       write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
         lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
         rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      stop
+      error stop 1
     endif
   else
     if (.not.lhs%is_unit_defined())  then
@@ -374,7 +374,7 @@ contains
       write(stderr, "(A)") 'error: cannot assign'//new_line('a')//&
         lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
         rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      stop
+      error stop 1
     endif
   endif
   endsubroutine assign_qreal
@@ -393,7 +393,7 @@ contains
       write(stderr, "(A)") 'error: cannot add'//new_line('a')//&
         lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
         rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      stop
+      error stop 1
     endif
   else
     ! dimensionless quantities assumed
@@ -662,7 +662,7 @@ contains
       write(stderr, "(A)") 'error: cannot subtract'//new_line('a')//&
         lhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)//' to '//new_line('a')//&
         rhs%stringify(with_aliases=.true., with_dimensions=.true., with_name=.true., compact_reals=.true.)
-      stop
+      error stop 1
     endif
   else
     ! dimensionless quantities assumed

@@ -64,6 +64,6 @@ test_passed(6) = force3%stringify(format='(F3.1)')=='2.0 kg2.m2.s-4'
 print "(A,L1)", 'force(float128) * force(float64) = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(6)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_mul_mixed

@@ -66,7 +66,7 @@ type :: uom
     generic :: operator(*) => mul                      !< Overloading `*` operator.
     generic :: operator(-) => sub                      !< Overloading `-` operator.
     generic :: operator(**) =>                   &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
                                pow_R16P,         &
 #endif
                                pow_R8P, pow_R4P, &
@@ -529,7 +529,7 @@ contains
     call self%alias%parse(source=tokens(2)%chars())
   elseif (n1>1.or.n2>1) then
     write(stderr, '(A)')'error: input source string "'//source//'" has bad alias specifier for the unit!'
-    stop
+    error stop 1
   endif
   endsubroutine parse_alias
 
@@ -550,7 +550,7 @@ contains
     self%name = tokens(2)%chars()
   elseif (n1>1.or.n2>1) then
     write(stderr, '(A)')'error: input source string "'//source//'" has bad name specifier for the unit!'
-    stop
+    error stop 1
   endif
   endsubroutine parse_name
 
@@ -639,7 +639,7 @@ contains
       if (.not.lhs==rhs) then
         write(stderr, "(A)") 'error: cannot assign between "'//lhs%stringify(with_dimensions=.true.)//'" and "'//&
                              rhs%stringify(with_dimensions=.true.)//'"'
-        stop
+        error stop 1
       endif
     endif
   endif
@@ -656,7 +656,7 @@ contains
   else
     write(stderr, "(A)") &
       'error: cannot add "'//lhs%stringify(with_dimensions=.true.)//'" to "'//rhs%stringify(with_dimensions=.true.)//'"'
-    stop
+    error stop 1
   endif
   endfunction add
 
@@ -783,7 +783,7 @@ contains
   else
     write(stderr, "(A)") &
       'error: cannot subtract "'//lhs%stringify(with_dimensions=.true.)//'" by "'//rhs%stringify(with_dimensions=.true.)//'"'
-    stop
+    error stop 1
   endif
   endfunction sub
 

@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["**"]   # a release tag points at a commit already tested on its branch push
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup build environment
+      uses: ./.github/actions/setup-build-env
+
+    - name: Fetch dependencies
+      if: hashFiles('**/.deps_config.ini') != ''
+      run: fobis fetch
+
+    - name: Run tests with coverage
+      id: cov
+      uses: ./.github/actions/run-coverage-analysis
+
+    - name: Run tests without quadruple precision
+      run: |
+        fobis rule --ex delexe
+        fobis build --mode tests-gnu-noquad
+        bash scripts/run_tests.sh

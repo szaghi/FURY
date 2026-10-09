@@ -1,5 +1,6 @@
 !< FURY class definition of real (with float128 kind) quantity with associated unit of measure.
 
+#ifdef PENF_R16P
 module fury_qreal128
 !< FURY class definition of real (with float128 kind) quantity with associated unit of measure.
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
@@ -9,3 +10,4 @@ use stringifor
 
 #include "fury_qreal.inc"
 endmodule fury_qreal128
+#endif

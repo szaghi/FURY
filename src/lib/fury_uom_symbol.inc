@@ -40,11 +40,11 @@ type :: uom_symbol
   !< The terms composing a definition can be separated by any white spaces number (even zero).
   !<
   !< In the case the user supply a generic conversion alias formula this one overrides the multiplicative-like optionally parsed.
-  class(uom_converter), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
-  integer(IKP),         private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
-  real(RKP),            private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
-  real(RKP),            private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
-  type(string),         private              :: symbol_         !< literal symbol, e.g. "m" for metres.
+  type(uom_converter_box), private, allocatable :: convert_        !< Generic conversion alias formula user-supplied.
+  integer(IKP),            private              :: exponent_=1_IKP !< Exponent of the symbol, e.g. "-1" for Hertz, namely "s-1".
+  real(RKP),               private              :: factor_=1._RKP  !< Symbol multiplicative scale factor (used only for converters).
+  real(RKP),               private              :: offset_=0._RKP  !< Symbol additive offset (used only for converters).
+  type(string),            private              :: symbol_         !< literal symbol, e.g. "m" for metres.
   contains
     ! public methods
     procedure, pass(self) :: convert      !< Convert a magnitude with respect symbol definition.
@@ -64,7 +64,7 @@ type :: uom_symbol
     generic :: operator(/) => div                        !< Overloading `/` operator.
     generic :: operator(*) => mul                        !< Overloading `*` operator.
     generic :: operator(**) =>                   &
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
                                pow_R16P,         &
 #endif
                                pow_R8P, pow_R4P, &
@@ -122,7 +122,7 @@ contains
   converted = magnitude
   if (self%is_defined()) then
     if (allocated(self%convert_)) then
-      converted = self%convert_%convert(magnitude=magnitude, inverse=inverse)
+      converted = self%convert_%converter%convert(magnitude=magnitude, inverse=inverse)
     else
       inverse_ = .false. ; if (present(inverse)) inverse_ = inverse
       if (inverse_) then
@@ -140,7 +140,7 @@ contains
   class(uom_converter), allocatable, intent(out) :: convert_ !< The symbol generic conversion alias.
 
   if (self%is_defined()) then
-    if (allocated(self%convert_)) allocate(convert_, source=self%convert_)
+    if (allocated(self%convert_)) allocate(convert_, source=self%convert_%converter)
   endif
   endsubroutine get_convert
      
@@ -149,7 +149,7 @@ contains
   class(uom_symbol), intent(in) :: self      !< The uom symbol.
   integer(IKP)                  :: exponent_ !< The symbol exponent.
 
-  if (self%is_defined()) exponent_ = self%exponent_
+  exponent_ = self%exponent_ ! components have default values: defined also for an undefined symbol
   endfunction get_exponent
 
   elemental function get_factor(self) result(factor_)
@@ -157,7 +157,7 @@ contains
   class(uom_symbol), intent(in) :: self    !< The uom symbol.
   real(RKP)                     :: factor_ !< The symbol factor.
 
-  if (self%is_defined()) factor_ = self%factor_
+  factor_ = self%factor_ ! components have default values: defined also for an undefined symbol
   endfunction get_factor
 
   elemental function get_offset(self) result(offset_)
@@ -165,7 +165,7 @@ contains
   class(uom_symbol), intent(in) :: self    !< The uom symbol.
   real(RKP)                     :: offset_ !< The symbol offset.
 
-  if (self%is_defined()) offset_ = self%offset_
+  offset_ = self%offset_ ! components have default values: defined also for an undefined symbol
   endfunction get_offset
 
   elemental function get_symbol(self) result(symbol_)
@@ -206,7 +206,7 @@ contains
       self%factor_ = cton(str=tokens(1)%chars(), knd=1._RKP)
       if (self%factor_==0._RKP) then
         write(stderr, "(A)") 'error: symbol cannot have "'//trim(str(n=self%factor_, compact=.true.))//'" multiplicative factor'
-        stop
+        error stop 1
       endif
       buffer = tokens(2)
     endif
@@ -248,7 +248,8 @@ contains
   if (present(offset_)) self%offset_ = offset_
   if (present(convert_)) then
     if (allocated(self%convert_)) deallocate(self%convert_)
-    allocate(self%convert_, source=convert_)
+    allocate(self%convert_)
+    allocate(self%convert_%converter, source=convert_)
   endif
   endsubroutine set
 

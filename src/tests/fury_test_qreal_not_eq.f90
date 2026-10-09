@@ -36,6 +36,6 @@ test_passed(1) = force1 /= force2
 print "(A,L1)", '1 * u_force /= 2 * u_force => '//trim(str(test_passed(1)))//', is correct? ', test_passed(1)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_not_eq

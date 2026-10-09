@@ -1,5 +1,5 @@
 !< FURY test of [[qreal]].
-program fury_test_qreal_sub_failure
+program fury_test_xfail_qreal_sub
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY test of [[qreal]].
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,4 +34,4 @@ print "(A)", 'ERROR: the test should not reach this point, a previous error shou
 print "(A,L1)", new_line('a')//'Are all tests passed? ', .true.
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
-endprogram fury_test_qreal_sub_failure
+endprogram fury_test_xfail_qreal_sub

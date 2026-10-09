@@ -5,17 +5,25 @@ module fury_mixed_kinds
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
 use fury_qreal32, qreal32 => qreal
 use fury_qreal64, qreal64 => qreal
+#ifdef PENF_R16P
 use fury_qreal128, qreal128 => qreal
+#endif
 use fury_uom32, uom32 => uom
 use fury_uom64, uom64 => uom
+#ifdef PENF_R16P
 use fury_uom128, uom128 => uom
+#endif
 use fury_uom_converter
 use fury_uom_reference32, uom_reference32 => uom_reference
 use fury_uom_reference64, uom_reference64 => uom_reference
+#ifdef PENF_R16P
 use fury_uom_reference128, uom_reference128 => uom_reference
+#endif
 use fury_uom_symbol32, uom_symbol32 => uom_symbol
 use fury_uom_symbol64, uom_symbol64 => uom_symbol
+#ifdef PENF_R16P
 use fury_uom_symbol128, uom_symbol128 => uom_symbol
+#endif
 use penf
 use stringifor
 
@@ -32,25 +40,25 @@ public :: operator(/=)
 interface assignment(=)
   ! qreal
   module procedure qreal32_assign_qreal64, qreal64_assign_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_assign_qreal128, qreal128_assign_qreal32
   module procedure qreal64_assign_qreal128, qreal128_assign_qreal64
 #endif
   ! uom
   module procedure uom32_assign_uom64, uom64_assign_uom32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure uom32_assign_uom128, uom128_assign_uom32
   module procedure uom64_assign_uom128, uom128_assign_uom64
 #endif
   ! uom_reference
   module procedure uom_reference32_assign_uom_reference64, uom_reference64_assign_uom_reference32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure uom_reference32_assign_uom_reference128, uom_reference128_assign_uom_reference32
   module procedure uom_reference64_assign_uom_reference128, uom_reference128_assign_uom_reference64
 #endif
   ! uom_symbol
   module procedure uom_symbol32_assign_uom_symbol64, uom_symbol64_assign_uom_symbol32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure uom_symbol32_assign_uom_symbol128, uom_symbol128_assign_uom_symbol32
   module procedure uom_symbol64_assign_uom_symbol128, uom_symbol128_assign_uom_symbol64
 #endif
@@ -58,7 +66,7 @@ endinterface
 
 interface operator(+)
   module procedure qreal32_add_qreal64, qreal64_add_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_add_qreal128, qreal128_add_qreal32
   module procedure qreal64_add_qreal128, qreal128_add_qreal64
 #endif
@@ -66,7 +74,7 @@ endinterface
 
 interface operator(/)
   module procedure qreal32_div_qreal64, qreal64_div_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_div_qreal128, qreal128_div_qreal32
   module procedure qreal64_div_qreal128, qreal128_div_qreal64
 #endif
@@ -74,7 +82,7 @@ endinterface
 
 interface operator(*)
   module procedure qreal32_mul_qreal64, qreal64_mul_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_mul_qreal128, qreal128_mul_qreal32
   module procedure qreal64_mul_qreal128, qreal128_mul_qreal64
 #endif
@@ -82,7 +90,7 @@ endinterface
 
 interface operator(-)
   module procedure qreal32_sub_qreal64, qreal64_sub_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_sub_qreal128, qreal128_sub_qreal32
   module procedure qreal64_sub_qreal128, qreal128_sub_qreal64
 #endif
@@ -90,7 +98,7 @@ endinterface
 
 interface operator(==)
   module procedure qreal32_eq_qreal64, qreal64_eq_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_eq_qreal128, qreal128_eq_qreal32
   module procedure qreal64_eq_qreal128, qreal128_eq_qreal64
 #endif
@@ -98,7 +106,7 @@ endinterface
 
 interface operator(/=)
   module procedure qreal32_not_eq_qreal64, qreal64_not_eq_qreal32
-#ifdef _R16P_SUPPORTED
+#ifdef PENF_R16P
   module procedure qreal32_not_eq_qreal128, qreal128_not_eq_qreal32
   module procedure qreal64_not_eq_qreal128, qreal128_not_eq_qreal64
 #endif
@@ -174,6 +182,7 @@ contains
    endif
    endsubroutine qreal64_assign_qreal32
 
+#ifdef PENF_R16P
    subroutine qreal32_assign_qreal128(lhs, rhs)
    !< `qreal32 = qreal128` assignment.
    !<
@@ -207,7 +216,9 @@ contains
      endif
    endif
    endsubroutine qreal32_assign_qreal128
+#endif
 
+#ifdef PENF_R16P
    subroutine qreal128_assign_qreal32(lhs, rhs)
    !< `qreal128 = qreal32` assignment.
    !<
@@ -241,7 +252,9 @@ contains
      endif
    endif
    endsubroutine qreal128_assign_qreal32
+#endif
 
+#ifdef PENF_R16P
    subroutine qreal64_assign_qreal128(lhs, rhs)
    !< `qreal64 = qreal128` assignment.
    !<
@@ -275,7 +288,9 @@ contains
      endif
    endif
    endsubroutine qreal64_assign_qreal128
+#endif
 
+#ifdef PENF_R16P
    subroutine qreal128_assign_qreal64(lhs, rhs)
    !< `qreal128 = qreal64` assignment.
    !<
@@ -309,6 +324,7 @@ contains
      endif
    endif
    endsubroutine qreal128_assign_qreal64
+#endif
 
    subroutine uom32_assign_uom64(lhs, rhs)
    !< `uom32 = uom64` assignment.
@@ -404,6 +420,7 @@ contains
    endif
    endsubroutine uom64_assign_uom32
 
+#ifdef PENF_R16P
    subroutine uom32_assign_uom128(lhs, rhs)
    !< `uom32 = uom128` assignment.
    !<
@@ -450,7 +467,9 @@ contains
      endif
    endif
    endsubroutine uom32_assign_uom128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom128_assign_uom32(lhs, rhs)
    !< `uom128 = uom32` assignment.
    !<
@@ -497,7 +516,9 @@ contains
      endif
    endif
    endsubroutine uom128_assign_uom32
+#endif
 
+#ifdef PENF_R16P
    subroutine uom64_assign_uom128(lhs, rhs)
    !< `uom64 = uom128` assignment.
    !<
@@ -544,7 +565,9 @@ contains
      endif
    endif
    endsubroutine uom64_assign_uom128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom128_assign_uom64(lhs, rhs)
    !< `uom128 = uom64` assignment.
    !<
@@ -591,6 +614,7 @@ contains
      endif
    endif
    endsubroutine uom128_assign_uom64
+#endif
 
    subroutine uom_reference32_assign_uom_reference64(lhs, rhs)
    !< `uom_reference32 = uom_reference64` assignment.
@@ -684,6 +708,7 @@ contains
    endif
    endsubroutine uom_reference64_assign_uom_reference32
 
+#ifdef PENF_R16P
    subroutine uom_reference32_assign_uom_reference128(lhs, rhs)
    !< `uom_reference32 = uom_reference128` assignment.
    !<
@@ -729,7 +754,9 @@ contains
      endif
    endif
    endsubroutine uom_reference32_assign_uom_reference128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_reference128_assign_uom_reference32(lhs, rhs)
    !< `uom_reference128 = uom_reference32` assignment.
    !<
@@ -775,7 +802,9 @@ contains
      endif
    endif
    endsubroutine uom_reference128_assign_uom_reference32
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_reference64_assign_uom_reference128(lhs, rhs)
    !< `uom_reference64 = uom_reference128` assignment.
    !<
@@ -821,7 +850,9 @@ contains
      endif
    endif
    endsubroutine uom_reference64_assign_uom_reference128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_reference128_assign_uom_reference64(lhs, rhs)
    !< `uom_reference128 = uom_reference64` assignment.
    !<
@@ -867,6 +898,7 @@ contains
      endif
    endif
    endsubroutine uom_reference128_assign_uom_reference64
+#endif
 
    subroutine uom_symbol32_assign_uom_symbol64(lhs, rhs)
    !< `uom_symbol32 = uom_symbol64` assignment.
@@ -954,6 +986,7 @@ contains
    endif
    endsubroutine uom_symbol64_assign_uom_symbol32
 
+#ifdef PENF_R16P
    subroutine uom_symbol32_assign_uom_symbol128(lhs, rhs)
    !< `uom_symbol32 = uom_symbol128` assignment.
    !<
@@ -996,7 +1029,9 @@ contains
      endif
    endif
    endsubroutine uom_symbol32_assign_uom_symbol128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_symbol128_assign_uom_symbol32(lhs, rhs)
    !< `uom_symbol128 = uom_symbol32` assignment.
    !<
@@ -1039,7 +1074,9 @@ contains
      endif
    endif
    endsubroutine uom_symbol128_assign_uom_symbol32
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_symbol64_assign_uom_symbol128(lhs, rhs)
    !< `uom_symbol64 = uom_symbol128` assignment.
    !<
@@ -1082,7 +1119,9 @@ contains
      endif
    endif
    endsubroutine uom_symbol64_assign_uom_symbol128
+#endif
 
+#ifdef PENF_R16P
    subroutine uom_symbol128_assign_uom_symbol64(lhs, rhs)
    !< `uom_symbol128 = uom_symbol64` assignment.
    !<
@@ -1125,6 +1164,7 @@ contains
      endif
    endif
    endsubroutine uom_symbol128_assign_uom_symbol64
+#endif
 
    ! operator(+)
    function qreal32_add_qreal64(lhs, rhs) result(opr)
@@ -1175,6 +1215,7 @@ contains
    opr = lhs + opr
    endfunction qreal64_add_qreal32
 
+#ifdef PENF_R16P
    function qreal32_add_qreal128(lhs, rhs) result(opr)
    !< `qreal32 + qreal128` operator.
    !<
@@ -1198,7 +1239,9 @@ contains
    opr = lhs
    opr = opr + rhs
    endfunction qreal32_add_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_add_qreal32(lhs, rhs) result(opr)
    !< `qreal128 + qreal32` operator.
    !<
@@ -1222,7 +1265,9 @@ contains
    opr = rhs
    opr = lhs + opr
    endfunction qreal128_add_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_add_qreal128(lhs, rhs) result(opr)
    !< `qreal64 + qreal128` operator.
    !<
@@ -1246,7 +1291,9 @@ contains
    opr = lhs
    opr = opr + rhs
    endfunction qreal64_add_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_add_qreal64(lhs, rhs) result(opr)
    !< `qreal128 + qreal64` operator.
    !<
@@ -1270,6 +1317,7 @@ contains
    opr = rhs
    opr = lhs + opr
    endfunction qreal128_add_qreal64
+#endif
 
    ! operator(/)
    function qreal32_div_qreal64(lhs, rhs) result(opr)
@@ -1322,6 +1370,7 @@ contains
    opr = lhs / tmp
    endfunction qreal64_div_qreal32
 
+#ifdef PENF_R16P
    function qreal32_div_qreal128(lhs, rhs) result(opr)
    !< `qreal32 / qreal128` operator.
    !<
@@ -1346,7 +1395,9 @@ contains
    tmp = lhs
    opr = tmp / rhs
    endfunction qreal32_div_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_div_qreal32(lhs, rhs) result(opr)
    !< `qreal128 / qreal32` operator.
    !<
@@ -1371,7 +1422,9 @@ contains
    tmp = rhs
    opr = lhs / tmp
    endfunction qreal128_div_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_div_qreal128(lhs, rhs) result(opr)
    !< `qreal64 / qreal128` operator.
    !<
@@ -1396,7 +1449,9 @@ contains
    tmp = lhs
    opr = tmp / rhs
    endfunction qreal64_div_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_div_qreal64(lhs, rhs) result(opr)
    !< `qreal128 / qreal64` operator.
    !<
@@ -1421,6 +1476,7 @@ contains
    tmp = rhs
    opr = lhs / tmp
    endfunction qreal128_div_qreal64
+#endif
 
    ! operator(*)
    function qreal32_mul_qreal64(lhs, rhs) result(opr)
@@ -1473,6 +1529,7 @@ contains
    opr = lhs * tmp
    endfunction qreal64_mul_qreal32
 
+#ifdef PENF_R16P
    function qreal32_mul_qreal128(lhs, rhs) result(opr)
    !< `qreal32 * qreal128` operator.
    !<
@@ -1497,7 +1554,9 @@ contains
    tmp = lhs
    opr = tmp * rhs
    endfunction qreal32_mul_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_mul_qreal32(lhs, rhs) result(opr)
    !< `qreal128 * qreal32` operator.
    !<
@@ -1522,7 +1581,9 @@ contains
    tmp = rhs
    opr = lhs * tmp
    endfunction qreal128_mul_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_mul_qreal128(lhs, rhs) result(opr)
    !< `qreal64 * qreal128` operator.
    !<
@@ -1547,7 +1608,9 @@ contains
    tmp = lhs
    opr = tmp * rhs
    endfunction qreal64_mul_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_mul_qreal64(lhs, rhs) result(opr)
    !< `qreal128 * qreal64` operator.
    !<
@@ -1572,6 +1635,7 @@ contains
    tmp = rhs
    opr = lhs * tmp
    endfunction qreal128_mul_qreal64
+#endif
 
    ! operator(-)
    function qreal32_sub_qreal64(lhs, rhs) result(opr)
@@ -1622,6 +1686,7 @@ contains
    opr = lhs - opr
    endfunction qreal64_sub_qreal32
 
+#ifdef PENF_R16P
    function qreal32_sub_qreal128(lhs, rhs) result(opr)
    !< `qreal32 - qreal128` operator.
    !<
@@ -1645,7 +1710,9 @@ contains
    opr = lhs
    opr = opr - rhs
    endfunction qreal32_sub_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_sub_qreal32(lhs, rhs) result(opr)
    !< `qreal128 - qreal32` operator.
    !<
@@ -1669,7 +1736,9 @@ contains
    opr = rhs
    opr = lhs - opr
    endfunction qreal128_sub_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_sub_qreal128(lhs, rhs) result(opr)
    !< `qreal64 - qreal128` operator.
    !<
@@ -1693,7 +1762,9 @@ contains
    opr = lhs
    opr = opr - rhs
    endfunction qreal64_sub_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_sub_qreal64(lhs, rhs) result(opr)
    !< `qreal128 - qreal64` operator.
    !<
@@ -1717,6 +1788,7 @@ contains
    opr = rhs
    opr = lhs - opr
    endfunction qreal128_sub_qreal64
+#endif
 
    ! operator(==)
    function qreal32_eq_qreal64(lhs, rhs) result(opr)
@@ -1765,6 +1837,7 @@ contains
    opr = lhs == tmp
    endfunction qreal64_eq_qreal32
 
+#ifdef PENF_R16P
    function qreal32_eq_qreal128(lhs, rhs) result(opr)
    !< `qreal32 == qreal128` operator.
    !<
@@ -1787,7 +1860,9 @@ contains
    tmp = lhs
    opr = tmp == rhs
    endfunction qreal32_eq_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_eq_qreal32(lhs, rhs) result(opr)
    !< `qreal128 == qreal32` operator.
    !<
@@ -1810,7 +1885,9 @@ contains
    tmp = rhs
    opr = lhs == tmp
    endfunction qreal128_eq_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_eq_qreal128(lhs, rhs) result(opr)
    !< `qreal64 == qreal128` operator.
    !<
@@ -1833,7 +1910,9 @@ contains
    tmp = lhs
    opr = tmp == rhs
    endfunction qreal64_eq_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_eq_qreal64(lhs, rhs) result(opr)
    !< `qreal128 == qreal64` operator.
    !<
@@ -1856,6 +1935,7 @@ contains
    tmp = rhs
    opr = lhs == tmp
    endfunction qreal128_eq_qreal64
+#endif
 
    ! operator(/=)
    function qreal32_not_eq_qreal64(lhs, rhs) result(opr)
@@ -1904,6 +1984,7 @@ contains
    opr = lhs /= tmp
    endfunction qreal64_not_eq_qreal32
 
+#ifdef PENF_R16P
    function qreal32_not_eq_qreal128(lhs, rhs) result(opr)
    !< `qreal32 /= qreal128` operator.
    !<
@@ -1926,7 +2007,9 @@ contains
    tmp = lhs
    opr = tmp /= rhs
    endfunction qreal32_not_eq_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_not_eq_qreal32(lhs, rhs) result(opr)
    !< `qreal128 /= qreal32` operator.
    !<
@@ -1949,7 +2032,9 @@ contains
    tmp = rhs
    opr = lhs /= tmp
    endfunction qreal128_not_eq_qreal32
+#endif
 
+#ifdef PENF_R16P
    function qreal64_not_eq_qreal128(lhs, rhs) result(opr)
    !< `qreal64 /= qreal128` operator.
    !<
@@ -1972,7 +2057,9 @@ contains
    tmp = lhs
    opr = tmp /= rhs
    endfunction qreal64_not_eq_qreal128
+#endif
 
+#ifdef PENF_R16P
    function qreal128_not_eq_qreal64(lhs, rhs) result(opr)
    !< `qreal128 /= qreal64` operator.
    !<
@@ -1995,4 +2082,5 @@ contains
    tmp = rhs
    opr = lhs /= tmp
    endfunction qreal128_not_eq_qreal64
+#endif
 endmodule fury_mixed_kinds

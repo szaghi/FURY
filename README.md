@@ -10,9 +10,8 @@
 [![License](https://img.shields.io/badge/license-MIT-red.svg)]()
 
 [![Status](https://img.shields.io/badge/status-stable-green.svg)]()
-[![Build Status](https://travis-ci.org/szaghi/FURY.svg?branch=master)](https://travis-ci.org/szaghi/FURY)
-[![Build Status](https://api.shippable.com/projects/57dabe9156a1350f001d8ffc/badge?branch=master)]()
-[![Coverage Status](https://img.shields.io/codecov/c/github/szaghi/FURY.svg)](http://codecov.io/github/szaghi/FURY?branch=master)
+[![CI](https://github.com/szaghi/FURY/actions/workflows/ci.yml/badge.svg)](https://github.com/szaghi/FURY/actions/workflows/ci.yml)
+[![coverage](https://img.shields.io/endpoint?url=https://szaghi.github.io/FURY/coverage.json)](https://github.com/szaghi/FURY/actions/workflows/ci.yml)
 
 ### FURY, Fortran Units (environment) for Reliable phYsical math
 
@@ -168,82 +167,30 @@ Go to [Top](#top)
 
 ## Download
 
-FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY). To download all the source files you can:
+FURY home is at [https://github.com/szaghi/FURY](https://github.com/szaghi/FURY):
 
-+ clone recursively this repository: `git clone --recursive https://github.com/szaghi/FURY`
-+ download the latest master-branch archive at [https://github.com/szaghi/FURY/archive/master.zip](https://github.com/szaghi/FURY/archive/master.zip)
-+ download a release archive at [https://github.com/szaghi/FURY/releases](https://github.com/szaghi/FURY/releases)
+```shell
+git clone https://github.com/szaghi/FURY
+cd FURY
+fobis fetch   # fetch the dependencies (default branches) into src/third_party/
+```
+
+Release archives are at [https://github.com/szaghi/FURY/releases](https://github.com/szaghi/FURY/releases).
 
 Go to [Top](#top)
 
 ## Compilation
 
-FURY is a modern Fortran project thus a modern Fortran compiler is need to compile the project.
-
-The library is modular, namely it exploits Fortran modules. As a consequence, there is compilation-cascade hierarchy to build the library. To correctly build the library the following approaches are supported
-
-+ [Build by means of FoBiS](#build-by-means-of-fobis): full support;
-+ [Build by means of GNU Make](#build-by-means-of-gnu-make): to be implemented.
-+ [Build by means of CMake](#build-by-means-of-cmake): to be implemented.
-
-The FoBiS building support is the most complete, as it is the one used for the developing FURY.
-
-### Build by means of FoBiS
-
-A `fobos` file is provided to build the library by means of the Fortran Building System [FoBiS](https://github.com/szaghi/FoBiS).
-
-#### Build all tests
-
-Type
+FURY is built by means of [FoBiS](https://github.com/szaghi/FoBiS) (`pip install FoBiS.py`):
 
 ```shell
-FoBiS.py build
+fobis build --mode tests-gnu          # all the tests, into exe/
+bash scripts/run_tests.sh             # run them
+fobis build --mode fury-static-gnu    # lib/libfury.a
+fobis build --lmodes                  # list all modes (shared library, Intel Fortran, debug, converter app)
 ```
 
-After (a successful) building a directory `./exe` is created containing all the compiled tests that constitute the FURY *regression-tests-suite*, e.g.
-
-```bash
-→ FoBiS.py build
-Builder options
-Directories
-  Building directory: "exe"
-  Compiled-objects .o   directory: "exe/obj"
-  Compiled-objects .mod directory: "exe/mod"
-Compiler options
-  Vendor: "gnu"
-  Compiler command: "gfortran"
-  Module directory switch: "-J"
-  Compiling flags: "-c -frealloc-lhs -std=f2008 -fall-intrinsics -O2 -Dr16p"
-  Linking flags: "-O2"
-  Preprocessing flags: "-Dr16p"
-  Coverage: False
-  Profile: False
-PreForM.py used: False
-PreForM.py output directory: None
-PreForM.py extensions processed: []
-
-Building src/tests/basic_use.f90
-Compiling src/lib/penf.F90 serially
-Compiling src/lib/string_t.F90 serially
-Compiling src/lib/stringifor.F90 serially
-Compiling ...
-Linking exe/basic_use
-Target src/tests/basic_use.f90 has been successfully built
-...
-
-→ tree -L 1 exe/
-exe/
-├── basic_use
-...
-```
-
-### Build by means of GNU Make
-
-To be implemented.
-
-### Build by means of CMake
-
-To be implemented.
+See the [installation guide](https://szaghi.github.io/FURY/guide/installation) for the details.
 
 Go to [Top](#top)
 

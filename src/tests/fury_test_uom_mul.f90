@@ -32,6 +32,6 @@ print "(A,L1)", 'si_mass*si_length/si_time/si_time = '//a_unit%stringify(with_di
 print "(A)", 'si_mass*si_length/si_time/si_time name is: '//a_unit%name
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_uom_mul

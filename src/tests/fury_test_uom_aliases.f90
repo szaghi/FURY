@@ -70,6 +70,6 @@ test_passed(9) = a_unit%stringify()=='kHz2'
 print "(A,L1)", 'kHz*Hz == '//a_unit%stringify()//', is correct? ', test_passed(9)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_uom_aliases

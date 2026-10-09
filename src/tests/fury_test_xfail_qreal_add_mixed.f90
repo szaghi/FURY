@@ -1,5 +1,5 @@
 !< FURY test of [[qreal]].
-program fury_test_qreal_add_aliases_failure
+program fury_test_xfail_qreal_add_mixed
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY test of [[qreal]].
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -7,11 +7,11 @@ use fury
 !-----------------------------------------------------------------------------------------------------------------------------------
 
 !-----------------------------------------------------------------------------------------------------------------------------------
-type(qreal64) :: speed1         !< A speed.
-type(qreal64) :: speed2         !< A speed.
-type(qreal64) :: speed3         !< A speed.
-type(uom64)   :: u_speed_km_h   !< Speed unit.
-type(uom64)   :: u_speed_m_s    !< Speed unit.
+type(qreal64) :: speed          !< A speed.
+type(qreal32) :: time           !< A time.
+type(qreal64) :: to_fail        !< Quantity faliling.
+type(uom64)   :: u_speed        !< Speed unit.
+type(uom32)   :: u_time         !< Time unit.
 logical       :: test_passed(1) !< List of passed tests.
 !-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -19,19 +19,19 @@ logical       :: test_passed(1) !< List of passed tests.
 test_passed = .false.
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 
-u_speed_km_h = uom64('km = 1000 * m [length].h-1 = 3600 * s-1 [time-1](km/h[speed]){km/h}')
-u_speed_m_s = uom64('m [length].s-1 [time-1](m/s[speed]){m/s}')
+u_speed = uom64('km = 1000 * m [length].h-1 = 3600 s-1 [time-1](km/h[speed]){km/h}')
+u_time = uom32('s = second [time]')
 
-speed1 = qreal64(magnitude=1._R_P, unit=u_speed_km_h)
-speed2 = qreal64(magnitude=2._R_P, unit=u_speed_m_s)
+speed = 2 * u_speed
+time = 2 * u_time
 
 print "(A)", 'An error will be raised (if all go rigth)'
-speed3 = speed1 + speed2
-test_passed(1) = speed3%stringify(format='(F3.1)')=='3.0 km.h-1'
-print "(A,L1)", '1.0 km.h-1 + 2.0 m.s = '//speed3%stringify(format='(F3.1)')//', is correct? ', test_passed(1)
+to_fail = speed + time
+test_passed(1) = speed%stringify(format='(F3.1)')=='2.0 km.h-1'
+print "(A,L1)", '2.0 km.h-1 + 2.0 s = '//speed%stringify(format='(F3.1)')//', is correct? ', test_passed(1)
 
 print "(A)", 'ERROR: the test should not reach this point, a previous error should have stop it before!'
 print "(A,L1)", new_line('a')//'Are all tests passed? ', .true.
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
-endprogram fury_test_qreal_add_aliases_failure
+endprogram fury_test_xfail_qreal_add_mixed

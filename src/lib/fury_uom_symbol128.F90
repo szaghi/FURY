@@ -1,5 +1,6 @@
 !< FURY class definition of unit symbol with float128 kind.
 
+#ifdef PENF_R16P
 module fury_uom_symbol128
 !< FURY class definition of unit symbol with float128 kind.
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
@@ -9,3 +10,4 @@ use stringifor
 
 #include "fury_uom_symbol.inc"
 endmodule fury_uom_symbol128
+#endif

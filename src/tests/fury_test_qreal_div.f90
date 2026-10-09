@@ -55,6 +55,6 @@ force3 = force1 / 2_I1P   ; test_passed(8) = force3%stringify(format='(F3.1)')==
 print "(A,L1)", '1.0 kg.m.s-2 / 2_I1P   = '//force3%stringify(format='(F3.1)')//', is correct? ', test_passed(8)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_div

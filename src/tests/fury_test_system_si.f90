@@ -63,5 +63,5 @@ print "(A,L1)", 'assigned 3.5 "kilobyte" => '//a_quantity%stringify(with_dimensi
                 compact_reals=.true.)//', is correct? ', test_passed(7)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 endprogram fury_test_system_si

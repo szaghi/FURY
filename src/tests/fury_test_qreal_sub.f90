@@ -43,6 +43,6 @@ test_passed(2) = force3%stringify(format='(F4.1)')=='-2.0 kg.m.s-2'
 print "(A,L1)", ' - 2.0 kg.m.s-2 = '//force3%stringify(format='(F4.1)')//', is correct? ', test_passed(2)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_qreal_sub

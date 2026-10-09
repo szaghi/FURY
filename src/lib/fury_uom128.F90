@@ -1,5 +1,6 @@
 !< FURY definition of unit of measure class with float128 real kind.
 
+#ifdef PENF_R16P
 module fury_uom128
 !< FURY definition of unit of measure class with float128 real kind.
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit
@@ -11,3 +12,4 @@ use stringifor
 
 #include "fury_uom.inc"
 endmodule fury_uom128
+#endif

@@ -33,6 +33,6 @@ a_unit = si_mass ** 2_I1P   ; test_passed(7) = a_unit%stringify()=='kg2'
 print "(A,L1)", 'si_mass ** 2_I1P   = '//a_unit%stringify(with_dimensions=.true.)//', is correct? ', test_passed(7)
 
 print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
-stop
+if (.not.all(test_passed)) error stop 1
 !-----------------------------------------------------------------------------------------------------------------------------------
 endprogram fury_test_uom_pow

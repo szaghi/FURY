@@ -1,5 +1,5 @@
 !< FURY test of [[uom]].
-program fury_test_uom_sub_failure
+program fury_test_xfail_uom_add
 !-----------------------------------------------------------------------------------------------------------------------------------
 !< FURY test of [[uom]].
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -20,10 +20,10 @@ print "(A,L1)", new_line('a')//'Are all tests passed? ', all(test_passed)
 print "(A)", 'An error will be raised (if all go rigth)'
 si_length = uom64(source='m')
 si_speed = uom64(source='m.s-1')
-a_unit = si_length - si_speed ! lhs unit /= rhs, lhs-rhs has no sense
+a_unit = si_length + si_speed ! lhs unit /= rhs, lhs+rhs has no sense
 
 print "(A)", 'ERROR: the test should not reach this point, a previous error should have stop it before!'
 print "(A,L1)", new_line('a')//'Are all tests passed? ', .true.
 stop
 !-----------------------------------------------------------------------------------------------------------------------------------
-endprogram fury_test_uom_sub_failure
+endprogram fury_test_xfail_uom_add
