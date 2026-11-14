@@ -45,8 +45,8 @@ get_automatic_changelog.sh
 references
 papers
 
-# library builds
-lib/
+# library builds (the root build directory only: src/lib holds the sources)
+/lib/
 
 # VitePress and generated documentation
 docs/node_modules/
