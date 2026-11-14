@@ -9,6 +9,7 @@ authors    = Stefano Zaghi
 
 [scaffold]
 toolchain = linux-gnu
+fpm       = true
 
 # no pins: every dependency follows its default branch
 [dependencies]
