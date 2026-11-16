@@ -11,6 +11,11 @@ authors    = Stefano Zaghi
 toolchain = linux-gnu
 fpm       = true
 
+# the one-line installer, scripts/install.sh (FoBiS#217): FURY's static library modes for the fobis build
+[installer]
+mode_gnu   = fury-static-gnu
+mode_intel = fury-static-intel
+
 # no pins: every dependency follows its default branch
 [dependencies]
 deps_dir   = src/third_party

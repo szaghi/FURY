@@ -80,6 +80,21 @@ short recipes. Every code sample of the documentation is a compiled, runnable pr
 
 ## Install
 
+### One-line install
+
+```bash
+curl -fsSL https://github.com/szaghi/FURY/releases/latest/download/install.sh | bash
+```
+
+It installs the latest release of the library into `~/.local` with the build system you choose among those FURY ships
+(`--build fobis|fpm`: a menu asks when you do not say), the compiler you name (`--fc`, `--gnu`, `--intel`), one
+install per compiler (`lib/fury/<compiler>-<version>/`, `include/fury/<compiler>-<version>/`), and makes it usable
+through pkg-config (`pkg-config --cflags --libs fury`, with `PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig`). The release
+carries FURY's dependencies (BeFoR64, FACE, FLAP, PENF, StringiFor). The fobis build has the quadruple precision types,
+the fpm build the 32 and 64 bits ones only. Pass options after `bash -s --`, e.g.
+`... | bash -s -- --build fpm --prefix /opt/fury`; `--help` lists them all, `--uninstall` removes the install. The
+installer is FoBiS's ([One-line installer](https://szaghi.github.io/FoBiS/cookbook/installer)).
+
 ### FoBiS
 
 **Standalone**: clone, fetch the dependencies, build.
