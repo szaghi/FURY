@@ -26,3 +26,9 @@ source-form = "free"
 
 [install]
 library = true
+
+# the preprocessor declared: fpm then reads the #ifdef PENF_R16P around the 128 bits modules when it lists the modules
+# of the sources, so fpm install does not look for module files the build never wrote
+[preprocess]
+[preprocess.cpp]
+suffixes = ["F90"]
